@@ -1,0 +1,5909 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PixelPipeline Script Documentation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            background: #2d2d2d;
+        }
+        pre {
+            padding: 1rem;
+            border-radius: 6px;
+            background: #2d2d2d !important;
+            overflow: auto;
+        }
+        pre code {
+            padding: 0;
+            background: transparent;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #404040;
+        }
+        th {
+            background: #2d2d2d;
+        }
+        tr:nth-child(even) {
+            background: #252525;
+        }
+        .function-signature {
+            font-weight: bold;
+            color: #58a6ff;
+        }
+        .parameter-name {
+            color: #ff7b72;
+        }
+        .parameter-type {
+            color: #d2a8ff;
+        }
+        .parameter-description {
+            color: #e0e0e0;
+        }
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            padding: 2rem;
+            background: #252525;
+            overflow-y: auto;
+        }
+        .content {
+            margin-left: 280px;
+        }
+        @media (max-width: 1200px) {
+            .nav {
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>PixelPipeline Script (v1.0.0)</h1>
+<p>This is a custom language implementation with support for functions, variables, and various data types.</p>
+<h2>Data Types</h2>
+<p>The language supports the following data types:</p>
+<ul>
+<li><code class="language-pxp">int</code>: Integer values</li>
+<li><code class="language-pxp">float</code>: Floating-point values</li>
+<li><code class="language-pxp">string</code>: Text values (enclosed in double quotes)</li>
+<li><code class="language-pxp">bool</code>: Boolean values (<code class="language-pxp">true</code> or <code class="language-pxp">false</code>)</li>
+</ul>
+<h2>Syntax</h2>
+<h3>Comments</h3>
+<p>Comments start and end with <code class="language-pxp">#</code>. Linebreaks are treated as part of the comment. In comments <code class="language-pxp">#</code> can be escaped with <code class="language-pxp">\</code>.</p>
+<h3>String Literals</h3>
+<p>Strings start and end with <code class="language-pxp">&quot;</code>. Linebreaks are treated as part of the string. In strings <code class="language-pxp">&quot;</code> can be escaped with <code class="language-pxp">\</code>.</p>
+<h3>Argument References</h3>
+<p>Script arguments can be referenced using <code class="language-pxp">$1</code>, <code class="language-pxp">$2</code>, etc.</p>
+<h3>Variables</h3>
+<p>Variables can be declared and assigned using the <code class="language-pxp">:</code> operator:</p>
+<p><code class="language-pxp">myVar: 42</code></p>
+<p><code class="language-pxp">text: &quot;Hello World&quot;</code></p>
+<h3>Functions</h3>
+<p>Functions are called using the syntax <code class="language-pxp">functionName(arg1 arg2 ...)</code>.</p>
+<p>Arguments can be passed by position or by name.
+You must either use positional arguments or named arguments, mixing is not allowed.
+All arguments have defaults.</p>
+<h2>Functions</h2>
+<h3><code class="language-pxp">auto-contrast(img=- threshold=0.01 strength=1) ⮕ (result=-)</code></h3>
+<p><em>Automatically adjusts the contrast of an image by stretching the histogram to use the full range of values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to auto-contrast</td>
+</tr>
+<tr>
+<td><code class="language-pxp">threshold</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.01</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>The percentage of pixels to ignore at both ends of the histogram (0-0.5)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">strength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>How strongly to apply the contrast adjustment (0 = no change, 1 = full correction)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The contrast-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">auto-levels(img=- lowPercentile=0.05 highPercentile=0.995 adjustAlpha=false) ⮕ (result=-)</code></h3>
+<p><em>Automatically adjusts the contrast and brightness of an image by stretching the histogram to use the full range of values, ignoring outliers using percentiles</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to auto-level</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowPercentile</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.05</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>The lower percentile to ignore (e.g., 0.5)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">highPercentile</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.995</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>The upper percentile to ignore (e.g., 99.5)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">adjustAlpha</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Whether to adjust alpha channel (false = preserve original alpha)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The auto-leveled image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">auto-tone(img=- levelsLow=0.005 levelsHigh=0.9995 whiteThresh=0.99 whiteStrength=0.8 contrastThresh=0.01 contrastStrength=0.8) ⮕ (result=-)</code></h3>
+<p><em>Automatically enhances the image by applying auto-levels, auto-white-balance, and auto-contrast in sequence</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to auto-tone</td>
+</tr>
+<tr>
+<td><code class="language-pxp">levelsLow</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.005</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>Lower percentile for auto-levels (e.g., 0.5)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">levelsHigh</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9995</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>Upper percentile for auto-levels (e.g., 99.5)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">whiteThresh</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.99</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>Brightness threshold for auto-white-balance (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">whiteStrength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Strength for auto-white-balance (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">contrastThresh</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.01</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>Percentile for auto-contrast (0-0.5)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">contrastStrength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Strength for auto-contrast (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The auto-toned image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">auto-white-balance(img=- threshold=0.95 strength=1) ⮕ (result=-)</code></h3>
+<p><em>Automatically adjusts the white balance of an image by finding bright areas and making them neutral</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to auto-white-balance</td>
+</tr>
+<tr>
+<td><code class="language-pxp">threshold</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.95</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">%</code></td>
+<td>The brightness threshold to consider as white (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">strength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>How strongly to apply the white balance (0 = no change, 1 = full correction)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The white-balanced image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-average(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the average blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-color(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the color blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-color-burn(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the color burn blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-color-dodge(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the color dodge blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-contrast-negate(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the contrast negate blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-darken(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the darken blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-darker-color(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the darker color blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-difference(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the difference blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-divide(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the divide blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-erase(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Erases the bottom image wherever the top image is present (destination out)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-exclusion(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the exclusion blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-glow(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the glow blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-hard-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the hard light blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-hard-mix(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the hard mix blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-hue(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the hue blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-lighten(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the lighten blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-lighter-color(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the lighter color blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-linear-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the linear light blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-luminosity(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the luminosity blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-multiply(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the multiply blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-negation(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the negation blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-normal(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the normal blend mode (alpha compositing)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-overlay(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the overlay blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-pin-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the pin light blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-reflect(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the reflect blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-saturation(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the saturation blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-screen(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the screen blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-soft-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the soft light blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-subtract(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the subtract blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-vivid-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<p><em>Blends the two images using the vivid light blend mode</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blur-box(img=- radius=1) ⮕ (result=-)</code></h3>
+<p><em>Applies a box blur to an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to blur</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">10</code></td>
+<td></td>
+<td>The blur radius (size of the box kernel)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blurred image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blur-gaussian(img=- radius=1) ⮕ (result=-)</code></h3>
+<p><em>Applies a Gaussian blur to the image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to blur</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">10</code></td>
+<td></td>
+<td>The blur radius (higher values create more blur)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blurred image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blur-motion(img=- length=5 angle=0) ⮕ (result=-)</code></h3>
+<p><em>Applies a motion blur to an image along a specified angle.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to blur</td>
+</tr>
+<tr>
+<td><code class="language-pxp">length</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">5</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">100</code></td>
+<td></td>
+<td>The length of the motion blur (in pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td></td>
+<td>The angle of the motion blur (in degrees)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blurred image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blur-zoom(img=- strength=0.25 centerX=0.5 centerY=0.5) ⮕ (result=-)</code></h3>
+<p><em>Applies a zoom blur effect to an image.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to blur</td>
+</tr>
+<tr>
+<td><code class="language-pxp">strength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.25</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The strength of the blur effect (higher means more blur)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">centerX</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>X coordinate of the blur center (default: image center)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">centerY</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Y coordinate of the blur center (default: image center)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blurred image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">brightness(img=- factor=0) ⮕ (result=-)</code></h3>
+<p><em>Changes the brightness of an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to change brightness of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">factor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The change factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with brightness changed</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">chromatic-aberration(img=- amount=5) ⮕ (result=-)</code></h3>
+<p><em>Creates a chromatic aberration effect by offsetting color channels</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to apply the effect to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">amount</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">20</code></td>
+<td></td>
+<td>The amount of color channel separation</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with chromatic aberration</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">clarity(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<p><em>Enhances local contrast while preserving overall image structure</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to enhance</td>
+</tr>
+<tr>
+<td><code class="language-pxp">intensity</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The intensity of the clarity effect</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The radius of the filter in pixels (higher values affect larger areas)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.299</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the red channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.587</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the green channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.114</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the blue channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The enhanced image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cmyk(c=0 m=0 y=0 k=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from CMYK values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">c</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The cyan component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">m</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The magenta component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The yellow component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">k</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The key (black) component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The alpha component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">color-balance(img=- rFactor=1 gFactor=1 bFactor=1) ⮕ (result=-)</code></h3>
+<p><em>Adjusts the balance of Red, Green, and Blue channels</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to adjust color balance of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rFactor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>Red channel adjustment factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gFactor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>Green channel adjustment factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bFactor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>Blue channel adjustment factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color-balanced image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">colorize(img=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Colorizes the image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to colorize</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color that determines the hue to use for colorization</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The colorized image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">contrast(img=- factor=1) ⮕ (result=-)</code></h3>
+<p><em>Adjusts the contrast of an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to adjust contrast of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">factor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The contrast factor (0 = gray, 1 = unchanged, 2 = maximum)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The contrast-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<p><em>Crops an image by specified percentages from each side</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">left</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to crop from the left side (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">right</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to crop from the right side (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">top</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to crop from the top side (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bottom</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to crop from the bottom side (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The cropped image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop-circle(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<p><em>Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Radius as a percentage of half the min(width, height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetX</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Horizontal offset from image center (percentage of width, -1..1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetY</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Vertical offset from image center (percentage of height, -1..1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The circularly cropped image (pixels outside the circle are transparent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop-circle-px(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<p><em>Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Radius as a percentage of half the min(width, height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetX</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Horizontal offset from image center (pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetY</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Vertical offset from image center (pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The circularly cropped image (pixels outside the circle are transparent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop-px(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<p><em>Crops an image by specified amounts of pixels from each side</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">left</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to crop from the left side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">right</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to crop from the right side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">top</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to crop from the top side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bottom</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to crop from the bottom side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The cropped image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop-square(img=- size=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<p><em>Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">size</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Size as a percentage of the min(width, height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetX</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Horizontal offset from image center (percentage of width, -1..1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetY</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Vertical offset from image center (percentage of height, -1..1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The square-cropped image (pixels outside the square are transparent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop-square-px(img=- size=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<p><em>Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">size</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Size as a percentage of the min(width, height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetX</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Horizontal offset from image center (pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetY</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Vertical offset from image center (pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The square-cropped image (pixels outside the square are transparent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">defisheye(img=- strength=1) ⮕ (result=-)</code></h3>
+<p><em>Corrects fisheye lens distortion in an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to correct</td>
+</tr>
+<tr>
+<td><code class="language-pxp">strength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The strength of the correction</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The corrected image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">displace(img=- dMap=- amount=10) ⮕ (result=-)</code></h3>
+<p><em>Displaces pixels based on the brightness of a displacement map</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to displace</td>
+</tr>
+<tr>
+<td><code class="language-pxp">dMap</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The displacement map image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">amount</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">10</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">50</code></td>
+<td></td>
+<td>The amount of displacement</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The displaced image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">edge-detect(img=-) ⮕ (result=-)</code></h3>
+<p><em>Detects edges in the image using the Sobel operator</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to detect edges in</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>An image highlighting the edges</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">enhance(img=- brightness=0 contrast=0 sharpening=1 rMin=0.75 rMax=1 gMin=0.75 gMax=1 bMin=0.75 bMax=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<p><em>Enhances colors and sharpness of an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to enhance</td>
+</tr>
+<tr>
+<td><code class="language-pxp">brightness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The brightness adjustment of the image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">contrast</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The contrast adjustment of the image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sharpening</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">5</code></td>
+<td></td>
+<td>The sharpening intensity in pixels (higher values detect larger edges)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rMin</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.75</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum intensity of the red channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rMax</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum intensity of the red channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gMin</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.75</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum intensity of the green channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gMax</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum intensity of the green channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bMin</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.75</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum intensity of the blue channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bMax</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum intensity of the blue channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.299</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the red channel (used for sharpening)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.587</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the green channel (used for sharpening)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.114</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the blue channel (used for sharpening)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The enhanceed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">expand(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<p><em>Expands an image by adding transparent borders with specified percentage widths</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to expand</td>
+</tr>
+<tr>
+<td><code class="language-pxp">left</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to add to the left side (relative to original width)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">right</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to add to the right side (relative to original width)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">top</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to add to the top side (relative to original height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bottom</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The percentage to add to the bottom side (relative to original height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The expanded image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">expand-px(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<p><em>Expands an image by adding transparent borders with specified pixel widths</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to expand</td>
+</tr>
+<tr>
+<td><code class="language-pxp">left</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to add to the left side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">right</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to add to the right side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">top</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to add to the top side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bottom</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of pixels to add to the bottom side</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The expanded image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">exposure(img=- level=0) ⮕ (result=-)</code></h3>
+<p><em>Adjusts the overall lightness or darkness of the image, simulating photographic exposure.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to adjust exposure of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">level</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-2</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The exposure level adjustment (-2 = much darker, 0 = unchanged, 2 = much brighter)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exposure-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">fill(img=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Fills the image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The fill color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The filled image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">fisheye(img=- strength=1) ⮕ (result=-)</code></h3>
+<p><em>Applies a fisheye lens distortion effect to the image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to distort</td>
+</tr>
+<tr>
+<td><code class="language-pxp">strength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The strength of the fisheye effect</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The distorted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">flip-h(img=-) ⮕ (result=-)</code></h3>
+<p><em>Flips an image horizontally (left to right)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to flip horizontally</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontally flipped image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">flip-v(img=-) ⮕ (result=-)</code></h3>
+<p><em>Flips an image vertically (top to bottom)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to flip vertically</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertically flipped image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">grayscale(img=-) ⮕ (result=-)</code></h3>
+<p><em>Grayscales an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to grayscale</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The grayscaled image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">highpass(img=- radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<p><em>Creates a high pass filter effect, resulting in a gray image with embossed edges</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to apply the high-pass filter to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The radius of the filter in pixels (higher values detect larger edges)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.299</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the red channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.587</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the green channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.114</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the blue channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The filtered image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">hsla(h=0 s=0.5 l=0.5 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from HSLA values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The color's hue</td>
+</tr>
+<tr>
+<td><code class="language-pxp">s</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's saturation</td>
+</tr>
+<tr>
+<td><code class="language-pxp">l</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's luminosity</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">hsv(h=0 s=0.5 v=0.5 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from HSV values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The color's hue</td>
+</tr>
+<tr>
+<td><code class="language-pxp">s</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's saturation</td>
+</tr>
+<tr>
+<td><code class="language-pxp">v</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's value (brightness)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">hue-rotate(img=- angle=0) ⮕ (result=-)</code></h3>
+<p><em>Rotates the hue of image colors</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to rotate hue of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The angle in degrees (0-360)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hue-rotated image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">hwb(h=0 w=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from HWB (Hue, Whiteness, Blackness) values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The color's hue</td>
+</tr>
+<tr>
+<td><code class="language-pxp">w</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The whiteness component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The blackness component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">invert(img=-) ⮕ (result=-)</code></h3>
+<p><em>Inverts an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to invert</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The inverted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">invert-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<p><em>Inverts pixels based on their hue, saturation, and luminance, inverting pixels inside the specified ranges</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The lower hue threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">30</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The minimum hue for full opacity (fade from 0% to 100% between lowerHue and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">330</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The maximum hue for full opacity (fade from 100% to 0% between this and upperHue)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The upper hue threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower saturation threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum saturation for full opacity (fade from 0% to 100% between lowerSat and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum saturation for full opacity (fade from 100% to 0% between this and upperSat)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper saturation threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower luminance threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum luminance for full opacity (fade from 0% to 100% between lowerLum and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum luminance for full opacity (fade from 100% to 0% between this and upperLum)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper luminance threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">lab(l=50 a=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from CIELAB values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">l</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">50</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">100</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The lightness component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-128</code></td>
+<td><code class="language-pxp">127</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The green-red component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-128</code></td>
+<td><code class="language-pxp">127</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The blue-yellow component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">lch(l=50 c=0 h=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from LCH (Lightness, Chroma, Hue) values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">l</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">50</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">100</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The lightness component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">c</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">128</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The chroma component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The hue component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">load(path=&quot;-&quot;) ⮕ (result=-)</code></h3>
+<p><em>Loads an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">path</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - Path to the image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The loaded image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">opacity(img=- amount=1) ⮕ (result=-)</code></h3>
+<p><em>Adjusts the overall opacity/transparency of an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to adjust opacity of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">amount</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The opacity amount (0 = fully transparent, 1 = unchanged)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opacity-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pixelate(img=- size=8) ⮕ (result=-)</code></h3>
+<p><em>Creates a pixelation effect by averaging colors in blocks</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to pixelate</td>
+</tr>
+<tr>
+<td><code class="language-pxp">size</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">8</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">50</code></td>
+<td></td>
+<td>The size of the pixel blocks</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The pixelated image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">polar-to-rectangular(img=-) ⮕ (result=-)</code></h3>
+<p><em>Converts a polar coordinate image to rectangular coordinates</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to transform</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The transformed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">posterize(img=- levels=4) ⮕ (result=-)</code></h3>
+<p><em>Reduces the number of color levels in the image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to posterize</td>
+</tr>
+<tr>
+<td><code class="language-pxp">levels</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">4</code></td>
+<td><code class="language-pxp">2</code></td>
+<td><code class="language-pxp">16</code></td>
+<td></td>
+<td>Number of color levels per channel (2-16)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The posterized image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">rectangular-to-polar(img=-) ⮕ (result=-)</code></h3>
+<p><em>Converts a rectangular coordinate image to polar coordinates</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to transform</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The transformed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">remove-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=-)</code></h3>
+<p><em>Removes pixels based on their brightness, making pixels inside the specified range transparent</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower brightness threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum brightness for full opacity (fade from 0% to 100% between lowerBright and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum brightness for full opacity (fade from 100% to 0% between this and upperBright)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper brightness threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with pixels in the specified brightness range removed (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">remove-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<p><em>Removes pixels based on their hue, saturation, and luminance, making pixels inside the specified ranges transparent</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The lower hue threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">30</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The minimum hue for full opacity (fade from 0% to 100% between lowerHue and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">330</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The maximum hue for full opacity (fade from 100% to 0% between this and upperHue)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The upper hue threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower saturation threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum saturation for full opacity (fade from 0% to 100% between lowerSat and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum saturation for full opacity (fade from 100% to 0% between this and upperSat)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper saturation threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower luminance threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum luminance for full opacity (fade from 0% to 100% between lowerLum and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum luminance for full opacity (fade from 100% to 0% between this and upperLum)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper luminance threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">rgba(r=0 g=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from RGBA values (8-bit per channel)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">255</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The red component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">g</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">255</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The green component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">255</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The blue component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The alpha component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">rgba64(r=0 g=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from RGBA values (16-bit per channel)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">65535</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The red component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">g</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">65535</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The green component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">65535</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The blue component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The alpha component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">rotate(img=- angle=0) ⮕ (result=-)</code></h3>
+<p><em>Rotates an image around its center by a specified angle</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to rotate</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-360</code></td>
+<td><code class="language-pxp">360</code></td>
+<td></td>
+<td>The rotation angle in degrees (positive = clockwise)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The rotated image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">rotate-hsl(img=- rotate=0 lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<p><em>Rotates the hue of pixels based on their hue, saturation, and luminance</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rotate</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The lower hue threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The lower hue threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">30</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The minimum hue for full opacity (fade from 0% to 100% between lowerHue and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">330</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The maximum hue for full opacity (fade from 100% to 0% between this and upperHue)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The upper hue threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower saturation threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum saturation for full opacity (fade from 0% to 100% between lowerSat and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum saturation for full opacity (fade from 100% to 0% between this and upperSat)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper saturation threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower luminance threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum luminance for full opacity (fade from 0% to 100% between lowerLum and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum luminance for full opacity (fade from 100% to 0% between this and upperLum)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper luminance threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">saturation(img=- factor=1) ⮕ (result=-)</code></h3>
+<p><em>Adjusts the color saturation of an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to adjust saturation of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">factor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The saturation factor (0 = grayscale, 1 = unchanged, 2 = super saturated)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The saturation-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">save(img=- path=&quot;-&quot;)</code></h3>
+<p><em>Saves an image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to save</td>
+</tr>
+<tr>
+<td><code class="language-pxp">path</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - Path where to save</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">scale(img=- sx=0 sy=0) ⮕ (result=-)</code></h3>
+<p><em>Scales an image by specified factors</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to scale</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sx</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontal scale factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sy</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertical scale factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The scaled image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">select-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=-)</code></h3>
+<p><em>Selects pixels based on their brightness, making pixels outside the specified range transparent</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower brightness threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum brightness for full opacity (fade from 0% to 100% between lowerBright and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum brightness for full opacity (fade from 100% to 0% between this and upperBright)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperBright</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper brightness threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with only pixels in the specified brightness range visible (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">select-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<p><em>Selects pixels based on their hue, saturation, and luminance, making pixels outside the specified ranges transparent</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The lower hue threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">30</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The minimum hue for full opacity (fade from 0% to 100% between lowerHue and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">330</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The maximum hue for full opacity (fade from 100% to 0% between this and upperHue)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperHue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The upper hue threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower saturation threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum saturation for full opacity (fade from 0% to 100% between lowerSat and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum saturation for full opacity (fade from 100% to 0% between this and upperSat)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperSat</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper saturation threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">lowerLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The lower luminance threshold (below this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.2</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum luminance for full opacity (fade from 0% to 100% between lowerLum and this)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The maximum luminance for full opacity (fade from 100% to 0% between this and upperLum)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">upperLum</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.9</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The upper luminance threshold (above this becomes transparent)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">select-hue(img=- hue=0 toleranceLeft=30 toleranceRight=30 softness=0.5 minSaturation=0.15) ⮕ (result=-)</code></h3>
+<p><em>Selects a specific hue from the image and makes everything else transparent</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to process (16-bit)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hue</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>The target hue to keep (in degrees)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">toleranceLeft</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">30</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">180</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>How much to include to the left (lower hue, in degrees)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">toleranceRight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">30</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">180</code></td>
+<td><code class="language-pxp">&amp;#34;°&amp;#34;</code></td>
+<td>How much to include to the right (higher hue, in degrees)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">softness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>How soft the transition should be (0 = hard cut, 1 = very soft)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">minSaturation</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.15</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The minimum saturation required to keep a pixel (smooth fade below)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with only the selected hue visible (16-bit)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sepia(img=-) ⮕ (result=-)</code></h3>
+<p><em>Changes the tone of an image to sepia</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to change to sepia tone</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The sepia-toned image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sharpen(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<p><em>Sharpens an image using a highpass combined with vivid light blending</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to sharpen</td>
+</tr>
+<tr>
+<td><code class="language-pxp">intensity</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The intensity of the sharpening effect</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>The radius of the filter in pixels (higher values detect larger edges)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.299</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the red channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.587</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the green channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">bWeight</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.114</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The weight of the blue channel</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The sharpened image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">threshold(img=- level=0.5) ⮕ (result=-)</code></h3>
+<p><em>Converts image to black and white based on a brightness threshold</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to apply thresholding to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">level</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The brightness threshold</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thresholded (black and white) image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">transform(img=- dx=0 dy=0 angle=0 sx=0 sy=0) ⮕ (result=-)</code></h3>
+<p><em>Applies translation, rotation, and scaling to an image in one operation</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to transform</td>
+</tr>
+<tr>
+<td><code class="language-pxp">dx</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontal translation in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">dy</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertical translation in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The rotation angle in degrees (clockwise)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sx</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontal scale factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sy</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertical scale factor</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The transformed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">translate(img=- dx=0 dy=0) ⮕ (result=-)</code></h3>
+<p><em>Translates (moves) an image by a specified amount</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to translate</td>
+</tr>
+<tr>
+<td><code class="language-pxp">dx</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontal translation amount in % (positive = right)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">dy</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertical translation amount in % (positive = down)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The translated image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">vibrance(img=- factor=0) ⮕ (result=-)</code></h3>
+<p><em>Adjusts the saturation of an image, protecting already saturated colors and skin tones.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to adjust vibrance of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">factor</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>The vibrance adjustment factor (-1 = less vibrant, 0 = unchanged, 1 = more vibrant)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vibrance-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">vignette(img=- strength=0.5 falloff=0.8) ⮕ (result=-)</code></h3>
+<p><em>Adds a vignette effect (darkens/lightens edges)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to apply vignette to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">strength</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.5</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Darkness/Lightness intensity (0 to 1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">falloff</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0.8</code></td>
+<td><code class="language-pxp">0.1</code></td>
+<td><code class="language-pxp">2</code></td>
+<td></td>
+<td>How quickly the effect fades (0.1 to 2.0)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image with vignette effect</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">xyz(x=0 y=0 z=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from CIE XYZ values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0.95047</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The X component (red)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The Y component (green)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">z</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1.08883</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The Z component (blue)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">ycbcr(y=0 cb=128 cr=128 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from YCbCr values (digital video)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">255</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The luminance component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">cb</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">128</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">255</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The blue-difference chroma component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">cr</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">128</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">255</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The red-difference chroma component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">yuv(y=0 u=0 v=0 alpha=1) ⮕ (result=-)</code></h3>
+<p><em>Creates a color from YUV values</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The luminance component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">u</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-0.436</code></td>
+<td><code class="language-pxp">0.436</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The U chrominance component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">v</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-0.615</code></td>
+<td><code class="language-pxp">0.615</code></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The V chrominance component</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The color's alpha</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+    </div>
+    <script>
+        
+        Prism.languages['pxp'] = {
+            'comment': {
+                pattern: /#[\s\S]*?#/,
+                greedy: true,
+                alias: 'comment'
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"/,
+                greedy: true,
+                alias: 'string'
+            },
+            'number': {
+                pattern: /\b\d+(?:\.\d+)?\b/,
+                alias: 'constant.numeric'
+            },
+            'boolean': {
+                pattern: /\b(?:true|false)\b/,
+                alias: 'constant.language.boolean'
+            },
+            'null': {
+                pattern: /\bnil\b/,
+                alias: 'constant.language.null'
+            },
+            'argument-reference': {
+                pattern: /\$\d+/,
+                alias: 'variable.parameter'
+            },
+            'variable-assignment': {
+                pattern: /\b[a-zA-Z_][a-zA-Z0-9_]*(?=\s*:)/,
+                alias: 'variable.assign'
+            },
+            'function': {
+                pattern: /\b[a-zA-Z_][a-zA-Z0-9_-]*(?=\s*\()/,
+                greedy: true,
+                alias: 'entity.name.function'
+            },
+            'named-argument': {
+                pattern: /[a-zA-Z_][a-zA-Z0-9_]*(?=\s*=)/,
+                alias: 'variable.parameter'
+            },
+            'operator': {
+                pattern: /[:=]/,
+                alias: 'keyword.operator.assignment'
+            },
+            'punctuation': {
+                pattern: /[(),]/,
+                alias: 'punctuation'
+            }
+        };
+
+        
+        const theme = {
+            'comment': '#6A9955',
+            'string': '#FFD4D4',
+            'constant.numeric': '#B5CEA8',
+            'constant.language.boolean': '#569CD6',
+            'constant.language.null': '#569CD6',
+            'variable.parameter': '#B5DCFE',
+            'variable.assign': '#D7BA7D',
+            'entity.name.function': '#FFD700',
+            'keyword.operator.assignment': '#D4D4D4',
+            'punctuation': '#d4d4d4'
+        };
+
+        
+        document.addEventListener('DOMContentLoaded', (event) => {
+            
+            Prism.highlightAll();
+
+            
+            const codeBlocks = document.querySelectorAll('code');
+            codeBlocks.forEach(block => {
+                const tokens = block.querySelectorAll('.token');
+                tokens.forEach(token => {
+                    const classes = Array.from(token.classList);
+                    for (const cls of classes) {
+                        if (theme[cls]) {
+                            token.style.color = theme[cls];
+                            break;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
