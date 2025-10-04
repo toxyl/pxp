@@ -524,3 +524,36 @@ func expandPx(img *image.NRGBA64, left int, right int, top int, bottom int) (*im
 
 	return result, nil
 }
+
+// @Name: resize-max-mp
+// @Desc: Resize an image to stay within a maximum amount of megapixels
+// @Param:      img     - -   	-   The image to resize
+// @Param:      mpMax    - -   	0   The maximum amount of megapixels
+// @Returns:    result  - -   	-   The resized image
+func resizeToMaxMP(img *image.NRGBA64, mpMax int) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	w := bounds.Dx()
+	h := bounds.Dy()
+
+	ow := w
+	oh := h
+	mp := w * h
+	for mp > mpMax {
+		w >>= 1
+		h >>= 1
+		mp = w * h
+	}
+	if ow != w || oh != h {
+		// Create a new image with the target dimensions and resample using nearest-neighbor
+		dst := image.NewNRGBA64(image.Rect(0, 0, w, h))
+		for y := 0; y < h; y++ {
+			srcY := y * oh / h
+			for x := 0; x < w; x++ {
+				srcX := x * ow / w
+				dst.SetNRGBA64(x, y, img.NRGBA64At(srcX, srcY))
+			}
+		}
+		img = dst
+	}
+	return img, nil
+}

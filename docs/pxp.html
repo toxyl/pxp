@@ -4475,6 +4475,51 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">resize-max-mp(img=- mpMax=0) ⮕ (result=-)</code></h3>
+<p><em>Resize an image to stay within a maximum amount of megapixels</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to resize</td>
+</tr>
+<tr>
+<td><code class="language-pxp">mpMax</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum amount of megapixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resized image</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">rgba(r=0 g=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
 <p><em>Creates a color from RGBA values (8-bit per channel)</em></p>
 <table>

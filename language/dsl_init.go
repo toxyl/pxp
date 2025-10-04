@@ -4339,6 +4339,36 @@ func init() {
             )
         },
     )
+    dsl.funcs.register("resize-max-mp", "Resize an image to stay within a maximum amount of megapixels",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to resize",
+            },
+            { 
+                name: "mpMax",
+                typ:  "int", 
+                def:  0, 
+                desc: "The maximum amount of megapixels",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resized image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return resizeToMaxMP(
+                a[0].(*image.NRGBA64),
+                a[1].(int), 
+            )
+        },
+    )
     dsl.funcs.register("load", "Loads an image",
         []dslParamMeta{ 
             { 

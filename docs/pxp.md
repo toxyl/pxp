@@ -926,6 +926,16 @@ _Removes pixels based on their hue, saturation, and luminance, making pixels ins
 | `⮕ result` | `any` | `-` |   |   |   | The image with only pixels in all specified ranges visible (16-bit) |
 ---
 
+### `resize-max-mp(img=- mpMax=0) ⮕ (result=-)`  
+_Resize an image to stay within a maximum amount of megapixels_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to resize |
+| `mpMax` | `int` | `0` |   |   |   | The maximum amount of megapixels |
+| `⮕ result` | `any` | `-` |   |   |   | The resized image |
+---
+
 ### `rgba(r=0 g=0 b=0 alpha=1) ⮕ (result=-)`  
 _Creates a color from RGBA values (8-bit per channel)_
 

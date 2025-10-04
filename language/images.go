@@ -2,15 +2,21 @@ package language
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"fmt"
 	"image"
 	"image/jpeg"
 	"image/png"
+	"io"
+	"net/http"
 	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/gen2brain/heic"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/tidwall/gjson"
+	"github.com/toxyl/flo"
 )
 
 var ImagesCache = NewImageCache()
@@ -47,6 +53,8 @@ func DetectImageType(data []byte) string {
 // @Param:      path    - -   -   Path to the image
 // @Returns:    result  - -   -   The loaded image
 func load(path string) (any, error) {
+	path = strings.TrimSpace(path)
+	isRemote := strings.HasPrefix(path, "http://") || strings.HasPrefix(path, "https://")
 	var nrgba *image.NRGBA64
 
 	// Check if the image is in cache
@@ -55,10 +63,36 @@ func load(path string) (any, error) {
 		return cachedImg, nil
 	}
 
-	// Read the entire file
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, err
+	var err error
+	var data []byte
+	if isRemote {
+		resp, err := http.Get(path)
+		if err != nil {
+			return "", fmt.Errorf("failed to download file '%s': %s", path, err.Error())
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			return "", fmt.Errorf("failed to download file: status %s", resp.Status)
+		}
+
+		data, err = io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read body: %s", err.Error())
+		}
+
+		hash := sha256.Sum256([]byte(path))
+		tempFileName := fmt.Sprintf("%x-%s", hash, filepath.Base(path))
+		path = filepath.Join(os.TempDir(), tempFileName)
+		if err = flo.File(path).StoreBytes(data); err != nil {
+			return nil, fmt.Errorf("could not store downloaded file: %s", err.Error())
+		}
+	} else {
+		// Read the entire file
+		data, err = os.ReadFile(path)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read file '%s': %s", path, err.Error())
+		}
 	}
 
 	// Create a bytes reader for image decoding
