@@ -150,38 +150,41 @@ func load(path string) (any, error) {
 		jsonByte, err := metaData.MarshalJSON()
 		if err == nil {
 			jsonString := string(jsonByte)
-			orientation := gjson.Get(jsonString, "Orientation").Array()[0]
-			switch orientation.String() {
-			case "1": // 1 = Horizontal (normal) = no change
-			case "2": // 2 = Mirror horizontal
-				nrgba, err = flipHorizontal(nrgba)
-				return nrgba, err
-			case "3": // 3 = Rotate 180
-				nrgba, err = rotate(nrgba, 180)
-				return nrgba, err
-			case "4": // 4 = Mirror vertical
-				nrgba, err = flipVertical(nrgba)
-				return nrgba, err
-			case "5": // 5 = Mirror horizontal and rotate 270 CW
-				res, err := flipHorizontal(nrgba)
-				if err != nil {
-					return nil, err
+			or := gjson.Get(jsonString, "Orientation").Array()
+			if len(or) > 0 {
+				orientation := or[0]
+				switch orientation.String() {
+				case "1": // 1 = Horizontal (normal) = no change
+				case "2": // 2 = Mirror horizontal
+					nrgba, err = flipHorizontal(nrgba)
+					return nrgba, err
+				case "3": // 3 = Rotate 180
+					nrgba, err = rotate(nrgba, 180)
+					return nrgba, err
+				case "4": // 4 = Mirror vertical
+					nrgba, err = flipVertical(nrgba)
+					return nrgba, err
+				case "5": // 5 = Mirror horizontal and rotate 270 CW
+					res, err := flipHorizontal(nrgba)
+					if err != nil {
+						return nil, err
+					}
+					nrgba, err = rotate(res, 270)
+					return nrgba, err
+				case "6": // 6 = Rotate 90 CW
+					nrgba, err = rotate(nrgba, 90)
+					return nrgba, err
+				case "7": // 7 = Mirror horizontal and rotate 90 CW
+					res, err := flipHorizontal(nrgba)
+					if err != nil {
+						return nil, err
+					}
+					nrgba, err = rotate(res, 90)
+					return nrgba, err
+				case "8": // 8 = Rotate 270 CW
+					nrgba, err = rotate(nrgba, 270)
+					return nrgba, err
 				}
-				nrgba, err = rotate(res, 270)
-				return nrgba, err
-			case "6": // 6 = Rotate 90 CW
-				nrgba, err = rotate(nrgba, 90)
-				return nrgba, err
-			case "7": // 7 = Mirror horizontal and rotate 90 CW
-				res, err := flipHorizontal(nrgba)
-				if err != nil {
-					return nil, err
-				}
-				nrgba, err = rotate(res, 90)
-				return nrgba, err
-			case "8": // 8 = Rotate 270 CW
-				nrgba, err = rotate(nrgba, 270)
-				return nrgba, err
 			}
 		}
 	}
