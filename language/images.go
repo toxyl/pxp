@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"image"
+	"image/gif"
 	"image/jpeg"
 	"image/png"
 	"io"
@@ -35,6 +36,11 @@ func DetectImageType(data []byte) string {
 	// Check for JPEG
 	if bytes.Equal(data[:2], []byte{0xFF, 0xD8}) && bytes.Equal(data[len(data)-2:], []byte{0xFF, 0xD9}) {
 		return "jpeg"
+	}
+
+	// Check for GIF
+	if len(data) >= 6 && (bytes.Equal(data[:6], []byte("GIF87a")) || bytes.Equal(data[:6], []byte("GIF89a"))) {
+		return "gif"
 	}
 
 	// Check for HEIC
@@ -107,6 +113,8 @@ func load(path string) (any, error) {
 	// Decode the image based on its type
 	var img image.Image
 	switch imgType {
+	case "gif":
+		img, err = gif.Decode(reader)
 	case "png":
 		img, err = png.Decode(reader)
 	case "jpeg":

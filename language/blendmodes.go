@@ -194,31 +194,34 @@ func blendColorDodge(imgA *image.NRGBA64, imgB *image.NRGBA64) (*image.NRGBA64, 
 
 			// Red channel
 			var r uint32
-			if r2 == 0 {
+			switch r2 {
+			case 0:
 				r = r1
-			} else if r2 == 0xffff {
+			case 0xffff:
 				r = 0xffff
-			} else {
+			default:
 				r = min((r1*0xffff)/(0xffff-r2), 0xffff)
 			}
 
 			// Green channel
 			var g uint32
-			if g2 == 0 {
+			switch g2 {
+			case 0:
 				g = g1
-			} else if g2 == 0xffff {
+			case 0xffff:
 				g = 0xffff
-			} else {
+			default:
 				g = min((g1*0xffff)/(0xffff-g2), 0xffff)
 			}
 
 			// Blue channel
 			var b uint32
-			if b2 == 0 {
+			switch b2 {
+			case 0:
 				b = b1
-			} else if b2 == 0xffff {
+			case 0xffff:
 				b = 0xffff
-			} else {
+			default:
 				b = min((b1*0xffff)/(0xffff-b2), 0xffff)
 			}
 
