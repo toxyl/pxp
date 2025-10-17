@@ -182,10 +182,31 @@ func (p *PXP) render(file string) (*image.NRGBA, error) {
 	return nrgba, nil
 }
 
-func RenderWithPXPFile(pxpFile string, pxpArgs []any, files []string) ([]*image.NRGBA, error) {
-	return New().ScriptFromFile(pxpFile).Args(pxpArgs...).Files(files...).RenderImages()
+// RenderFile loads `pathIn` into the variable `in`, processes it with the given `script` and stores the result in `pathOut`.
+//
+// The script must use the variable `in` as input image and store the final result in the `img` variable.
+//
+// The `pathIn` variable can be a URL or a local file path.
+//
+// When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given sizes.
+func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (*image.NRGBA, error) {
+	sb := strings.Builder{}
+	sb.WriteString(`in: load("` + pathIn + `")` + "\n")
+	sb.WriteString(script + "\n")
+	sb.WriteString(`save(`)
+	if maxW > 0 && maxH > 0 {
+		sb.WriteString(fmt.Sprintf("resize-fit(img %d %d)", maxW, maxH))
+	} else {
+		sb.WriteString(`img`)
+	}
+	sb.WriteString(` "` + pathOut + `")`)
+	return New().Script(sb.String()).render("dummy")
 }
 
-func RenderWithPXPScript(pxpScript string, pxpArgs []any, files []string) ([]*image.NRGBA, error) {
-	return New().Script(pxpScript).Args(pxpArgs...).Files(files...).RenderImages()
+func RenderWithPXPFile(script string, args []any, files []string) ([]*image.NRGBA, error) {
+	return New().ScriptFromFile(script).Args(args...).Files(files...).RenderImages()
+}
+
+func RenderWithPXPScript(script string, args []any, files []string) ([]*image.NRGBA, error) {
+	return New().Script(script).Args(args...).Files(files...).RenderImages()
 }

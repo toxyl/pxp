@@ -926,6 +926,17 @@ _Removes pixels based on their hue, saturation, and luminance, making pixels ins
 | `⮕ result` | `any` | `-` |   |   |   | The image with only pixels in all specified ranges visible (16-bit) |
 ---
 
+### `resize-fit(img=- maxW=0 maxH=0) ⮕ (result=-)`  
+_Resize an image to fit within a bounding box while preserving aspect ratio_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to resize |
+| `maxW` | `int` | `0` |   |   |   | The maximum width (pixels) |
+| `maxH` | `int` | `0` |   |   |   | The maximum height (pixels) |
+| `⮕ result` | `any` | `-` |   |   |   | The resized image |
+---
+
 ### `resize-max-mp(img=- mpMax=0) ⮕ (result=-)`  
 _Resize an image to stay within a maximum amount of megapixels_
 

@@ -4369,6 +4369,43 @@ func init() {
             )
         },
     )
+    dsl.funcs.register("resize-fit", "Resize an image to fit within a bounding box while preserving aspect ratio",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to resize",
+            },
+            { 
+                name: "maxW",
+                typ:  "int", 
+                def:  0, 
+                desc: "The maximum width (pixels)",
+            },
+            { 
+                name: "maxH",
+                typ:  "int", 
+                def:  0, 
+                desc: "The maximum height (pixels)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resized image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return resizeToFit(
+                a[0].(*image.NRGBA64),
+                a[1].(int),
+                a[2].(int), 
+            )
+        },
+    )
     dsl.funcs.register("load", "Loads an image",
         []dslParamMeta{ 
             { 

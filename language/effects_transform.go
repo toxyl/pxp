@@ -557,3 +557,52 @@ func resizeToMaxMP(img *image.NRGBA64, mpMax int) (*image.NRGBA64, error) {
 	}
 	return img, nil
 }
+
+// @Name: resize-fit
+// @Desc: Resize an image to fit within a bounding box while preserving aspect ratio
+// @Param:      img     - -   	-   The image to resize
+// @Param:      maxW    - -   	0   The maximum width (pixels)
+// @Param:      maxH    - -   	0   The maximum height (pixels)
+// @Returns:    result  - -   	-   The resized image
+func resizeToFit(img *image.NRGBA64, maxW int, maxH int) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	ow := bounds.Dx()
+	oh := bounds.Dy()
+
+	if maxW <= 0 && maxH <= 0 {
+		return img, nil
+	}
+	if maxW <= 0 {
+		maxW = ow
+	}
+	if maxH <= 0 {
+		maxH = oh
+	}
+
+	if ow <= maxW && oh <= maxH {
+		return img, nil
+	}
+
+	scaleW := float64(maxW) / float64(ow)
+	scaleH := float64(maxH) / float64(oh)
+	scale := math.Min(scaleW, scaleH)
+
+	nw := int(math.Round(float64(ow) * scale))
+	nh := int(math.Round(float64(oh) * scale))
+	if nw < 1 {
+		nw = 1
+	}
+	if nh < 1 {
+		nh = 1
+	}
+
+	dst := image.NewNRGBA64(image.Rect(0, 0, nw, nh))
+	for y := 0; y < nh; y++ {
+		srcY := y * oh / nh
+		for x := 0; x < nw; x++ {
+			srcX := x * ow / nw
+			dst.SetNRGBA64(x, y, img.NRGBA64At(srcX, srcY))
+		}
+	}
+	return dst, nil
+}
