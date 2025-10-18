@@ -43,6 +43,227 @@ All arguments have defaults.
 
 ## Functions
 
+### `I(w=- h=- col=-) ⮕ (result=-)`  
+_Creates a new image with the given color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `w` | `int` | `-` |   |   |   | The width of the image |
+| `h` | `int` | `-` |   |   |   | The height of the image |
+| `col` | `color.RGBA64` | `-` |   |   |   | The fill color |
+| `⮕ result` | `any` | `-` |   |   |   | The new image |
+---
+
+### `Ih(img=-) ⮕ (result=-)`  
+_Returns the height of an image._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to return the height of |
+| `⮕ result` | `any` | `-` |   |   |   | The height of img |
+---
+
+### `It(img=- dt=-) ⮕ (result=-)`  
+_Translates the given image by expanding/cropping the left &#43; top borders._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to translate |
+| `dt` | `Point` | `-` |   |   |   | The translation to apply |
+| `⮕ result` | `any` | `-` |   |   |   | The new image |
+---
+
+### `Iw(img=-) ⮕ (result=-)`  
+_Returns the width of an image._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to return the width of |
+| `⮕ result` | `any` | `-` |   |   |   | The width of img |
+---
+
+### `P(x=0 y=0) ⮕ (result=-)`  
+_Creates the point P(x|y)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `0` |   |   |   | The start position on the x-axis (relative) |
+| `y` | `float64` | `0` |   |   |   | The start position on the y-axis (relative) |
+| `⮕ result` | `any` | `-` |   |   |   | A new point |
+---
+
+### `Px(p=-) ⮕ (result=-)`  
+_Returns the x-coordinate of a point._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `p` | `Point` | `-` |   |   |   | The point to return the x-coordinate of |
+| `⮕ result` | `any` | `-` |   |   |   | The x-coordinate of p |
+---
+
+### `Py(p=-) ⮕ (result=-)`  
+_Returns the y-coordinate of a point._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `p` | `Point` | `-` |   |   |   | The point to return the y-coordinate of |
+| `⮕ result` | `any` | `-` |   |   |   | The y-coordinate of p |
+---
+
+### `abs(x=-) ⮕ (result=-)`  
+_Returns the absolute value of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The absolute value of x |
+---
+
+### `acos(radians=-) ⮕ (result=-)`  
+_calculates the arccosine (inverse cosine) of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | angle in radians between 0 and PI |
+---
+
+### `acosh(x=-) ⮕ (result=-)`  
+_calculates the inverse hyperbolic cosine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | inverse hyperbolic cosine value (x &gt;= 1) |
+---
+
+### `acoth(x=-) ⮕ (result=-)`  
+_calculates the inverse hyperbolic cotangent of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | inverse hyperbolic cotangent value (|x| &gt; 1) |
+---
+
+### `acsch(x=-) ⮕ (result=-)`  
+_calculates the inverse hyperbolic cosecant of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | inverse hyperbolic cosecant value (x != 0) |
+---
+
+### `add(a=- b=-) ⮕ (result=-)`  
+_Adds the two numbers_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `float64` | `-` |   |   |   | The first number |
+| `b` | `float64` | `-` |   |   |   | The second number |
+| `⮕ result` | `any` | `-` |   |   |   | a&#43;b |
+---
+
+### `add-n(a=- b=- n=-) ⮕ (result=-)`  
+_Multiplies b by n and adds the result to a_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `float64` | `-` |   |   |   | The first number |
+| `b` | `float64` | `-` |   |   |   | The second number |
+| `n` | `float64` | `-` |   |   |   | The multiplier for the second number |
+| `⮕ result` | `any` | `-` |   |   |   | a &#43; (n * b) |
+---
+
+### `adjacent-of-triangle(hypotenuse=- opposite=- alpha=-) ⮕ (result=-)`  
+_Calculates adjacent side from hypotenuse, opposite and alpha angle_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `alpha` | `float64` | `-` |   |   |   | The alpha angle |
+| `⮕ result` | `any` | `-` |   |   |   | The adjacent side length |
+---
+
+### `angle-between(x1=- y1=- x2=- y2=-) ⮕ (result=-)`  
+_Calculates angle between two points_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x1` | `float64` | `-` |   |   |   | The x coordinate of the first point |
+| `y1` | `float64` | `-` |   |   |   | The y coordinate of the first point |
+| `x2` | `float64` | `-` |   |   |   | The x coordinate of the second point |
+| `y2` | `float64` | `-` |   |   |   | The y coordinate of the second point |
+| `⮕ result` | `any` | `-` |   |   |   | The angle in radians |
+---
+
+### `angle-difference(angle1=- angle2=-) ⮕ (result=-)`  
+_calculates the smallest difference between two angles_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `angle1` | `float64` | `-` |   |   |   | The first angle in radians |
+| `angle2` | `float64` | `-` |   |   |   | The second angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | smallest angle difference in radians |
+---
+
+### `angle-difference-degrees(angle1=- angle2=-) ⮕ (result=-)`  
+_calculates the smallest difference between two angles in degrees_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `angle1` | `float64` | `-` |   |   |   | The first angle in degrees |
+| `angle2` | `float64` | `-` |   |   |   | The second angle in degrees |
+| `⮕ result` | `any` | `-` |   |   |   | smallest angle difference in degrees |
+---
+
+### `asech(x=-) ⮕ (result=-)`  
+_calculates the inverse hyperbolic secant of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | inverse hyperbolic secant value (0 &lt; x &lt;= 1) |
+---
+
+### `asin(radians=-) ⮕ (result=-)`  
+_calculates the arcsine (inverse sine) of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | angle in radians between -PI/2 and PI/2 |
+---
+
+### `asinh(x=-) ⮕ (result=-)`  
+_calculates the inverse hyperbolic sine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | inverse hyperbolic sine value |
+---
+
+### `atan(radians=-) ⮕ (result=-)`  
+_calculates the arctangent (inverse tangent) of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | angle in radians between -PI/2 and PI/2 |
+---
+
+### `atanh(x=-) ⮕ (result=-)`  
+_calculates the inverse hyperbolic tangent of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | inverse hyperbolic tangent value (|x| &lt; 1) |
+---
+
 ### `auto-contrast(img=- threshold=0.01 strength=1) ⮕ (result=-)`  
 _Automatically adjusts the contrast of an image by stretching the histogram to use the full range of values_
 
@@ -445,6 +666,24 @@ _Changes the brightness of an image_
 | `⮕ result` | `any` | `-` |   |   |   | The image with brightness changed |
 ---
 
+### `ceil(x=-) ⮕ (result=-)`  
+_Returns the smallest integer greater than or equal to x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The smallest integer greater than or equal to x |
+---
+
+### `chord(x=-) ⮕ (result=-)`  
+_calculates the chord of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | chord value (2 * sin(x/2)) |
+---
+
 ### `chromatic-aberration(img=- amount=5) ⮕ (result=-)`  
 _Creates a chromatic aberration effect by offsetting color channels_
 
@@ -453,6 +692,15 @@ _Creates a chromatic aberration effect by offsetting color channels_
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to apply the effect to |
 | `amount` | `float64` | `5` | `0` | `20` |   | The amount of color channel separation |
 | `⮕ result` | `any` | `-` |   |   |   | The image with chromatic aberration |
+---
+
+### `circumference-of-a_circle(radius=-) ⮕ (result=-)`  
+_Calculates circumference from radius_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radius` | `float64` | `-` |   |   |   | The radius of the circle |
+| `⮕ result` | `any` | `-` |   |   |   | The circumference length |
 ---
 
 ### `clarity(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)`  
@@ -512,6 +760,108 @@ _Adjusts the contrast of an image_
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to adjust contrast of |
 | `factor` | `float64` | `1` | `0` | `2` |   | The contrast factor (0 = gray, 1 = unchanged, 2 = maximum) |
 | `⮕ result` | `any` | `-` |   |   |   | The contrast-adjusted image |
+---
+
+### `cos(radians=-) ⮕ (result=-)`  
+_calculates the cosine of an angle in radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | cosine value between -1 and 1 |
+---
+
+### `cos-of-triangle(adjacent=- hypotenuse=-) ⮕ (result=-)`  
+_calculates cosine using adjacent and hypotenuse sides_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `⮕ result` | `any` | `-` |   |   |   | cosine value (adjacent/hypotenuse) |
+---
+
+### `cos2(x=-) ⮕ (result=-)`  
+_calculates the square of cosine (cos²(x))_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | squared cosine value (cos(x)²) |
+---
+
+### `cosec(radians=-) ⮕ (result=-)`  
+_calculates the cosecant of an angle in radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | cosecant value (1/sin) |
+---
+
+### `cosec-of-triangle(hypotenuse=- opposite=-) ⮕ (result=-)`  
+_calculates cosecant using hypotenuse and opposite sides_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `⮕ result` | `any` | `-` |   |   |   | cosecant value (hypotenuse/opposite) |
+---
+
+### `cosh(x=-) ⮕ (result=-)`  
+_calculates the hyperbolic cosine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | hyperbolic cosine value (always positive) |
+---
+
+### `cot(radians=-) ⮕ (result=-)`  
+_calculates the cotangent of an angle in radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | cotangent value (1/tan) |
+---
+
+### `cot-of-triangle(adjacent=- opposite=-) ⮕ (result=-)`  
+_calculates cotangent using adjacent and opposite sides_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `⮕ result` | `any` | `-` |   |   |   | cotangent value (adjacent/opposite) |
+---
+
+### `coth(x=-) ⮕ (result=-)`  
+_calculates the hyperbolic cotangent of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | hyperbolic cotangent value (1/tanh) |
+---
+
+### `covercos(x=-) ⮕ (result=-)`  
+_calculates the coversed cosine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | coversed cosine value (1 &#43; sin(x)) |
+---
+
+### `coversin(x=-) ⮕ (result=-)`  
+_calculates the coversed sine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | coversed sine value (1 - sin(x)) |
 ---
 
 ### `crop(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)`  
@@ -588,6 +938,15 @@ _Crops an image using a square mask. The square is centered at (centerX&#43;offs
 | `⮕ result` | `any` | `-` |   |   |   | The square-cropped image (pixels outside the square are transparent) |
 ---
 
+### `csch(x=-) ⮕ (result=-)`  
+_calculates the hyperbolic cosecant of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | hyperbolic cosecant value (1/sinh) |
+---
+
 ### `defisheye(img=- strength=1) ⮕ (result=-)`  
 _Corrects fisheye lens distortion in an image_
 
@@ -596,6 +955,15 @@ _Corrects fisheye lens distortion in an image_
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to correct |
 | `strength` | `float64` | `1` | `0` | `2` |   | The strength of the correction |
 | `⮕ result` | `any` | `-` |   |   |   | The corrected image |
+---
+
+### `degrees2radians(degrees=-) ⮕ (result=-)`  
+_converts degrees to radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `degrees` | `float64` | `-` |   |   |   | The angle in degrees |
+| `⮕ result` | `any` | `-` |   |   |   | angle in radians |
 ---
 
 ### `displace(img=- dMap=- amount=10) ⮕ (result=-)`  
@@ -607,6 +975,218 @@ _Displaces pixels based on the brightness of a displacement map_
 | `dMap` | `*image.NRGBA64` | `-` |   |   |   | The displacement map image |
 | `amount` | `float64` | `10` | `0` | `50` |   | The amount of displacement |
 | `⮕ result` | `any` | `-` |   |   |   | The displaced image |
+---
+
+### `distance-between(x1=- y1=- x2=- y2=-) ⮕ (result=-)`  
+_Calculates distance between two points_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x1` | `float64` | `-` |   |   |   | The x coordinate of the first point |
+| `y1` | `float64` | `-` |   |   |   | The y coordinate of the first point |
+| `x2` | `float64` | `-` |   |   |   | The x coordinate of the second point |
+| `y2` | `float64` | `-` |   |   |   | The y coordinate of the second point |
+| `⮕ result` | `any` | `-` |   |   |   | The distance between the points |
+---
+
+### `div(a=- b=-) ⮕ (result=-)`  
+_Divides the two numbers_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `float64` | `-` |   |   |   | The first number |
+| `b` | `float64` | `-` |   |   |   | The second number |
+| `⮕ result` | `any` | `-` |   |   |   | a/b |
+---
+
+### `draw-circle(img=- p=- radius=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a circle centered at (x,y) with the given radius._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the circle (relative) |
+| `radius` | `float64` | `-` |   |   |   | The radius of the circle (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the circle border (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The circle color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-circle-px(img=- p=- radius=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a circle centered at (x,y) with the given radius._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the circle |
+| `radius` | `int` | `-` |   |   |   | The radius of the circle |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the circle border |
+| `col` | `color.RGBA64` | `-` |   |   |   | The circle color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-ellipse(img=- p=- rx=- ry=- thickness=- col=-) ⮕ (result=-)`  
+_Draws an ellipse centered at (x,y) with the given radii._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the ellipse (relative) |
+| `rx` | `float64` | `-` |   |   |   | The horizontal radius (relative) |
+| `ry` | `float64` | `-` |   |   |   | The vertical radius (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the ellipse border (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The ellipse color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-ellipse-px(img=- p=- rx=- ry=- thickness=- col=-) ⮕ (result=-)`  
+_Draws an ellipse centered at (x,y) with the given radii._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the ellipse |
+| `rx` | `int` | `-` |   |   |   | The horizontal radius |
+| `ry` | `int` | `-` |   |   |   | The vertical radius |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the ellipse border |
+| `col` | `color.RGBA64` | `-` |   |   |   | The ellipse color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line(img=- p1=- p2=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p1` | `Point` | `-` |   |   |   | The start position (relative) |
+| `p2` | `Point` | `-` |   |   |   | The end position (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the line (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line-h(img=- y=- x1=- x2=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a line from P(x1|y) to P(x2|y) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `y` | `float64` | `-` |   |   |   | The position on the y-axis (relative) |
+| `x1` | `float64` | `-` |   |   |   | The start position on the x-axis (relative) |
+| `x2` | `float64` | `-` |   |   |   | The end position on the x-axis (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the line (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line-h-px(img=- y=- x1=- x2=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a line from P(x1|y) to P(x2|y) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `y` | `float64` | `-` |   |   |   | The position on the y-axis |
+| `x1` | `float64` | `-` |   |   |   | The start position on the x-axis |
+| `x2` | `float64` | `-` |   |   |   | The end position on the x-axis |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the line |
+| `col` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line-px(img=- p1=- p2=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p1` | `Point` | `-` |   |   |   | The start position |
+| `p2` | `Point` | `-` |   |   |   | The end position |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the line |
+| `col` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line-v(img=- x=- y1=- y2=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `x` | `float64` | `-` |   |   |   | The position on the x-axis (relative) |
+| `y1` | `float64` | `-` |   |   |   | The start position on the y-axis (relative) |
+| `y2` | `float64` | `-` |   |   |   | The end position on the y-axis (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the line (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line-v-px(img=- x=- y1=- y2=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `x` | `float64` | `-` |   |   |   | The position on the x-axis |
+| `y1` | `float64` | `-` |   |   |   | The start position on the y-axis |
+| `y2` | `float64` | `-` |   |   |   | The end position on the y-axis |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the line |
+| `col` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-rect(img=- p=- w=- h=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a rectangle at position (x,y) with the given width and height._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the rectangle (relative) |
+| `w` | `float64` | `-` |   |   |   | The width of the rectangle (relative) |
+| `h` | `float64` | `-` |   |   |   | The height of the rectangle (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the rectangle border (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The rectangle border color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-rect-px(img=- p=- w=- h=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a rectangle at position (x,y) with the given width and height._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the rectangle |
+| `w` | `int` | `-` |   |   |   | The width of the rectangle |
+| `h` | `int` | `-` |   |   |   | The height of the rectangle |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the rectangle border |
+| `col` | `color.RGBA64` | `-` |   |   |   | The rectangle color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-square(img=- p=- size=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a square at position (x,y) with the given size._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the square (relative) |
+| `size` | `float64` | `-` |   |   |   | The size of the square (relative) |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the square border (absolute) |
+| `col` | `color.RGBA64` | `-` |   |   |   | The square color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-square-px(img=- p=- size=- thickness=- col=-) ⮕ (result=-)`  
+_Draws a square at position (x,y) with the given size._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `p` | `Point` | `-` |   |   |   | The center of the square |
+| `size` | `int` | `-` |   |   |   | The size of the square |
+| `thickness` | `float64` | `-` |   |   |   | The thickness of the square border |
+| `col` | `color.RGBA64` | `-` |   |   |   | The square color |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
 ### `edge-detect(img=-) ⮕ (result=-)`  
@@ -637,6 +1217,15 @@ _Enhances colors and sharpness of an image_
 | `gWeight` | `float64` | `0.587` | `0` | `1` |   | The weight of the green channel (used for sharpening) |
 | `bWeight` | `float64` | `0.114` | `0` | `1` |   | The weight of the blue channel (used for sharpening) |
 | `⮕ result` | `any` | `-` |   |   |   | The enhanceed image |
+---
+
+### `excsc(x=-) ⮕ (result=-)`  
+_calculates the excosecant of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | excosecant value (cosec(x) - 1) |
 ---
 
 ### `expand(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)`  
@@ -673,6 +1262,24 @@ _Adjusts the overall lightness or darkness of the image, simulating photographic
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to adjust exposure of |
 | `level` | `float64` | `0` | `-2` | `2` |   | The exposure level adjustment (-2 = much darker, 0 = unchanged, 2 = much brighter) |
 | `⮕ result` | `any` | `-` |   |   |   | The exposure-adjusted image |
+---
+
+### `exsec(x=-) ⮕ (result=-)`  
+_calculates the exsecant of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | exsecant value (sec(x) - 1) |
+---
+
+### `fibonacci(nth=-) ⮕ (result=-)`  
+_Calculates the nth fibonacci number using 1-based indexing with memoization_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `nth` | `float64` | `-` |   |   |   | The nth fibonacci number to calculate |
+| `⮕ result` | `any` | `-` |   |   |   | The nth fibonacci number |
 ---
 
 ### `fill(img=- col=-) ⮕ (result=-)`  
@@ -713,6 +1320,24 @@ _Flips an image vertically (top to bottom)_
 | `⮕ result` | `any` | `-` |   |   |   | The vertically flipped image |
 ---
 
+### `floor(x=-) ⮕ (result=-)`  
+_Returns the largest integer less than or equal to x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The largest integer less than or equal to x |
+---
+
+### `grads2radians(grads=-) ⮕ (result=-)`  
+_converts grads to radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `grads` | `float64` | `-` |   |   |   | The angle in grads |
+| `⮕ result` | `any` | `-` |   |   |   | angle in radians |
+---
+
 ### `grayscale(img=-) ⮕ (result=-)`  
 _Grayscales an image_
 
@@ -720,6 +1345,15 @@ _Grayscales an image_
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to grayscale |
 | `⮕ result` | `any` | `-` |   |   |   | The grayscaled image |
+---
+
+### `haversin(x=-) ⮕ (result=-)`  
+_calculates the haversine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | haversine value (0.5 * (1 - cos(x))) |
 ---
 
 ### `highpass(img=- radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)`  
@@ -781,6 +1415,44 @@ _Creates a color from HWB (Hue, Whiteness, Blackness) values_
 | `⮕ result` | `any` | `-` |   |   |   | The color as color.RGBA64 |
 ---
 
+### `hypotenuse-of-triangle(adjacent=- opposite=- gamma=-) ⮕ (result=-)`  
+_Calculates hypotenuse from adjacent, opposite and gamma angle_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `gamma` | `float64` | `-` |   |   |   | The gamma angle |
+| `⮕ result` | `any` | `-` |   |   |   | The hypotenuse length |
+---
+
+### `image-aspect-ratio(img=-) ⮕ (result=-)`  
+_Returns the aspect ratio of the given image_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to return the aspect ratio of |
+| `⮕ result` | `any` | `-` |   |   |   | Aspect ratio of the image |
+---
+
+### `image-height(img=-) ⮕ (result=-)`  
+_Returns the height of the given image_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to return the height of |
+| `⮕ result` | `any` | `-` |   |   |   | Width of the image |
+---
+
+### `image-width(img=-) ⮕ (result=-)`  
+_Returns the width of the given image_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to return the width of |
+| `⮕ result` | `any` | `-` |   |   |   | Width of the image |
+---
+
 ### `invert(img=-) ⮕ (result=-)`  
 _Inverts an image_
 
@@ -835,6 +1507,28 @@ _Creates a color from LCH (Lightness, Chroma, Hue) values_
 | `⮕ result` | `any` | `-` |   |   |   | The color as color.RGBA64 |
 ---
 
+### `lerp-angle(angle1=- angle2=- t=-) ⮕ (result=-)`  
+_linearly interpolates between two angles in radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `angle1` | `float64` | `-` |   |   |   | The first angle in radians |
+| `angle2` | `float64` | `-` |   |   |   | The second angle in radians |
+| `t` | `float64` | `-` |   |   |   | The interpolation factor (0-1) |
+| `⮕ result` | `any` | `-` |   |   |   | interpolated angle in radians |
+---
+
+### `lerp-angle-degrees(angle1=- angle2=- t=-) ⮕ (result=-)`  
+_linearly interpolates between two angles in degrees_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `angle1` | `float64` | `-` |   |   |   | The first angle in degrees |
+| `angle2` | `float64` | `-` |   |   |   | The second angle in degrees |
+| `t` | `float64` | `-` |   |   |   | The interpolation factor (0-1) |
+| `⮕ result` | `any` | `-` |   |   |   | interpolated angle in degrees |
+---
+
 ### `load(path="-") ⮕ (result=-)`  
 _Loads an image_
 
@@ -842,6 +1536,43 @@ _Loads an image_
 |------|------|---------|-----|-----|------|-------------|
 | `path` | `string` | `"-"` |   |   |   | - - Path to the image |
 | `⮕ result` | `any` | `-` |   |   |   | The loaded image |
+---
+
+### `log(x=-) ⮕ (result=-)`  
+_Returns the natural logarithm of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The natural logarithm of x |
+---
+
+### `mul(a=- b=-) ⮕ (result=-)`  
+_Multiplies the two numbers_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `float64` | `-` |   |   |   | The first number |
+| `b` | `float64` | `-` |   |   |   | The second number |
+| `⮕ result` | `any` | `-` |   |   |   | a*b |
+---
+
+### `normalize-angle(radians=-) ⮕ (result=-)`  
+_normalizes an angle to [0, 2π)_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | normalized angle in radians |
+---
+
+### `normalize-angle-degrees(degrees=-) ⮕ (result=-)`  
+_normalizes an angle to [0, 360)_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `degrees` | `float64` | `-` |   |   |   | The angle in degrees |
+| `⮕ result` | `any` | `-` |   |   |   | normalized angle in degrees |
 ---
 
 ### `opacity(img=- amount=1) ⮕ (result=-)`  
@@ -852,6 +1583,27 @@ _Adjusts the overall opacity/transparency of an image_
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to adjust opacity of |
 | `amount` | `float64` | `1` | `0` | `1` |   | The opacity amount (0 = fully transparent, 1 = unchanged) |
 | `⮕ result` | `any` | `-` |   |   |   | The opacity-adjusted image |
+---
+
+### `opposite-of-triangle(hypotenuse=- adjacent=- beta=-) ⮕ (result=-)`  
+_Calculates opposite side from hypotenuse, adjacent and beta angle_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `beta` | `float64` | `-` |   |   |   | The beta angle |
+| `⮕ result` | `any` | `-` |   |   |   | The opposite side length |
+---
+
+### `or(value1=- value2=-) ⮕ (result=-)`  
+_Returns either value1 or value2 randomly_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `value1` | `float64` | `-` |   |   |   | The first value |
+| `value2` | `float64` | `-` |   |   |   | The second value |
+| `⮕ result` | `any` | `-` |   |   |   | One of the two input values randomly |
 ---
 
 ### `pixelate(img=- size=8) ⮕ (result=-)`  
@@ -881,6 +1633,109 @@ _Reduces the number of color levels in the image_
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to posterize |
 | `levels` | `int` | `4` | `2` | `16` |   | Number of color levels per channel (2-16) |
 | `⮕ result` | `any` | `-` |   |   |   | The posterized image |
+---
+
+### `pow(base=- n=-) ⮕ (result=-)`  
+_Calculates base raised to the power of n, using lookup tables for integer bases when possible_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `base` | `float64` | `-` |   |   |   | The base value |
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | Base^n |
+---
+
+### `pow10(n=-) ⮕ (result=-)`  
+_Calculates 10 raised to the power of n_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | 10^n |
+---
+
+### `pow12(n=-) ⮕ (result=-)`  
+_Calculates 12 raised to the power of n_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | 12^n |
+---
+
+### `pow16(n=-) ⮕ (result=-)`  
+_Calculates 16 raised to the power of n_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | 16^n |
+---
+
+### `pow2(n=-) ⮕ (result=-)`  
+_Calculates 2 raised to the power of n_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | 2^n |
+---
+
+### `pow4(n=-) ⮕ (result=-)`  
+_Calculates 4 raised to the power of n_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | 4^n |
+---
+
+### `pow8(n=-) ⮕ (result=-)`  
+_Calculates 8 raised to the power of n_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `n` | `float64` | `-` |   |   |   | The exponent |
+| `⮕ result` | `any` | `-` |   |   |   | 8^n |
+---
+
+### `radians-of-triangle(adjacent=- opposite=- hypotenuse=-) ⮕ (result=-)`  
+_calculates angle in radians using all three sides of a triangle_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `⮕ result` | `any` | `-` |   |   |   | angle in radians between adjacent and opposite sides |
+---
+
+### `radians2degrees(radians=-) ⮕ (result=-)`  
+_converts radians to degrees_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | angle in degrees |
+---
+
+### `radians2grads(radians=-) ⮕ (result=-)`  
+_converts radians to grads_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | angle in grads |
+---
+
+### `random-range(min=- max=-) ⮕ (result=-)`  
+_Returns a random number between min and max_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `min` | `float64` | `-` |   |   |   | The minimum value |
+| `max` | `float64` | `-` |   |   |   | The maximum value |
+| `⮕ result` | `any` | `-` |   |   |   | A random float64 value between min and max, with NaN handling |
 ---
 
 ### `rectangular-to-polar(img=-) ⮕ (result=-)`  
@@ -1003,6 +1858,15 @@ _Rotates the hue of pixels based on their hue, saturation, and luminance_
 | `⮕ result` | `any` | `-` |   |   |   | The image with only pixels in all specified ranges visible (16-bit) |
 ---
 
+### `round(x=-) ⮕ (result=-)`  
+_Returns the nearest integer to x, rounding to even on ties_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The nearest integer to x |
+---
+
 ### `saturation(img=- factor=1) ⮕ (result=-)`  
 _Adjusts the color saturation of an image_
 
@@ -1031,6 +1895,34 @@ _Scales an image by specified factors_
 | `sx` | `float64` | `0` |   |   |   | The horizontal scale factor |
 | `sy` | `float64` | `0` |   |   |   | The vertical scale factor |
 | `⮕ result` | `any` | `-` |   |   |   | The scaled image |
+---
+
+### `sec(radians=-) ⮕ (result=-)`  
+_calculates the secant of an angle in radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | secant value (1/cos) |
+---
+
+### `sec-of-triangle(hypotenuse=- adjacent=-) ⮕ (result=-)`  
+_calculates secant using hypotenuse and adjacent sides_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `⮕ result` | `any` | `-` |   |   |   | secant value (hypotenuse/adjacent) |
+---
+
+### `sech(x=-) ⮕ (result=-)`  
+_calculates the hyperbolic secant of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | hyperbolic secant value (1/cosh) |
 ---
 
 ### `select-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=-)`  
@@ -1104,6 +1996,149 @@ _Sharpens an image using a highpass combined with vivid light blending_
 | `⮕ result` | `any` | `-` |   |   |   | The sharpened image |
 ---
 
+### `sin(radians=-) ⮕ (result=-)`  
+_calculates the sine of an angle_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | sine value between -1 and 1 |
+---
+
+### `sin-of-triangle(opposite=- hypotenuse=-) ⮕ (result=-)`  
+_calculates sine using opposite and hypotenuse sides_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `hypotenuse` | `float64` | `-` |   |   |   | The hypotenuse length |
+| `⮕ result` | `any` | `-` |   |   |   | sine value (opposite/hypotenuse) |
+---
+
+### `sin2(x=-) ⮕ (result=-)`  
+_calculates the square of sine (sin²(x))_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | squared sine value (sin(x)²) |
+---
+
+### `sinc(x=-) ⮕ (result=-)`  
+_calculates the sinc function (sin(x)/x)_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | sinc value (sin(x)/x, with sinc(0) = 1) |
+---
+
+### `sinh(x=-) ⮕ (result=-)`  
+_calculates the hyperbolic sine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | hyperbolic sine value |
+---
+
+### `slope(x1=- y1=- x2=- y2=-) ⮕ (result=-)`  
+_Calculates the slope between two points_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x1` | `float64` | `-` |   |   |   | The x coordinate of the first point |
+| `y1` | `float64` | `-` |   |   |   | The y coordinate of the first point |
+| `x2` | `float64` | `-` |   |   |   | The x coordinate of the second point |
+| `y2` | `float64` | `-` |   |   |   | The y coordinate of the second point |
+| `⮕ result` | `any` | `-` |   |   |   | The slope value |
+---
+
+### `sqrt(x=-) ⮕ (result=-)`  
+_Returns the square root of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The square root of x |
+---
+
+### `square(x=-) ⮕ (result=-)`  
+_Calculates the square of a number_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | The square of x |
+---
+
+### `sub(a=- b=-) ⮕ (result=-)`  
+_Subtracts the two numbers_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `float64` | `-` |   |   |   | The first number |
+| `b` | `float64` | `-` |   |   |   | The second number |
+| `⮕ result` | `any` | `-` |   |   |   | a-b |
+---
+
+### `sub-n(a=- b=- n=-) ⮕ (result=-)`  
+_Multiplies b by n and subtracts the result from a_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `float64` | `-` |   |   |   | The first number |
+| `b` | `float64` | `-` |   |   |   | The second number |
+| `n` | `float64` | `-` |   |   |   | The multiplier for the second number |
+| `⮕ result` | `any` | `-` |   |   |   | a - (n * b) |
+---
+
+### `tan(radians=-) ⮕ (result=-)`  
+_calculates the tangent of an angle in radians_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `radians` | `float64` | `-` |   |   |   | The angle in radians |
+| `⮕ result` | `any` | `-` |   |   |   | tangent value (unbounded) |
+---
+
+### `tan-of-slope(m=-) ⮕ (result=-)`  
+_Calculates the angle from a slope value_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `m` | `float64` | `-` |   |   |   | The slope value |
+| `⮕ result` | `any` | `-` |   |   |   | The angle in radians |
+---
+
+### `tan-of-triangle(opposite=- adjacent=-) ⮕ (result=-)`  
+_calculates tangent using opposite and adjacent sides_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `opposite` | `float64` | `-` |   |   |   | The opposite side length |
+| `adjacent` | `float64` | `-` |   |   |   | The adjacent side length |
+| `⮕ result` | `any` | `-` |   |   |   | tangent value (opposite/adjacent) |
+---
+
+### `tan2(x=-) ⮕ (result=-)`  
+_calculates the square of tangent (tan²(x))_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | squared tangent value (tan(x)²) |
+---
+
+### `tanh(x=-) ⮕ (result=-)`  
+_calculates the hyperbolic tangent of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | hyperbolic tangent value between -1 and 1 |
+---
+
 ### `threshold(img=- level=0.5) ⮕ (result=-)`  
 _Converts image to black and white based on a brightness threshold_
 
@@ -1137,6 +2172,24 @@ _Translates (moves) an image by a specified amount_
 | `dx` | `float64` | `0` |   |   |   | The horizontal translation amount in % (positive = right) |
 | `dy` | `float64` | `0` |   |   |   | The vertical translation amount in % (positive = down) |
 | `⮕ result` | `any` | `-` |   |   |   | The translated image |
+---
+
+### `vercos(x=-) ⮕ (result=-)`  
+_calculates the versed cosine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | versed cosine value (1 &#43; cos(x)) |
+---
+
+### `versin(x=-) ⮕ (result=-)`  
+_calculates the versed sine of x_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The input value |
+| `⮕ result` | `any` | `-` |   |   |   | versed sine value (1 - cos(x)) |
 ---
 
 ### `vibrance(img=- factor=0) ⮕ (result=-)`  

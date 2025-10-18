@@ -128,6 +128,960 @@
 You must either use positional arguments or named arguments, mixing is not allowed.
 All arguments have defaults.</p>
 <h2>Functions</h2>
+<h3><code class="language-pxp">I(w=- h=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Creates a new image with the given color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">w</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The width of the image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The height of the image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The fill color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The new image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">Ih(img=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the height of an image.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to return the height of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The height of img</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">It(img=- dt=-) ⮕ (result=-)</code></h3>
+<p><em>Translates the given image by expanding/cropping the left + top borders.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to translate</td>
+</tr>
+<tr>
+<td><code class="language-pxp">dt</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The translation to apply</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The new image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">Iw(img=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the width of an image.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to return the width of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The width of img</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">P(x=0 y=0) ⮕ (result=-)</code></h3>
+<p><em>Creates the point P(x|y).</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position on the x-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position on the y-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>A new point</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">Px(p=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the x-coordinate of a point.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The point to return the x-coordinate of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x-coordinate of p</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">Py(p=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the y-coordinate of a point.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The point to return the y-coordinate of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y-coordinate of p</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">abs(x=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the absolute value of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The absolute value of x</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">acos(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the arccosine (inverse cosine) of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in radians between 0 and PI</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">acosh(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the inverse hyperbolic cosine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>inverse hyperbolic cosine value (x &gt;= 1)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">acoth(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the inverse hyperbolic cotangent of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>inverse hyperbolic cotangent value (</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">acsch(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the inverse hyperbolic cosecant of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>inverse hyperbolic cosecant value (x != 0)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">add(a=- b=-) ⮕ (result=-)</code></h3>
+<p><em>Adds the two numbers</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>a+b</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">add-n(a=- b=- n=-) ⮕ (result=-)</code></h3>
+<p><em>Multiplies b by n and adds the result to a</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The multiplier for the second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>a + (n * b)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">adjacent-of-triangle(hypotenuse=- opposite=- alpha=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates adjacent side from hypotenuse, opposite and alpha angle</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The alpha angle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">angle-between(x1=- y1=- x2=- y2=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates angle between two points</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x coordinate of the first point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y coordinate of the first point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x coordinate of the second point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y coordinate of the second point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">angle-difference(angle1=- angle2=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the smallest difference between two angles</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">angle1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>smallest angle difference in radians</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">angle-difference-degrees(angle1=- angle2=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the smallest difference between two angles in degrees</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">angle1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first angle in degrees</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second angle in degrees</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>smallest angle difference in degrees</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">asech(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the inverse hyperbolic secant of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>inverse hyperbolic secant value (0 &lt; x &lt;= 1)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">asin(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the arcsine (inverse sine) of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in radians between -PI/2 and PI/2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">asinh(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the inverse hyperbolic sine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>inverse hyperbolic sine value</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">atan(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the arctangent (inverse tangent) of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in radians between -PI/2 and PI/2</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">atanh(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the inverse hyperbolic tangent of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>inverse hyperbolic tangent value (</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">auto-contrast(img=- threshold=0.01 strength=1) ⮕ (result=-)</code></h3>
 <p><em>Automatically adjusts the contrast of an image by stretching the histogram to use the full range of values</em></p>
 <table>
@@ -1991,6 +2945,78 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">ceil(x=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the smallest integer greater than or equal to x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The smallest integer greater than or equal to x</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">chord(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the chord of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>chord value (2 * sin(x/2))</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">chromatic-aberration(img=- amount=5) ⮕ (result=-)</code></h3>
 <p><em>Creates a chromatic aberration effect by offsetting color channels</em></p>
 <table>
@@ -2032,6 +3058,42 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The image with chromatic aberration</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">circumference-of-a_circle(radius=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates circumference from radius</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The radius of the circle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The circumference length</td>
 </tr>
 </tbody>
 </table>
@@ -2338,6 +3400,429 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The contrast-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cos(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the cosine of an angle in radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>cosine value between -1 and 1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cos-of-triangle(adjacent=- hypotenuse=-) ⮕ (result=-)</code></h3>
+<p><em>calculates cosine using adjacent and hypotenuse sides</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>cosine value (adjacent/hypotenuse)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cos2(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the square of cosine (cos²(x))</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>squared cosine value (cos(x)²)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cosec(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the cosecant of an angle in radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>cosecant value (1/sin)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cosec-of-triangle(hypotenuse=- opposite=-) ⮕ (result=-)</code></h3>
+<p><em>calculates cosecant using hypotenuse and opposite sides</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>cosecant value (hypotenuse/opposite)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cosh(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the hyperbolic cosine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>hyperbolic cosine value (always positive)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cot(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the cotangent of an angle in radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>cotangent value (1/tan)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">cot-of-triangle(adjacent=- opposite=-) ⮕ (result=-)</code></h3>
+<p><em>calculates cotangent using adjacent and opposite sides</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>cotangent value (adjacent/opposite)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">coth(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the hyperbolic cotangent of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>hyperbolic cotangent value (1/tanh)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">covercos(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the coversed cosine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>coversed cosine value (1 + sin(x))</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">coversin(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the coversed sine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>coversed sine value (1 - sin(x))</td>
 </tr>
 </tbody>
 </table>
@@ -2738,6 +4223,42 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">csch(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the hyperbolic cosecant of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>hyperbolic cosecant value (1/sinh)</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">defisheye(img=- strength=1) ⮕ (result=-)</code></h3>
 <p><em>Corrects fisheye lens distortion in an image</em></p>
 <table>
@@ -2779,6 +4300,42 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The corrected image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">degrees2radians(degrees=-) ⮕ (result=-)</code></h3>
+<p><em>converts degrees to radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">degrees</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in degrees</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in radians</td>
 </tr>
 </tbody>
 </table>
@@ -2833,6 +4390,1194 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The displaced image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">distance-between(x1=- y1=- x2=- y2=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates distance between two points</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x coordinate of the first point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y coordinate of the first point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x coordinate of the second point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y coordinate of the second point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The distance between the points</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">div(a=- b=-) ⮕ (result=-)</code></h3>
+<p><em>Divides the two numbers</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>a/b</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-circle(img=- p=- radius=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a circle centered at (x,y) with the given radius.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the circle (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The radius of the circle (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the circle border (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The circle color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-circle-px(img=- p=- radius=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a circle centered at (x,y) with the given radius.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the circle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The radius of the circle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the circle border</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The circle color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-ellipse(img=- p=- rx=- ry=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws an ellipse centered at (x,y) with the given radii.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the ellipse (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rx</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontal radius (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">ry</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertical radius (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the ellipse border (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The ellipse color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-ellipse-px(img=- p=- rx=- ry=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws an ellipse centered at (x,y) with the given radii.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the ellipse</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rx</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The horizontal radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">ry</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The vertical radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the ellipse border</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The ellipse color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line(img=- p1=- p2=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p1</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p2</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end position (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the line (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The line color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-h(img=- y=- x1=- x2=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The position on the y-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position on the x-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end position on the x-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the line (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The line color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-h-px(img=- y=- x1=- x2=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The position on the y-axis</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position on the x-axis</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end position on the x-axis</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The line color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-px(img=- p1=- p2=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p1</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p2</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end position</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The line color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-v(img=- x=- y1=- y2=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The position on the x-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position on the y-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end position on the y-axis (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the line (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The line color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-v-px(img=- x=- y1=- y2=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The position on the x-axis</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start position on the y-axis</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end position on the y-axis</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The line color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-rect(img=- p=- w=- h=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a rectangle at position (x,y) with the given width and height.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the rectangle (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">w</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The width of the rectangle (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The height of the rectangle (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the rectangle border (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The rectangle border color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-rect-px(img=- p=- w=- h=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a rectangle at position (x,y) with the given width and height.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the rectangle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">w</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The width of the rectangle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">h</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The height of the rectangle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the rectangle border</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The rectangle color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-square(img=- p=- size=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a square at position (x,y) with the given size.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the square (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">size</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The size of the square (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the square border (absolute)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The square color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-square-px(img=- p=- size=- thickness=- col=-) ⮕ (result=-)</code></h3>
+<p><em>Draws a square at position (x,y) with the given size.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to fill</td>
+</tr>
+<tr>
+<td><code class="language-pxp">p</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The center of the square</td>
+</tr>
+<tr>
+<td><code class="language-pxp">size</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The size of the square</td>
+</tr>
+<tr>
+<td><code class="language-pxp">thickness</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness of the square border</td>
+</tr>
+<tr>
+<td><code class="language-pxp">col</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The square color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The resulting image</td>
 </tr>
 </tbody>
 </table>
@@ -3013,6 +5758,42 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The enhanceed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">excsc(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the excosecant of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>excosecant value (cosec(x) - 1)</td>
 </tr>
 </tbody>
 </table>
@@ -3206,6 +5987,78 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">exsec(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the exsecant of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>exsecant value (sec(x) - 1)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">fibonacci(nth=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates the nth fibonacci number using 1-based indexing with memoization</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">nth</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The nth fibonacci number to calculate</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The nth fibonacci number</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">fill(img=- col=-) ⮕ (result=-)</code></h3>
 <p><em>Fills the image</em></p>
 <table>
@@ -3368,6 +6221,78 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">floor(x=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the largest integer less than or equal to x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The largest integer less than or equal to x</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">grads2radians(grads=-) ⮕ (result=-)</code></h3>
+<p><em>converts grads to radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">grads</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in grads</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in radians</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">grayscale(img=-) ⮕ (result=-)</code></h3>
 <p><em>Grayscales an image</em></p>
 <table>
@@ -3400,6 +6325,42 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The grayscaled image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">haversin(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the haversine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>haversine value (0.5 * (1 - cos(x)))</td>
 </tr>
 </tbody>
 </table>
@@ -3710,6 +6671,168 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">hypotenuse-of-triangle(adjacent=- opposite=- gamma=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates hypotenuse from adjacent, opposite and gamma angle</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">gamma</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The gamma angle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">image-aspect-ratio(img=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the aspect ratio of the given image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to return the aspect ratio of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Aspect ratio of the image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">image-height(img=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the height of the given image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to return the height of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Width of the image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">image-width(img=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the width of the given image</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to return the width of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Width of the image</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">invert(img=-) ⮕ (result=-)</code></h3>
 <p><em>Inverts an image</em></p>
 <table>
@@ -4016,6 +7139,114 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">lerp-angle(angle1=- angle2=- t=-) ⮕ (result=-)</code></h3>
+<p><em>linearly interpolates between two angles in radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">angle1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">t</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The interpolation factor (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>interpolated angle in radians</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">lerp-angle-degrees(angle1=- angle2=- t=-) ⮕ (result=-)</code></h3>
+<p><em>linearly interpolates between two angles in degrees</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">angle1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first angle in degrees</td>
+</tr>
+<tr>
+<td><code class="language-pxp">angle2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second angle in degrees</td>
+</tr>
+<tr>
+<td><code class="language-pxp">t</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The interpolation factor (0-1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>interpolated angle in degrees</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">load(path=&quot;-&quot;) ⮕ (result=-)</code></h3>
 <p><em>Loads an image</em></p>
 <table>
@@ -4048,6 +7279,159 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The loaded image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">log(x=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the natural logarithm of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The natural logarithm of x</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">mul(a=- b=-) ⮕ (result=-)</code></h3>
+<p><em>Multiplies the two numbers</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>a*b</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">normalize-angle(radians=-) ⮕ (result=-)</code></h3>
+<p><em>normalizes an angle to [0, 2π)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>normalized angle in radians</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">normalize-angle-degrees(degrees=-) ⮕ (result=-)</code></h3>
+<p><em>normalizes an angle to [0, 360)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">degrees</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in degrees</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>normalized angle in degrees</td>
 </tr>
 </tbody>
 </table>
@@ -4093,6 +7477,105 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The opacity-adjusted image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">opposite-of-triangle(hypotenuse=- adjacent=- beta=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates opposite side from hypotenuse, adjacent and beta angle</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">beta</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The beta angle</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">or(value1=- value2=-) ⮕ (result=-)</code></h3>
+<p><em>Returns either value1 or value2 randomly</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">value1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">value2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>One of the two input values randomly</td>
 </tr>
 </tbody>
 </table>
@@ -4219,6 +7702,438 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The posterized image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow(base=- n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates base raised to the power of n, using lookup tables for integer bases when possible</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">base</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The base value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Base^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow10(n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates 10 raised to the power of n</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>10^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow12(n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates 12 raised to the power of n</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>12^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow16(n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates 16 raised to the power of n</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>16^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow2(n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates 2 raised to the power of n</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow4(n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates 4 raised to the power of n</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">pow8(n=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates 8 raised to the power of n</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The exponent</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>8^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">radians-of-triangle(adjacent=- opposite=- hypotenuse=-) ⮕ (result=-)</code></h3>
+<p><em>calculates angle in radians using all three sides of a triangle</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in radians between adjacent and opposite sides</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">radians2degrees(radians=-) ⮕ (result=-)</code></h3>
+<p><em>converts radians to degrees</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in degrees</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">radians2grads(radians=-) ⮕ (result=-)</code></h3>
+<p><em>converts radians to grads</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>angle in grads</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">random-range(min=- max=-) ⮕ (result=-)</code></h3>
+<p><em>Returns a random number between min and max</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">min</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The minimum value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">max</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>A random float64 value between min and max, with NaN handling</td>
 </tr>
 </tbody>
 </table>
@@ -4898,6 +8813,42 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">round(x=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the nearest integer to x, rounding to even on ties</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The nearest integer to x</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">saturation(img=- factor=1) ⮕ (result=-)</code></h3>
 <p><em>Adjusts the color saturation of an image</em></p>
 <table>
@@ -5029,6 +8980,123 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The scaled image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sec(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the secant of an angle in radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>secant value (1/cos)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sec-of-triangle(hypotenuse=- adjacent=-) ⮕ (result=-)</code></h3>
+<p><em>calculates secant using hypotenuse and adjacent sides</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>secant value (hypotenuse/adjacent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sech(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the hyperbolic secant of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>hyperbolic secant value (1/cosh)</td>
 </tr>
 </tbody>
 </table>
@@ -5447,6 +9515,618 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">sin(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the sine of an angle</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>sine value between -1 and 1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sin-of-triangle(opposite=- hypotenuse=-) ⮕ (result=-)</code></h3>
+<p><em>calculates sine using opposite and hypotenuse sides</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hypotenuse</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The hypotenuse length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>sine value (opposite/hypotenuse)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sin2(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the square of sine (sin²(x))</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>squared sine value (sin(x)²)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sinc(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the sinc function (sin(x)/x)</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>sinc value (sin(x)/x, with sinc(0) = 1)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sinh(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the hyperbolic sine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>hyperbolic sine value</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">slope(x1=- y1=- x2=- y2=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates the slope between two points</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x coordinate of the first point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y coordinate of the first point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">x2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The x coordinate of the second point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">y2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The y coordinate of the second point</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The slope value</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sqrt(x=-) ⮕ (result=-)</code></h3>
+<p><em>Returns the square root of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The square root of x</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">square(x=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates the square of a number</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The square of x</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sub(a=- b=-) ⮕ (result=-)</code></h3>
+<p><em>Subtracts the two numbers</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>a-b</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sub-n(a=- b=- n=-) ⮕ (result=-)</code></h3>
+<p><em>Multiplies b by n and subtracts the result from a</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The multiplier for the second number</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>a - (n * b)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">tan(radians=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the tangent of an angle in radians</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">radians</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>tangent value (unbounded)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">tan-of-slope(m=-) ⮕ (result=-)</code></h3>
+<p><em>Calculates the angle from a slope value</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">m</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The slope value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">tan-of-triangle(opposite=- adjacent=-) ⮕ (result=-)</code></h3>
+<p><em>calculates tangent using opposite and adjacent sides</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">opposite</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The opposite side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">adjacent</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The adjacent side length</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>tangent value (opposite/adjacent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">tan2(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the square of tangent (tan²(x))</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>squared tangent value (tan(x)²)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">tanh(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the hyperbolic tangent of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>hyperbolic tangent value between -1 and 1</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">threshold(img=- level=0.5) ⮕ (result=-)</code></h3>
 <p><em>Converts image to black and white based on a brightness threshold</em></p>
 <table>
@@ -5623,6 +10303,78 @@ All arguments have defaults.</p>
 <td></td>
 <td></td>
 <td>The translated image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">vercos(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the versed cosine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>versed cosine value (1 + cos(x))</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">versin(x=-) ⮕ (result=-)</code></h3>
+<p><em>calculates the versed sine of x</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">x</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The input value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>versed sine value (1 - cos(x))</td>
 </tr>
 </tbody>
 </table>

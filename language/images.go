@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"image"
+	"image/color"
 	"image/gif"
 	"image/jpeg"
 	"image/png"
@@ -18,6 +19,7 @@ import (
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/tidwall/gjson"
 	"github.com/toxyl/flo"
+	"github.com/toxyl/math"
 )
 
 var ImagesCache = NewImageCache()
@@ -52,6 +54,60 @@ func DetectImageType(data []byte) string {
 	}
 
 	return ""
+}
+
+// @Name: I
+// @Desc: Creates a new image with the given color.
+// @Param:      w       - - -   The width of the image
+// @Param:      h       - - -   The height of the image
+// @Param:      col  	- - -   The fill color
+// @Returns:    result  - - -	The new image
+func makeImage(w, h int, col color.RGBA64) (*image.NRGBA64, error) {
+	img := image.NewNRGBA64(image.Rect(0, 0, w, h))
+	r2, g2, b2, a2 := uint32(col.R), uint32(col.G), uint32(col.B), uint32(col.A)
+	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
+		return r2, g2, b2, a2
+	}, numWorkers), nil
+}
+
+// @Name: Iw
+// @Desc: Returns the width of an image.
+// @Param:      img       - - -  The image to return the width of
+// @Returns:    result    - - -	 The width of img
+func imageW(img *image.NRGBA64) (any, error) {
+	return img.Bounds().Max.X, nil
+}
+
+// @Name: Ih
+// @Desc: Returns the height of an image.
+// @Param:      img       - - -  The image to return the height of
+// @Returns:    result    - - -	 The height of img
+func imageH(img *image.NRGBA64) (any, error) {
+	return img.Bounds().Max.Y, nil
+}
+
+// @Name: It
+// @Desc: Translates the given image by expanding/cropping the left + top borders.
+// @Param:      img     - - -   The image to translate
+// @Param:      dt      - - -   The translation to apply
+// @Returns:    result  - - -	The new image
+func translateImage(img *image.NRGBA64, dt Point) (*image.NRGBA64, error) {
+	left, top := 0, 0
+	if dt.X != 0 {
+		if dt.X < 0 {
+			left = int(dt.X)
+		} else {
+			left = math.Abs(int(dt.X))
+		}
+	}
+	if dt.Y != 0 {
+		if dt.Y < 0 {
+			top = int(dt.Y)
+		} else {
+			top = math.Abs(int(dt.Y))
+		}
+	}
+	return expandPx(img, left, 0, top, 0)
 }
 
 // @Name: load

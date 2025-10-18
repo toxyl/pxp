@@ -17,6 +17,15 @@ type dslTokenType string
 // parsed and evaluated.
 type dslNodeKind int
 
+type Point struct {
+	X float64
+	Y float64
+}
+
+func (p *Point) String() string {
+	return fmt.Sprintf("P(%f %f)", p.X, p.Y)
+}
+
 func dslError(fmtStr string, args ...any) error {
 	return fmt.Errorf(fmtStr, args...)
 }
