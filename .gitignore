@@ -1,2 +1,6 @@
-build.sh
+app/.build/bin
+app/frontend/node_modules
+app/frontend/dist
+language/dsl_*
+language/template_*
 go-dsl

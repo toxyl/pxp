@@ -43,6 +43,250 @@ func init() {
     dsl.vars.storeState() // Store the state of variables, so we can reset the language without losing them
 
     // Register functions
+    dsl.funcs.register("Px", "Returns the x-coordinate of a point.",
+        []dslParamMeta{ 
+            { 
+                name: "p",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The point to return the x-coordinate of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The x-coordinate of p",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pointX(
+                a[0].(Point), 
+            )
+        },
+    )
+    dsl.funcs.register("Py", "Returns the y-coordinate of a point.",
+        []dslParamMeta{ 
+            { 
+                name: "p",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The point to return the y-coordinate of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The y-coordinate of p",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pointY(
+                a[0].(Point), 
+            )
+        },
+    )
+    dsl.funcs.register("Rx", "Returns the x-coordinate of a rect.",
+        []dslParamMeta{ 
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The rect to return the x-coordinate of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The x-coordinate of r",
+            },
+        },
+        func(a ...any) (any, error) {
+            return rectX(
+                a[0].(Rect), 
+            )
+        },
+    )
+    dsl.funcs.register("Ry", "Returns the y-coordinate of a rect.",
+        []dslParamMeta{ 
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The rect to return the y-coordinate of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The y-coordinate of r",
+            },
+        },
+        func(a ...any) (any, error) {
+            return rectY(
+                a[0].(Rect), 
+            )
+        },
+    )
+    dsl.funcs.register("Rw", "Returns the width of a rect.",
+        []dslParamMeta{ 
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The rect to return the width of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The width of r",
+            },
+        },
+        func(a ...any) (any, error) {
+            return rectW(
+                a[0].(Rect), 
+            )
+        },
+    )
+    dsl.funcs.register("Rh", "Returns the height of a rect.",
+        []dslParamMeta{ 
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The rect to return the height of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The height of r",
+            },
+        },
+        func(a ...any) (any, error) {
+            return rectH(
+                a[0].(Rect), 
+            )
+        },
+    )
+    dsl.funcs.register("Iw", "Returns the width of an image.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to return the width of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The width of img",
+            },
+        },
+        func(a ...any) (any, error) {
+            return imageW(
+                a[0].(*image.NRGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("Ih", "Returns the height of an image.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to return the height of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The height of img",
+            },
+        },
+        func(a ...any) (any, error) {
+            return imageH(
+                a[0].(*image.NRGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("Ir", "Returns the aspect ratio of the given image",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to return the aspect ratio of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "Aspect ratio of the image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return imageAspectRatio(
+                a[0].(*image.NRGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("blend", "Blends the two images using the given blendmode (defaults to normal)",
+        []dslParamMeta{ 
+            { 
+                name: "imgA",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The bottom image",
+            },
+            { 
+                name: "imgB",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The top image",
+            },
+            { 
+                name: "mode",
+                typ:  "string", 
+                def:  "normal", 
+                desc: "The blendmode name",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The blended image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return blend(
+                a[0].(*image.NRGBA64),
+                a[1].(*image.NRGBA64),
+                a[2].(string), 
+            )
+        },
+    )
     dsl.funcs.register("blend-normal", "Blends the two images using the normal blend mode (alpha compositing)",
         []dslParamMeta{ 
             { 
@@ -1569,19 +1813,19 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("P", "Creates the point P(x|y).",
+    dsl.funcs.register("P", "Creates a new point at P(x|y).",
         []dslParamMeta{ 
             { 
                 name: "x",
                 typ:  "float64", 
                 def:  0, 
-                desc: "The start position on the x-axis (relative)",
+                desc: "The start position on the x-axis",
             },
             { 
                 name: "y",
                 typ:  "float64", 
                 def:  0, 
-                desc: "The start position on the y-axis (relative)",
+                desc: "The start position on the y-axis",
             },
         },
         []dslParamMeta{     
@@ -1599,532 +1843,31 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Px", "Returns the x-coordinate of a point.",
+    dsl.funcs.register("R", "Creates a new rectangle with the given dimensions at P(x|y).",
         []dslParamMeta{ 
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The point to return the x-coordinate of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The x-coordinate of p",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pointX(
-                a[0].(Point), 
-            )
-        },
-    )
-    dsl.funcs.register("Py", "Returns the y-coordinate of a point.",
-        []dslParamMeta{ 
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The point to return the y-coordinate of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The y-coordinate of p",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pointY(
-                a[0].(Point), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-line", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "p1",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The start position (relative)",
-            },
-            { 
-                name: "p2",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The end position (relative)",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the line (absolute)",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The line color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawLine(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(Point),
-                a[3].(float64),
-                a[4].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-line-v", "Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
             { 
                 name: "x",
                 typ:  "float64", 
                 def:  "-", 
-                desc: "The position on the x-axis (relative)",
-            },
-            { 
-                name: "y1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The start position on the y-axis (relative)",
-            },
-            { 
-                name: "y2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The end position on the y-axis (relative)",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the line (absolute)",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The line color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawLineVertical(
-                a[0].(*image.NRGBA64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64),
-                a[4].(float64),
-                a[5].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-line-h", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
+                desc: "The upper-left corner of the rectangle",
             },
             { 
                 name: "y",
                 typ:  "float64", 
                 def:  "-", 
-                desc: "The position on the y-axis (relative)",
-            },
-            { 
-                name: "x1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The start position on the x-axis (relative)",
-            },
-            { 
-                name: "x2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The end position on the x-axis (relative)",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the line (absolute)",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The line color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawLineHorizontal(
-                a[0].(*image.NRGBA64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64),
-                a[4].(float64),
-                a[5].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-line-px", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "p1",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The start position",
-            },
-            { 
-                name: "p2",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The end position",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the line",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The line color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawLinePx(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(Point),
-                a[3].(float64),
-                a[4].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-line-v-px", "Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The position on the x-axis",
-            },
-            { 
-                name: "y1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The start position on the y-axis",
-            },
-            { 
-                name: "y2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The end position on the y-axis",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the line",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The line color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawLineVerticalPx(
-                a[0].(*image.NRGBA64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64),
-                a[4].(float64),
-                a[5].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-line-h-px", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "y",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The position on the y-axis",
-            },
-            { 
-                name: "x1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The start position on the x-axis",
-            },
-            { 
-                name: "x2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The end position on the x-axis",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the line",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The line color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawLineHorizontalPx(
-                a[0].(*image.NRGBA64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64),
-                a[4].(float64),
-                a[5].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-rect", "Draws a rectangle at position (x,y) with the given width and height.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The center of the rectangle (relative)",
+                desc: "The upper-left corner of the rectangle",
             },
             { 
                 name: "w",
                 typ:  "float64", 
-                def:  "-", 
-                desc: "The width of the rectangle (relative)",
-            },
-            { 
-                name: "h",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The height of the rectangle (relative)",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the rectangle border (absolute)",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The rectangle border color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawRect(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(float64),
-                a[3].(float64),
-                a[4].(float64),
-                a[5].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-square", "Draws a square at position (x,y) with the given size.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The center of the square (relative)",
-            },
-            { 
-                name: "size",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The size of the square (relative)",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the square border (absolute)",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The square color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawSquare(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(float64),
-                a[3].(float64),
-                a[4].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("draw-rect-px", "Draws a rectangle at position (x,y) with the given width and height.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to fill",
-            },
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The center of the rectangle",
-            },
-            { 
-                name: "w",
-                typ:  "int", 
                 def:  "-", 
                 desc: "The width of the rectangle",
             },
             { 
                 name: "h",
-                typ:  "int", 
-                def:  "-", 
-                desc: "The height of the rectangle",
-            },
-            { 
-                name: "thickness",
                 typ:  "float64", 
                 def:  "-", 
-                desc: "The thickness of the rectangle border",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The rectangle color",
+                desc: "The width of the rectangle",
             },
         },
         []dslParamMeta{     
@@ -2132,51 +1875,98 @@ func init() {
                 name: "result",
                 typ:  "any", 
                 def:  "-", 
-                desc: "The resulting image",
+                desc: "A new rectangle",
             },
         },
         func(a ...any) (any, error) {
-            return drawRectPx(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(int),
-                a[3].(int),
-                a[4].(float64),
-                a[5].(color.RGBA64), 
+            return makeRect(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64), 
             )
         },
     )
-    dsl.funcs.register("draw-square-px", "Draws a square at position (x,y) with the given size.",
+    dsl.funcs.register("IC", "Creates a new image with the given color.",
+        []dslParamMeta{ 
+            { 
+                name: "w",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The width of the image",
+            },
+            { 
+                name: "h",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The height of the image",
+            },
+            { 
+                name: "cFill",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The fill color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The new image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return makeImage(
+                a[0].(int),
+                a[1].(int),
+                a[2].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("I", "Creates a new transparent image.",
+        []dslParamMeta{ 
+            { 
+                name: "w",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The width of the image",
+            },
+            { 
+                name: "h",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The height of the image",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The new image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return makeImageTransparent(
+                a[0].(int),
+                a[1].(int), 
+            )
+        },
+    )
+    dsl.funcs.register("SI", "Copies an area from a source image and returns it as a new image.",
         []dslParamMeta{ 
             { 
                 name: "img",
                 typ:  "*image.NRGBA64", 
                 def:  "-", 
-                desc: "The image to fill",
+                desc: "The source image",
             },
             { 
-                name: "p",
-                typ:  "Point", 
+                name: "r",
+                typ:  "Rect", 
                 def:  "-", 
-                desc: "The center of the square",
-            },
-            { 
-                name: "size",
-                typ:  "int", 
-                def:  "-", 
-                desc: "The size of the square",
-            },
-            { 
-                name: "thickness",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The thickness of the square border",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The square color",
+                desc: "The selection to copy",
             },
         },
         []dslParamMeta{     
@@ -2184,16 +1974,13 @@ func init() {
                 name: "result",
                 typ:  "any", 
                 def:  "-", 
-                desc: "The resulting image",
+                desc: "The new image",
             },
         },
         func(a ...any) (any, error) {
-            return drawSquarePx(
+            return extractSubImage(
                 a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(int),
-                a[3].(float64),
-                a[4].(color.RGBA64), 
+                a[1].(Rect), 
             )
         },
     )
@@ -2224,7 +2011,7 @@ func init() {
                 desc: "The thickness of the circle border (absolute)",
             },
             { 
-                name: "col",
+                name: "cBorder",
                 typ:  "color.RGBA64", 
                 def:  "-", 
                 desc: "The circle color",
@@ -2275,7 +2062,7 @@ func init() {
                 desc: "The thickness of the circle border",
             },
             { 
-                name: "col",
+                name: "cBorder",
                 typ:  "color.RGBA64", 
                 def:  "-", 
                 desc: "The circle color",
@@ -2332,7 +2119,7 @@ func init() {
                 desc: "The thickness of the ellipse border (absolute)",
             },
             { 
-                name: "col",
+                name: "cBorder",
                 typ:  "color.RGBA64", 
                 def:  "-", 
                 desc: "The ellipse color",
@@ -2390,7 +2177,7 @@ func init() {
                 desc: "The thickness of the ellipse border",
             },
             { 
-                name: "col",
+                name: "cBorder",
                 typ:  "color.RGBA64", 
                 def:  "-", 
                 desc: "The ellipse color",
@@ -2412,6 +2199,558 @@ func init() {
                 a[3].(int),
                 a[4].(float64),
                 a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-line", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "p1",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The start position (relative)",
+            },
+            { 
+                name: "p2",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The end position (relative)",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the line (absolute)",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The line color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLine(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(Point),
+                a[3].(float64),
+                a[4].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-line-v", "Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The position on the x-axis (relative)",
+            },
+            { 
+                name: "y1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start position on the y-axis (relative)",
+            },
+            { 
+                name: "y2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end position on the y-axis (relative)",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the line (absolute)",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The line color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLineVertical(
+                a[0].(*image.NRGBA64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-line-h", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "y",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The position on the y-axis (relative)",
+            },
+            { 
+                name: "x1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start position on the x-axis (relative)",
+            },
+            { 
+                name: "x2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end position on the x-axis (relative)",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the line (absolute)",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The line color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLineHorizontal(
+                a[0].(*image.NRGBA64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-line-px", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "p1",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The start position",
+            },
+            { 
+                name: "p2",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The end position",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the line",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The line color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLinePx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(Point),
+                a[3].(float64),
+                a[4].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-line-v-px", "Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The position on the x-axis",
+            },
+            { 
+                name: "y1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start position on the y-axis",
+            },
+            { 
+                name: "y2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end position on the y-axis",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the line",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The line color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLineVerticalPx(
+                a[0].(*image.NRGBA64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-line-h-px", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "y",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The position on the y-axis",
+            },
+            { 
+                name: "x1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start position on the x-axis",
+            },
+            { 
+                name: "x2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end position on the x-axis",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the line",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The line color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLineHorizontalPx(
+                a[0].(*image.NRGBA64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-rect", "Draws a rectangle at position (x,y) with the given width and height.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "p",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The center of the rectangle (relative)",
+            },
+            { 
+                name: "w",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The width of the rectangle (relative)",
+            },
+            { 
+                name: "h",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The height of the rectangle (relative)",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the rectangle border (absolute)",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The rectangle border color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawRect(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-square", "Draws a square at position (x,y) with the given size.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "p",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The center of the square (relative)",
+            },
+            { 
+                name: "size",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The size of the square (relative)",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the square border (absolute)",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The square color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawSquare(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-rect-px", "Draws a rectangle at position (x,y) with the given width and height.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "p",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The center of the rectangle",
+            },
+            { 
+                name: "w",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The width of the rectangle",
+            },
+            { 
+                name: "h",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The height of the rectangle",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the rectangle border",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The rectangle color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawRectPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(int),
+                a[3].(int),
+                a[4].(float64),
+                a[5].(color.RGBA64), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-square-px", "Draws a square at position (x,y) with the given size.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to fill",
+            },
+            { 
+                name: "p",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The center of the square",
+            },
+            { 
+                name: "size",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The size of the square",
+            },
+            { 
+                name: "thickness",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The thickness of the square border",
+            },
+            { 
+                name: "cBorder",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The square color",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawSquarePx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(int),
+                a[3].(float64),
+                a[4].(color.RGBA64), 
             )
         },
     )
@@ -5252,89 +5591,6 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("I", "Creates a new image with the given color.",
-        []dslParamMeta{ 
-            { 
-                name: "w",
-                typ:  "int", 
-                def:  "-", 
-                desc: "The width of the image",
-            },
-            { 
-                name: "h",
-                typ:  "int", 
-                def:  "-", 
-                desc: "The height of the image",
-            },
-            { 
-                name: "col",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The fill color",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The new image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return makeImage(
-                a[0].(int),
-                a[1].(int),
-                a[2].(color.RGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("Iw", "Returns the width of an image.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to return the width of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The width of img",
-            },
-        },
-        func(a ...any) (any, error) {
-            return imageW(
-                a[0].(*image.NRGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("Ih", "Returns the height of an image.",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to return the height of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The height of img",
-            },
-        },
-        func(a ...any) (any, error) {
-            return imageH(
-                a[0].(*image.NRGBA64), 
-            )
-        },
-    )
     dsl.funcs.register("It", "Translates the given image by expanding/cropping the left + top borders.",
         []dslParamMeta{ 
             { 
@@ -5409,75 +5665,6 @@ func init() {
             return save(
                 a[0].(*image.NRGBA64),
                 a[1].(string), 
-            )
-        },
-    )
-    dsl.funcs.register("image-width", "Returns the width of the given image",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to return the width of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "Width of the image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return imageWidth(
-                a[0].(*image.NRGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("image-height", "Returns the height of the given image",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to return the height of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "Width of the image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return imageHeight(
-                a[0].(*image.NRGBA64), 
-            )
-        },
-    )
-    dsl.funcs.register("image-aspect-ratio", "Returns the aspect ratio of the given image",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to return the aspect ratio of",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "Aspect ratio of the image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return imageAspectRatio(
-                a[0].(*image.NRGBA64), 
             )
         },
     )

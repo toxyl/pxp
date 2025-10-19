@@ -2,22 +2,61 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
 
 	"github.com/toxyl/flo"
 	"github.com/toxyl/pxp/language"
 )
 
+func printBlue(message string) {
+	fmt.Printf("\033[1;34m%s\033[0m\n", message)
+}
+
+func printYellow(message string) {
+	fmt.Printf("\033[1;33m%s\033[0m\n", message)
+}
+
+func printGreen(message string) {
+	fmt.Printf("\033[1;32m%s\033[0m\n", message)
+}
+
+func printRed(message string) {
+	fmt.Printf("\033[1;31m%s\033[0m\n", message)
+}
+
+func dieOnError(err error, msg string) {
+	if err != nil {
+		printRed(fmt.Sprintf("%s: %v", msg, err))
+		os.Exit(1)
+	}
+}
+
 func main() {
-	if err := language.ExportToVSIX("pxp.vsix"); err != nil {
-		fmt.Printf("Failed to export VSCode extension: %v", err)
-	}
-	if err := flo.File("docs/pxp.md").StoreString(language.DocMarkdown()); err != nil {
-		fmt.Printf("Failed to create Markdown doc: %v", err)
-	}
-	if err := flo.File("docs/pxp.html").StoreString(language.DocHTML()); err != nil {
-		fmt.Printf("Failed to create HTML doc: %v", err)
-	}
-	if err := flo.File("docs/pxp.txt").StoreString(language.DocText()); err != nil {
-		fmt.Printf("Failed to create text doc: %v", err)
-	}
+	/////////////////////////////////////////////////////////////////////////////////////////
+	printYellow("PixelPipeline Documentation Generator")
+	/////////////////////////////////////////////////////////////////////////////////////////
+	var (
+		dSrc     = flo.Dir(".")     // /src/pixelpipeline/
+		dSrcBin  = dSrc.Dir("bin")  // /src/pixelpipeline/bin/
+		dSrcDocs = dSrc.Dir("docs") // /src/pixelpipeline/docs/
+	)
+	/////////////////////////////////////////////////////////////////////////////////////////
+	printBlue("Generating docs...")
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+	dieOnError(dSrcDocs.File("README.md").StoreString(language.DocMarkdown()), "Failed to create Markdown doc")
+	dieOnError(dSrcDocs.File("README.html").StoreString(language.DocHTML()), "Failed to create HTML doc")
+	dieOnError(dSrcDocs.File("README.txt").StoreString(language.DocText()), "Failed to create text doc")
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	printBlue("Generating VSCode extension...")
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+	time.Sleep(5 * time.Second)
+	dieOnError(language.ExportToVSIX(dSrcBin.File("pxp.vsix").Path()), "Failed to export VSCode extension")
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	printGreen("Documentation generated successfully!")
+	/////////////////////////////////////////////////////////////////////////////////////////
 }
