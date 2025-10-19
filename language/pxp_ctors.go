@@ -50,7 +50,9 @@ func makeImageTransparent(w, h int) (*image.NRGBA64, error) {
 // @Param:      r       - - -   The selection to copy
 // @Returns:    result  - - -	The new image
 func extractSubImage(img *image.NRGBA64, r Rect) (*image.NRGBA64, error) {
-	return cropPx(img, int(r.X1()), int(r.Y1()), int(r.X2()), int(r.Y2()))
+	bounds := img.Bounds()
+	iw, ih := bounds.Dx(), bounds.Dy()
+	return cropPx(img, int(r.X1()), iw-int(r.X2()), int(r.Y1()), ih-int(r.Y2()))
 }
 
 func P(x, y float64) Point {
