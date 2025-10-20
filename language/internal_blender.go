@@ -4,6 +4,8 @@ import (
 	"image"
 	"image/color"
 	"sync"
+
+	"github.com/toxyl/math"
 )
 
 type PixelBlendProcessor func(r1, g1, b1, a1, r2, g2, b2, a2 uint32) (r, g, b, a uint32)
@@ -59,7 +61,7 @@ func (bl *Blender) Images(imgA, imgB *image.NRGBA64) *image.NRGBA64 {
 
 	for i := range numWorkers {
 		startY := minY + i*rowsPerWorker
-		endY := min(startY+rowsPerWorker, maxY)
+		endY := math.Min(startY+rowsPerWorker, maxY)
 
 		if startY >= endY {
 			continue
@@ -70,7 +72,7 @@ func (bl *Blender) Images(imgA, imgB *image.NRGBA64) *image.NRGBA64 {
 			defer wg.Done()
 			for y := startY; y < endY; y++ {
 				for x := minX; x < maxX; x++ {
-					bl.Pixel(P(float64(x), float64(y)), imgA, imgB)
+					bl.Pixel(*P(float64(x), float64(y)), imgA, imgB)
 				}
 			}
 		}(startY, endY)

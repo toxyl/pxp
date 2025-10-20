@@ -69,18 +69,6 @@ func colorBrightness(img *image.NRGBA64, factor float64) (*image.NRGBA64, error)
 	}, numWorkers), nil
 }
 
-// @Name: fill
-// @Desc: Fills the image
-// @Param:      img     - - -   The image to fill
-// @Param:      col  	- - -   The fill color
-// @Returns:    result  - - -	The filled image
-func colorFill(img *image.NRGBA64, col color.RGBA64) (*image.NRGBA64, error) {
-	r2, g2, b2, a2 := uint32(col.R), uint32(col.G), uint32(col.B), uint32(col.A)
-	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
-		return r2, g2, b2, a2
-	}, numWorkers), nil
-}
-
 // @Name: colorize
 // @Desc: Colorizes the image
 // @Param:      img     - - -   The image to colorize
@@ -154,7 +142,7 @@ func colorSaturation(img *image.NRGBA64, factor float64) (*image.NRGBA64, error)
 		h, s, l := rgbToHsl(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
 
 		// Adjust saturation
-		s = min(s*factor, 1.0)
+		s = math.Min(s*factor, 1.0)
 
 		// Convert back to RGB
 		rf, gf, bf := hslToRgb(h, s, l)

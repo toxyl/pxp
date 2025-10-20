@@ -1191,6 +1191,13 @@ function updateOutputPreview(result, error = null) {
     viewerContainer.style.zIndex = '1'; // Lower than header's z-index
     outputPreview.appendChild(viewerContainer);
 
+    // Create dimensions tooltip
+    const dimensionsTooltip = document.createElement('div');
+    dimensionsTooltip.className = 'dimensions-tooltip';
+    dimensionsTooltip.textContent = result.dimensions || '';
+    dimensionsTooltip.style.display = 'none';
+    outputPreview.appendChild(dimensionsTooltip);
+
     // Create the image element inside the viewer container
     const img = document.createElement('img');
     img.src = result.data;
@@ -1220,6 +1227,17 @@ function updateOutputPreview(result, error = null) {
             // Enable save button when viewer is ready
             saveOutputBtn.disabled = false;
         },
+    });
+
+    // Add hover event handlers for dimensions tooltip
+    outputPreview.addEventListener('mouseenter', () => {
+        if (dimensionsTooltip.textContent) {
+            dimensionsTooltip.style.display = 'block';
+        }
+    });
+
+    outputPreview.addEventListener('mouseleave', () => {
+        dimensionsTooltip.style.display = 'none';
     });
 }
 
@@ -1283,7 +1301,10 @@ function updateButtonStates() {
     const outputPreview = document.getElementById('outputPreview');
     
     // Update RENDER button state
-    renderBtn.disabled = Object.keys(state.imageFiles).length === 0 || !state.editor || state.editor.getValue().trim() === '';
+    const script = state.editor ? state.editor.getValue().trim() : '';
+    const hasImageFiles = Object.keys(state.imageFiles).length > 0;
+    const hasLoadFunction = /load\s*\(/.test(script);
+    renderBtn.disabled = !state.editor || script === '' || (!hasImageFiles && !hasLoadFunction);
     
     // Update BATCH button state
     batchBtn.disabled = !state.editor || state.editor.getValue().trim() === '';

@@ -208,9 +208,9 @@ func lab(l float64, a float64, b float64, alpha float64) (color.RGBA64, error) {
 	b2 = 0.0557*x - 0.2040*y + 1.0570*z
 
 	// Clip values to 0-1 range
-	r = max(0.0, min(1.0, r))
-	g = max(0.0, min(1.0, g))
-	b2 = max(0.0, min(1.0, b2))
+	r = math.Max(0.0, math.Min(1.0, r))
+	g = math.Max(0.0, math.Min(1.0, g))
+	b2 = math.Max(0.0, math.Min(1.0, b2))
 
 	// Convert to 16-bit color channels
 	R := uint16(r * 65535)
@@ -242,7 +242,7 @@ func hwb(h float64, w float64, b float64, alpha float64) (color.RGBA64, error) {
 	if v != 0 {
 		s = 1 - (w / v)
 	}
-	s = max(0.0, min(1.0, s))
+	s = math.Max(0.0, math.Min(1.0, s))
 
 	// Now we can use HSV conversion
 	var r, g, black float64

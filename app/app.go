@@ -318,6 +318,12 @@ func (a *App) Run(script string, filePaths []string) OpResult {
 	// Store the image
 	a.lastRunImage = img
 
+	// Get image dimensions
+	bounds := img.Bounds()
+	width := bounds.Max.X - bounds.Min.X
+	height := bounds.Max.Y - bounds.Min.Y
+	dimensions := fmt.Sprintf("%dx%d", width, height)
+
 	// Encode the image to PNG and then to base64 for preview
 	var buf bytes.Buffer
 	if err := png.Encode(&buf, img); err != nil {
@@ -327,7 +333,8 @@ func (a *App) Run(script string, filePaths []string) OpResult {
 	}
 	encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
 	return OpResult{map[string]string{
-		"data": fmt.Sprintf("data:image/png;base64,%s", encoded),
+		"data":       fmt.Sprintf("data:image/png;base64,%s", encoded),
+		"dimensions": dimensions,
 	}, nil}
 }
 

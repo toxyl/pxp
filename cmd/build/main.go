@@ -150,7 +150,7 @@ func main() {
 	dieOnError(buildGoDSL(flo.Dir(*goDslSourcePath), fGoDSLBin), "Failed to build GoDSL")
 	dieOnError(generateDSL(dSrcLang, fGoDSLBin), "Failed to generate DSL")
 
-	for _, osName := range []string{"linux", "windows"} {
+	for _, osName := range []string{"windows", "linux"} {
 		/////////////////////////////////////////////////////////////////////////////////////////
 		printBlue(fmt.Sprintf("%s: %s", osName, "Creating directories..."))
 		/////////////////////////////////////////////////////////////////////////////////////////

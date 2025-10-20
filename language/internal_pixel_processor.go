@@ -4,6 +4,8 @@ import (
 	"image"
 	"runtime"
 	"sync"
+
+	"github.com/toxyl/math"
 )
 
 var (
@@ -32,7 +34,7 @@ func parallelPixelBuffer(img *image.NRGBA64, processor PixelBufferProcessor) (bu
 
 	for i := range numWorkers {
 		startY := minY + i*rowsPerWorker
-		endY := min(startY+rowsPerWorker, maxY)
+		endY := math.Min(startY+rowsPerWorker, maxY)
 
 		if startY >= endY {
 			continue

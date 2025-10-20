@@ -1008,3 +1008,24 @@ dialog .batch-error-item {
     opacity: 0.8;
     border-color: #ff4444;
 }
+
+/* Dimensions tooltip styles */
+.dimensions-tooltip {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--text-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.dimensions-tooltip[style*="block"] {
+    opacity: 1;
+}

@@ -9,56 +9,44 @@ import (
 
 // @Name: draw-rect
 // @Desc: Draws a rectangle at position (x,y) with the given width and height.
-// @Param:      img       - - -   The image to fill
-// @Param:      p         - - -   The center of the rectangle (relative)
-// @Param:      w         - - -   The width of the rectangle (relative)
-// @Param:      h         - - -   The height of the rectangle (relative)
-// @Param:      thickness - - -   The thickness of the rectangle border (absolute)
-// @Param:      cBorder	  - - -   The rectangle border color
+// @Param:      img       - - -   The image to draw to
+// @Param:      r         - - -   The rectangle to draw (relative)
+// @Param:      style     - - -   The thickness and color of the line
 // @Returns:    result    - - -	  The resulting image
-func drawRect(img *image.NRGBA64, p Point, w, h, thickness float64, cBorder color.RGBA64) (*image.NRGBA64, error) {
+func drawRect(img *image.NRGBA64, r Rect, style LineStyle) (*image.NRGBA64, error) {
 	bounds := img.Bounds()
-	imgW, imgH := bounds.Max.X, bounds.Max.Y
-	return drawRectPx(img, P(p.X*float64(imgW), p.Y*float64(imgH)), int(w*float64(imgW)), int(h*float64(imgH)), thickness, cBorder)
+	return drawRectPx(img, *r.Denorm(float64(bounds.Max.X), float64(bounds.Max.Y)), style)
 }
 
 // @Name: draw-square
 // @Desc: Draws a square at position (x,y) with the given size.
-// @Param:      img       - - -   The image to fill
-// @Param:      p         - - -   The center of the square (relative)
-// @Param:      size      - - -   The size of the square (relative)
-// @Param:      thickness - - -   The thickness of the square border (absolute)
-// @Param:      cBorder	  - - -   The square color
+// @Param:      img       - - -   The image to draw to
+// @Param:      s         - - -   The square to draw (relative)
+// @Param:      style     - - -   The thickness and color of the line
 // @Returns:    result    - - -	  The resulting image
-func drawSquare(img *image.NRGBA64, p Point, size float64, thickness float64, cBorder color.RGBA64) (*image.NRGBA64, error) {
+func drawSquare(img *image.NRGBA64, s Rect, style LineStyle) (*image.NRGBA64, error) {
 	bounds := img.Bounds()
-	imgW, imgH := bounds.Max.X, bounds.Max.Y
-	x1, y1, w1, h1 := int(p.X*float64(imgW)), int(p.Y*float64(imgH)), int(size*float64(imgW)), int(size*float64(imgH))
-	w1 = min(w1, h1)
-	return drawRectPx(img, P(float64(x1), float64(y1)), w1, w1, thickness, cBorder)
+	return drawSquarePx(img, *s.Denorm(float64(bounds.Max.X), float64(bounds.Max.Y)), style)
 }
 
 // @Name: draw-rect-px
 // @Desc: Draws a rectangle at position (x,y) with the given width and height.
-// @Param:      img       - - -   The image to fill
-// @Param:      p         - - -   The center of the rectangle
-// @Param:      w         - - -   The width of the rectangle
-// @Param:      h         - - -   The height of the rectangle
-// @Param:      thickness - - -   The thickness of the rectangle border
-// @Param:      cBorder	  - - -   The rectangle color
+// @Param:      img       - - -   The image to draw to
+// @Param:      r         - - -   The rectangle to draw (absolute)
+// @Param:      style     - - -   The thickness and color of the line
 // @Returns:    result    - - -	  The resulting image
-func drawRectPx(img *image.NRGBA64, p Point, w, h int, thickness float64, cBorder color.RGBA64) (*image.NRGBA64, error) {
+func drawRectPx(img *image.NRGBA64, r Rect, style LineStyle) (*image.NRGBA64, error) {
 	bounds := img.Bounds()
 	result := IClone(img)
+	r.P2.X -= 1
+	r.P2.Y -= 1
 
 	// Draw rectangle border with proper thickness and anti-aliasing
 	// Calculate bounding box for efficiency
-	halfW := float64(w) / 2.0
-	halfH := float64(h) / 2.0
-	minX := int(p.X - halfW - thickness - 1)
-	maxX := int(p.X + halfW + thickness + 1)
-	minY := int(p.Y - halfH - thickness - 1)
-	maxY := int(p.Y + halfH + thickness + 1)
+	minX := int(r.X1() - style.Thickness - 1)
+	maxX := int(r.X2() + style.Thickness + 1)
+	minY := int(r.Y1() - style.Thickness - 1)
+	maxY := int(r.Y2() + style.Thickness + 1)
 
 	for py := minY; py <= maxY; py++ {
 		for px := minX; px <= maxX; px++ {
@@ -68,13 +56,13 @@ func drawRectPx(img *image.NRGBA64, p Point, w, h int, thickness float64, cBorde
 				var dist float64
 
 				// Distance to left edge
-				distLeft := float64(px) - (p.X - halfW)
+				distLeft := float64(px) - r.X1()
 				// Distance to right edge
-				distRight := (p.X + halfW) - float64(px)
+				distRight := r.X2() - float64(px)
 				// Distance to top edge
-				distTop := float64(py) - (p.Y - halfH)
+				distTop := float64(py) - r.Y1()
 				// Distance to bottom edge
-				distBottom := (p.Y + halfH) - float64(py)
+				distBottom := r.Y2() - float64(py)
 
 				// Check if point is inside rectangle
 				if distLeft < 0 && distRight < 0 && distTop < 0 && distBottom < 0 {
@@ -88,19 +76,19 @@ func drawRectPx(img *image.NRGBA64, p Point, w, h int, thickness float64, cBorde
 				dist = math.Min(dist, distBottom)
 
 				// Get pixel coverage for anti-aliasing
-				coverage := getRectPixelCoverage(dist, thickness)
+				coverage := getRectPixelCoverage(dist, style.Thickness)
 
 				if coverage > 0 {
 					// Get existing pixel color
 					existing := result.NRGBA64At(px, py)
 
 					// Apply coverage to alpha
-					alpha := uint32(float64(cBorder.A) * coverage)
+					alpha := uint32(float64(style.Color.A) * coverage)
 
 					// Blend colors using normal blend mode
 					r, g, b, a := blendWithAlpha(
 						uint32(existing.R), uint32(existing.G), uint32(existing.B), uint32(existing.A),
-						uint32(cBorder.R), uint32(cBorder.G), uint32(cBorder.B), alpha,
+						uint32(style.Color.R), uint32(style.Color.G), uint32(style.Color.B), alpha,
 						func(r1, g1, b1, r2, g2, b2 uint32) (uint32, uint32, uint32) {
 							return r2, g2, b2
 						},
@@ -120,12 +108,17 @@ func drawRectPx(img *image.NRGBA64, p Point, w, h int, thickness float64, cBorde
 
 // @Name: draw-square-px
 // @Desc: Draws a square at position (x,y) with the given size.
-// @Param:      img       - - -   The image to fill
-// @Param:      p         - - -   The center of the square
-// @Param:      size      - - -   The size of the square
-// @Param:      thickness - - -   The thickness of the square border
-// @Param:      cBorder	  - - -   The square color
+// @Param:      img       - - -   The image to draw to
+// @Param:      s         - - -   The square to draw (absolute)
+// @Param:      style     - - -   The thickness and color of the line
 // @Returns:    result    - - -	  The resulting image
-func drawSquarePx(img *image.NRGBA64, p Point, size int, thickness float64, cBorder color.RGBA64) (*image.NRGBA64, error) {
-	return drawRectPx(img, p, size, size, thickness, cBorder)
+func drawSquarePx(img *image.NRGBA64, s Rect, style LineStyle) (*image.NRGBA64, error) {
+	if s.W() != s.H() {
+		m := math.Min(s.W(), s.H())
+		s = Rect{
+			P1: s.P1,
+			P2: P(s.P1.X+m, s.P1.Y+m),
+		}
+	}
+	return drawRectPx(img, s, style)
 }

@@ -169,7 +169,7 @@ var (
 				case 0xffff:
 					r = 0xffff
 				default:
-					r = min((r1*0xffff)/(0xffff-r2), 0xffff)
+					r = math.Min((r1*0xffff)/(0xffff-r2), 0xffff)
 				}
 
 				// Green channel
@@ -180,7 +180,7 @@ var (
 				case 0xffff:
 					g = 0xffff
 				default:
-					g = min((g1*0xffff)/(0xffff-g2), 0xffff)
+					g = math.Min((g1*0xffff)/(0xffff-g2), 0xffff)
 				}
 
 				// Blue channel
@@ -191,7 +191,7 @@ var (
 				case 0xffff:
 					b = 0xffff
 				default:
-					b = min((b1*0xffff)/(0xffff-b2), 0xffff)
+					b = math.Min((b1*0xffff)/(0xffff-b2), 0xffff)
 				}
 
 				return r, g, b
@@ -286,19 +286,19 @@ var (
 				// Red channel
 				var r uint32
 				if r2 > 0 {
-					r = min((r1*0xffff)/r2, 0xffff)
+					r = math.Min((r1*0xffff)/r2, 0xffff)
 				}
 
 				// Green channel
 				var g uint32
 				if g2 > 0 {
-					g = min((g1*0xffff)/g2, 0xffff)
+					g = math.Min((g1*0xffff)/g2, 0xffff)
 				}
 
 				// Blue channel
 				var b uint32
 				if b2 > 0 {
-					b = min((b1*0xffff)/b2, 0xffff)
+					b = math.Min((b1*0xffff)/b2, 0xffff)
 				}
 
 				return r, g, b
@@ -390,7 +390,7 @@ var (
 				if r2 == 0xffff {
 					r = 0xffff
 				} else if r2 < 0xffff {
-					r = min((r1*r1)/(0xffff-r2), 0xffff)
+					r = math.Min((r1*r1)/(0xffff-r2), 0xffff)
 				}
 
 				// Green channel
@@ -398,7 +398,7 @@ var (
 				if g2 == 0xffff {
 					g = 0xffff
 				} else if g2 < 0xffff {
-					g = min((g1*g1)/(0xffff-g2), 0xffff)
+					g = math.Min((g1*g1)/(0xffff-g2), 0xffff)
 				}
 
 				// Blue channel
@@ -406,7 +406,7 @@ var (
 				if b2 == 0xffff {
 					b = 0xffff
 				} else if b2 < 0xffff {
-					b = min((b1*b1)/(0xffff-b2), 0xffff)
+					b = math.Min((b1*b1)/(0xffff-b2), 0xffff)
 				}
 
 				return r, g, b
@@ -422,7 +422,7 @@ var (
 				if r1 == 0xffff {
 					r = 0xffff
 				} else if r1 < 0xffff {
-					r = min((r2*r2)/(0xffff-r1), 0xffff)
+					r = math.Min((r2*r2)/(0xffff-r1), 0xffff)
 				}
 
 				// Green channel
@@ -430,7 +430,7 @@ var (
 				if g1 == 0xffff {
 					g = 0xffff
 				} else if g1 < 0xffff {
-					g = min((g2*g2)/(0xffff-g1), 0xffff)
+					g = math.Min((g2*g2)/(0xffff-g1), 0xffff)
 				}
 
 				// Blue channel
@@ -438,7 +438,7 @@ var (
 				if b1 == 0xffff {
 					b = 0xffff
 				} else if b1 < 0xffff {
-					b = min((b2*b2)/(0xffff-b1), 0xffff)
+					b = math.Min((b2*b2)/(0xffff-b1), 0xffff)
 				}
 
 				return r, g, b
@@ -496,7 +496,7 @@ var (
 					if r2 == 0xffff {
 						r = 0xffff
 					} else {
-						r = min((r1*0x8000)/(0xffff-r2), 0xffff)
+						r = math.Min((r1*0x8000)/(0xffff-r2), 0xffff)
 					}
 				}
 
@@ -515,7 +515,7 @@ var (
 					if g2 == 0xffff {
 						g = 0xffff
 					} else {
-						g = min((g1*0x8000)/(0xffff-g2), 0xffff)
+						g = math.Min((g1*0x8000)/(0xffff-g2), 0xffff)
 					}
 				}
 
@@ -534,7 +534,7 @@ var (
 					if b2 == 0xffff {
 						b = 0xffff
 					} else {
-						b = min((b1*0x8000)/(0xffff-b2), 0xffff)
+						b = math.Min((b1*0x8000)/(0xffff-b2), 0xffff)
 					}
 				}
 
@@ -562,26 +562,26 @@ var (
 				var r uint32
 				if r2 < 0x8000 {
 					// Darken
-					r = min(r1, 2*r2)
+					r = math.Min(r1, 2*r2)
 				} else {
 					// Lighten
-					r = max(r1, 2*(r2-0x8000))
+					r = math.Max(r1, 2*(r2-0x8000))
 				}
 
 				// Green channel
 				var g uint32
 				if g2 < 0x8000 {
-					g = min(g1, 2*g2)
+					g = math.Min(g1, 2*g2)
 				} else {
-					g = max(g1, 2*(g2-0x8000))
+					g = math.Max(g1, 2*(g2-0x8000))
 				}
 
 				// Blue channel
 				var b uint32
 				if b2 < 0x8000 {
-					b = min(b1, 2*b2)
+					b = math.Min(b1, 2*b2)
 				} else {
-					b = max(b1, 2*(b2-0x8000))
+					b = math.Max(b1, 2*(b2-0x8000))
 				}
 
 				return r, g, b
@@ -590,10 +590,10 @@ var (
 		NewBlender(DARKEN, func(r1, g1, b1, a1, r2, g2, b2, a2 uint32) (r, g, b, a uint32) {
 			return blendWithAlpha(r1, g1, b1, a1, r2, g2, b2, a2, func(r1, g1, b1, r2, g2, b2 uint32) (uint32, uint32, uint32) {
 				// Darken blend mode for un-premultiplied colors
-				// Formula: min(bottom, top)
-				r := min(r1, r2)
-				g := min(g1, g2)
-				b := min(b1, b2)
+				// Formula: math.Min(bottom, top)
+				r := math.Min(r1, r2)
+				g := math.Min(g1, g2)
+				b := math.Min(b1, b2)
 				return r, g, b
 			})
 		}),
@@ -616,10 +616,10 @@ var (
 		NewBlender(LIGHTEN, func(r1, g1, b1, a1, r2, g2, b2, a2 uint32) (r, g, b, a uint32) {
 			return blendWithAlpha(r1, g1, b1, a1, r2, g2, b2, a2, func(r1, g1, b1, r2, g2, b2 uint32) (uint32, uint32, uint32) {
 				// Lighten blend mode for un-premultiplied colors
-				// Formula: max(bottom, top)
-				r := max(r1, r2)
-				g := max(g1, g2)
-				b := max(b1, b2)
+				// Formula: math.Max(bottom, top)
+				r := math.Max(r1, r2)
+				g := math.Max(g1, g2)
+				b := math.Max(b1, b2)
 				return r, g, b
 			})
 		}),
@@ -659,7 +659,7 @@ var (
 					if r2 == 0xffff {
 						vR = 0xffff
 					} else {
-						vR = min((r1*0x8000)/(0xffff-r2), 0xffff)
+						vR = math.Min((r1*0x8000)/(0xffff-r2), 0xffff)
 					}
 				}
 				r := uint32(0)
@@ -682,7 +682,7 @@ var (
 					if g2 == 0xffff {
 						vG = 0xffff
 					} else {
-						vG = min((g1*0x8000)/(0xffff-g2), 0xffff)
+						vG = math.Min((g1*0x8000)/(0xffff-g2), 0xffff)
 					}
 				}
 				g := uint32(0)
@@ -705,7 +705,7 @@ var (
 					if b2 == 0xffff {
 						vB = 0xffff
 					} else {
-						vB = min((b1*0x8000)/(0xffff-b2), 0xffff)
+						vB = math.Min((b1*0x8000)/(0xffff-b2), 0xffff)
 					}
 				}
 				b := uint32(0)

@@ -342,7 +342,7 @@ func cropCirclePx(img *image.NRGBA64, radius float64, offsetX int, offsetY int) 
 	centerY := height/2 + offsetY
 
 	// Use the smaller of width or height for radius calculation
-	minHalf := min(height, width)
+	minHalf := math.Min(height, width)
 	minHalf = minHalf / 2
 	r := int(math.Round(float64(minHalf) * radius))
 	r2 := r * r // squared radius for distance check
@@ -421,7 +421,7 @@ func cropSquarePx(img *image.NRGBA64, size float64, offsetX int, offsetY int) (*
 	centerY := height/2 + offsetY
 
 	// Use the smaller of width or height for square size calculation
-	minDim := min(height, width)
+	minDim := math.Min(height, width)
 	halfSide := int(math.Round(float64(minDim) * size / 2.0))
 
 	// Calculate the cropped square's bounds

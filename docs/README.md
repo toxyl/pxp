@@ -47,6 +47,74 @@ All arguments have defaults.
 
 ## Functions
 
+### `C(centerX=- centerY=- radius=-) ⮕ (result=-)`  
+_Creates a new circle with the given radius at P(x|y)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `centerX` | `float64` | `-` |   |   |   | The center of the circle on the x-axis |
+| `centerY` | `float64` | `-` |   |   |   | The center of the circle on the y-axis |
+| `radius` | `float64` | `-` |   |   |   | The radius of the circle |
+| `⮕ result` | `any` | `-` |   |   |   | A new circle |
+---
+
+### `E(centerX=- centerY=- radiusX=- radiusY=-) ⮕ (result=-)`  
+_Creates a new ellipse with the given radius at P(x|y)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `centerX` | `float64` | `-` |   |   |   | The center of the ellipse on the x-axis |
+| `centerY` | `float64` | `-` |   |   |   | The center of the ellipse on the y-axis |
+| `radiusX` | `float64` | `-` |   |   |   | The radius of the ellipse on the x-axis |
+| `radiusY` | `float64` | `-` |   |   |   | The radius of the ellipse on the y-axis |
+| `⮕ result` | `any` | `-` |   |   |   | A new ellipse |
+---
+
+### `Erx(e=-) ⮕ (result=-)`  
+_Returns the x-component of the radius of an ellipse._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `e` | `Ellipse` | `-` |   |   |   | The ellipse to return the x-component of the radius of |
+| `⮕ result` | `any` | `-` |   |   |   | the x-component of the radius of e |
+---
+
+### `Ery(e=-) ⮕ (result=-)`  
+_Returns the y-component of the radius of an ellipse._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `e` | `Ellipse` | `-` |   |   |   | The ellipse to return the y-component of the radius of |
+| `⮕ result` | `any` | `-` |   |   |   | the y-component of the radius of e |
+---
+
+### `Ex(e=-) ⮕ (result=-)`  
+_Returns the center x-coordinate of an ellipse._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `e` | `Ellipse` | `-` |   |   |   | The ellipse to return the center x-coordinate of |
+| `⮕ result` | `any` | `-` |   |   |   | the center x-coordinate of e |
+---
+
+### `Ey(e=-) ⮕ (result=-)`  
+_Returns the center y-coordinate of an ellipse._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `e` | `Ellipse` | `-` |   |   |   | The ellipse to return the center y-coordinate of |
+| `⮕ result` | `any` | `-` |   |   |   | the center y-coordinate of e |
+---
+
+### `FS(color=-) ⮕ (result=-)`  
+_Creates a new fill style._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `color` | `color.RGBA64` | `-` |   |   |   | The fill color |
+| `⮕ result` | `any` | `-` |   |   |   | A new fill style |
+---
+
 ### `I(w=- h=-) ⮕ (result=-)`  
 _Creates a new transparent image._
 
@@ -103,6 +171,16 @@ _Returns the width of an image._
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to return the width of |
 | `⮕ result` | `any` | `-` |   |   |   | The width of img |
+---
+
+### `LS(color=- thickness=1) ⮕ (result=-)`  
+_Creates a new line style._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `color` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `thickness` | `float64` | `1` |   |   | `1` | The line thickness |
+| `⮕ result` | `any` | `-` |   |   |   | A new line style |
 ---
 
 ### `P(x=0 y=0) ⮕ (result=-)`  
@@ -189,6 +267,65 @@ _Copies an area from a source image and returns it as a new image._
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The source image |
 | `r` | `Rect` | `-` |   |   |   | The selection to copy |
 | `⮕ result` | `any` | `-` |   |   |   | The new image |
+---
+
+### `T(style=- text="-") ⮕ (result=-)`  
+_Creates a new text._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `style` | `TextStyle` | `-` |   |   |   | The text style to use |
+| `text` | `string` | `"-"` |   |   |   | - - The text to print |
+| `⮕ result` | `any` | `-` |   |   |   | A new text |
+---
+
+### `TS(color=- size=10 family="mono") ⮕ (result=-)`  
+_Creates a new font style._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `color` | `color.RGBA64` | `-` |   |   |   | The font color |
+| `size` | `float64` | `10` |   |   | `1` | The font size |
+| `family` | `string` | `"mono"` |   |   |   | The font family |
+| `⮕ result` | `any` | `-` |   |   |   | A new font style |
+---
+
+### `V(x=0 y=0 z=0) ⮕ (result=-)`  
+_Creates a new Vector from x, y and z._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `0` |   |   |   | The x-component |
+| `y` | `float64` | `0` |   |   |   | The y-component |
+| `z` | `float64` | `0` |   |   |   | The z-component |
+| `⮕ result` | `any` | `-` |   |   |   | A new vector |
+---
+
+### `Vx(v=-) ⮕ (result=-)`  
+_Returns the x-component of a vector._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `v` | `Vector` | `-` |   |   |   | The vector to return the x-component of |
+| `⮕ result` | `any` | `-` |   |   |   | The x-component of v |
+---
+
+### `Vy(v=-) ⮕ (result=-)`  
+_Returns the y-component of a vector._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `v` | `Vector` | `-` |   |   |   | The vector to return the y-component of |
+| `⮕ result` | `any` | `-` |   |   |   | The y-component of vp |
+---
+
+### `Vz(v=-) ⮕ (result=-)`  
+_Returns the z-component of a vector._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `v` | `Vector` | `-` |   |   |   | The vector to return the z-component of |
+| `⮕ result` | `any` | `-` |   |   |   | The z-component of vp |
 ---
 
 ### `abs(x=-) ⮕ (result=-)`  
@@ -748,6 +885,27 @@ _Applies a zoom blur effect to an image._
 | `⮕ result` | `any` | `-` |   |   |   | The blurred image |
 ---
 
+### `border(img=- style=-) ⮕ (result=-)`  
+_Draws a border around the image._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw border around |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the border |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `box(img=- styleBorder=- styleFill=-) ⮕ (result=-)`  
+_Fills the image with the given background color and then draws a border around it._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw border around |
+| `styleBorder` | `LineStyle` | `-` |   |   |   | The thickness and color of the border |
+| `styleFill` | `FillStyle` | `-` |   |   |   | The color of the fill |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
 ### `brightness(img=- factor=0) ⮕ (result=-)`  
 _Changes the brightness of an image_
 
@@ -1058,6 +1216,16 @@ _converts degrees to radians_
 | `⮕ result` | `any` | `-` |   |   |   | angle in radians |
 ---
 
+### `delta(x=- y=-) ⮕ (result=-)`  
+_Returns the delta between x and y_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The x value |
+| `y` | `float64` | `-` |   |   |   | The y value |
+| `⮕ result` | `any` | `-` |   |   |   | The delta between x and y |
+---
+
 ### `displace(img=- dMap=- amount=10) ⮕ (result=-)`  
 _Displaces pixels based on the brightness of a displacement map_
 
@@ -1091,193 +1259,239 @@ _Divides the two numbers_
 | `⮕ result` | `any` | `-` |   |   |   | a/b |
 ---
 
-### `draw-circle(img=- p=- radius=- thickness=- cBorder=-) ⮕ (result=-)`  
-_Draws a circle centered at (x,y) with the given radius._
+### `draw-circle(img=- c=- style=-) ⮕ (result=-)`  
+_Draws a circle._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the circle (relative) |
-| `radius` | `float64` | `-` |   |   |   | The radius of the circle (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the circle border (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The circle color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `c` | `Ellipse` | `-` |   |   |   | The circle to draw |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-circle-px(img=- p=- radius=- thickness=- cBorder=-) ⮕ (result=-)`  
-_Draws a circle centered at (x,y) with the given radius._
+### `draw-circle-px(img=- c=- style=-) ⮕ (result=-)`  
+_Draws a circle._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the circle |
-| `radius` | `int` | `-` |   |   |   | The radius of the circle |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the circle border |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The circle color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `c` | `Ellipse` | `-` |   |   |   | The circle to draw |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-ellipse(img=- p=- rx=- ry=- thickness=- cBorder=-) ⮕ (result=-)`  
-_Draws an ellipse centered at (x,y) with the given radii._
+### `draw-ellipse(img=- e=- style=-) ⮕ (result=-)`  
+_Draws an ellipse._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the ellipse (relative) |
-| `rx` | `float64` | `-` |   |   |   | The horizontal radius (relative) |
-| `ry` | `float64` | `-` |   |   |   | The vertical radius (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the ellipse border (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The ellipse color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `e` | `Ellipse` | `-` |   |   |   | The ellipse to draw |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-ellipse-px(img=- p=- rx=- ry=- thickness=- cBorder=-) ⮕ (result=-)`  
-_Draws an ellipse centered at (x,y) with the given radii._
+### `draw-ellipse-px(img=- e=- style=-) ⮕ (result=-)`  
+_Draws an ellipse._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the ellipse |
-| `rx` | `int` | `-` |   |   |   | The horizontal radius |
-| `ry` | `int` | `-` |   |   |   | The vertical radius |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the ellipse border |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The ellipse color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `e` | `Ellipse` | `-` |   |   |   | The ellipse to draw |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-line(img=- p1=- p2=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-grid(img=- r=- rows=- cols=- style=-) ⮕ (result=-)`  
+_Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `r` | `Rect` | `-` |   |   |   | The area to draw the grid on (relative) |
+| `rows` | `int` | `-` |   |   |   | The number of rows |
+| `cols` | `int` | `-` |   |   |   | The number of cols |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-grid-px(img=- r=- rows=- cols=- style=-) ⮕ (result=-)`  
+_Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `r` | `Rect` | `-` |   |   |   | The area to draw the grid on |
+| `rows` | `int` | `-` |   |   |   | The number of rows |
+| `cols` | `int` | `-` |   |   |   | The number of cols |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-line(img=- p1=- p2=- style=-) ⮕ (result=-)`  
 _Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `p1` | `Point` | `-` |   |   |   | The start position (relative) |
 | `p2` | `Point` | `-` |   |   |   | The end position (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the line (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-line-h(img=- y=- x1=- x2=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-line-h(img=- y=- x1=- x2=- style=-) ⮕ (result=-)`  
 _Draws a line from P(x1|y) to P(x2|y) with the given thickness and color._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `y` | `float64` | `-` |   |   |   | The position on the y-axis (relative) |
 | `x1` | `float64` | `-` |   |   |   | The start position on the x-axis (relative) |
 | `x2` | `float64` | `-` |   |   |   | The end position on the x-axis (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the line (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-line-h-px(img=- y=- x1=- x2=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-line-h-px(img=- y=- x1=- x2=- style=-) ⮕ (result=-)`  
 _Draws a line from P(x1|y) to P(x2|y) with the given thickness and color._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `y` | `float64` | `-` |   |   |   | The position on the y-axis |
 | `x1` | `float64` | `-` |   |   |   | The start position on the x-axis |
 | `x2` | `float64` | `-` |   |   |   | The end position on the x-axis |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the line |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-line-px(img=- p1=- p2=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-line-px(img=- p1=- p2=- style=-) ⮕ (result=-)`  
 _Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `p1` | `Point` | `-` |   |   |   | The start position |
 | `p2` | `Point` | `-` |   |   |   | The end position |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the line |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-line-v(img=- x=- y1=- y2=- thickness=- cBorder=-) ⮕ (result=-)`  
-_Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color._
+### `draw-line-v(img=- x=- y1=- y2=- style=-) ⮕ (result=-)`  
+_Draws a line from P(x|y1) to P(x|y2) with the given thickness and color._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `x` | `float64` | `-` |   |   |   | The position on the x-axis (relative) |
 | `y1` | `float64` | `-` |   |   |   | The start position on the y-axis (relative) |
 | `y2` | `float64` | `-` |   |   |   | The end position on the y-axis (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the line (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-line-v-px(img=- x=- y1=- y2=- thickness=- cBorder=-) ⮕ (result=-)`  
-_Draws a vertical line from P(x|y1) to P(x|y2) with the given thickness and color._
+### `draw-line-v-px(img=- x=- y1=- y2=- style=-) ⮕ (result=-)`  
+_Draws a line from P(x|y1) to P(x|y2) with the given thickness and color._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `x` | `float64` | `-` |   |   |   | The position on the x-axis |
 | `y1` | `float64` | `-` |   |   |   | The start position on the y-axis |
 | `y2` | `float64` | `-` |   |   |   | The end position on the y-axis |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the line |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The line color |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-rect(img=- p=- w=- h=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-rect(img=- r=- style=-) ⮕ (result=-)`  
 _Draws a rectangle at position (x,y) with the given width and height._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the rectangle (relative) |
-| `w` | `float64` | `-` |   |   |   | The width of the rectangle (relative) |
-| `h` | `float64` | `-` |   |   |   | The height of the rectangle (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the rectangle border (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The rectangle border color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `r` | `Rect` | `-` |   |   |   | The rectangle to draw (relative) |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-rect-px(img=- p=- w=- h=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-rect-px(img=- r=- style=-) ⮕ (result=-)`  
 _Draws a rectangle at position (x,y) with the given width and height._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the rectangle |
-| `w` | `int` | `-` |   |   |   | The width of the rectangle |
-| `h` | `int` | `-` |   |   |   | The height of the rectangle |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the rectangle border |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The rectangle color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `r` | `Rect` | `-` |   |   |   | The rectangle to draw (absolute) |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-square(img=- p=- size=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-square(img=- s=- style=-) ⮕ (result=-)`  
 _Draws a square at position (x,y) with the given size._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the square (relative) |
-| `size` | `float64` | `-` |   |   |   | The size of the square (relative) |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the square border (absolute) |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The square color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `s` | `Rect` | `-` |   |   |   | The square to draw (relative) |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
-### `draw-square-px(img=- p=- size=- thickness=- cBorder=-) ⮕ (result=-)`  
+### `draw-square-px(img=- s=- style=-) ⮕ (result=-)`  
 _Draws a square at position (x,y) with the given size._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `p` | `Point` | `-` |   |   |   | The center of the square |
-| `size` | `int` | `-` |   |   |   | The size of the square |
-| `thickness` | `float64` | `-` |   |   |   | The thickness of the square border |
-| `cBorder` | `color.RGBA64` | `-` |   |   |   | The square color |
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `s` | `Rect` | `-` |   |   |   | The square to draw (absolute) |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-text(img=- p=- t=-) ⮕ (result=-)`  
+_Draws a text at position (x,y)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
+| `t` | `Text` | `-` |   |   |   | The text to draw |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-text-outline(img=- p=- t=- outline=-) ⮕ (result=-)`  
+_Draws only the outline of text at position (x,y)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
+| `t` | `Text` | `-` |   |   |   | The text to outline |
+| `outline` | `LineStyle` | `-` |   |   |   | The outline style (thickness and color) |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-text-outline-px(img=- p=- t=- outline=-) ⮕ (result=-)`  
+_Draws only the outline of text at position (x,y)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
+| `t` | `Text` | `-` |   |   |   | The text to outline |
+| `outline` | `LineStyle` | `-` |   |   |   | The outline style (thickness and color) |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `draw-text-px(img=- p=- t=-) ⮕ (result=-)`  
+_Draws text at position (x,y) with the given style using TrueType fonts._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
+| `t` | `Text` | `-` |   |   |   | The text to draw |
 | `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
@@ -1374,13 +1588,13 @@ _Calculates the nth fibonacci number using 1-based indexing with memoization_
 | `⮕ result` | `any` | `-` |   |   |   | The nth fibonacci number |
 ---
 
-### `fill(img=- col=-) ⮕ (result=-)`  
-_Fills the image_
+### `fill(img=- style=-) ⮕ (result=-)`  
+_Fills the given image._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to fill |
-| `col` | `color.RGBA64` | `-` |   |   |   | The fill color |
+| `style` | `FillStyle` | `-` |   |   |   | The color of the fill |
 | `⮕ result` | `any` | `-` |   |   |   | The filled image |
 ---
 
@@ -1437,6 +1651,37 @@ _Grayscales an image_
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to grayscale |
 | `⮕ result` | `any` | `-` |   |   |   | The grayscaled image |
+---
+
+### `grid(img=- rows=- cols=- style=-) ⮕ (result=-)`  
+_Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `rows` | `int` | `-` |   |   |   | The number of rows |
+| `cols` | `int` | `-` |   |   |   | The number of cols |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the border |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
+---
+
+### `group(img=- title="-" colText=- colFill=- colBorder=- padding=3 fillAlphaHeader=0.9 fillAlphaBody=0.8 borderThickness=1 borderAlphaHeader=0.95 borderAlphaBody=0.95) ⮕ (result=-)`  
+_Generates the given group with the given styles._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to wrap in a group |
+| `title` | `string` | `"-"` |   |   |   | - - The title of the group |
+| `colText` | `color.RGBA64` | `-` |   |   |   | The color of the title |
+| `colFill` | `color.RGBA64` | `-` |   |   |   | The color of the group |
+| `colBorder` | `color.RGBA64` | `-` |   |   |   | The color of the border |
+| `padding` | `float64` | `3` |   |   | `0` | The padding for the image to wrap |
+| `fillAlphaHeader` | `float64` | `0.9` |   |   | `0` | The alpha of header fill |
+| `fillAlphaBody` | `float64` | `0.8` |   |   | `0` | The alpha of body fill |
+| `borderThickness` | `float64` | `1` |   |   | `0` | The thickness of the border |
+| `borderAlphaHeader` | `float64` | `0.95` |   |   | `0` | The alpha of header border |
+| `borderAlphaBody` | `float64` | `0.95` |   |   | `0` | The alpha of body border |
+| `⮕ result` | `any` | `-` |   |   |   | The group wrapping the input image |
 ---
 
 ### `haversin(x=-) ⮕ (result=-)`  
@@ -1610,6 +1855,26 @@ _Returns the natural logarithm of x_
 |------|------|---------|-----|-----|------|-------------|
 | `x` | `float64` | `-` |   |   |   | The input value |
 | `⮕ result` | `any` | `-` |   |   |   | The natural logarithm of x |
+---
+
+### `max(x=- y=-) ⮕ (result=-)`  
+_Returns the maximum value of x and y_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The x value |
+| `y` | `float64` | `-` |   |   |   | The y value |
+| `⮕ result` | `any` | `-` |   |   |   | The maximum value of x and y |
+---
+
+### `min(x=- y=-) ⮕ (result=-)`  
+_Returns the minimum value of x and y_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `x` | `float64` | `-` |   |   |   | The x value |
+| `y` | `float64` | `-` |   |   |   | The y value |
+| `⮕ result` | `any` | `-` |   |   |   | The minimum value of x and y |
 ---
 
 ### `mul(a=- b=-) ⮕ (result=-)`  
@@ -2202,6 +2467,17 @@ _calculates the hyperbolic tangent of x_
 |------|------|---------|-----|-----|------|-------------|
 | `x` | `float64` | `-` |   |   |   | The input value |
 | `⮕ result` | `any` | `-` |   |   |   | hyperbolic tangent value between -1 and 1 |
+---
+
+### `text(t="-" style=- outline=-) ⮕ (result=-)`  
+_Generates the given text with the given styles._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `t` | `string` | `"-"` |   |   |   | - - The text to generate |
+| `style` | `TextStyle` | `-` |   |   |   | The text style (font, size, color) |
+| `outline` | `LineStyle` | `-` |   |   |   | The thickness and color of the outline |
+| `⮕ result` | `any` | `-` |   |   |   | The resulting image |
 ---
 
 ### `threshold(img=- level=0.5) ⮕ (result=-)`  

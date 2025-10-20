@@ -142,6 +142,33 @@ func round(x float64) (float64, error) {
 	return math.Round(x), nil
 }
 
+// @Name: min
+// @Desc: Returns the minimum value of x and y
+// @Param:      x       - -   -   The x value
+// @Param:      y       - -   -   The y value
+// @Returns:    result  - -   -   The minimum value of x and y
+func min(x, y float64) (float64, error) {
+	return math.Min(x, y), nil
+}
+
+// @Name: max
+// @Desc: Returns the maximum value of x and y
+// @Param:      x       - -   -   The x value
+// @Param:      y       - -   -   The y value
+// @Returns:    result  - -   -   The maximum value of x and y
+func max(x, y float64) (float64, error) {
+	return math.Max(x, y), nil
+}
+
+// @Name: delta
+// @Desc: Returns the delta between x and y
+// @Param:      x       - -   -   The x value
+// @Param:      y       - -   -   The y value
+// @Returns:    result  - -   -   The delta between x and y
+func delta(x, y float64) (float64, error) {
+	return math.Max(x, y) - math.Min(x, y), nil
+}
+
 // @Name: abs
 // @Desc: Returns the absolute value of x
 // @Param:      x       - -   -   The input value
