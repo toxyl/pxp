@@ -20,17 +20,13 @@ import (
 
 // castSelfOnly handles casting for types that can only be cast to themselves
 func castSelfOnly[T any](dsl *dslCollection, value T, targetType, typeName string) (any, error) {
-	srcType := reflect.TypeOf(value).String()
-	if srcType == "-" {
-		return new(T), nil
-	}
 	if targetType == typeName || targetType == "language."+typeName {
 		return value, nil
 	}
 	if targetType == "*"+typeName || targetType == "*language."+typeName {
 		return value, nil
 	}
-	return nil, dsl.errors.CAST_NOT_POSSIBLE(srcType, targetType)
+	return nil, dsl.errors.CAST_NOT_POSSIBLE(reflect.TypeOf(value).String(), targetType)
 }
 
 // cast attempts to convert a value to the target type

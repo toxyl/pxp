@@ -12,13 +12,31 @@ import (
 	"github.com/toxyl/pxp/language"
 )
 
+// RenderToFile processes the given `script` and stores the result in `pathOut`.
+//
+// The script must use the variable `img` to store the final result.
+//
+// When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given dimensions.
+func RenderToFile(script, pathOut string, maxW, maxH int) (*image.NRGBA, error) {
+	sb := strings.Builder{}
+	sb.WriteString(script + "\n")
+	sb.WriteString(`save(`)
+	if maxW > 0 && maxH > 0 {
+		sb.WriteString(fmt.Sprintf("resize-fit(img %d %d)", maxW, maxH))
+	} else {
+		sb.WriteString(`img`)
+	}
+	sb.WriteString(` "` + pathOut + `")`)
+	return New().Script(sb.String()).render("dummy")
+}
+
 // RenderFile loads `pathIn` into the variable `in`, processes it with the given `script` and stores the result in `pathOut`.
 //
 // The script must use the variable `in` as input image and store the final result in the `img` variable.
 //
 // The `pathIn` variable can be a URL or a local file path.
 //
-// When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given sizes.
+// When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given dimensions.
 func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (*image.NRGBA, error) {
 	sb := strings.Builder{}
 	sb.WriteString(`in: load("` + pathIn + `")` + "\n")
