@@ -7,7 +7,6 @@
 package language
 
 import (
-	"fmt"
 	"sort"
 	"sync"
 )
@@ -25,7 +24,6 @@ func (r *dslFnRegistry) storeState() {
 func (r *dslFnRegistry) restoreState() {
 	toRemove := r.state.get()
 	for _, name := range toRemove {
-		fmt.Printf("\x1b[31mRemoving function %s\x1b[0m\n", name)
 		delete(r.data, name)
 	}
 	r.state.reset()
