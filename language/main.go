@@ -10,6 +10,8 @@ func Shell() {
 }
 
 func Run(script string, args ...any) (*dslResult, error) {
+	dsl.storeState()
+	defer dsl.restoreState()
 	res, err := dsl.run(script, false, args...)
 	if err != nil {
 		return nil, err

@@ -8,16 +8,57 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/toxyl/pxp/language"
 )
 
-// RenderToFile processes the given `script` and stores the result in `pathOut`.
+type renderLock struct {
+	mu     *sync.Mutex
+	locked bool
+}
+
+func (l *renderLock) lock() {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.locked = true
+}
+
+func (l *renderLock) unlock() {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.locked = false
+}
+
+func (l *renderLock) isLocked() bool {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.locked
+}
+
+func (l *renderLock) Exec(fn func()) {
+	for l.isLocked() {
+		time.Sleep(1 * time.Second)
+	}
+	l.lock()
+	defer l.unlock()
+	fn()
+}
+
+var (
+	rlock = &renderLock{
+		mu:     &sync.Mutex{},
+		locked: false,
+	}
+)
+
+// RenderToFile processes the given `script` and stores the result in `path`.
 //
 // The script must use the variable `img` to store the final result.
 //
 // When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given dimensions.
-func RenderToFile(script, pathOut string, maxW, maxH int) (*image.NRGBA, error) {
+func RenderToFile(script, path string, maxW, maxH int) (err error) {
 	sb := strings.Builder{}
 	sb.WriteString(script + "\n")
 	sb.WriteString(`save(`)
@@ -26,8 +67,9 @@ func RenderToFile(script, pathOut string, maxW, maxH int) (*image.NRGBA, error) 
 	} else {
 		sb.WriteString(`img`)
 	}
-	sb.WriteString(` "` + pathOut + `")`)
-	return New().Script(sb.String()).render("dummy")
+	sb.WriteString(` "` + path + `")`)
+	rlock.Exec(func() { _, err = New().Script(sb.String()).render("dummy") })
+	return
 }
 
 // RenderFile loads `pathIn` into the variable `in`, processes it with the given `script` and stores the result in `pathOut`.
