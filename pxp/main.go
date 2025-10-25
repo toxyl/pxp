@@ -79,7 +79,7 @@ func RenderToFile(script, path string, maxW, maxH int) (err error) {
 // The `pathIn` variable can be a URL or a local file path.
 //
 // When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given dimensions.
-func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (*image.NRGBA, error) {
+func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (img *image.NRGBA, err error) {
 	sb := strings.Builder{}
 	sb.WriteString(`in: load("` + pathIn + `")` + "\n")
 	sb.WriteString(script + "\n")
@@ -90,15 +90,18 @@ func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (*image.NRGBA, e
 		sb.WriteString(`img`)
 	}
 	sb.WriteString(` "` + pathOut + `")`)
-	return New().Script(sb.String()).render("dummy")
+	rlock.Exec(func() { img, err = New().Script(sb.String()).render("dummy") })
+	return
 }
 
-func RenderWithPXPFile(script string, args []any, files []string) ([]*image.NRGBA, error) {
-	return New().ScriptFromFile(script).Args(args...).Files(files...).RenderImages()
+func RenderWithPXPFile(script string, args []any, files []string) (images []*image.NRGBA, err error) {
+	rlock.Exec(func() { images, err = New().ScriptFromFile(script).Args(args...).Files(files...).RenderImages() })
+	return
 }
 
-func RenderWithPXPScript(script string, args []any, files []string) ([]*image.NRGBA, error) {
-	return New().Script(script).Args(args...).Files(files...).RenderImages()
+func RenderWithPXPScript(script string, args []any, files []string) (images []*image.NRGBA, err error) {
+	rlock.Exec(func() { images, err = New().Script(script).Args(args...).Files(files...).RenderImages() })
+	return
 }
 
 func DocMarkdown() string                { return language.DocMarkdown() }
