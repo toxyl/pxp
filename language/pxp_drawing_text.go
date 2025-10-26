@@ -412,3 +412,64 @@ func drawBitmapText(img *image.NRGBA64, p Point, t Text) (*image.NRGBA64, error)
 
 	return result, nil
 }
+
+// measureTextBounds calculates the exact bounds of text before rendering
+func measureTextBounds(t Text, outline LineStyle) (width, height int) {
+	lines := splitLines(t.Text)
+
+	if t.Style.Family == "mono" {
+		// Bitmap font measurements
+		const (
+			charWidth  = 9
+			charHeight = 10
+		)
+		scale := int(t.Style.Size) / charHeight
+		if scale <= 0 {
+			scale = 1
+		}
+
+		maxLineWidth := 0
+		for _, line := range lines {
+			lineWidth := len(line) * charWidth * scale
+			if lineWidth > maxLineWidth {
+				maxLineWidth = lineWidth
+			}
+		}
+
+		width = maxLineWidth
+		height = len(lines) * charHeight * scale
+	} else {
+		// TrueType font measurements
+		face, err := getFontFace(t.Style.Family, t.Style.Size)
+		if err != nil {
+			// Fallback to bitmap if font load fails
+			return measureTextBounds(Text{Text: t.Text, Style: &TextStyle{Family: "mono", Size: t.Style.Size, Color: t.Style.Color}}, outline)
+		}
+
+		metrics := face.Metrics()
+		lineHeight := float64(metrics.Height >> 6)
+
+		maxLineWidth := 0
+		for _, line := range lines {
+			advance := font.MeasureString(face, line)
+			lineWidth := int(float64(advance >> 6))
+			if lineWidth > maxLineWidth {
+				maxLineWidth = lineWidth
+			}
+		}
+
+		width = maxLineWidth
+		if len(lines) > 0 {
+			height = int(float64(len(lines)) * lineHeight)
+		} else {
+			height = int(lineHeight)
+		}
+	}
+
+	// Add padding for outline
+	outlinePadding := int(outline.Thickness + 1)
+	width += outlinePadding * 2
+	height += outlinePadding * 2
+
+	return width, height
+}

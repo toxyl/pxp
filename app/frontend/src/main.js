@@ -70,6 +70,10 @@ async function initializeMonaco() {
                     // Null
                     [/\bnil\b/, 'constant.language.null'],
                     
+                    // Keywords
+                    [/\bfor\b/, 'keyword.control'],
+                    [/\bdone\b/, 'keyword.control'],
+                    
                     // Argument references ($1, $2, etc)
                     [/\$\d+/, 'variable.parameter'],
                     
@@ -156,6 +160,7 @@ async function initializeMonaco() {
                 { token: 'variable.assign', foreground: getThemeColor('variable.assign') || 'D7BA7D' },
                 { token: 'variable.other', foreground: getThemeColor('variable.other') || 'D4E6FF' },
                 { token: 'entity.name.function', foreground: getThemeColor('entity.name.function') || 'FFD700' },
+                { token: 'keyword.control', foreground: getThemeColor('keyword.control') || 'C586C0' },
                 { token: 'keyword.operator.assignment', foreground: getThemeColor('keyword.operator.assignment') || 'D4D4D4' },
                 { token: 'punctuation', foreground: getThemeColor('punctuation') || 'D4D4D4' },
                 { token: 'constant.character.escape', foreground: getThemeColor('constant.character.escape') || '808080' }

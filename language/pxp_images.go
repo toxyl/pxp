@@ -2,22 +2,18 @@ package language
 
 import (
 	"bytes"
-	"crypto/sha256"
 	"fmt"
 	"image"
+	"image/color"
 	"image/gif"
 	"image/jpeg"
 	"image/png"
-	"io"
-	"net/http"
 	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/gen2brain/heic"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/tidwall/gjson"
-	"github.com/toxyl/flo"
 	"github.com/toxyl/math"
 )
 
@@ -85,7 +81,6 @@ func translateImage(img *image.NRGBA64, dt Point) (*image.NRGBA64, error) {
 // @Returns:    result  - -   -   The loaded image
 func load(path string) (any, error) {
 	path = strings.TrimSpace(path)
-	isRemote := strings.HasPrefix(path, "http://") || strings.HasPrefix(path, "https://")
 	var nrgba *image.NRGBA64
 
 	// Check if the image is in cache
@@ -93,37 +88,9 @@ func load(path string) (any, error) {
 		ImagesCache.UpdateTimestamp(path)
 		return cachedImg, nil
 	}
-
-	var err error
-	var data []byte
-	if isRemote {
-		resp, err := http.Get(path)
-		if err != nil {
-			return "", fmt.Errorf("failed to download file '%s': %s", path, err.Error())
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode != http.StatusOK {
-			return "", fmt.Errorf("failed to download file: status %s", resp.Status)
-		}
-
-		data, err = io.ReadAll(resp.Body)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read body: %s", err.Error())
-		}
-
-		hash := sha256.Sum256([]byte(path))
-		tempFileName := fmt.Sprintf("%x-%s", hash, filepath.Base(path))
-		path = filepath.Join(os.TempDir(), tempFileName)
-		if err = flo.File(path).StoreBytes(data); err != nil {
-			return nil, fmt.Errorf("could not store downloaded file: %s", err.Error())
-		}
-	} else {
-		// Read the entire file
-		data, err = os.ReadFile(path)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read file '%s': %s", path, err.Error())
-		}
+	localPath, data, err := loadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load image: %v", err)
 	}
 
 	// Create a bytes reader for image decoding
@@ -164,7 +131,7 @@ func load(path string) (any, error) {
 	}
 
 	// Get EXIF
-	f, err := os.Open(path)
+	f, err := os.Open(localPath)
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +140,7 @@ func load(path string) (any, error) {
 	defer func() {
 		if nrgba != nil {
 			// Store the result in cache before returning
-			ImagesCache.Put(path, nrgba)
+			ImagesCache.Put(localPath, nrgba)
 		}
 	}()
 
@@ -236,5 +203,100 @@ func save(img *image.NRGBA64, path string) (any, error) {
 	}
 	defer file.Close()
 	png.Encode(file, img) // note that we use NRGBA because storing PNGs is much faster that way
+	return img, nil
+}
+
+// @Name: plot-data
+// @Desc: Renders a chart from CSV data by plotting selected columns with specified colors
+// @Param:      width   - - -   Chart width in pixels
+// @Param:      height  - - -   Chart height in pixels
+// @Param:      data    - - -   2D array of data from CSV
+// @Param:      columns - - -   Array of column indices to plot
+// @Param:      colors  - - -   Array of colors for each column
+// @Returns:    result  - - -   The chart image
+func plotData(width, height int, data [][]float64, columns []any, colors []any) (*image.NRGBA64, error) {
+	if width <= 0 || height <= 0 {
+		return nil, fmt.Errorf("width and height must be greater than 0")
+	}
+
+	if len(data) == 0 {
+		return IC(width, height, color.RGBA64{0, 0, 0, 0}), nil
+	}
+
+	if len(columns) != len(colors) {
+		return nil, fmt.Errorf("columns and colors arrays must have the same length")
+	}
+
+	if len(columns) == 0 {
+		return IC(width, height, color.RGBA64{0, 0, 0, 0}), nil
+	}
+
+	columnsInt := make([]int, len(columns))
+	for i, v := range columns {
+		if intVal, ok := v.(int); ok {
+			columnsInt[i] = intVal
+		} else if floatVal, ok := v.(float64); ok {
+			columnsInt[i] = int(floatVal)
+		} else {
+			return nil, fmt.Errorf("invalid column index type at position %d", i)
+		}
+	}
+
+	colorsRGBA64 := make([]color.RGBA64, len(colors))
+	for i, v := range colors {
+		if col, ok := v.(color.RGBA64); ok {
+			colorsRGBA64[i] = col
+		} else {
+			return nil, fmt.Errorf("invalid color type at position %d", i)
+		}
+	}
+
+	numDatapoints := len(data)
+	if numDatapoints == 0 {
+		return IC(width, height, color.RGBA64{0, 0, 0, 0}), nil
+	}
+
+	img := IC(width, height, color.RGBA64{0, 0, 0, 0})
+	xScale := float64(width) / float64(numDatapoints)
+
+	for colIdx, colIndex := range columnsInt {
+		if colIndex < 0 {
+			continue
+		}
+
+		colColor := colorsRGBA64[colIdx]
+		nrgbaColor := color.NRGBA64{R: colColor.R, G: colColor.G, B: colColor.B, A: colColor.A}
+
+		for i := 0; i < numDatapoints; i++ {
+			if colIndex >= len(data[i]) {
+				continue
+			}
+
+			yValue := data[i][colIndex]
+			if math.IsNaN(yValue) {
+				continue
+			}
+
+			yNormalized := math.Clamp(yValue, 0.0, 1.0)
+			yPixel := height - 1 - int(yNormalized*float64(height))
+			xPixel := int(float64(i) * xScale)
+
+			if xPixel < 0 {
+				xPixel = 0
+			}
+			if xPixel >= width {
+				xPixel = width - 1
+			}
+			if yPixel < 0 {
+				yPixel = 0
+			}
+			if yPixel >= height {
+				yPixel = height - 1
+			}
+
+			img.Set(xPixel, yPixel, nrgbaColor)
+		}
+	}
+
 	return img, nil
 }

@@ -37,7 +37,7 @@ func (l *renderLock) isLocked() bool {
 	return l.locked
 }
 
-func (l *renderLock) Exec(fn func()) {
+func (l *renderLock) exec(fn func()) {
 	for l.isLocked() {
 		time.Sleep(1 * time.Second)
 	}
@@ -68,7 +68,7 @@ func RenderToFile(script, path string, maxW, maxH int) (err error) {
 		sb.WriteString(`img`)
 	}
 	sb.WriteString(` "` + path + `")`)
-	rlock.Exec(func() { _, err = New().Script(sb.String()).render("dummy") })
+	_, err = New().Script(sb.String()).render(nil)
 	return
 }
 
@@ -90,18 +90,15 @@ func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (img *image.NRGB
 		sb.WriteString(`img`)
 	}
 	sb.WriteString(` "` + pathOut + `")`)
-	rlock.Exec(func() { img, err = New().Script(sb.String()).render("dummy") })
-	return
+	return New().Script(sb.String()).render(nil)
 }
 
 func RenderWithPXPFile(script string, args []any, files []string) (images []*image.NRGBA, err error) {
-	rlock.Exec(func() { images, err = New().ScriptFromFile(script).Args(args...).Files(files...).RenderImages() })
-	return
+	return New().ScriptFromFile(script).Args(args...).Files(files...).RenderImages()
 }
 
 func RenderWithPXPScript(script string, args []any, files []string) (images []*image.NRGBA, err error) {
-	rlock.Exec(func() { images, err = New().Script(script).Args(args...).Files(files...).RenderImages() })
-	return
+	return New().Script(script).Args(args...).Files(files...).RenderImages()
 }
 
 func DocMarkdown() string                { return language.DocMarkdown() }
@@ -172,7 +169,7 @@ func (p *PXP) RenderImages() ([]*image.NRGBA, error) {
 		if file == "" {
 			continue
 		}
-		img, err := p.render(file)
+		img, err := p.render(&file)
 		if err != nil {
 			p.err = fmt.Errorf("render error: %s", err.Error())
 			continue
@@ -203,7 +200,7 @@ func (p *PXP) RenderFiles(outputDir string) ([]string, error) {
 		if file == "" {
 			continue
 		}
-		img, err := p.render(file)
+		img, err := p.render(&file)
 		if err != nil {
 			p.err = fmt.Errorf("render error: %s", err.Error())
 			continue
@@ -233,48 +230,60 @@ func (p *PXP) RenderFiles(outputDir string) ([]string, error) {
 	return files, p.err
 }
 
-func (p *PXP) render(file string) (*image.NRGBA, error) {
+func (p *PXP) render(file *string) (*image.NRGBA, error) {
 	if p.err != nil {
 		return nil, p.err
 	}
-
-	res, err := language.Run(p.script, append([]any{file}, p.args...)...)
-	if err != nil {
-		return nil, fmt.Errorf("script execution error: %w", err)
-	}
-	if res == nil {
-		return nil, fmt.Errorf("no result returned from script")
-	}
-
-	var img image.Image
-	switch val := res.Value().(type) {
-	case *image.RGBA:
-		img = val
-	case *image.NRGBA:
-		img = val
-	case *image.RGBA64:
-		img = val
-	case *image.NRGBA64:
-		img = val
-	default:
-		return nil, fmt.Errorf("unexpected result type: %T", res.Value())
-	}
-
-	if img == nil {
-		return nil, fmt.Errorf("no image data returned")
-	}
-
-	if nrgba, ok := img.(*image.NRGBA); ok {
-		return nrgba, nil
-	}
-
-	bounds := img.Bounds()
-	nrgba := image.NewNRGBA(bounds)
-	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			nrgba.Set(x, y, img.At(x, y))
+	var nrgba *image.NRGBA
+	var err error
+	rlock.exec(func() {
+		f := "dummy"
+		if file != nil {
+			f = *file
 		}
-	}
+		res, err2 := language.Run(p.script, append([]any{f}, p.args...)...)
+		if err2 != nil {
+			err = fmt.Errorf("script execution error: %w", err2)
+			return
+		}
+		if res == nil {
+			err = fmt.Errorf("no result returned from script")
+			return
+		}
 
-	return nrgba, nil
+		var img image.Image
+		switch val := res.Value().(type) {
+		case *image.RGBA:
+			img = val
+		case *image.NRGBA:
+			img = val
+		case *image.RGBA64:
+			img = val
+		case *image.NRGBA64:
+			img = val
+		default:
+			err = fmt.Errorf("unexpected result type: %T", res.Value())
+			return
+		}
+
+		if img == nil {
+			err = fmt.Errorf("no image data returned")
+			return
+		}
+
+		if res, ok := img.(*image.NRGBA); ok {
+			nrgba = res
+			return
+		}
+
+		bounds := img.Bounds()
+		nrgba := image.NewNRGBA(bounds)
+		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+			for x := bounds.Min.X; x < bounds.Max.X; x++ {
+				nrgba.Set(x, y, img.At(x, y))
+			}
+		}
+	})
+
+	return nrgba, err
 }

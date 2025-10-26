@@ -131,8 +131,15 @@
 <p>Arguments can be passed by position or by name.
 You must either use positional arguments or named arguments, mixing is not allowed.
 All arguments have defaults.</p>
+<h3>For Loops</h3>
+<p>For loops iterate over slices or matrices using the syntax:</p>
+<pre><code class="language-pxp" class="language-pxp">for listName[indexVar itemVar]
+    # body statements #
+done
+</code></pre>
+<p>The <code class="language-pxp">done</code> keyword marks the end of the loop body.</p>
 <h2>Functions</h2>
-<h3><code class="language-pxp">C(centerX=- centerY=- radius=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">C(centerX=- centerY=- radius=-) ⮕ (result=)</code></h3>
 <p><em>Creates a new circle with the given radius at P(x|y).</em></p>
 <table>
 <thead>
@@ -176,17 +183,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new circle</td>
+<td></td>
+<td>- - - A new circle</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">E(centerX=- centerY=- radiusX=- radiusY=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">E(centerX=- centerY=- radiusX=- radiusY=-) ⮕ (result=)</code></h3>
 <p><em>Creates a new ellipse with the given radius at P(x|y).</em></p>
 <table>
 <thead>
@@ -239,17 +246,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new ellipse</td>
+<td></td>
+<td>- - - A new ellipse</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Erx(e=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Erx(e=-) ⮕ (result=)</code></h3>
 <p><em>Returns the x-component of the radius of an ellipse.</em></p>
 <table>
 <thead>
@@ -275,17 +282,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>the x-component of the radius of e</td>
+<td></td>
+<td>- - - the x-component of the radius of e</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Ery(e=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Ery(e=-) ⮕ (result=)</code></h3>
 <p><em>Returns the y-component of the radius of an ellipse.</em></p>
 <table>
 <thead>
@@ -311,17 +318,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>the y-component of the radius of e</td>
+<td></td>
+<td>- - - the y-component of the radius of e</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Ex(e=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Ex(e=-) ⮕ (result=)</code></h3>
 <p><em>Returns the center x-coordinate of an ellipse.</em></p>
 <table>
 <thead>
@@ -347,17 +354,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>the center x-coordinate of e</td>
+<td></td>
+<td>- - - the center x-coordinate of e</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Ey(e=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Ey(e=-) ⮕ (result=)</code></h3>
 <p><em>Returns the center y-coordinate of an ellipse.</em></p>
 <table>
 <thead>
@@ -383,17 +390,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>the center y-coordinate of e</td>
+<td></td>
+<td>- - - the center y-coordinate of e</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">FS(color=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">FS(color=-) ⮕ (result=)</code></h3>
 <p><em>Creates a new fill style.</em></p>
 <table>
 <thead>
@@ -419,17 +426,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new fill style</td>
+<td></td>
+<td>- - - A new fill style</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">I(w=- h=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">I(w=- h=-) ⮕ (result=)</code></h3>
 <p><em>Creates a new transparent image.</em></p>
 <table>
 <thead>
@@ -464,17 +471,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The new image</td>
+<td></td>
+<td>- - - The new image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">IC(w=- h=- cFill=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">IC(w=- h=- cFill=-) ⮕ (result=)</code></h3>
 <p><em>Creates a new image with the given color.</em></p>
 <table>
 <thead>
@@ -518,17 +525,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The new image</td>
+<td></td>
+<td>- - - The new image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Ih(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Ih(img=-) ⮕ (result=)</code></h3>
 <p><em>Returns the height of an image.</em></p>
 <table>
 <thead>
@@ -554,17 +561,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The height of img</td>
+<td></td>
+<td>- - - The height of img</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Ir(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Ir(img=-) ⮕ (result=)</code></h3>
 <p><em>Returns the aspect ratio of the given image</em></p>
 <table>
 <thead>
@@ -590,17 +597,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>Aspect ratio of the image</td>
+<td></td>
+<td>- - - Aspect ratio of the image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">It(img=- dt=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">It(img=- dt=-) ⮕ (result=)</code></h3>
 <p><em>Translates the given image by expanding/cropping the left + top borders.</em></p>
 <table>
 <thead>
@@ -635,17 +642,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The new image</td>
+<td></td>
+<td>- - - The new image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Iw(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Iw(img=-) ⮕ (result=)</code></h3>
 <p><em>Returns the width of an image.</em></p>
 <table>
 <thead>
@@ -671,17 +678,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The width of img</td>
+<td></td>
+<td>- - - The width of img</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">LS(color=- thickness=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">LS(color=- thickness=1) ⮕ (result=)</code></h3>
 <p><em>Creates a new line style.</em></p>
 <table>
 <thead>
@@ -716,17 +723,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new line style</td>
+<td></td>
+<td>- - - A new line style</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">P(x=0 y=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">P(x=0 y=0) ⮕ (result=)</code></h3>
 <p><em>Creates a new point at P(x|y).</em></p>
 <table>
 <thead>
@@ -761,17 +768,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new point</td>
+<td></td>
+<td>- - - A new point</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Px(p=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Px(p=-) ⮕ (result=)</code></h3>
 <p><em>Returns the x-coordinate of a point.</em></p>
 <table>
 <thead>
@@ -797,17 +804,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The x-coordinate of p</td>
+<td></td>
+<td>- - - The x-coordinate of p</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Py(p=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Py(p=-) ⮕ (result=)</code></h3>
 <p><em>Returns the y-coordinate of a point.</em></p>
 <table>
 <thead>
@@ -833,17 +840,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The y-coordinate of p</td>
+<td></td>
+<td>- - - The y-coordinate of p</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">R(x=- y=- w=- h=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">R(x=- y=- w=- h=-) ⮕ (result=)</code></h3>
 <p><em>Creates a new rectangle with the given dimensions at P(x|y).</em></p>
 <table>
 <thead>
@@ -896,17 +903,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new rectangle</td>
+<td></td>
+<td>- - - A new rectangle</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Rh(r=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Rh(r=-) ⮕ (result=)</code></h3>
 <p><em>Returns the height of a rect.</em></p>
 <table>
 <thead>
@@ -932,17 +939,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The height of r</td>
+<td></td>
+<td>- - - The height of r</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Rw(r=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Rw(r=-) ⮕ (result=)</code></h3>
 <p><em>Returns the width of a rect.</em></p>
 <table>
 <thead>
@@ -968,17 +975,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The width of r</td>
+<td></td>
+<td>- - - The width of r</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Rx(r=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Rx(r=-) ⮕ (result=)</code></h3>
 <p><em>Returns the x-coordinate of a rect.</em></p>
 <table>
 <thead>
@@ -1004,17 +1011,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The x-coordinate of r</td>
+<td></td>
+<td>- - - The x-coordinate of r</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Ry(r=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Ry(r=-) ⮕ (result=)</code></h3>
 <p><em>Returns the y-coordinate of a rect.</em></p>
 <table>
 <thead>
@@ -1040,17 +1047,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The y-coordinate of r</td>
+<td></td>
+<td>- - - The y-coordinate of r</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">SI(img=- r=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">SI(img=- r=-) ⮕ (result=)</code></h3>
 <p><em>Copies an area from a source image and returns it as a new image.</em></p>
 <table>
 <thead>
@@ -1085,17 +1092,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The new image</td>
+<td></td>
+<td>- - - The new image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">T(style=- text=&quot;-&quot;) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">T(style=- text=&quot;-&quot;) ⮕ (result=)</code></h3>
 <p><em>Creates a new text.</em></p>
 <table>
 <thead>
@@ -1130,17 +1137,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new text</td>
+<td></td>
+<td>- - - A new text</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">TS(color=- size=10 family=&quot;mono&quot;) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">TS(color=- size=10 family=&quot;mono&quot;) ⮕ (result=)</code></h3>
 <p><em>Creates a new font style.</em></p>
 <table>
 <thead>
@@ -1184,17 +1191,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new font style</td>
+<td></td>
+<td>- - - A new font style</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">V(x=0 y=0 z=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">V(x=0 y=0 z=0) ⮕ (result=)</code></h3>
 <p><em>Creates a new Vector from x, y and z.</em></p>
 <table>
 <thead>
@@ -1238,17 +1245,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A new vector</td>
+<td></td>
+<td>- - - A new vector</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Vx(v=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Vx(v=-) ⮕ (result=)</code></h3>
 <p><em>Returns the x-component of a vector.</em></p>
 <table>
 <thead>
@@ -1274,17 +1281,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The x-component of v</td>
+<td></td>
+<td>- - - The x-component of v</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Vy(v=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Vy(v=-) ⮕ (result=)</code></h3>
 <p><em>Returns the y-component of a vector.</em></p>
 <table>
 <thead>
@@ -1310,17 +1317,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The y-component of vp</td>
+<td></td>
+<td>- - - The y-component of vp</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">Vz(v=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">Vz(v=-) ⮕ (result=)</code></h3>
 <p><em>Returns the z-component of a vector.</em></p>
 <table>
 <thead>
@@ -1346,17 +1353,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The z-component of vp</td>
+<td></td>
+<td>- - - The z-component of vp</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">abs(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">abs(x=-) ⮕ (result=)</code></h3>
 <p><em>Returns the absolute value of x</em></p>
 <table>
 <thead>
@@ -1382,17 +1389,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The absolute value of x</td>
+<td></td>
+<td>- - - The absolute value of x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">acos(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">acos(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the arccosine (inverse cosine) of x</em></p>
 <table>
 <thead>
@@ -1418,17 +1425,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in radians between 0 and PI</td>
+<td></td>
+<td>- - - angle in radians between 0 and PI</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">acosh(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">acosh(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the inverse hyperbolic cosine of x</em></p>
 <table>
 <thead>
@@ -1454,17 +1461,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>inverse hyperbolic cosine value (x &gt;= 1)</td>
+<td></td>
+<td>- - - inverse hyperbolic cosine value (x &gt;= 1)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">acoth(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">acoth(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the inverse hyperbolic cotangent of x</em></p>
 <table>
 <thead>
@@ -1490,17 +1497,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>inverse hyperbolic cotangent value (</td>
+<td></td>
+<td>- - - inverse hyperbolic cotangent value (</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">acsch(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">acsch(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the inverse hyperbolic cosecant of x</em></p>
 <table>
 <thead>
@@ -1526,17 +1533,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>inverse hyperbolic cosecant value (x != 0)</td>
+<td></td>
+<td>- - - inverse hyperbolic cosecant value (x != 0)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">add(a=- b=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">add(a=- b=-) ⮕ (result=)</code></h3>
 <p><em>Adds the two numbers</em></p>
 <table>
 <thead>
@@ -1571,17 +1578,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>a+b</td>
+<td></td>
+<td>- - - a+b</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">add-n(a=- b=- n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">add-n(a=- b=- n=-) ⮕ (result=)</code></h3>
 <p><em>Multiplies b by n and adds the result to a</em></p>
 <table>
 <thead>
@@ -1625,17 +1632,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>a + (n * b)</td>
+<td></td>
+<td>- - - a + (n * b)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">adjacent-of-triangle(hypotenuse=- opposite=- alpha=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">adjacent-of-triangle(hypotenuse=- opposite=- alpha=-) ⮕ (result=)</code></h3>
 <p><em>Calculates adjacent side from hypotenuse, opposite and alpha angle</em></p>
 <table>
 <thead>
@@ -1679,17 +1686,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The adjacent side length</td>
+<td></td>
+<td>- - - The adjacent side length</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">angle-between(x1=- y1=- x2=- y2=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">angle-between(x1=- y1=- x2=- y2=-) ⮕ (result=)</code></h3>
 <p><em>Calculates angle between two points</em></p>
 <table>
 <thead>
@@ -1742,17 +1749,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The angle in radians</td>
+<td></td>
+<td>- - - The angle in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">angle-difference(angle1=- angle2=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">angle-difference(angle1=- angle2=-) ⮕ (result=)</code></h3>
 <p><em>calculates the smallest difference between two angles</em></p>
 <table>
 <thead>
@@ -1787,17 +1794,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>smallest angle difference in radians</td>
+<td></td>
+<td>- - - smallest angle difference in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">angle-difference-degrees(angle1=- angle2=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">angle-difference-degrees(angle1=- angle2=-) ⮕ (result=)</code></h3>
 <p><em>calculates the smallest difference between two angles in degrees</em></p>
 <table>
 <thead>
@@ -1832,17 +1839,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>smallest angle difference in degrees</td>
+<td></td>
+<td>- - - smallest angle difference in degrees</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">asech(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">asech(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the inverse hyperbolic secant of x</em></p>
 <table>
 <thead>
@@ -1868,17 +1875,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>inverse hyperbolic secant value (0 &lt; x &lt;= 1)</td>
+<td></td>
+<td>- - - inverse hyperbolic secant value (0 &lt; x &lt;= 1)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">asin(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">asin(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the arcsine (inverse sine) of x</em></p>
 <table>
 <thead>
@@ -1904,17 +1911,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in radians between -PI/2 and PI/2</td>
+<td></td>
+<td>- - - angle in radians between -PI/2 and PI/2</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">asinh(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">asinh(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the inverse hyperbolic sine of x</em></p>
 <table>
 <thead>
@@ -1940,17 +1947,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>inverse hyperbolic sine value</td>
+<td></td>
+<td>- - - inverse hyperbolic sine value</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">atan(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">atan(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the arctangent (inverse tangent) of x</em></p>
 <table>
 <thead>
@@ -1976,17 +1983,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in radians between -PI/2 and PI/2</td>
+<td></td>
+<td>- - - angle in radians between -PI/2 and PI/2</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">atanh(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">atanh(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the inverse hyperbolic tangent of x</em></p>
 <table>
 <thead>
@@ -2012,17 +2019,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>inverse hyperbolic tangent value (</td>
+<td></td>
+<td>- - - inverse hyperbolic tangent value (</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">auto-contrast(img=- threshold=0.01 strength=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">auto-contrast(img=- threshold=0.01 strength=1) ⮕ (result=)</code></h3>
 <p><em>Automatically adjusts the contrast of an image by stretching the histogram to use the full range of values</em></p>
 <table>
 <thead>
@@ -2066,17 +2073,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The contrast-adjusted image</td>
+<td></td>
+<td>- - - The contrast-adjusted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">auto-levels(img=- lowPercentile=0.05 highPercentile=0.995 adjustAlpha=false) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">auto-levels(img=- lowPercentile=0.05 highPercentile=0.995 adjustAlpha=false) ⮕ (result=)</code></h3>
 <p><em>Automatically adjusts the contrast and brightness of an image by stretching the histogram to use the full range of values, ignoring outliers using percentiles</em></p>
 <table>
 <thead>
@@ -2129,17 +2136,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The auto-leveled image</td>
+<td></td>
+<td>- - - The auto-leveled image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">auto-tone(img=- levelsLow=0.005 levelsHigh=0.9995 whiteThresh=0.99 whiteStrength=0.8 contrastThresh=0.01 contrastStrength=0.8) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">auto-tone(img=- levelsLow=0.005 levelsHigh=0.9995 whiteThresh=0.99 whiteStrength=0.8 contrastThresh=0.01 contrastStrength=0.8) ⮕ (result=)</code></h3>
 <p><em>Automatically enhances the image by applying auto-levels, auto-white-balance, and auto-contrast in sequence</em></p>
 <table>
 <thead>
@@ -2219,17 +2226,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The auto-toned image</td>
+<td></td>
+<td>- - - The auto-toned image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">auto-white-balance(img=- threshold=0.95 strength=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">auto-white-balance(img=- threshold=0.95 strength=1) ⮕ (result=)</code></h3>
 <p><em>Automatically adjusts the white balance of an image by finding bright areas and making them neutral</em></p>
 <table>
 <thead>
@@ -2273,17 +2280,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The white-balanced image</td>
+<td></td>
+<td>- - - The white-balanced image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend(imgA=- imgB=- mode=&quot;normal&quot;) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend(imgA=- imgB=- mode=&quot;normal&quot;) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the given blendmode (defaults to normal)</em></p>
 <table>
 <thead>
@@ -2327,17 +2334,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-average(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-average(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the average blend mode</em></p>
 <table>
 <thead>
@@ -2372,17 +2379,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-color(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-color(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the color blend mode</em></p>
 <table>
 <thead>
@@ -2417,17 +2424,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-color-burn(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-color-burn(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the color burn blend mode</em></p>
 <table>
 <thead>
@@ -2462,17 +2469,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-color-dodge(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-color-dodge(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the color dodge blend mode</em></p>
 <table>
 <thead>
@@ -2507,17 +2514,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-contrast-negate(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-contrast-negate(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the contrast negate blend mode</em></p>
 <table>
 <thead>
@@ -2552,17 +2559,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-darken(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-darken(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the darken blend mode</em></p>
 <table>
 <thead>
@@ -2597,17 +2604,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-darker-color(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-darker-color(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the darker color blend mode</em></p>
 <table>
 <thead>
@@ -2642,17 +2649,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-difference(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-difference(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the difference blend mode</em></p>
 <table>
 <thead>
@@ -2687,17 +2694,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-divide(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-divide(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the divide blend mode</em></p>
 <table>
 <thead>
@@ -2732,17 +2739,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-erase(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-erase(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Erases the bottom image wherever the top image is present (destination out)</em></p>
 <table>
 <thead>
@@ -2777,17 +2784,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-exclusion(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-exclusion(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the exclusion blend mode</em></p>
 <table>
 <thead>
@@ -2822,17 +2829,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-glow(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-glow(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the glow blend mode</em></p>
 <table>
 <thead>
@@ -2867,17 +2874,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-hard-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-hard-light(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the hard light blend mode</em></p>
 <table>
 <thead>
@@ -2912,17 +2919,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-hard-mix(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-hard-mix(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the hard mix blend mode</em></p>
 <table>
 <thead>
@@ -2957,17 +2964,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-hue(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-hue(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the hue blend mode</em></p>
 <table>
 <thead>
@@ -3002,17 +3009,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-lighten(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-lighten(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the lighten blend mode</em></p>
 <table>
 <thead>
@@ -3047,17 +3054,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-lighter-color(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-lighter-color(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the lighter color blend mode</em></p>
 <table>
 <thead>
@@ -3092,17 +3099,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-linear-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-linear-light(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the linear light blend mode</em></p>
 <table>
 <thead>
@@ -3137,17 +3144,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-luminosity(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-luminosity(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the luminosity blend mode</em></p>
 <table>
 <thead>
@@ -3182,17 +3189,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-multiply(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-multiply(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the multiply blend mode</em></p>
 <table>
 <thead>
@@ -3227,17 +3234,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-negation(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-negation(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the negation blend mode</em></p>
 <table>
 <thead>
@@ -3272,17 +3279,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-normal(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-normal(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the normal blend mode (alpha compositing)</em></p>
 <table>
 <thead>
@@ -3317,17 +3324,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-overlay(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-overlay(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the overlay blend mode</em></p>
 <table>
 <thead>
@@ -3362,17 +3369,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-pin-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-pin-light(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the pin light blend mode</em></p>
 <table>
 <thead>
@@ -3407,17 +3414,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-reflect(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-reflect(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the reflect blend mode</em></p>
 <table>
 <thead>
@@ -3452,17 +3459,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-saturation(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-saturation(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the saturation blend mode</em></p>
 <table>
 <thead>
@@ -3497,17 +3504,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-screen(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-screen(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the screen blend mode</em></p>
 <table>
 <thead>
@@ -3542,17 +3549,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-soft-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-soft-light(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the soft light blend mode</em></p>
 <table>
 <thead>
@@ -3587,17 +3594,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-subtract(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-subtract(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the subtract blend mode</em></p>
 <table>
 <thead>
@@ -3632,17 +3639,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blend-vivid-light(imgA=- imgB=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blend-vivid-light(imgA=- imgB=-) ⮕ (result=)</code></h3>
 <p><em>Blends the two images using the vivid light blend mode</em></p>
 <table>
 <thead>
@@ -3677,17 +3684,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blended image</td>
+<td></td>
+<td>- - - The blended image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blur-box(img=- radius=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blur-box(img=- radius=1) ⮕ (result=)</code></h3>
 <p><em>Applies a box blur to an image</em></p>
 <table>
 <thead>
@@ -3722,17 +3729,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blurred image</td>
+<td></td>
+<td>- - - The blurred image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blur-gaussian(img=- radius=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blur-gaussian(img=- radius=1) ⮕ (result=)</code></h3>
 <p><em>Applies a Gaussian blur to the image</em></p>
 <table>
 <thead>
@@ -3767,17 +3774,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blurred image</td>
+<td></td>
+<td>- - - The blurred image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blur-motion(img=- length=5 angle=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blur-motion(img=- length=5 angle=0) ⮕ (result=)</code></h3>
 <p><em>Applies a motion blur to an image along a specified angle.</em></p>
 <table>
 <thead>
@@ -3821,17 +3828,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blurred image</td>
+<td></td>
+<td>- - - The blurred image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">blur-zoom(img=- strength=0.25 centerX=0.5 centerY=0.5) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">blur-zoom(img=- strength=0.25 centerX=0.5 centerY=0.5) ⮕ (result=)</code></h3>
 <p><em>Applies a zoom blur effect to an image.</em></p>
 <table>
 <thead>
@@ -3884,17 +3891,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The blurred image</td>
+<td></td>
+<td>- - - The blurred image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">border(img=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">border(img=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a border around the image.</em></p>
 <table>
 <thead>
@@ -3929,17 +3936,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">box(img=- styleBorder=- styleFill=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">box(img=- styleBorder=- styleFill=-) ⮕ (result=)</code></h3>
 <p><em>Fills the image with the given background color and then draws a border around it.</em></p>
 <table>
 <thead>
@@ -3983,17 +3990,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">brightness(img=- factor=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">brightness(img=- factor=0) ⮕ (result=)</code></h3>
 <p><em>Changes the brightness of an image</em></p>
 <table>
 <thead>
@@ -4028,17 +4035,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with brightness changed</td>
+<td></td>
+<td>- - - The image with brightness changed</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">ceil(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">ceil(x=-) ⮕ (result=)</code></h3>
 <p><em>Returns the smallest integer greater than or equal to x</em></p>
 <table>
 <thead>
@@ -4064,17 +4071,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The smallest integer greater than or equal to x</td>
+<td></td>
+<td>- - - The smallest integer greater than or equal to x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">chord(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">chord(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the chord of x</em></p>
 <table>
 <thead>
@@ -4100,17 +4107,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>chord value (2 * sin(x/2))</td>
+<td></td>
+<td>- - - chord value (2 * sin(x/2))</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">chromatic-aberration(img=- amount=5) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">chromatic-aberration(img=- amount=5) ⮕ (result=)</code></h3>
 <p><em>Creates a chromatic aberration effect by offsetting color channels</em></p>
 <table>
 <thead>
@@ -4145,17 +4152,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with chromatic aberration</td>
+<td></td>
+<td>- - - The image with chromatic aberration</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">circumference-of-a_circle(radius=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">circumference-of-a_circle(radius=-) ⮕ (result=)</code></h3>
 <p><em>Calculates circumference from radius</em></p>
 <table>
 <thead>
@@ -4181,17 +4188,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The circumference length</td>
+<td></td>
+<td>- - - The circumference length</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">clarity(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">clarity(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=)</code></h3>
 <p><em>Enhances local contrast while preserving overall image structure</em></p>
 <table>
 <thead>
@@ -4262,17 +4269,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The enhanced image</td>
+<td></td>
+<td>- - - The enhanced image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cmyk(c=0 m=0 y=0 k=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cmyk(c=0 m=0 y=0 k=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from CMYK values</em></p>
 <table>
 <thead>
@@ -4334,17 +4341,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">color-balance(img=- rFactor=1 gFactor=1 bFactor=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">color-balance(img=- rFactor=1 gFactor=1 bFactor=1) ⮕ (result=)</code></h3>
 <p><em>Adjusts the balance of Red, Green, and Blue channels</em></p>
 <table>
 <thead>
@@ -4397,17 +4404,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color-balanced image</td>
+<td></td>
+<td>- - - The color-balanced image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">colorize(img=- col=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">colorize(img=- col=-) ⮕ (result=)</code></h3>
 <p><em>Colorizes the image</em></p>
 <table>
 <thead>
@@ -4442,17 +4449,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The colorized image</td>
+<td></td>
+<td>- - - The colorized image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">contrast(img=- factor=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">contrast(img=- factor=1) ⮕ (result=)</code></h3>
 <p><em>Adjusts the contrast of an image</em></p>
 <table>
 <thead>
@@ -4487,17 +4494,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The contrast-adjusted image</td>
+<td></td>
+<td>- - - The contrast-adjusted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cos(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cos(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the cosine of an angle in radians</em></p>
 <table>
 <thead>
@@ -4523,17 +4530,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>cosine value between -1 and 1</td>
+<td></td>
+<td>- - - cosine value between -1 and 1</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cos-of-triangle(adjacent=- hypotenuse=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cos-of-triangle(adjacent=- hypotenuse=-) ⮕ (result=)</code></h3>
 <p><em>calculates cosine using adjacent and hypotenuse sides</em></p>
 <table>
 <thead>
@@ -4568,17 +4575,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>cosine value (adjacent/hypotenuse)</td>
+<td></td>
+<td>- - - cosine value (adjacent/hypotenuse)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cos2(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cos2(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the square of cosine (cos²(x))</em></p>
 <table>
 <thead>
@@ -4604,17 +4611,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>squared cosine value (cos(x)²)</td>
+<td></td>
+<td>- - - squared cosine value (cos(x)²)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cosec(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cosec(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the cosecant of an angle in radians</em></p>
 <table>
 <thead>
@@ -4640,17 +4647,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>cosecant value (1/sin)</td>
+<td></td>
+<td>- - - cosecant value (1/sin)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cosec-of-triangle(hypotenuse=- opposite=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cosec-of-triangle(hypotenuse=- opposite=-) ⮕ (result=)</code></h3>
 <p><em>calculates cosecant using hypotenuse and opposite sides</em></p>
 <table>
 <thead>
@@ -4685,17 +4692,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>cosecant value (hypotenuse/opposite)</td>
+<td></td>
+<td>- - - cosecant value (hypotenuse/opposite)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cosh(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cosh(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the hyperbolic cosine of x</em></p>
 <table>
 <thead>
@@ -4721,17 +4728,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>hyperbolic cosine value (always positive)</td>
+<td></td>
+<td>- - - hyperbolic cosine value (always positive)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cot(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cot(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the cotangent of an angle in radians</em></p>
 <table>
 <thead>
@@ -4757,17 +4764,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>cotangent value (1/tan)</td>
+<td></td>
+<td>- - - cotangent value (1/tan)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">cot-of-triangle(adjacent=- opposite=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">cot-of-triangle(adjacent=- opposite=-) ⮕ (result=)</code></h3>
 <p><em>calculates cotangent using adjacent and opposite sides</em></p>
 <table>
 <thead>
@@ -4802,17 +4809,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>cotangent value (adjacent/opposite)</td>
+<td></td>
+<td>- - - cotangent value (adjacent/opposite)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">coth(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">coth(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the hyperbolic cotangent of x</em></p>
 <table>
 <thead>
@@ -4838,17 +4845,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>hyperbolic cotangent value (1/tanh)</td>
+<td></td>
+<td>- - - hyperbolic cotangent value (1/tanh)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">covercos(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">covercos(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the coversed cosine of x</em></p>
 <table>
 <thead>
@@ -4874,17 +4881,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>coversed cosine value (1 + sin(x))</td>
+<td></td>
+<td>- - - coversed cosine value (1 + sin(x))</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">coversin(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">coversin(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the coversed sine of x</em></p>
 <table>
 <thead>
@@ -4910,17 +4917,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>coversed sine value (1 - sin(x))</td>
+<td></td>
+<td>- - - coversed sine value (1 - sin(x))</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">crop(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">crop(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image by specified percentages from each side</em></p>
 <table>
 <thead>
@@ -4982,17 +4989,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The cropped image</td>
+<td></td>
+<td>- - - The cropped image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">crop-circle(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">crop-circle(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.</em></p>
 <table>
 <thead>
@@ -5045,17 +5052,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The circularly cropped image (pixels outside the circle are transparent)</td>
+<td></td>
+<td>- - - The circularly cropped image (pixels outside the circle are transparent)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">crop-circle-px(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">crop-circle-px(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.</em></p>
 <table>
 <thead>
@@ -5108,17 +5115,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The circularly cropped image (pixels outside the circle are transparent)</td>
+<td></td>
+<td>- - - The circularly cropped image (pixels outside the circle are transparent)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">crop-px(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">crop-px(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image by specified amounts of pixels from each side</em></p>
 <table>
 <thead>
@@ -5180,17 +5187,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The cropped image</td>
+<td></td>
+<td>- - - The cropped image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">crop-square(img=- size=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">crop-square(img=- size=1 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.</em></p>
 <table>
 <thead>
@@ -5243,17 +5250,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The square-cropped image (pixels outside the square are transparent)</td>
+<td></td>
+<td>- - - The square-cropped image (pixels outside the square are transparent)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">crop-square-px(img=- size=1 offsetX=0 offsetY=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">crop-square-px(img=- size=1 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.</em></p>
 <table>
 <thead>
@@ -5306,17 +5313,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The square-cropped image (pixels outside the square are transparent)</td>
+<td></td>
+<td>- - - The square-cropped image (pixels outside the square are transparent)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">csch(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">csch(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the hyperbolic cosecant of x</em></p>
 <table>
 <thead>
@@ -5342,17 +5349,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>hyperbolic cosecant value (1/sinh)</td>
+<td></td>
+<td>- - - hyperbolic cosecant value (1/sinh)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">defisheye(img=- strength=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">defisheye(img=- strength=1) ⮕ (result=)</code></h3>
 <p><em>Corrects fisheye lens distortion in an image</em></p>
 <table>
 <thead>
@@ -5387,17 +5394,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The corrected image</td>
+<td></td>
+<td>- - - The corrected image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">degrees2radians(degrees=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">degrees2radians(degrees=-) ⮕ (result=)</code></h3>
 <p><em>converts degrees to radians</em></p>
 <table>
 <thead>
@@ -5423,17 +5430,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in radians</td>
+<td></td>
+<td>- - - angle in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">delta(x=- y=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">delta(x=- y=-) ⮕ (result=)</code></h3>
 <p><em>Returns the delta between x and y</em></p>
 <table>
 <thead>
@@ -5468,17 +5475,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The delta between x and y</td>
+<td></td>
+<td>- - - The delta between x and y</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">displace(img=- dMap=- amount=10) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">displace(img=- dMap=- amount=10) ⮕ (result=)</code></h3>
 <p><em>Displaces pixels based on the brightness of a displacement map</em></p>
 <table>
 <thead>
@@ -5522,17 +5529,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The displaced image</td>
+<td></td>
+<td>- - - The displaced image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">distance-between(x1=- y1=- x2=- y2=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">distance-between(x1=- y1=- x2=- y2=-) ⮕ (result=)</code></h3>
 <p><em>Calculates distance between two points</em></p>
 <table>
 <thead>
@@ -5585,17 +5592,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The distance between the points</td>
+<td></td>
+<td>- - - The distance between the points</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">div(a=- b=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">div(a=- b=-) ⮕ (result=)</code></h3>
 <p><em>Divides the two numbers</em></p>
 <table>
 <thead>
@@ -5630,17 +5637,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>a/b</td>
+<td></td>
+<td>- - - a/b</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-circle(img=- c=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-circle(img=- c=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a circle.</em></p>
 <table>
 <thead>
@@ -5684,17 +5691,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-circle-px(img=- c=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-circle-px(img=- c=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a circle.</em></p>
 <table>
 <thead>
@@ -5738,17 +5745,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-ellipse(img=- e=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-ellipse(img=- e=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws an ellipse.</em></p>
 <table>
 <thead>
@@ -5792,17 +5799,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-ellipse-px(img=- e=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-ellipse-px(img=- e=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws an ellipse.</em></p>
 <table>
 <thead>
@@ -5846,17 +5853,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-grid(img=- r=- rows=- cols=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-grid(img=- r=- rows=- cols=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -5918,17 +5925,143 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-grid-px(img=- r=- rows=- cols=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-grid-h(img=- r=- rows=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">Rect</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The area to draw the grid on (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rows</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of rows</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-h-px(img=- r=- rows=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">Rect</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The area to draw the grid on</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rows</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of rows</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-px(img=- r=- rows=- cols=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -5990,17 +6123,143 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-line(img=- p1=- p2=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-grid-v(img=- r=- cols=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">Rect</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The area to draw the grid on (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">cols</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of cols</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-v-px(img=- r=- cols=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">Rect</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The area to draw the grid on</td>
+</tr>
+<tr>
+<td><code class="language-pxp">cols</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of cols</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line(img=- p1=- p2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -6053,17 +6312,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-line-h(img=- y=- x1=- x2=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-line-h(img=- y=- x1=- x2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -6125,17 +6384,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-line-h-px(img=- y=- x1=- x2=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-line-h-px(img=- y=- x1=- x2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -6197,17 +6456,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-line-px(img=- p1=- p2=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-line-px(img=- p1=- p2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -6260,17 +6519,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-line-v(img=- x=- y1=- y2=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-line-v(img=- x=- y1=- y2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x|y1) to P(x|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -6332,17 +6591,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-line-v-px(img=- x=- y1=- y2=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-line-v-px(img=- x=- y1=- y2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x|y1) to P(x|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -6404,17 +6663,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-rect(img=- r=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-rect(img=- r=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a rectangle at position (x,y) with the given width and height.</em></p>
 <table>
 <thead>
@@ -6458,17 +6717,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-rect-px(img=- r=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-rect-px(img=- r=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a rectangle at position (x,y) with the given width and height.</em></p>
 <table>
 <thead>
@@ -6512,17 +6771,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-square(img=- s=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-square(img=- s=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a square at position (x,y) with the given size.</em></p>
 <table>
 <thead>
@@ -6566,17 +6825,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-square-px(img=- s=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-square-px(img=- s=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a square at position (x,y) with the given size.</em></p>
 <table>
 <thead>
@@ -6620,17 +6879,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-text(img=- p=- t=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-text(img=- p=- t=-) ⮕ (result=)</code></h3>
 <p><em>Draws a text at position (x,y).</em></p>
 <table>
 <thead>
@@ -6674,17 +6933,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-text-outline(img=- p=- t=- outline=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-text-outline(img=- p=- t=- outline=-) ⮕ (result=)</code></h3>
 <p><em>Draws only the outline of text at position (x,y).</em></p>
 <table>
 <thead>
@@ -6737,17 +6996,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-text-outline-px(img=- p=- t=- outline=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-text-outline-px(img=- p=- t=- outline=-) ⮕ (result=)</code></h3>
 <p><em>Draws only the outline of text at position (x,y).</em></p>
 <table>
 <thead>
@@ -6800,17 +7059,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-text-px(img=- p=- t=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">draw-text-px(img=- p=- t=-) ⮕ (result=)</code></h3>
 <p><em>Draws text at position (x,y) with the given style using TrueType fonts.</em></p>
 <table>
 <thead>
@@ -6854,17 +7113,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">edge-detect(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">edge-detect(img=-) ⮕ (result=)</code></h3>
 <p><em>Detects edges in the image using the Sobel operator</em></p>
 <table>
 <thead>
@@ -6890,17 +7149,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>An image highlighting the edges</td>
+<td></td>
+<td>- - - An image highlighting the edges</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">enhance(img=- brightness=0 contrast=0 sharpening=1 rMin=0.75 rMax=1 gMin=0.75 gMax=1 bMin=0.75 bMax=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">enhance(img=- brightness=0 contrast=0 sharpening=1 rMin=0.75 rMax=1 gMin=0.75 gMax=1 bMin=0.75 bMax=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=)</code></h3>
 <p><em>Enhances colors and sharpness of an image</em></p>
 <table>
 <thead>
@@ -7034,17 +7293,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The enhanceed image</td>
+<td></td>
+<td>- - - The enhanceed image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">excsc(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">excsc(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the excosecant of x</em></p>
 <table>
 <thead>
@@ -7070,17 +7329,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>excosecant value (cosec(x) - 1)</td>
+<td></td>
+<td>- - - excosecant value (cosec(x) - 1)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">expand(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">expand(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=)</code></h3>
 <p><em>Expands an image by adding transparent borders with specified percentage widths</em></p>
 <table>
 <thead>
@@ -7142,17 +7401,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The expanded image</td>
+<td></td>
+<td>- - - The expanded image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">expand-px(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">expand-px(img=- left=0 right=0 top=0 bottom=0) ⮕ (result=)</code></h3>
 <p><em>Expands an image by adding transparent borders with specified pixel widths</em></p>
 <table>
 <thead>
@@ -7214,17 +7473,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The expanded image</td>
+<td></td>
+<td>- - - The expanded image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">exposure(img=- level=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">exposure(img=- level=0) ⮕ (result=)</code></h3>
 <p><em>Adjusts the overall lightness or darkness of the image, simulating photographic exposure.</em></p>
 <table>
 <thead>
@@ -7259,17 +7518,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The exposure-adjusted image</td>
+<td></td>
+<td>- - - The exposure-adjusted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">exsec(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">exsec(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the exsecant of x</em></p>
 <table>
 <thead>
@@ -7295,17 +7554,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>exsecant value (sec(x) - 1)</td>
+<td></td>
+<td>- - - exsecant value (sec(x) - 1)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">fibonacci(nth=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">fibonacci(nth=-) ⮕ (result=)</code></h3>
 <p><em>Calculates the nth fibonacci number using 1-based indexing with memoization</em></p>
 <table>
 <thead>
@@ -7331,17 +7590,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The nth fibonacci number</td>
+<td></td>
+<td>- - - The nth fibonacci number</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">fill(img=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">fill(img=- style=-) ⮕ (result=)</code></h3>
 <p><em>Fills the given image.</em></p>
 <table>
 <thead>
@@ -7376,17 +7635,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The filled image</td>
+<td></td>
+<td>- - - The filled image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">fisheye(img=- strength=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">fisheye(img=- strength=1) ⮕ (result=)</code></h3>
 <p><em>Applies a fisheye lens distortion effect to the image</em></p>
 <table>
 <thead>
@@ -7421,17 +7680,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The distorted image</td>
+<td></td>
+<td>- - - The distorted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">flip-h(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">flip-h(img=-) ⮕ (result=)</code></h3>
 <p><em>Flips an image horizontally (left to right)</em></p>
 <table>
 <thead>
@@ -7457,17 +7716,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The horizontally flipped image</td>
+<td></td>
+<td>- - - The horizontally flipped image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">flip-v(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">flip-v(img=-) ⮕ (result=)</code></h3>
 <p><em>Flips an image vertically (top to bottom)</em></p>
 <table>
 <thead>
@@ -7493,17 +7752,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The vertically flipped image</td>
+<td></td>
+<td>- - - The vertically flipped image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">floor(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">floor(x=-) ⮕ (result=)</code></h3>
 <p><em>Returns the largest integer less than or equal to x</em></p>
 <table>
 <thead>
@@ -7529,17 +7788,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The largest integer less than or equal to x</td>
+<td></td>
+<td>- - - The largest integer less than or equal to x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">grads2radians(grads=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">grads2radians(grads=-) ⮕ (result=)</code></h3>
 <p><em>converts grads to radians</em></p>
 <table>
 <thead>
@@ -7565,17 +7824,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in radians</td>
+<td></td>
+<td>- - - angle in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">grayscale(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">grayscale(img=-) ⮕ (result=)</code></h3>
 <p><em>Grayscales an image</em></p>
 <table>
 <thead>
@@ -7601,17 +7860,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The grayscaled image</td>
+<td></td>
+<td>- - - The grayscaled image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">grid(img=- rows=- cols=- style=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">grid(img=- rows=- cols=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
 <thead>
@@ -7664,17 +7923,125 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">group(img=- title=&quot;-&quot; colText=- colFill=- colBorder=- padding=3 fillAlphaHeader=0.9 fillAlphaBody=0.8 borderThickness=1 borderAlphaHeader=0.95 borderAlphaBody=0.95) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">grid-h(img=- rows=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws horizontal grid lines on the image with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">rows</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of rows</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the border</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">grid-v(img=- cols=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws vertical grid lines on the image with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">cols</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of columns</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the border</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">group(img=- title=&quot;-&quot; colText=- colFill=- colBorder=- padding=3 fillAlphaHeader=0.9 fillAlphaBody=0.8 borderThickness=1 borderAlphaHeader=0.95 borderAlphaBody=0.95) ⮕ (result=)</code></h3>
 <p><em>Generates the given group with the given styles.</em></p>
 <table>
 <thead>
@@ -7790,17 +8157,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The group wrapping the input image</td>
+<td></td>
+<td>- - - The group wrapping the input image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">haversin(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">haversin(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the haversine of x</em></p>
 <table>
 <thead>
@@ -7826,17 +8193,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>haversine value (0.5 * (1 - cos(x)))</td>
+<td></td>
+<td>- - - haversine value (0.5 * (1 - cos(x)))</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">highpass(img=- radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">highpass(img=- radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=)</code></h3>
 <p><em>Creates a high pass filter effect, resulting in a gray image with embossed edges</em></p>
 <table>
 <thead>
@@ -7898,17 +8265,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The filtered image</td>
+<td></td>
+<td>- - - The filtered image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">hsla(h=0 s=0.5 l=0.5 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">hsla(h=0 s=0.5 l=0.5 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from HSLA values</em></p>
 <table>
 <thead>
@@ -7961,17 +8328,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">hsv(h=0 s=0.5 v=0.5 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">hsv(h=0 s=0.5 v=0.5 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from HSV values</em></p>
 <table>
 <thead>
@@ -8024,17 +8391,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">hue-rotate(img=- angle=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">hue-rotate(img=- angle=0) ⮕ (result=)</code></h3>
 <p><em>Rotates the hue of image colors</em></p>
 <table>
 <thead>
@@ -8069,17 +8436,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The hue-rotated image</td>
+<td></td>
+<td>- - - The hue-rotated image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">hwb(h=0 w=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">hwb(h=0 w=0 b=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from HWB (Hue, Whiteness, Blackness) values</em></p>
 <table>
 <thead>
@@ -8132,17 +8499,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">hypotenuse-of-triangle(adjacent=- opposite=- gamma=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">hypotenuse-of-triangle(adjacent=- opposite=- gamma=-) ⮕ (result=)</code></h3>
 <p><em>Calculates hypotenuse from adjacent, opposite and gamma angle</em></p>
 <table>
 <thead>
@@ -8186,17 +8553,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The hypotenuse length</td>
+<td></td>
+<td>- - - The hypotenuse length</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">invert(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">invert(img=-) ⮕ (result=)</code></h3>
 <p><em>Inverts an image</em></p>
 <table>
 <thead>
@@ -8222,17 +8589,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The inverted image</td>
+<td></td>
+<td>- - - The inverted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">invert-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">invert-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=)</code></h3>
 <p><em>Inverts pixels based on their hue, saturation, and luminance, inverting pixels inside the specified ranges</em></p>
 <table>
 <thead>
@@ -8366,17 +8733,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+<td></td>
+<td>- - - The image with only pixels in all specified ranges visible (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">lab(l=50 a=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">lab(l=50 a=0 b=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from CIELAB values</em></p>
 <table>
 <thead>
@@ -8429,17 +8796,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">lch(l=50 c=0 h=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">lch(l=50 c=0 h=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from LCH (Lightness, Chroma, Hue) values</em></p>
 <table>
 <thead>
@@ -8492,17 +8859,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">lerp-angle(angle1=- angle2=- t=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">lerp-angle(angle1=- angle2=- t=-) ⮕ (result=)</code></h3>
 <p><em>linearly interpolates between two angles in radians</em></p>
 <table>
 <thead>
@@ -8546,17 +8913,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>interpolated angle in radians</td>
+<td></td>
+<td>- - - interpolated angle in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">lerp-angle-degrees(angle1=- angle2=- t=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">lerp-angle-degrees(angle1=- angle2=- t=-) ⮕ (result=)</code></h3>
 <p><em>linearly interpolates between two angles in degrees</em></p>
 <table>
 <thead>
@@ -8600,17 +8967,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>interpolated angle in degrees</td>
+<td></td>
+<td>- - - interpolated angle in degrees</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">load(path=&quot;-&quot;) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">load(path=&quot;-&quot;) ⮕ (result=)</code></h3>
 <p><em>Loads an image</em></p>
 <table>
 <thead>
@@ -8636,17 +9003,197 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The loaded image</td>
+<td></td>
+<td>- - - The loaded image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">log(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">load-csv(path=&quot;-&quot; sep=&quot;\t&quot; hasHeader=true) ⮕ (result=)</code></h3>
+<p><em>Loads a CSV file</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">path</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - Path to the CSV file</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sep</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;\t&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The separator to split columns with</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hasHeader</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">true</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Whether the first row is a header row</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A 2D slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">load-csv-column(path=&quot;-&quot; index=- sep=&quot;\t&quot; hasHeader=true) ⮕ (result=)</code></h3>
+<p><em>Loads a column from a CSV file</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">path</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - Path to the CSV file</td>
+</tr>
+<tr>
+<td><code class="language-pxp">index</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The index of the column to retrieve</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sep</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;\t&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The separator to split columns with</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hasHeader</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">true</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Whether the first row is a header row</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">load-csv-row(path=&quot;-&quot; index=- sep=&quot;\t&quot; hasHeader=true) ⮕ (result=)</code></h3>
+<p><em>Loads a row from a CSV file</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">path</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - Path to the CSV file</td>
+</tr>
+<tr>
+<td><code class="language-pxp">index</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The index of the row to retrieve</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sep</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;\t&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The separator to split columns with</td>
+</tr>
+<tr>
+<td><code class="language-pxp">hasHeader</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">true</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Whether the first row is a header row</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">log(x=-) ⮕ (result=)</code></h3>
 <p><em>Returns the natural logarithm of x</em></p>
 <table>
 <thead>
@@ -8672,17 +9219,53 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The natural logarithm of x</td>
+<td></td>
+<td>- - - The natural logarithm of x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">max(x=- y=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">lowercase(str=&quot;-&quot;) ⮕ (result=)</code></h3>
+<p><em>Lowercases a string</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">str</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The string to lowercase</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The lowercased string</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">max(x=- y=-) ⮕ (result=)</code></h3>
 <p><em>Returns the maximum value of x and y</em></p>
 <table>
 <thead>
@@ -8717,17 +9300,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The maximum value of x and y</td>
+<td></td>
+<td>- - - The maximum value of x and y</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">min(x=- y=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">min(x=- y=-) ⮕ (result=)</code></h3>
 <p><em>Returns the minimum value of x and y</em></p>
 <table>
 <thead>
@@ -8762,17 +9345,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The minimum value of x and y</td>
+<td></td>
+<td>- - - The minimum value of x and y</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">mul(a=- b=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">mul(a=- b=-) ⮕ (result=)</code></h3>
 <p><em>Multiplies the two numbers</em></p>
 <table>
 <thead>
@@ -8807,17 +9390,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>a*b</td>
+<td></td>
+<td>- - - a*b</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">normalize-angle(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">normalize-angle(radians=-) ⮕ (result=)</code></h3>
 <p><em>normalizes an angle to [0, 2π)</em></p>
 <table>
 <thead>
@@ -8843,17 +9426,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>normalized angle in radians</td>
+<td></td>
+<td>- - - normalized angle in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">normalize-angle-degrees(degrees=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">normalize-angle-degrees(degrees=-) ⮕ (result=)</code></h3>
 <p><em>normalizes an angle to [0, 360)</em></p>
 <table>
 <thead>
@@ -8879,17 +9462,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>normalized angle in degrees</td>
+<td></td>
+<td>- - - normalized angle in degrees</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">opacity(img=- amount=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">opacity(img=- amount=1) ⮕ (result=)</code></h3>
 <p><em>Adjusts the overall opacity/transparency of an image</em></p>
 <table>
 <thead>
@@ -8924,17 +9507,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The opacity-adjusted image</td>
+<td></td>
+<td>- - - The opacity-adjusted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">opposite-of-triangle(hypotenuse=- adjacent=- beta=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">opposite-of-triangle(hypotenuse=- adjacent=- beta=-) ⮕ (result=)</code></h3>
 <p><em>Calculates opposite side from hypotenuse, adjacent and beta angle</em></p>
 <table>
 <thead>
@@ -8978,17 +9561,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The opposite side length</td>
+<td></td>
+<td>- - - The opposite side length</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">or(value1=- value2=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">or(value1=- value2=-) ⮕ (result=)</code></h3>
 <p><em>Returns either value1 or value2 randomly</em></p>
 <table>
 <thead>
@@ -9023,17 +9606,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>One of the two input values randomly</td>
+<td></td>
+<td>- - - One of the two input values randomly</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pixelate(img=- size=8) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pixelate(img=- size=8) ⮕ (result=)</code></h3>
 <p><em>Creates a pixelation effect by averaging colors in blocks</em></p>
 <table>
 <thead>
@@ -9068,17 +9651,89 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The pixelated image</td>
+<td></td>
+<td>- - - The pixelated image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">polar-to-rectangular(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">plot-data(width=- height=- data=- columns=- colors=-) ⮕ (result=)</code></h3>
+<p><em>Renders a chart from CSV data by plotting selected columns with specified colors</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">width</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Chart width in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">height</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Chart height in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2D array of data from CSV</td>
+</tr>
+<tr>
+<td><code class="language-pxp">columns</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Array of column indices to plot</td>
+</tr>
+<tr>
+<td><code class="language-pxp">colors</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Array of colors for each column</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The chart image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">polar-to-rectangular(img=-) ⮕ (result=)</code></h3>
 <p><em>Converts a polar coordinate image to rectangular coordinates</em></p>
 <table>
 <thead>
@@ -9104,17 +9759,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The transformed image</td>
+<td></td>
+<td>- - - The transformed image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">posterize(img=- levels=4) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">posterize(img=- levels=4) ⮕ (result=)</code></h3>
 <p><em>Reduces the number of color levels in the image</em></p>
 <table>
 <thead>
@@ -9149,17 +9804,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The posterized image</td>
+<td></td>
+<td>- - - The posterized image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow(base=- n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow(base=- n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates base raised to the power of n, using lookup tables for integer bases when possible</em></p>
 <table>
 <thead>
@@ -9194,17 +9849,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>Base^n</td>
+<td></td>
+<td>- - - Base^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow10(n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow10(n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates 10 raised to the power of n</em></p>
 <table>
 <thead>
@@ -9230,17 +9885,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>10^n</td>
+<td></td>
+<td>- - - 10^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow12(n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow12(n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates 12 raised to the power of n</em></p>
 <table>
 <thead>
@@ -9266,17 +9921,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>12^n</td>
+<td></td>
+<td>- - - 12^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow16(n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow16(n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates 16 raised to the power of n</em></p>
 <table>
 <thead>
@@ -9302,17 +9957,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>16^n</td>
+<td></td>
+<td>- - - 16^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow2(n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow2(n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates 2 raised to the power of n</em></p>
 <table>
 <thead>
@@ -9338,17 +9993,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>2^n</td>
+<td></td>
+<td>- - - 2^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow4(n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow4(n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates 4 raised to the power of n</em></p>
 <table>
 <thead>
@@ -9374,17 +10029,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>4^n</td>
+<td></td>
+<td>- - - 4^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">pow8(n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">pow8(n=-) ⮕ (result=)</code></h3>
 <p><em>Calculates 8 raised to the power of n</em></p>
 <table>
 <thead>
@@ -9410,17 +10065,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>8^n</td>
+<td></td>
+<td>- - - 8^n</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">radians-of-triangle(adjacent=- opposite=- hypotenuse=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">radians-of-triangle(adjacent=- opposite=- hypotenuse=-) ⮕ (result=)</code></h3>
 <p><em>calculates angle in radians using all three sides of a triangle</em></p>
 <table>
 <thead>
@@ -9464,17 +10119,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in radians between adjacent and opposite sides</td>
+<td></td>
+<td>- - - angle in radians between adjacent and opposite sides</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">radians2degrees(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">radians2degrees(radians=-) ⮕ (result=)</code></h3>
 <p><em>converts radians to degrees</em></p>
 <table>
 <thead>
@@ -9500,17 +10155,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in degrees</td>
+<td></td>
+<td>- - - angle in degrees</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">radians2grads(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">radians2grads(radians=-) ⮕ (result=)</code></h3>
 <p><em>converts radians to grads</em></p>
 <table>
 <thead>
@@ -9536,17 +10191,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>angle in grads</td>
+<td></td>
+<td>- - - angle in grads</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">random-range(min=- max=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">random-range(min=- max=-) ⮕ (result=)</code></h3>
 <p><em>Returns a random number between min and max</em></p>
 <table>
 <thead>
@@ -9581,17 +10236,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>A random float64 value between min and max, with NaN handling</td>
+<td></td>
+<td>- - - A random float64 value between min and max, with NaN handling</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">rectangular-to-polar(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">rectangular-to-polar(img=-) ⮕ (result=)</code></h3>
 <p><em>Converts a rectangular coordinate image to polar coordinates</em></p>
 <table>
 <thead>
@@ -9617,17 +10272,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The transformed image</td>
+<td></td>
+<td>- - - The transformed image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">remove-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">remove-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=)</code></h3>
 <p><em>Removes pixels based on their brightness, making pixels inside the specified range transparent</em></p>
 <table>
 <thead>
@@ -9689,17 +10344,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with pixels in the specified brightness range removed (16-bit)</td>
+<td></td>
+<td>- - - The image with pixels in the specified brightness range removed (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">remove-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">remove-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=)</code></h3>
 <p><em>Removes pixels based on their hue, saturation, and luminance, making pixels inside the specified ranges transparent</em></p>
 <table>
 <thead>
@@ -9833,17 +10488,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+<td></td>
+<td>- - - The image with only pixels in all specified ranges visible (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">resize-fit(img=- maxW=0 maxH=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">resize-fit(img=- maxW=0 maxH=0) ⮕ (result=)</code></h3>
 <p><em>Resize an image to fit within a bounding box while preserving aspect ratio</em></p>
 <table>
 <thead>
@@ -9887,17 +10542,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resized image</td>
+<td></td>
+<td>- - - The resized image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">resize-max-mp(img=- mpMax=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">resize-max-mp(img=- mpMax=0) ⮕ (result=)</code></h3>
 <p><em>Resize an image to stay within a maximum amount of megapixels</em></p>
 <table>
 <thead>
@@ -9932,17 +10587,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resized image</td>
+<td></td>
+<td>- - - The resized image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">rgba(r=0 g=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">rgba(r=0 g=0 b=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from RGBA values (8-bit per channel)</em></p>
 <table>
 <thead>
@@ -9995,17 +10650,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">rgba64(r=0 g=0 b=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">rgba64(r=0 g=0 b=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from RGBA values (16-bit per channel)</em></p>
 <table>
 <thead>
@@ -10058,17 +10713,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">rotate(img=- angle=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">rotate(img=- angle=0) ⮕ (result=)</code></h3>
 <p><em>Rotates an image around its center by a specified angle</em></p>
 <table>
 <thead>
@@ -10103,17 +10758,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The rotated image</td>
+<td></td>
+<td>- - - The rotated image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">rotate-hsl(img=- rotate=0 lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">rotate-hsl(img=- rotate=0 lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=)</code></h3>
 <p><em>Rotates the hue of pixels based on their hue, saturation, and luminance</em></p>
 <table>
 <thead>
@@ -10256,17 +10911,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+<td></td>
+<td>- - - The image with only pixels in all specified ranges visible (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">round(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">round(x=-) ⮕ (result=)</code></h3>
 <p><em>Returns the nearest integer to x, rounding to even on ties</em></p>
 <table>
 <thead>
@@ -10292,17 +10947,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The nearest integer to x</td>
+<td></td>
+<td>- - - The nearest integer to x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">saturation(img=- factor=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">saturation(img=- factor=1) ⮕ (result=)</code></h3>
 <p><em>Adjusts the color saturation of an image</em></p>
 <table>
 <thead>
@@ -10337,12 +10992,12 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The saturation-adjusted image</td>
+<td></td>
+<td>- - - The saturation-adjusted image</td>
 </tr>
 </tbody>
 </table>
@@ -10383,7 +11038,7 @@ All arguments have defaults.</p>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">scale(img=- sx=0 sy=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">scale(img=- sx=0 sy=0) ⮕ (result=)</code></h3>
 <p><em>Scales an image by specified factors</em></p>
 <table>
 <thead>
@@ -10427,17 +11082,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The scaled image</td>
+<td></td>
+<td>- - - The scaled image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sec(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sec(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the secant of an angle in radians</em></p>
 <table>
 <thead>
@@ -10463,17 +11118,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>secant value (1/cos)</td>
+<td></td>
+<td>- - - secant value (1/cos)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sec-of-triangle(hypotenuse=- adjacent=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sec-of-triangle(hypotenuse=- adjacent=-) ⮕ (result=)</code></h3>
 <p><em>calculates secant using hypotenuse and adjacent sides</em></p>
 <table>
 <thead>
@@ -10508,17 +11163,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>secant value (hypotenuse/adjacent)</td>
+<td></td>
+<td>- - - secant value (hypotenuse/adjacent)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sech(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sech(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the hyperbolic secant of x</em></p>
 <table>
 <thead>
@@ -10544,17 +11199,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>hyperbolic secant value (1/cosh)</td>
+<td></td>
+<td>- - - hyperbolic secant value (1/cosh)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">select-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">select-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=)</code></h3>
 <p><em>Selects pixels based on their brightness, making pixels outside the specified range transparent</em></p>
 <table>
 <thead>
@@ -10616,17 +11271,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with only pixels in the specified brightness range visible (16-bit)</td>
+<td></td>
+<td>- - - The image with only pixels in the specified brightness range visible (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">select-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">select-hsl(img=- lowerHue=0 minHue=30 maxHue=330 upperHue=360 lowerSat=0.1 minSat=0.2 maxSat=0.8 upperSat=0.9 lowerLum=0.1 minLum=0.2 maxLum=0.8 upperLum=0.9) ⮕ (result=)</code></h3>
 <p><em>Selects pixels based on their hue, saturation, and luminance, making pixels outside the specified ranges transparent</em></p>
 <table>
 <thead>
@@ -10760,17 +11415,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with only pixels in all specified ranges visible (16-bit)</td>
+<td></td>
+<td>- - - The image with only pixels in all specified ranges visible (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">select-hue(img=- hue=0 toleranceLeft=30 toleranceRight=30 softness=0.5 minSaturation=0.15) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">select-hue(img=- hue=0 toleranceLeft=30 toleranceRight=30 softness=0.5 minSaturation=0.15) ⮕ (result=)</code></h3>
 <p><em>Selects a specific hue from the image and makes everything else transparent</em></p>
 <table>
 <thead>
@@ -10841,17 +11496,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with only the selected hue visible (16-bit)</td>
+<td></td>
+<td>- - - The image with only the selected hue visible (16-bit)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sepia(img=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sepia(img=-) ⮕ (result=)</code></h3>
 <p><em>Changes the tone of an image to sepia</em></p>
 <table>
 <thead>
@@ -10877,17 +11532,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The sepia-toned image</td>
+<td></td>
+<td>- - - The sepia-toned image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sharpen(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sharpen(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=)</code></h3>
 <p><em>Sharpens an image using a highpass combined with vivid light blending</em></p>
 <table>
 <thead>
@@ -10958,17 +11613,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The sharpened image</td>
+<td></td>
+<td>- - - The sharpened image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sin(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sin(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the sine of an angle</em></p>
 <table>
 <thead>
@@ -10994,17 +11649,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>sine value between -1 and 1</td>
+<td></td>
+<td>- - - sine value between -1 and 1</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sin-of-triangle(opposite=- hypotenuse=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sin-of-triangle(opposite=- hypotenuse=-) ⮕ (result=)</code></h3>
 <p><em>calculates sine using opposite and hypotenuse sides</em></p>
 <table>
 <thead>
@@ -11039,17 +11694,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>sine value (opposite/hypotenuse)</td>
+<td></td>
+<td>- - - sine value (opposite/hypotenuse)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sin2(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sin2(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the square of sine (sin²(x))</em></p>
 <table>
 <thead>
@@ -11075,17 +11730,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>squared sine value (sin(x)²)</td>
+<td></td>
+<td>- - - squared sine value (sin(x)²)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sinc(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sinc(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the sinc function (sin(x)/x)</em></p>
 <table>
 <thead>
@@ -11111,17 +11766,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>sinc value (sin(x)/x, with sinc(0) = 1)</td>
+<td></td>
+<td>- - - sinc value (sin(x)/x, with sinc(0) = 1)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sinh(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sinh(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the hyperbolic sine of x</em></p>
 <table>
 <thead>
@@ -11147,17 +11802,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>hyperbolic sine value</td>
+<td></td>
+<td>- - - hyperbolic sine value</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">slope(x1=- y1=- x2=- y2=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">slope(x1=- y1=- x2=- y2=-) ⮕ (result=)</code></h3>
 <p><em>Calculates the slope between two points</em></p>
 <table>
 <thead>
@@ -11210,17 +11865,62 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The slope value</td>
+<td></td>
+<td>- - - The slope value</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sqrt(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sprintf(str=&quot;-&quot; a=-) ⮕ (result=)</code></h3>
+<p><em>Creates formatted strings</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">str</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The format string</td>
+</tr>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>A slice with the arguments</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The formatted string</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">sqrt(x=-) ⮕ (result=)</code></h3>
 <p><em>Returns the square root of x</em></p>
 <table>
 <thead>
@@ -11246,17 +11946,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The square root of x</td>
+<td></td>
+<td>- - - The square root of x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">square(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">square(x=-) ⮕ (result=)</code></h3>
 <p><em>Calculates the square of a number</em></p>
 <table>
 <thead>
@@ -11282,17 +11982,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The square of x</td>
+<td></td>
+<td>- - - The square of x</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sub(a=- b=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sub(a=- b=-) ⮕ (result=)</code></h3>
 <p><em>Subtracts the two numbers</em></p>
 <table>
 <thead>
@@ -11327,17 +12027,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>a-b</td>
+<td></td>
+<td>- - - a-b</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">sub-n(a=- b=- n=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">sub-n(a=- b=- n=-) ⮕ (result=)</code></h3>
 <p><em>Multiplies b by n and subtracts the result from a</em></p>
 <table>
 <thead>
@@ -11381,17 +12081,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>a - (n * b)</td>
+<td></td>
+<td>- - - a - (n * b)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">tan(radians=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">tan(radians=-) ⮕ (result=)</code></h3>
 <p><em>calculates the tangent of an angle in radians</em></p>
 <table>
 <thead>
@@ -11417,17 +12117,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>tangent value (unbounded)</td>
+<td></td>
+<td>- - - tangent value (unbounded)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">tan-of-slope(m=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">tan-of-slope(m=-) ⮕ (result=)</code></h3>
 <p><em>Calculates the angle from a slope value</em></p>
 <table>
 <thead>
@@ -11453,17 +12153,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The angle in radians</td>
+<td></td>
+<td>- - - The angle in radians</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">tan-of-triangle(opposite=- adjacent=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">tan-of-triangle(opposite=- adjacent=-) ⮕ (result=)</code></h3>
 <p><em>calculates tangent using opposite and adjacent sides</em></p>
 <table>
 <thead>
@@ -11498,17 +12198,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>tangent value (opposite/adjacent)</td>
+<td></td>
+<td>- - - tangent value (opposite/adjacent)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">tan2(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">tan2(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the square of tangent (tan²(x))</em></p>
 <table>
 <thead>
@@ -11534,17 +12234,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>squared tangent value (tan(x)²)</td>
+<td></td>
+<td>- - - squared tangent value (tan(x)²)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">tanh(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">tanh(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the hyperbolic tangent of x</em></p>
 <table>
 <thead>
@@ -11570,17 +12270,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>hyperbolic tangent value between -1 and 1</td>
+<td></td>
+<td>- - - hyperbolic tangent value between -1 and 1</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">text(t=&quot;-&quot; style=- outline=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">text(t=&quot;-&quot; style=- outline=-) ⮕ (result=)</code></h3>
 <p><em>Generates the given text with the given styles.</em></p>
 <table>
 <thead>
@@ -11624,17 +12324,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The resulting image</td>
+<td></td>
+<td>- - - The resulting image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">threshold(img=- level=0.5) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">threshold(img=- level=0.5) ⮕ (result=)</code></h3>
 <p><em>Converts image to black and white based on a brightness threshold</em></p>
 <table>
 <thead>
@@ -11669,17 +12369,53 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The thresholded (black and white) image</td>
+<td></td>
+<td>- - - The thresholded (black and white) image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">transform(img=- dx=0 dy=0 angle=0 sx=0 sy=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">time(layout=&quot;2006-01-02 15:04:05&quot;) ⮕ (result=)</code></h3>
+<p><em>Returns the current time according to the given layout</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">layout</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;2006-01-02 15:04:05&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The layout</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The current time as string</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">transform(img=- dx=0 dy=0 angle=0 sx=0 sy=0) ⮕ (result=)</code></h3>
 <p><em>Applies translation, rotation, and scaling to an image in one operation</em></p>
 <table>
 <thead>
@@ -11750,17 +12486,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The transformed image</td>
+<td></td>
+<td>- - - The transformed image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">translate(img=- dx=0 dy=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">translate(img=- dx=0 dy=0) ⮕ (result=)</code></h3>
 <p><em>Translates (moves) an image by a specified amount</em></p>
 <table>
 <thead>
@@ -11804,17 +12540,53 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The translated image</td>
+<td></td>
+<td>- - - The translated image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">vercos(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">uppercase(str=&quot;-&quot;) ⮕ (result=)</code></h3>
+<p><em>Uppercases a string</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">str</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The string to uppercase</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The uppercased string</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">vercos(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the versed cosine of x</em></p>
 <table>
 <thead>
@@ -11840,17 +12612,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>versed cosine value (1 + cos(x))</td>
+<td></td>
+<td>- - - versed cosine value (1 + cos(x))</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">versin(x=-) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">versin(x=-) ⮕ (result=)</code></h3>
 <p><em>calculates the versed sine of x</em></p>
 <table>
 <thead>
@@ -11876,17 +12648,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>versed sine value (1 - cos(x))</td>
+<td></td>
+<td>- - - versed sine value (1 - cos(x))</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">vibrance(img=- factor=0) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">vibrance(img=- factor=0) ⮕ (result=)</code></h3>
 <p><em>Adjusts the saturation of an image, protecting already saturated colors and skin tones.</em></p>
 <table>
 <thead>
@@ -11921,17 +12693,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The vibrance-adjusted image</td>
+<td></td>
+<td>- - - The vibrance-adjusted image</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">vignette(img=- strength=0.5 falloff=0.8) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">vignette(img=- strength=0.5 falloff=0.8) ⮕ (result=)</code></h3>
 <p><em>Adds a vignette effect (darkens/lightens edges)</em></p>
 <table>
 <thead>
@@ -11975,17 +12747,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The image with vignette effect</td>
+<td></td>
+<td>- - - The image with vignette effect</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">xyz(x=0 y=0 z=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">xyz(x=0 y=0 z=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from CIE XYZ values</em></p>
 <table>
 <thead>
@@ -12038,17 +12810,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">ycbcr(y=0 cb=128 cr=128 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">ycbcr(y=0 cb=128 cr=128 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from YCbCr values (digital video)</em></p>
 <table>
 <thead>
@@ -12101,17 +12873,17 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">yuv(y=0 u=0 v=0 alpha=1) ⮕ (result=-)</code></h3>
+<h3><code class="language-pxp">yuv(y=0 u=0 v=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from YUV values</em></p>
 <table>
 <thead>
@@ -12164,12 +12936,12 @@ All arguments have defaults.</p>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">any</code></td>
-<td><code class="language-pxp">-</code></td>
+<td><code class="language-pxp">error</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color as color.RGBA64</td>
+<td></td>
+<td>- - - The color as color.RGBA64</td>
 </tr>
 </tbody>
 </table>
@@ -12200,6 +12972,10 @@ All arguments have defaults.</p>
             'null': {
                 pattern: /\bnil\b/,
                 alias: 'constant.language.null'
+            },
+            'keyword': {
+                pattern: /\bfor\b/,
+                alias: 'keyword.control'
             },
             'argument-reference': {
                 pattern: /\$\d+/,
@@ -12235,10 +13011,11 @@ All arguments have defaults.</p>
             'constant.numeric': '#B5CEA8',
             'constant.language.boolean': '#569CD6',
             'constant.language.null': '#569CD6',
+            'keyword.control': '#C586C0',
             'variable.parameter': '#B5DCFE',
             'variable.assign': '#D7BA7D',
             'entity.name.function': '#FFD700',
-            'keyword.operator.assignment': '#D4D4D4',
+            'keyword.operator.assignment': '#FFA500',
             'punctuation': '#d4d4d4'
         };
 

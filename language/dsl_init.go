@@ -67,9 +67,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -98,9 +97,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -128,9 +126,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -158,9 +155,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -188,9 +184,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -218,9 +213,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -248,9 +242,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -278,9 +271,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -308,9 +300,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -338,9 +329,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -368,9 +358,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -398,9 +387,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -428,9 +416,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -458,9 +445,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -488,9 +474,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -518,9 +503,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -548,9 +532,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -578,9 +561,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -608,9 +590,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -638,9 +619,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -668,9 +648,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -698,9 +677,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -728,9 +706,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -758,9 +735,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -788,9 +764,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -818,9 +793,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -848,9 +822,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -878,9 +851,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -908,9 +880,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -938,9 +909,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -968,9 +938,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blended image",
+                typ:  "error", 
+                desc: "- - - The blended image",
             },
         },
         func(a ...any) (any, error) {
@@ -1022,9 +991,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1078,9 +1046,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1134,9 +1101,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1199,9 +1165,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1256,9 +1221,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1312,9 +1276,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1368,9 +1331,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1424,9 +1386,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1480,9 +1441,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1536,9 +1496,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1592,9 +1551,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color as color.RGBA64",
+                typ:  "error", 
+                desc: "- - - The color as color.RGBA64",
             },
         },
         func(a ...any) (any, error) {
@@ -1603,6 +1561,128 @@ func init() {
                 a[1].(float64),
                 a[2].(float64),
                 a[3].(float64), 
+            )
+        },
+    )
+    dsl.funcs.register("load-csv", "Loads a CSV file",
+        []dslParamMeta{ 
+            { 
+                name: "path",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - Path to the CSV file",
+            },
+            { 
+                name: "sep",
+                typ:  "string", 
+                def:  "\\t", 
+                desc: "The separator to split columns with",
+            },
+            { 
+                name: "hasHeader",
+                typ:  "bool", 
+                def:  true, 
+                desc: "Whether the first row is a header row",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A 2D slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return loadCSV(
+                a[0].(string),
+                a[1].(string),
+                a[2].(bool), 
+            )
+        },
+    )
+    dsl.funcs.register("load-csv-column", "Loads a column from a CSV file",
+        []dslParamMeta{ 
+            { 
+                name: "path",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - Path to the CSV file",
+            },
+            { 
+                name: "index",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The index of the column to retrieve",
+            },
+            { 
+                name: "sep",
+                typ:  "string", 
+                def:  "\\t", 
+                desc: "The separator to split columns with",
+            },
+            { 
+                name: "hasHeader",
+                typ:  "bool", 
+                def:  true, 
+                desc: "Whether the first row is a header row",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return loadCSVColumn(
+                a[0].(string),
+                a[1].(int),
+                a[2].(string),
+                a[3].(bool), 
+            )
+        },
+    )
+    dsl.funcs.register("load-csv-row", "Loads a row from a CSV file",
+        []dslParamMeta{ 
+            { 
+                name: "path",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - Path to the CSV file",
+            },
+            { 
+                name: "index",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The index of the row to retrieve",
+            },
+            { 
+                name: "sep",
+                typ:  "string", 
+                def:  "\\t", 
+                desc: "The separator to split columns with",
+            },
+            { 
+                name: "hasHeader",
+                typ:  "bool", 
+                def:  true, 
+                desc: "Whether the first row is a header row",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return loadCSVRow(
+                a[0].(string),
+                a[1].(int),
+                a[2].(string),
+                a[3].(bool), 
             )
         },
     )
@@ -1624,9 +1704,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The filled image",
+                typ:  "error", 
+                desc: "- - - The filled image",
             },
         },
         func(a ...any) (any, error) {
@@ -1654,9 +1733,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -1690,9 +1768,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -1733,9 +1810,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -1744,6 +1820,78 @@ func init() {
                 a[1].(int),
                 a[2].(int),
                 a[3].(LineStyle), 
+            )
+        },
+    )
+    dsl.funcs.register("grid-v", "Draws vertical grid lines on the image with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "cols",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of columns",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the border",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return gridV(
+                a[0].(*image.NRGBA64),
+                a[1].(int),
+                a[2].(LineStyle), 
+            )
+        },
+    )
+    dsl.funcs.register("grid-h", "Draws horizontal grid lines on the image with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "rows",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of rows",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the border",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return gridH(
+                a[0].(*image.NRGBA64),
+                a[1].(int),
+                a[2].(LineStyle), 
             )
         },
     )
@@ -1771,9 +1919,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -1862,9 +2009,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The group wrapping the input image",
+                typ:  "error", 
+                desc: "- - - The group wrapping the input image",
             },
         },
         func(a ...any) (any, error) {
@@ -1907,9 +2053,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -1944,9 +2089,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -1981,9 +2125,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2018,9 +2161,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2067,9 +2209,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2079,6 +2220,92 @@ func init() {
                 a[2].(int),
                 a[3].(int),
                 a[4].(LineStyle), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-grid-h", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The area to draw the grid on (relative)",
+            },
+            { 
+                name: "rows",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of rows",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridH(
+                a[0].(*image.NRGBA64),
+                a[1].(Rect),
+                a[2].(int),
+                a[3].(LineStyle), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-grid-v", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The area to draw the grid on (relative)",
+            },
+            { 
+                name: "cols",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of cols",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridV(
+                a[0].(*image.NRGBA64),
+                a[1].(Rect),
+                a[2].(int),
+                a[3].(LineStyle), 
             )
         },
     )
@@ -2118,9 +2345,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2130,6 +2356,92 @@ func init() {
                 a[2].(int),
                 a[3].(int),
                 a[4].(LineStyle), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-grid-h-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The area to draw the grid on",
+            },
+            { 
+                name: "rows",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of rows",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridHPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Rect),
+                a[2].(int),
+                a[3].(LineStyle), 
+            )
+        },
+    )
+    dsl.funcs.register("draw-grid-v-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "r",
+                typ:  "Rect", 
+                def:  "-", 
+                desc: "The area to draw the grid on",
+            },
+            { 
+                name: "cols",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of cols",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridVPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Rect),
+                a[2].(int),
+                a[3].(LineStyle), 
             )
         },
     )
@@ -2163,9 +2475,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2213,9 +2524,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2264,9 +2574,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2309,9 +2618,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2359,9 +2667,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2410,9 +2717,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2449,9 +2755,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2486,9 +2791,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2523,9 +2827,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2560,9 +2863,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2597,9 +2899,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2634,9 +2935,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2677,9 +2977,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2721,9 +3020,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resulting image",
+                typ:  "error", 
+                desc: "- - - The resulting image",
             },
         },
         func(a ...any) (any, error) {
@@ -2755,9 +3053,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blurred image",
+                typ:  "error", 
+                desc: "- - - The blurred image",
             },
         },
         func(a ...any) (any, error) {
@@ -2787,9 +3084,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blurred image",
+                typ:  "error", 
+                desc: "- - - The blurred image",
             },
         },
         func(a ...any) (any, error) {
@@ -2827,9 +3123,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blurred image",
+                typ:  "error", 
+                desc: "- - - The blurred image",
             },
         },
         func(a ...any) (any, error) {
@@ -2876,9 +3171,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The blurred image",
+                typ:  "error", 
+                desc: "- - - The blurred image",
             },
         },
         func(a ...any) (any, error) {
@@ -2902,9 +3196,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The inverted image",
+                typ:  "error", 
+                desc: "- - - The inverted image",
             },
         },
         func(a ...any) (any, error) {
@@ -2925,9 +3218,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The grayscaled image",
+                typ:  "error", 
+                desc: "- - - The grayscaled image",
             },
         },
         func(a ...any) (any, error) {
@@ -2948,9 +3240,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The sepia-toned image",
+                typ:  "error", 
+                desc: "- - - The sepia-toned image",
             },
         },
         func(a ...any) (any, error) {
@@ -2979,9 +3270,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with brightness changed",
+                typ:  "error", 
+                desc: "- - - The image with brightness changed",
             },
         },
         func(a ...any) (any, error) {
@@ -3009,9 +3299,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The colorized image",
+                typ:  "error", 
+                desc: "- - - The colorized image",
             },
         },
         func(a ...any) (any, error) {
@@ -3041,9 +3330,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The contrast-adjusted image",
+                typ:  "error", 
+                desc: "- - - The contrast-adjusted image",
             },
         },
         func(a ...any) (any, error) {
@@ -3073,9 +3361,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The saturation-adjusted image",
+                typ:  "error", 
+                desc: "- - - The saturation-adjusted image",
             },
         },
         func(a ...any) (any, error) {
@@ -3105,9 +3392,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The opacity-adjusted image",
+                typ:  "error", 
+                desc: "- - - The opacity-adjusted image",
             },
         },
         func(a ...any) (any, error) {
@@ -3137,9 +3423,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with chromatic aberration",
+                typ:  "error", 
+                desc: "- - - The image with chromatic aberration",
             },
         },
         func(a ...any) (any, error) {
@@ -3170,9 +3455,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The hue-rotated image",
+                typ:  "error", 
+                desc: "- - - The hue-rotated image",
             },
         },
         func(a ...any) (any, error) {
@@ -3218,9 +3502,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The color-balanced image",
+                typ:  "error", 
+                desc: "- - - The color-balanced image",
             },
         },
         func(a ...any) (any, error) {
@@ -3252,9 +3535,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The posterized image",
+                typ:  "error", 
+                desc: "- - - The posterized image",
             },
         },
         func(a ...any) (any, error) {
@@ -3284,9 +3566,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The thresholded (black and white) image",
+                typ:  "error", 
+                desc: "- - - The thresholded (black and white) image",
             },
         },
         func(a ...any) (any, error) {
@@ -3308,9 +3589,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "An image highlighting the edges",
+                typ:  "error", 
+                desc: "- - - An image highlighting the edges",
             },
         },
         func(a ...any) (any, error) {
@@ -3347,9 +3627,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with vignette effect",
+                typ:  "error", 
+                desc: "- - - The image with vignette effect",
             },
         },
         func(a ...any) (any, error) {
@@ -3380,9 +3659,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The vibrance-adjusted image",
+                typ:  "error", 
+                desc: "- - - The vibrance-adjusted image",
             },
         },
         func(a ...any) (any, error) {
@@ -3412,9 +3690,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The exposure-adjusted image",
+                typ:  "error", 
+                desc: "- - - The exposure-adjusted image",
             },
         },
         func(a ...any) (any, error) {
@@ -3479,9 +3756,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with only the selected hue visible (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with only the selected hue visible (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -3607,9 +3883,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with only pixels in all specified ranges visible (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with only pixels in all specified ranges visible (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -3742,9 +4017,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with only pixels in all specified ranges visible (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with only pixels in all specified ranges visible (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -3877,9 +4151,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with only pixels in all specified ranges visible (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with only pixels in all specified ranges visible (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -4021,9 +4294,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with only pixels in all specified ranges visible (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with only pixels in all specified ranges visible (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -4077,9 +4349,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The auto-leveled image",
+                typ:  "error", 
+                desc: "- - - The auto-leveled image",
             },
         },
         func(a ...any) (any, error) {
@@ -4118,9 +4389,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The white-balanced image",
+                typ:  "error", 
+                desc: "- - - The white-balanced image",
             },
         },
         func(a ...any) (any, error) {
@@ -4158,9 +4428,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The contrast-adjusted image",
+                typ:  "error", 
+                desc: "- - - The contrast-adjusted image",
             },
         },
         func(a ...any) (any, error) {
@@ -4227,9 +4496,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The auto-toned image",
+                typ:  "error", 
+                desc: "- - - The auto-toned image",
             },
         },
         func(a ...any) (any, error) {
@@ -4288,9 +4556,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with only pixels in the specified brightness range visible (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with only pixels in the specified brightness range visible (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -4347,9 +4614,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The image with pixels in the specified brightness range removed (16-bit)",
+                typ:  "error", 
+                desc: "- - - The image with pixels in the specified brightness range removed (16-bit)",
             },
         },
         func(a ...any) (any, error) {
@@ -4374,9 +4640,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The transformed image",
+                typ:  "error", 
+                desc: "- - - The transformed image",
             },
         },
         func(a ...any) (any, error) {
@@ -4397,9 +4662,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The transformed image",
+                typ:  "error", 
+                desc: "- - - The transformed image",
             },
         },
         func(a ...any) (any, error) {
@@ -4428,9 +4692,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The pixelated image",
+                typ:  "error", 
+                desc: "- - - The pixelated image",
             },
         },
         func(a ...any) (any, error) {
@@ -4466,9 +4729,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The displaced image",
+                typ:  "error", 
+                desc: "- - - The displaced image",
             },
         },
         func(a ...any) (any, error) {
@@ -4499,9 +4761,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The corrected image",
+                typ:  "error", 
+                desc: "- - - The corrected image",
             },
         },
         func(a ...any) (any, error) {
@@ -4531,9 +4792,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The distorted image",
+                typ:  "error", 
+                desc: "- - - The distorted image",
             },
         },
         func(a ...any) (any, error) {
@@ -4651,9 +4911,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The enhanceed image",
+                typ:  "error", 
+                desc: "- - - The enhanceed image",
             },
         },
         func(a ...any) (any, error) {
@@ -4726,9 +4985,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The sharpened image",
+                typ:  "error", 
+                desc: "- - - The sharpened image",
             },
         },
         func(a ...any) (any, error) {
@@ -4786,9 +5044,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The filtered image",
+                typ:  "error", 
+                desc: "- - - The filtered image",
             },
         },
         func(a ...any) (any, error) {
@@ -4853,9 +5110,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The enhanced image",
+                typ:  "error", 
+                desc: "- - - The enhanced image",
             },
         },
         func(a ...any) (any, error) {
@@ -4893,9 +5149,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The translated image",
+                typ:  "error", 
+                desc: "- - - The translated image",
             },
         },
         func(a ...any) (any, error) {
@@ -4926,9 +5181,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The rotated image",
+                typ:  "error", 
+                desc: "- - - The rotated image",
             },
         },
         func(a ...any) (any, error) {
@@ -4962,9 +5216,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The scaled image",
+                typ:  "error", 
+                desc: "- - - The scaled image",
             },
         },
         func(a ...any) (any, error) {
@@ -5017,9 +5270,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The transformed image",
+                typ:  "error", 
+                desc: "- - - The transformed image",
             },
         },
         func(a ...any) (any, error) {
@@ -5045,9 +5297,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The vertically flipped image",
+                typ:  "error", 
+                desc: "- - - The vertically flipped image",
             },
         },
         func(a ...any) (any, error) {
@@ -5068,9 +5319,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The horizontally flipped image",
+                typ:  "error", 
+                desc: "- - - The horizontally flipped image",
             },
         },
         func(a ...any) (any, error) {
@@ -5115,9 +5365,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The cropped image",
+                typ:  "error", 
+                desc: "- - - The cropped image",
             },
         },
         func(a ...any) (any, error) {
@@ -5166,9 +5415,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The cropped image",
+                typ:  "error", 
+                desc: "- - - The cropped image",
             },
         },
         func(a ...any) (any, error) {
@@ -5217,9 +5465,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The circularly cropped image (pixels outside the circle are transparent)",
+                typ:  "error", 
+                desc: "- - - The circularly cropped image (pixels outside the circle are transparent)",
             },
         },
         func(a ...any) (any, error) {
@@ -5263,9 +5510,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The circularly cropped image (pixels outside the circle are transparent)",
+                typ:  "error", 
+                desc: "- - - The circularly cropped image (pixels outside the circle are transparent)",
             },
         },
         func(a ...any) (any, error) {
@@ -5313,9 +5559,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The square-cropped image (pixels outside the square are transparent)",
+                typ:  "error", 
+                desc: "- - - The square-cropped image (pixels outside the square are transparent)",
             },
         },
         func(a ...any) (any, error) {
@@ -5359,9 +5604,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The square-cropped image (pixels outside the square are transparent)",
+                typ:  "error", 
+                desc: "- - - The square-cropped image (pixels outside the square are transparent)",
             },
         },
         func(a ...any) (any, error) {
@@ -5409,9 +5653,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The expanded image",
+                typ:  "error", 
+                desc: "- - - The expanded image",
             },
         },
         func(a ...any) (any, error) {
@@ -5460,9 +5703,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The expanded image",
+                typ:  "error", 
+                desc: "- - - The expanded image",
             },
         },
         func(a ...any) (any, error) {
@@ -5493,9 +5735,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resized image",
+                typ:  "error", 
+                desc: "- - - The resized image",
             },
         },
         func(a ...any) (any, error) {
@@ -5529,9 +5770,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The resized image",
+                typ:  "error", 
+                desc: "- - - The resized image",
             },
         },
         func(a ...any) (any, error) {
@@ -5560,9 +5800,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The new image",
+                typ:  "error", 
+                desc: "- - - The new image",
             },
         },
         func(a ...any) (any, error) {
@@ -5584,9 +5823,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The loaded image",
+                typ:  "error", 
+                desc: "- - - The loaded image",
             },
         },
         func(a ...any) (any, error) {
@@ -5619,6 +5857,56 @@ func init() {
             )
         },
     )
+    dsl.funcs.register("plot-data", "Renders a chart from CSV data by plotting selected columns with specified colors",
+        []dslParamMeta{ 
+            { 
+                name: "width",
+                typ:  "int", 
+                def:  "-", 
+                desc: "Chart width in pixels",
+            },
+            { 
+                name: "height",
+                typ:  "int", 
+                def:  "-", 
+                desc: "Chart height in pixels",
+            },
+            { 
+                name: "data",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "2D array of data from CSV",
+            },
+            { 
+                name: "columns",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "Array of column indices to plot",
+            },
+            { 
+                name: "colors",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "Array of colors for each column",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The chart image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return plotData(
+                a[0].(int),
+                a[1].(int),
+                a[2].([][]float64),
+                a[3].([]any),
+                a[4].([]any), 
+            )
+        },
+    )
     dsl.funcs.register("add", "Adds the two numbers",
         []dslParamMeta{ 
             { 
@@ -5637,9 +5925,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "a+b",
+                typ:  "error", 
+                desc: "- - - a+b",
             },
         },
         func(a ...any) (any, error) {
@@ -5673,9 +5960,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "a + (n * b)",
+                typ:  "error", 
+                desc: "- - - a + (n * b)",
             },
         },
         func(a ...any) (any, error) {
@@ -5704,9 +5990,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "a-b",
+                typ:  "error", 
+                desc: "- - - a-b",
             },
         },
         func(a ...any) (any, error) {
@@ -5740,9 +6025,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "a - (n * b)",
+                typ:  "error", 
+                desc: "- - - a - (n * b)",
             },
         },
         func(a ...any) (any, error) {
@@ -5771,9 +6055,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "a*b",
+                typ:  "error", 
+                desc: "- - - a*b",
             },
         },
         func(a ...any) (any, error) {
@@ -5801,9 +6084,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "a/b",
+                typ:  "error", 
+                desc: "- - - a/b",
             },
         },
         func(a ...any) (any, error) {
@@ -5825,9 +6107,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The nth fibonacci number",
+                typ:  "error", 
+                desc: "- - - The nth fibonacci number",
             },
         },
         func(a ...any) (any, error) {
@@ -5848,9 +6129,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The largest integer less than or equal to x",
+                typ:  "error", 
+                desc: "- - - The largest integer less than or equal to x",
             },
         },
         func(a ...any) (any, error) {
@@ -5871,9 +6151,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The smallest integer greater than or equal to x",
+                typ:  "error", 
+                desc: "- - - The smallest integer greater than or equal to x",
             },
         },
         func(a ...any) (any, error) {
@@ -5894,9 +6173,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The nearest integer to x",
+                typ:  "error", 
+                desc: "- - - The nearest integer to x",
             },
         },
         func(a ...any) (any, error) {
@@ -5923,9 +6201,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The minimum value of x and y",
+                typ:  "error", 
+                desc: "- - - The minimum value of x and y",
             },
         },
         func(a ...any) (any, error) {
@@ -5953,9 +6230,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The maximum value of x and y",
+                typ:  "error", 
+                desc: "- - - The maximum value of x and y",
             },
         },
         func(a ...any) (any, error) {
@@ -5983,9 +6259,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The delta between x and y",
+                typ:  "error", 
+                desc: "- - - The delta between x and y",
             },
         },
         func(a ...any) (any, error) {
@@ -6007,9 +6282,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The absolute value of x",
+                typ:  "error", 
+                desc: "- - - The absolute value of x",
             },
         },
         func(a ...any) (any, error) {
@@ -6048,9 +6322,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The slope value",
+                typ:  "error", 
+                desc: "- - - The slope value",
             },
         },
         func(a ...any) (any, error) {
@@ -6074,9 +6347,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The angle in radians",
+                typ:  "error", 
+                desc: "- - - The angle in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -6109,9 +6381,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The hypotenuse length",
+                typ:  "error", 
+                desc: "- - - The hypotenuse length",
             },
         },
         func(a ...any) (any, error) {
@@ -6146,9 +6417,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The adjacent side length",
+                typ:  "error", 
+                desc: "- - - The adjacent side length",
             },
         },
         func(a ...any) (any, error) {
@@ -6183,9 +6453,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The opposite side length",
+                typ:  "error", 
+                desc: "- - - The opposite side length",
             },
         },
         func(a ...any) (any, error) {
@@ -6208,9 +6477,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The circumference length",
+                typ:  "error", 
+                desc: "- - - The circumference length",
             },
         },
         func(a ...any) (any, error) {
@@ -6249,9 +6517,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The distance between the points",
+                typ:  "error", 
+                desc: "- - - The distance between the points",
             },
         },
         func(a ...any) (any, error) {
@@ -6293,9 +6560,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The angle in radians",
+                typ:  "error", 
+                desc: "- - - The angle in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -6319,9 +6585,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The square of x",
+                typ:  "error", 
+                desc: "- - - The square of x",
             },
         },
         func(a ...any) (any, error) {
@@ -6348,9 +6613,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "Base^n",
+                typ:  "error", 
+                desc: "- - - Base^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6372,9 +6636,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "2^n",
+                typ:  "error", 
+                desc: "- - - 2^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6395,9 +6658,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "4^n",
+                typ:  "error", 
+                desc: "- - - 4^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6418,9 +6680,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "8^n",
+                typ:  "error", 
+                desc: "- - - 8^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6441,9 +6702,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "10^n",
+                typ:  "error", 
+                desc: "- - - 10^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6464,9 +6724,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "12^n",
+                typ:  "error", 
+                desc: "- - - 12^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6487,9 +6746,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "16^n",
+                typ:  "error", 
+                desc: "- - - 16^n",
             },
         },
         func(a ...any) (any, error) {
@@ -6510,9 +6768,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The square root of x",
+                typ:  "error", 
+                desc: "- - - The square root of x",
             },
         },
         func(a ...any) (any, error) {
@@ -6533,9 +6790,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The natural logarithm of x",
+                typ:  "error", 
+                desc: "- - - The natural logarithm of x",
             },
         },
         func(a ...any) (any, error) {
@@ -6562,9 +6818,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A random float64 value between min and max, with NaN handling",
+                typ:  "error", 
+                desc: "- - - A random float64 value between min and max, with NaN handling",
             },
         },
         func(a ...any) (any, error) {
@@ -6592,9 +6847,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "One of the two input values randomly",
+                typ:  "error", 
+                desc: "- - - One of the two input values randomly",
             },
         },
         func(a ...any) (any, error) {
@@ -6616,9 +6870,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in radians",
+                typ:  "error", 
+                desc: "- - - angle in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -6639,9 +6892,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in radians",
+                typ:  "error", 
+                desc: "- - - angle in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -6662,9 +6914,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in degrees",
+                typ:  "error", 
+                desc: "- - - angle in degrees",
             },
         },
         func(a ...any) (any, error) {
@@ -6685,9 +6936,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in grads",
+                typ:  "error", 
+                desc: "- - - angle in grads",
             },
         },
         func(a ...any) (any, error) {
@@ -6708,9 +6958,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "normalized angle in radians",
+                typ:  "error", 
+                desc: "- - - normalized angle in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -6731,9 +6980,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "normalized angle in degrees",
+                typ:  "error", 
+                desc: "- - - normalized angle in degrees",
             },
         },
         func(a ...any) (any, error) {
@@ -6760,9 +7008,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "smallest angle difference in radians",
+                typ:  "error", 
+                desc: "- - - smallest angle difference in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -6790,9 +7037,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "smallest angle difference in degrees",
+                typ:  "error", 
+                desc: "- - - smallest angle difference in degrees",
             },
         },
         func(a ...any) (any, error) {
@@ -6814,9 +7060,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "sine value between -1 and 1",
+                typ:  "error", 
+                desc: "- - - sine value between -1 and 1",
             },
         },
         func(a ...any) (any, error) {
@@ -6837,9 +7082,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in radians between -PI/2 and PI/2",
+                typ:  "error", 
+                desc: "- - - angle in radians between -PI/2 and PI/2",
             },
         },
         func(a ...any) (any, error) {
@@ -6860,9 +7104,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "cosine value between -1 and 1",
+                typ:  "error", 
+                desc: "- - - cosine value between -1 and 1",
             },
         },
         func(a ...any) (any, error) {
@@ -6883,9 +7126,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in radians between 0 and PI",
+                typ:  "error", 
+                desc: "- - - angle in radians between 0 and PI",
             },
         },
         func(a ...any) (any, error) {
@@ -6906,9 +7148,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "tangent value (unbounded)",
+                typ:  "error", 
+                desc: "- - - tangent value (unbounded)",
             },
         },
         func(a ...any) (any, error) {
@@ -6929,9 +7170,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in radians between -PI/2 and PI/2",
+                typ:  "error", 
+                desc: "- - - angle in radians between -PI/2 and PI/2",
             },
         },
         func(a ...any) (any, error) {
@@ -6952,9 +7192,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "secant value (1/cos)",
+                typ:  "error", 
+                desc: "- - - secant value (1/cos)",
             },
         },
         func(a ...any) (any, error) {
@@ -6975,9 +7214,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "cosecant value (1/sin)",
+                typ:  "error", 
+                desc: "- - - cosecant value (1/sin)",
             },
         },
         func(a ...any) (any, error) {
@@ -6998,9 +7236,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "cotangent value (1/tan)",
+                typ:  "error", 
+                desc: "- - - cotangent value (1/tan)",
             },
         },
         func(a ...any) (any, error) {
@@ -7021,9 +7258,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "hyperbolic sine value",
+                typ:  "error", 
+                desc: "- - - hyperbolic sine value",
             },
         },
         func(a ...any) (any, error) {
@@ -7044,9 +7280,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "hyperbolic cosine value (always positive)",
+                typ:  "error", 
+                desc: "- - - hyperbolic cosine value (always positive)",
             },
         },
         func(a ...any) (any, error) {
@@ -7067,9 +7302,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "hyperbolic tangent value between -1 and 1",
+                typ:  "error", 
+                desc: "- - - hyperbolic tangent value between -1 and 1",
             },
         },
         func(a ...any) (any, error) {
@@ -7090,9 +7324,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "hyperbolic secant value (1/cosh)",
+                typ:  "error", 
+                desc: "- - - hyperbolic secant value (1/cosh)",
             },
         },
         func(a ...any) (any, error) {
@@ -7113,9 +7346,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "hyperbolic cosecant value (1/sinh)",
+                typ:  "error", 
+                desc: "- - - hyperbolic cosecant value (1/sinh)",
             },
         },
         func(a ...any) (any, error) {
@@ -7136,9 +7368,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "hyperbolic cotangent value (1/tanh)",
+                typ:  "error", 
+                desc: "- - - hyperbolic cotangent value (1/tanh)",
             },
         },
         func(a ...any) (any, error) {
@@ -7159,9 +7390,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "inverse hyperbolic sine value",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic sine value",
             },
         },
         func(a ...any) (any, error) {
@@ -7182,9 +7412,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "inverse hyperbolic cosine value (x >= 1)",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic cosine value (x >= 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7205,9 +7434,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "inverse hyperbolic tangent value (|x| < 1)",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic tangent value (|x| < 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7228,9 +7456,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "inverse hyperbolic secant value (0 < x <= 1)",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic secant value (0 < x <= 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7251,9 +7478,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "inverse hyperbolic cosecant value (x != 0)",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic cosecant value (x != 0)",
             },
         },
         func(a ...any) (any, error) {
@@ -7274,9 +7500,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "inverse hyperbolic cotangent value (|x| > 1)",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic cotangent value (|x| > 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7297,9 +7522,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "versed sine value (1 - cos(x))",
+                typ:  "error", 
+                desc: "- - - versed sine value (1 - cos(x))",
             },
         },
         func(a ...any) (any, error) {
@@ -7320,9 +7544,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "versed cosine value (1 + cos(x))",
+                typ:  "error", 
+                desc: "- - - versed cosine value (1 + cos(x))",
             },
         },
         func(a ...any) (any, error) {
@@ -7343,9 +7566,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "coversed sine value (1 - sin(x))",
+                typ:  "error", 
+                desc: "- - - coversed sine value (1 - sin(x))",
             },
         },
         func(a ...any) (any, error) {
@@ -7366,9 +7588,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "coversed cosine value (1 + sin(x))",
+                typ:  "error", 
+                desc: "- - - coversed cosine value (1 + sin(x))",
             },
         },
         func(a ...any) (any, error) {
@@ -7389,9 +7610,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "haversine value (0.5 * (1 - cos(x)))",
+                typ:  "error", 
+                desc: "- - - haversine value (0.5 * (1 - cos(x)))",
             },
         },
         func(a ...any) (any, error) {
@@ -7412,9 +7632,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "exsecant value (sec(x) - 1)",
+                typ:  "error", 
+                desc: "- - - exsecant value (sec(x) - 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7435,9 +7654,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "excosecant value (cosec(x) - 1)",
+                typ:  "error", 
+                desc: "- - - excosecant value (cosec(x) - 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7458,9 +7676,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "chord value (2 * sin(x/2))",
+                typ:  "error", 
+                desc: "- - - chord value (2 * sin(x/2))",
             },
         },
         func(a ...any) (any, error) {
@@ -7487,9 +7704,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "sine value (opposite/hypotenuse)",
+                typ:  "error", 
+                desc: "- - - sine value (opposite/hypotenuse)",
             },
         },
         func(a ...any) (any, error) {
@@ -7517,9 +7733,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "cosine value (adjacent/hypotenuse)",
+                typ:  "error", 
+                desc: "- - - cosine value (adjacent/hypotenuse)",
             },
         },
         func(a ...any) (any, error) {
@@ -7547,9 +7762,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "tangent value (opposite/adjacent)",
+                typ:  "error", 
+                desc: "- - - tangent value (opposite/adjacent)",
             },
         },
         func(a ...any) (any, error) {
@@ -7577,9 +7791,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "secant value (hypotenuse/adjacent)",
+                typ:  "error", 
+                desc: "- - - secant value (hypotenuse/adjacent)",
             },
         },
         func(a ...any) (any, error) {
@@ -7607,9 +7820,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "cosecant value (hypotenuse/opposite)",
+                typ:  "error", 
+                desc: "- - - cosecant value (hypotenuse/opposite)",
             },
         },
         func(a ...any) (any, error) {
@@ -7637,9 +7849,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "cotangent value (adjacent/opposite)",
+                typ:  "error", 
+                desc: "- - - cotangent value (adjacent/opposite)",
             },
         },
         func(a ...any) (any, error) {
@@ -7673,9 +7884,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "angle in radians between adjacent and opposite sides",
+                typ:  "error", 
+                desc: "- - - angle in radians between adjacent and opposite sides",
             },
         },
         func(a ...any) (any, error) {
@@ -7698,9 +7908,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "squared sine value (sin(x)²)",
+                typ:  "error", 
+                desc: "- - - squared sine value (sin(x)²)",
             },
         },
         func(a ...any) (any, error) {
@@ -7721,9 +7930,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "squared cosine value (cos(x)²)",
+                typ:  "error", 
+                desc: "- - - squared cosine value (cos(x)²)",
             },
         },
         func(a ...any) (any, error) {
@@ -7744,9 +7952,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "squared tangent value (tan(x)²)",
+                typ:  "error", 
+                desc: "- - - squared tangent value (tan(x)²)",
             },
         },
         func(a ...any) (any, error) {
@@ -7767,9 +7974,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "sinc value (sin(x)/x, with sinc(0) = 1)",
+                typ:  "error", 
+                desc: "- - - sinc value (sin(x)/x, with sinc(0) = 1)",
             },
         },
         func(a ...any) (any, error) {
@@ -7802,9 +8008,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "interpolated angle in radians",
+                typ:  "error", 
+                desc: "- - - interpolated angle in radians",
             },
         },
         func(a ...any) (any, error) {
@@ -7839,9 +8044,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "interpolated angle in degrees",
+                typ:  "error", 
+                desc: "- - - interpolated angle in degrees",
             },
         },
         func(a ...any) (any, error) {
@@ -7849,6 +8053,101 @@ func init() {
                 a[0].(float64),
                 a[1].(float64),
                 a[2].(float64), 
+            )
+        },
+    )
+    dsl.funcs.register("sprintf", "Creates formatted strings",
+        []dslParamMeta{ 
+            { 
+                name: "str",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - The format string",
+            },
+            { 
+                name: "a",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "A slice with the arguments",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The formatted string",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sprintf(
+                a[0].(string),
+                a[1].([]any), 
+            )
+        },
+    )
+    dsl.funcs.register("uppercase", "Uppercases a string",
+        []dslParamMeta{ 
+            { 
+                name: "str",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - The string to uppercase",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The uppercased string",
+            },
+        },
+        func(a ...any) (any, error) {
+            return uppercase(
+                a[0].(string), 
+            )
+        },
+    )
+    dsl.funcs.register("lowercase", "Lowercases a string",
+        []dslParamMeta{ 
+            { 
+                name: "str",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - The string to lowercase",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The lowercased string",
+            },
+        },
+        func(a ...any) (any, error) {
+            return lowercase(
+                a[0].(string), 
+            )
+        },
+    )
+    dsl.funcs.register("time", "Returns the current time according to the given layout",
+        []dslParamMeta{ 
+            { 
+                name: "layout",
+                typ:  "string", 
+                def:  "2006-01-02 15:04:05", 
+                desc: "The layout",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The current time as string",
+            },
+        },
+        func(a ...any) (any, error) {
+            return timeStr(
+                a[0].(string), 
             )
         },
     )
@@ -7870,9 +8169,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new text",
+                typ:  "error", 
+                desc: "- - - A new text",
             },
         },
         func(a ...any) (any, error) {
@@ -7900,9 +8198,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new point",
+                typ:  "error", 
+                desc: "- - - A new point",
             },
         },
         func(a ...any) (any, error) {
@@ -7924,9 +8221,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The x-coordinate of p",
+                typ:  "error", 
+                desc: "- - - The x-coordinate of p",
             },
         },
         func(a ...any) (any, error) {
@@ -7947,9 +8243,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The y-coordinate of p",
+                typ:  "error", 
+                desc: "- - - The y-coordinate of p",
             },
         },
         func(a ...any) (any, error) {
@@ -7982,9 +8277,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new vector",
+                typ:  "error", 
+                desc: "- - - A new vector",
             },
         },
         func(a ...any) (any, error) {
@@ -8007,9 +8301,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The x-component of v",
+                typ:  "error", 
+                desc: "- - - The x-component of v",
             },
         },
         func(a ...any) (any, error) {
@@ -8030,9 +8323,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The y-component of vp",
+                typ:  "error", 
+                desc: "- - - The y-component of vp",
             },
         },
         func(a ...any) (any, error) {
@@ -8053,9 +8345,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The z-component of vp",
+                typ:  "error", 
+                desc: "- - - The z-component of vp",
             },
         },
         func(a ...any) (any, error) {
@@ -8094,9 +8385,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new rectangle",
+                typ:  "error", 
+                desc: "- - - A new rectangle",
             },
         },
         func(a ...any) (any, error) {
@@ -8120,9 +8410,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The x-coordinate of r",
+                typ:  "error", 
+                desc: "- - - The x-coordinate of r",
             },
         },
         func(a ...any) (any, error) {
@@ -8143,9 +8432,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The y-coordinate of r",
+                typ:  "error", 
+                desc: "- - - The y-coordinate of r",
             },
         },
         func(a ...any) (any, error) {
@@ -8166,9 +8454,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The width of r",
+                typ:  "error", 
+                desc: "- - - The width of r",
             },
         },
         func(a ...any) (any, error) {
@@ -8189,9 +8476,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The height of r",
+                typ:  "error", 
+                desc: "- - - The height of r",
             },
         },
         func(a ...any) (any, error) {
@@ -8230,9 +8516,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new ellipse",
+                typ:  "error", 
+                desc: "- - - A new ellipse",
             },
         },
         func(a ...any) (any, error) {
@@ -8256,9 +8541,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "the center x-coordinate of e",
+                typ:  "error", 
+                desc: "- - - the center x-coordinate of e",
             },
         },
         func(a ...any) (any, error) {
@@ -8279,9 +8563,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "the center y-coordinate of e",
+                typ:  "error", 
+                desc: "- - - the center y-coordinate of e",
             },
         },
         func(a ...any) (any, error) {
@@ -8302,9 +8585,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "the x-component of the radius of e",
+                typ:  "error", 
+                desc: "- - - the x-component of the radius of e",
             },
         },
         func(a ...any) (any, error) {
@@ -8325,9 +8607,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "the y-component of the radius of e",
+                typ:  "error", 
+                desc: "- - - the y-component of the radius of e",
             },
         },
         func(a ...any) (any, error) {
@@ -8360,9 +8641,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new circle",
+                typ:  "error", 
+                desc: "- - - A new circle",
             },
         },
         func(a ...any) (any, error) {
@@ -8385,9 +8665,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The width of img",
+                typ:  "error", 
+                desc: "- - - The width of img",
             },
         },
         func(a ...any) (any, error) {
@@ -8408,9 +8687,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The height of img",
+                typ:  "error", 
+                desc: "- - - The height of img",
             },
         },
         func(a ...any) (any, error) {
@@ -8431,9 +8709,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "Aspect ratio of the image",
+                typ:  "error", 
+                desc: "- - - Aspect ratio of the image",
             },
         },
         func(a ...any) (any, error) {
@@ -8466,9 +8743,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The new image",
+                typ:  "error", 
+                desc: "- - - The new image",
             },
         },
         func(a ...any) (any, error) {
@@ -8497,9 +8773,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The new image",
+                typ:  "error", 
+                desc: "- - - The new image",
             },
         },
         func(a ...any) (any, error) {
@@ -8527,9 +8802,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "The new image",
+                typ:  "error", 
+                desc: "- - - The new image",
             },
         },
         func(a ...any) (any, error) {
@@ -8558,9 +8832,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new line style",
+                typ:  "error", 
+                desc: "- - - A new line style",
             },
         },
         func(a ...any) (any, error) {
@@ -8582,9 +8855,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new fill style",
+                typ:  "error", 
+                desc: "- - - A new fill style",
             },
         },
         func(a ...any) (any, error) {
@@ -8618,9 +8890,8 @@ func init() {
         []dslParamMeta{     
             { 
                 name: "result",
-                typ:  "any", 
-                def:  "-", 
-                desc: "A new font style",
+                typ:  "error", 
+                desc: "- - - A new font style",
             },
         },
         func(a ...any) (any, error) {

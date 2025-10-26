@@ -6,6 +6,8 @@
 
 package language
 
+import "reflect"
+
 type dslFnMeta struct {
 	name    string
 	desc    string
@@ -104,6 +106,12 @@ func (f *dslFnType) call(args ...any) (any, error) {
 
 		// Handle type conversions
 		if f.meta.params[i].typ != "" {
+			// Check if types already match exactly before casting
+			argType := reflect.TypeOf(callArgs[i])
+			if argType != nil && argType.String() == f.meta.params[i].typ {
+				// Types match exactly, no conversion needed
+				continue
+			}
 			converted, err := dsl.cast(callArgs[i], f.meta.params[i].typ)
 			if err != nil {
 				return nil, err

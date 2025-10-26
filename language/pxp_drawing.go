@@ -54,6 +54,30 @@ func grid(img *image.NRGBA64, rows, cols int, style LineStyle) (*image.NRGBA64, 
 	return drawGridPx(img, R(0, 0, float64(w), float64(h)), rows, cols, style)
 }
 
+// @Name: grid-v
+// @Desc: Draws vertical grid lines on the image with the given thickness and color.
+// @Param:      img       - - -   The image to draw to
+// @Param:      cols      - - -   The number of columns
+// @Param:      style     - - -   The thickness and color of the border
+// @Returns:    result    - - -	  The resulting image
+func gridV(img *image.NRGBA64, cols int, style LineStyle) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	w, h := bounds.Max.X, bounds.Max.Y
+	return drawGridVPx(img, R(0, 0, float64(w), float64(h)), cols, style)
+}
+
+// @Name: grid-h
+// @Desc: Draws horizontal grid lines on the image with the given thickness and color.
+// @Param:      img       - - -   The image to draw to
+// @Param:      rows      - - -   The number of rows
+// @Param:      style     - - -   The thickness and color of the border
+// @Returns:    result    - - -	  The resulting image
+func gridH(img *image.NRGBA64, rows int, style LineStyle) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	w, h := bounds.Max.X, bounds.Max.Y
+	return drawGridHPx(img, R(0, 0, float64(w), float64(h)), rows, style)
+}
+
 // @Name: text
 // @Desc: Generates the given text with the given styles.
 // @Param:      t         - - -   The text to generate
@@ -61,78 +85,34 @@ func grid(img *image.NRGBA64, rows, cols int, style LineStyle) (*image.NRGBA64, 
 // @Param:      outline   - - -   The thickness and color of the outline
 // @Returns:    result    - - -	  The resulting image
 func text(t string, style TextStyle, outline LineStyle) (*image.NRGBA64, error) {
-	// Create a Text object with the provided style
 	textObj := Text{
 		Text:  t,
 		Style: &style,
 	}
 
-	// Calculate generous initial canvas size
-	lines := splitLines(t)
-	maxLineLength := 0
-	for _, line := range lines {
-		if len(line) > maxLineLength {
-			maxLineLength = len(line)
-		}
-	}
 	outline.Thickness++
 
-	// Estimate dimensions with generous padding
-	estimatedWidth := maxLineLength*int(style.Size) + int(outline.Thickness)*2 + 20
-	estimatedHeight := len(lines)*int(style.Size) + int(outline.Thickness)*2 + 20
+	// Calculate exact dimensions using font metrics
+	width, height := measureTextBounds(textObj, outline)
 
-	// Create oversized canvas
-	canvas := I(estimatedWidth, estimatedHeight)
+	// Create canvas with exact size
+	canvas := I(width, height)
 
-	// Render text fill
-	canvas, err := drawTextPx(canvas, *P(10, 10), textObj)
+	// Render text fill (accounting for outline padding)
+	padding := int(outline.Thickness)
+	textPos := P(float64(padding), float64(padding))
+	canvas, err := drawTextPx(canvas, *textPos, textObj)
 	if err != nil {
 		return nil, err
 	}
 
 	// Render text outline
-	canvas, err = drawTextOutlinePx(canvas, *P(10, 10), textObj, outline)
+	canvas, err = drawTextOutlinePx(canvas, *textPos, textObj, outline)
 	if err != nil {
 		return nil, err
 	}
 
-	// Detect content bounds
-	bounds := canvas.Bounds()
-	minX, minY := bounds.Max.X, bounds.Max.Y
-	maxX, maxY := bounds.Min.X, bounds.Min.Y
-
-	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			pixel := canvas.NRGBA64At(x, y)
-			if pixel.A > 0 {
-				if x < minX {
-					minX = x
-				}
-				if x > maxX {
-					maxX = x
-				}
-				if y < minY {
-					minY = y
-				}
-				if y > maxY {
-					maxY = y
-				}
-			}
-		}
-	}
-
-	// Handle edge case where no content is found
-	if minX > maxX || minY > maxY {
-		return I(1, 1), nil
-	}
-
-	// Crop to content bounds
-	left := minX
-	right := bounds.Max.X - maxX - 1
-	top := minY
-	bottom := bounds.Max.Y - maxY - 1
-
-	return cropPx(canvas, left, right, top, bottom)
+	return canvas, nil
 }
 
 // @Name: group

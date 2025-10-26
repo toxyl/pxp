@@ -22,6 +22,34 @@ func drawGrid(img *image.NRGBA64, r Rect, rows, cols int, style LineStyle) (*ima
 	return drawGridPx(img, R(x, y, w, h), rows, cols, style)
 }
 
+// @Name: draw-grid-h
+// @Desc: Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.
+// @Param:      img       - - -   The image to draw to
+// @Param:      r         - - -   The area to draw the grid on (relative)
+// @Param:      rows      - - -   The number of rows
+// @Param:      style     - - -   The thickness and color of the line
+// @Returns:    result    - - -	  The resulting image
+func drawGridH(img *image.NRGBA64, r Rect, rows int, style LineStyle) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	wi, hi := float64(bounds.Dx()), float64(bounds.Dy())
+	x, y, w, h := r.X1()*wi, r.Y1()*hi, r.X2()*wi, r.Y2()*hi
+	return drawGridHPx(img, R(x, y, w, h), rows, style)
+}
+
+// @Name: draw-grid-v
+// @Desc: Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.
+// @Param:      img       - - -   The image to draw to
+// @Param:      r         - - -   The area to draw the grid on (relative)
+// @Param:      cols      - - -   The number of cols
+// @Param:      style     - - -   The thickness and color of the line
+// @Returns:    result    - - -	  The resulting image
+func drawGridV(img *image.NRGBA64, r Rect, cols int, style LineStyle) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	wi, hi := float64(bounds.Dx()), float64(bounds.Dy())
+	x, y, w, h := r.X1()*wi, r.Y1()*hi, r.X2()*wi, r.Y2()*hi
+	return drawGridVPx(img, R(x, y, w, h), cols, style)
+}
+
 // @Name: draw-grid-px
 // @Desc: Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.
 // @Param:      img       - - -   The image to draw to
@@ -43,6 +71,44 @@ func drawGridPx(img *image.NRGBA64, r Rect, rows, cols int, style LineStyle) (*i
 		img, _ = drawLineHorizontalPx(img, y+float64(r)*hB, 0, w, style)
 	}
 	img, _ = drawLineHorizontalPx(img, y+h, 0, w, style)
+
+	return img, nil
+}
+
+// @Name: draw-grid-h-px
+// @Desc: Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.
+// @Param:      img       - - -   The image to draw to
+// @Param:      r         - - -   The area to draw the grid on
+// @Param:      rows      - - -   The number of rows
+// @Param:      style     - - -   The thickness and color of the line
+// @Returns:    result    - - -	  The resulting image
+func drawGridHPx(img *image.NRGBA64, r Rect, rows int, style LineStyle) (*image.NRGBA64, error) {
+	y, w, h := r.Y1(), r.W()-1, r.H()-1
+	hB := h / float64(rows)
+
+	for r := range rows {
+		img, _ = drawLineHorizontalPx(img, y+float64(r)*hB, 0, w, style)
+	}
+	img, _ = drawLineHorizontalPx(img, y+h, 0, w, style)
+
+	return img, nil
+}
+
+// @Name: draw-grid-v-px
+// @Desc: Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.
+// @Param:      img       - - -   The image to draw to
+// @Param:      r         - - -   The area to draw the grid on
+// @Param:      cols      - - -   The number of cols
+// @Param:      style     - - -   The thickness and color of the line
+// @Returns:    result    - - -	  The resulting image
+func drawGridVPx(img *image.NRGBA64, r Rect, cols int, style LineStyle) (*image.NRGBA64, error) {
+	x, w, h := r.X1(), r.W()-1, r.H()-1
+	wB := w / float64(cols)
+
+	for c := range cols {
+		img, _ = drawLineVerticalPx(img, x+float64(c)*wB, 0, h, style)
+	}
+	img, _ = drawLineVerticalPx(img, x+w, 0, h, style)
 
 	return img, nil
 }

@@ -46,19 +46,6 @@ func buildGoDSL(src *flo.DirObj, bin *flo.FileObj) error {
 		return fmt.Errorf("failed to build GoDSL: %w", err)
 	}
 
-	// // Move the binary to current directory
-	// sourcePath := src.Path()
-
-	// if err := flo.File(sourcePath).Copy(bin.Path()); err != nil {
-	// 	return fmt.Errorf("failed to copy GoDSL binary: %w", err)
-	// }
-
-	// // Remove the source file
-	// if err := flo.File(sourcePath).Remove(); err != nil {
-	// 	return fmt.Errorf("failed to remove source GoDSL binary: %w", err)
-	// }
-
-	// time.Sleep(5 * time.Second)
 	return nil
 }
 
@@ -97,6 +84,7 @@ func main() {
 		appSlug         = flag.String("slug", "pxp", "Application slug")
 		appName         = flag.String("name", "PixelPipeline Studio", "Application name")
 		arch            = flag.String("arch", "amd64", "Architecture")
+		oses            = flag.String("os", "linux,windows", "Target OSs (comma-separated)")
 		goDslSourcePath = flag.String("godslsrc", "../go-dsl/app", "Path to go-dsl source directory")
 	)
 	flag.Parse()
@@ -150,7 +138,9 @@ func main() {
 	dieOnError(buildGoDSL(flo.Dir(*goDslSourcePath), fGoDSLBin), "Failed to build GoDSL")
 	dieOnError(generateDSL(dSrcLang, fGoDSLBin), "Failed to generate DSL")
 
-	for _, osName := range []string{"windows", "linux"} {
+	for _, osName := range strings.Split(*oses, ",") {
+		osName = strings.TrimSpace(osName)
+
 		/////////////////////////////////////////////////////////////////////////////////////////
 		printBlue(fmt.Sprintf("%s: %s", osName, "Creating directories..."))
 		/////////////////////////////////////////////////////////////////////////////////////////
