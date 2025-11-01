@@ -7645,6 +7645,87 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">first-csv-row(data=-) ⮕ (result=)</code></h3>
+<p><em>Returns the first row of CSV data</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Data to return first row of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">first-csv-rows(data=- n=1) ⮕ (result=)</code></h3>
+<p><em>Returns the first <code class="language-pxp">n</code> rows of CSV data</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Data to return first <code class="language-pxp">n</code> rows of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">1</code></td>
+<td>Number rows to return</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">fisheye(img=- strength=1) ⮕ (result=)</code></h3>
 <p><em>Applies a fisheye lens distortion effect to the image</em></p>
 <table>
@@ -8806,6 +8887,87 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">last-csv-row(data=-) ⮕ (result=)</code></h3>
+<p><em>Returns the last row of CSV data</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Data to return last row of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">last-csv-rows(data=- n=1) ⮕ (result=)</code></h3>
+<p><em>Returns the last <code class="language-pxp">n</code> rows of CSV data</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Data to return last <code class="language-pxp">n</code> rows of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">n</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">1</code></td>
+<td>Number rows to return</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - A slice with the data</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">lch(l=50 c=0 h=0 alpha=1) ⮕ (result=)</code></h3>
 <p><em>Creates a color from LCH (Lightness, Chroma, Hue) values</em></p>
 <table>
@@ -9265,6 +9427,69 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">map-color(value=0 min=0 max=1 stops=-) ⮕ (result=)</code></h3>
+<p><em>Maps a value to a color using color stops with HSLA interpolation</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">value</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The value to map to a color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">min</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Minimum value of the range</td>
+</tr>
+<tr>
+<td><code class="language-pxp">max</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Maximum value of the range</td>
+</tr>
+<tr>
+<td><code class="language-pxp">stops</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The interpolated color as color.RGBA64</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">max(x=- y=-) ⮕ (result=)</code></h3>
 <p><em>Returns the maximum value of x and y</em></p>
 <table>
@@ -9720,6 +9945,177 @@ done
 <td></td>
 <td></td>
 <td>Array of colors for each column</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The chart image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">plot-data-compact(width=- height=- data=- columns=- colors=-) ⮕ (result=)</code></h3>
+<p><em>Renders a chart from CSV data by plotting selected columns with specified colors. The series will be normalized to 0..1 based on their minium and maximimum value.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">width</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Chart width in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">height</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Chart height in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2D array of data from CSV</td>
+</tr>
+<tr>
+<td><code class="language-pxp">columns</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Array of column indices to plot</td>
+</tr>
+<tr>
+<td><code class="language-pxp">colors</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Array of colors for each column</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The chart image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">plot-series(width=- height=- data=- column=- min=- max=- stops=- invertY=false) ⮕ (result=)</code></h3>
+<p><em>Renders a series from CSV data by plotting a single column with colors determined by value using color stops</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">width</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Chart width in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">height</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Chart height in pixels</td>
+</tr>
+<tr>
+<td><code class="language-pxp">data</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2D array of data from CSV</td>
+</tr>
+<tr>
+<td><code class="language-pxp">column</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Column index to plot</td>
+</tr>
+<tr>
+<td><code class="language-pxp">min</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Minimum value for color mapping</td>
+</tr>
+<tr>
+<td><code class="language-pxp">max</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Maximum value for color mapping</td>
+</tr>
+<tr>
+<td><code class="language-pxp">stops</code></td>
+<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+</tr>
+<tr>
+<td><code class="language-pxp">invertY</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Whether flip the y-axis when plotting</td>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>

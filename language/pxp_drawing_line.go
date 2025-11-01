@@ -83,13 +83,15 @@ func drawGridPx(img *image.NRGBA64, r Rect, rows, cols int, style LineStyle) (*i
 // @Param:      style     - - -   The thickness and color of the line
 // @Returns:    result    - - -	  The resulting image
 func drawGridHPx(img *image.NRGBA64, r Rect, rows int, style LineStyle) (*image.NRGBA64, error) {
-	y, w, h := r.Y1(), r.W()-1, r.H()-1
-	hB := h / float64(rows)
-
-	for r := range rows {
-		img, _ = drawLineHorizontalPx(img, y+float64(r)*hB, 0, w, style)
+	if rows <= 1 {
+		return img, nil
 	}
-	img, _ = drawLineHorizontalPx(img, y+h, 0, w, style)
+	y, w, h := r.Y1(), r.W()-1, r.H()-1
+	cellH := h / float64(rows)
+
+	for row := range rows - 1 {
+		img, _ = drawLineHorizontalPx(img, y+cellH+float64(row)*cellH, 0, w, style)
+	}
 
 	return img, nil
 }
@@ -102,13 +104,15 @@ func drawGridHPx(img *image.NRGBA64, r Rect, rows int, style LineStyle) (*image.
 // @Param:      style     - - -   The thickness and color of the line
 // @Returns:    result    - - -	  The resulting image
 func drawGridVPx(img *image.NRGBA64, r Rect, cols int, style LineStyle) (*image.NRGBA64, error) {
-	x, w, h := r.X1(), r.W()-1, r.H()-1
-	wB := w / float64(cols)
-
-	for c := range cols {
-		img, _ = drawLineVerticalPx(img, x+float64(c)*wB, 0, h, style)
+	if cols <= 2 {
+		return img, nil
 	}
-	img, _ = drawLineVerticalPx(img, x+w, 0, h, style)
+	x, w, h := r.X1(), r.W()-1, r.H()-1
+	cellW := w / float64(cols)
+
+	for col := range cols - 1 {
+		img, _ = drawLineVerticalPx(img, x+cellW+float64(col)*cellW, 0, h, style)
+	}
 
 	return img, nil
 }

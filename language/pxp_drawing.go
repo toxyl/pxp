@@ -16,7 +16,7 @@ func fill(img *image.NRGBA64, style FillStyle) (*image.NRGBA64, error) {
 	r2, g2, b2, a2 := uint32(style.Color.R), uint32(style.Color.G), uint32(style.Color.B), uint32(style.Color.A)
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
 		return r2, g2, b2, a2
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: border

@@ -55,11 +55,11 @@ func (bl *Blender) Images(imgA, imgB *image.NRGBA64) *image.NRGBA64 {
 		return imgA // Nothing to process
 	}
 
-	rowsPerWorker := (height + numWorkers - 1) / numWorkers
+	rowsPerWorker := (height + NumColorConversionWorkers - 1) / NumColorConversionWorkers
 
 	var wg sync.WaitGroup
 
-	for i := range numWorkers {
+	for i := range NumColorConversionWorkers {
 		startY := minY + i*rowsPerWorker
 		endY := math.Min(startY+rowsPerWorker, maxY)
 

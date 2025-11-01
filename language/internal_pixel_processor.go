@@ -2,19 +2,15 @@ package language
 
 import (
 	"image"
-	"runtime"
 	"sync"
 
 	"github.com/toxyl/math"
 )
 
-var (
-	numWorkers = runtime.NumCPU()
-)
-
 type PixelBufferProcessor func(r1, g1, b1, a1 uint32) (res float64)
 
 func parallelPixelBuffer(img *image.NRGBA64, processor PixelBufferProcessor) (buf []float64) {
+	numWorkers := NumColorConversionWorkers
 	bounds := img.Bounds()
 	width := bounds.Dx()
 	height := bounds.Dy()

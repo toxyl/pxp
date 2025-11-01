@@ -1,7 +1,9 @@
 package language
 
 import (
+	"fmt"
 	"image/color"
+	"sort"
 
 	"github.com/toxyl/math"
 )
@@ -408,4 +410,93 @@ func ycbcr(y float64, cb float64, cr float64, alpha float64) (color.RGBA64, erro
 		B: B,
 		A: A,
 	}, nil
+}
+
+// @Name: map-color
+// @Desc: Maps a value to a color using color stops with HSLA interpolation
+// @Param:      value      	"" -   	0.0   	The value to map to a color
+// @Param:      min        	"" -   	0.0   	Minimum value of the range
+// @Param:      max        	"" -   	1.0   	Maximum value of the range
+// @Param:      stops      	"" -   	-   	Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]
+// @Returns:    result      - -		-   	The interpolated color as color.RGBA64
+func mapColor(value float64, min float64, max float64, stops [][]float64) (color.RGBA64, error) {
+	// Normalize value to 0-1 range
+	if max == min {
+		value = 0.0
+	} else {
+		value = (value - min) / (max - min)
+	}
+	value = math.Max(0.0, math.Min(1.0, value))
+
+	// Find the two stops to interpolate between
+	if len(stops) == 0 {
+		return color.RGBA64{}, fmt.Errorf("no color stops provided")
+	}
+
+	// Sort stops ascending by the first field of each row (threshold)
+	sort.Slice(stops, func(i, j int) bool {
+		if len(stops[i]) == 0 {
+			return false
+		}
+		if len(stops[j]) == 0 {
+			return true
+		}
+		return stops[i][0] < stops[j][0]
+	})
+
+	// Find the stop range
+	var startStop, endStop []float64
+
+	for i := 0; i < len(stops)-1; i++ {
+		if len(stops[i]) < 5 || len(stops[i+1]) < 5 {
+			return color.RGBA64{}, fmt.Errorf("invalid color stop format: each stop must have [threshold, hue, saturation, lightness, alpha]")
+		}
+		if value >= stops[i][0] && value <= stops[i+1][0] {
+			startStop = stops[i]
+			endStop = stops[i+1]
+			break
+		}
+	}
+
+	// If value is before first stop or after last stop, use the nearest stop
+	if startStop == nil {
+		if value <= stops[0][0] {
+			startStop = stops[0]
+			endStop = stops[0]
+		} else {
+			startStop = stops[len(stops)-1]
+			endStop = stops[len(stops)-1]
+		}
+	}
+
+	// If start and end are the same, return that color directly
+	if startStop[0] == endStop[0] {
+		return hsla(startStop[1], startStop[2], startStop[3], startStop[4])
+	}
+
+	// Calculate interpolation factor
+	factor := (value - startStop[0]) / (endStop[0] - startStop[0])
+
+	// Interpolate HSLA values
+	// Handle hue wrapping (hue is circular 0-360)
+	dh := endStop[1] - startStop[1]
+	if math.Abs(dh) > 180 {
+		if dh > 0 {
+			dh -= 360
+		} else {
+			dh += 360
+		}
+	}
+	h := startStop[1] + factor*dh
+	if h < 0 {
+		h += 360
+	} else if h >= 360 {
+		h -= 360
+	}
+
+	s := startStop[2] + factor*(endStop[2]-startStop[2])
+	l := startStop[3] + factor*(endStop[3]-startStop[3])
+	a := startStop[4] + factor*(endStop[4]-startStop[4])
+
+	return hsla(h, s, l, a)
 }

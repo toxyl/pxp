@@ -1,6 +1,7 @@
 package language
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -110,6 +111,60 @@ func loadCSVRow(path string, index int, sep string, hasHeader bool) ([]float64, 
 	}
 
 	return res, nil
+}
+
+// @Name: first-csv-row
+// @Desc: Returns the first row of CSV data
+// @Param:      data    	- -   -   	Data to return first row of
+// @Returns:    result  	- -   -   	A slice with the data
+func firstCSVRow(data [][]float64) ([]float64, error) {
+	if len(data) == 0 {
+		return []float64{}, fmt.Errorf("no data found")
+	}
+	return data[0], nil
+}
+
+// @Name: first-csv-rows
+// @Desc: Returns the first `n` rows of CSV data
+// @Param:      data    	- -   -   	Data to return first `n` rows of
+// @Param:      n    	    1 -   1   	Number rows to return
+// @Returns:    result  	- -   -   	A slice with the data
+func firstCSVRows(data [][]float64, n int) ([][]float64, error) {
+	if n <= 0 {
+		return [][]float64{}, fmt.Errorf("n must be positive")
+	}
+	if len(data) < n {
+		return [][]float64{}, fmt.Errorf("not enough data: have %d rows, need %d", len(data), n)
+	}
+	return data[:n], nil
+}
+
+// @Name: last-csv-row
+// @Desc: Returns the last row of CSV data
+// @Param:      data    	- -   -   	Data to return last row of
+// @Returns:    result  	- -   -   	A slice with the data
+func lastCSVRow(data [][]float64) ([]float64, error) {
+	i := len(data) - 1
+	if i < 0 {
+		return []float64{}, fmt.Errorf("no data found")
+	}
+	return data[i], nil
+}
+
+// @Name: last-csv-rows
+// @Desc: Returns the last `n` rows of CSV data
+// @Param:      data    	- -   -   	Data to return last `n` rows of
+// @Param:      n    	    1 -   1   	Number rows to return
+// @Returns:    result  	- -   -   	A slice with the data
+func lastCSVRows(data [][]float64, n int) ([][]float64, error) {
+	if n <= 0 {
+		return [][]float64{}, fmt.Errorf("n must be positive")
+	}
+	if len(data) < n {
+		return [][]float64{}, fmt.Errorf("not enough data: have %d rows, need %d", len(data), n)
+	}
+	i := len(data) - n
+	return data[i:], nil
 }
 
 func normalizeSep(sep string) string {

@@ -278,7 +278,7 @@ func (a *App) Run(script string, filePaths []string) OpResult {
 	for i, v := range filePaths {
 		args[i] = v
 	}
-	res, err := language.Run(string(script), args...)
+	res, err := language.New().Run(string(script), args...)
 	if err != nil {
 		return OpResult{map[string]string{
 			"error": err.Error(),
@@ -389,8 +389,6 @@ func (a *App) RunBatch(script, outputDir string, filePaths [][]string, reviewEna
 			"error": "No input files provided",
 		}
 	}
-	language.ImagesCache.Disable()
-	defer language.ImagesCache.Enable()
 
 	// Generate all possible combinations
 	combinations := [][]string{}
@@ -431,6 +429,8 @@ func (a *App) RunBatch(script, outputDir string, filePaths [][]string, reviewEna
 	a.batchLen = len(combinations)
 	a.batchProgress = 0
 
+	lang := language.New()
+
 	l := float64(a.batchLen)
 	// Convert []string to []any for each combination and process them
 	for i, combo := range combinations {
@@ -445,7 +445,7 @@ func (a *App) RunBatch(script, outputDir string, filePaths [][]string, reviewEna
 		}
 		fname := fmt.Sprintf("%s.png", strings.Join(suffix, "_-_"))
 
-		res, err := language.Run(script, args...)
+		res, err := lang.Run(script, args...)
 		if err != nil {
 			errors[fname] = err.Error()
 			continue

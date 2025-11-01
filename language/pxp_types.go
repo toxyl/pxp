@@ -253,7 +253,7 @@ func IC(w, h int, cFill color.RGBA64) *image.NRGBA64 {
 	r2, g2, b2, a2 := uint32(cFill.R), uint32(cFill.G), uint32(cFill.B), uint32(cFill.A)
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
 		return r2, g2, b2, a2
-	}, numWorkers)
+	}, NumColorConversionWorkers)
 }
 
 // @Name: IC

@@ -610,6 +610,7 @@ body {
     margin: 8px;
     white-space: pre-wrap;
     font-family: monospace;
+    text-align: left;
 }
 
 .error-message .error-title {

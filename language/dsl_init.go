@@ -9,12 +9,15 @@ package language
 import (
     "image"
     "image/color"
+    "sync"
 )
 
-func init() {
-    // First we need to initialize our language
-    // so it becomes available in our pseudo-namespace.
-    dsl.initDSL(
+// NewLanguage creates a new isolated language instance
+func NewLanguage() *dslCollection {
+    l := &dslCollection{
+        mu: &sync.Mutex{},
+    }
+    l.initDSL(
         "pxp", 
         "PixelPipeline Script", 
         "A scripting language for defining image processing pipelines.",
@@ -29,21 +32,21 @@ func init() {
     // If you ever need to reset the language to clear variables and functions
     // that have been added over time, you can do so by calling:
     //
-    // dsl.restoreState()
+    // l.restoreState()
     //
     // This will perform a full reset, which wipes all variables and
     // functions that have been created since the last time you called
-    // dsl.vars.storeState() and dsl.funcs.storeState().
+    // l.vars.storeState() and l.funcs.storeState().
     //
     // You can also store the current state of the language by calling:
     //
-    // dsl.storeState()
+    // l.storeState()
 
     // Register variables
-    dsl.vars.storeState() // Store the state of variables, so we can reset the language without losing them
+    l.vars.storeState() // Store the state of variables, so we can reset the language without losing them
 
     // Register functions
-    dsl.funcs.register("blend", "Blends the two images using the given blendmode (defaults to normal)",
+    l.funcs.register("blend", "Blends the two images using the given blendmode (defaults to normal)",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -79,7 +82,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-normal", "Blends the two images using the normal blend mode (alpha compositing)",
+    l.funcs.register("blend-normal", "Blends the two images using the normal blend mode (alpha compositing)",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -108,7 +111,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-erase", "Erases the bottom image wherever the top image is present (destination out)",
+    l.funcs.register("blend-erase", "Erases the bottom image wherever the top image is present (destination out)",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -137,7 +140,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-multiply", "Blends the two images using the multiply blend mode",
+    l.funcs.register("blend-multiply", "Blends the two images using the multiply blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -166,7 +169,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-screen", "Blends the two images using the screen blend mode",
+    l.funcs.register("blend-screen", "Blends the two images using the screen blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -195,7 +198,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-exclusion", "Blends the two images using the exclusion blend mode",
+    l.funcs.register("blend-exclusion", "Blends the two images using the exclusion blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -224,7 +227,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-overlay", "Blends the two images using the overlay blend mode",
+    l.funcs.register("blend-overlay", "Blends the two images using the overlay blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -253,7 +256,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-color-burn", "Blends the two images using the color burn blend mode",
+    l.funcs.register("blend-color-burn", "Blends the two images using the color burn blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -282,7 +285,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-color-dodge", "Blends the two images using the color dodge blend mode",
+    l.funcs.register("blend-color-dodge", "Blends the two images using the color dodge blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -311,7 +314,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-soft-light", "Blends the two images using the soft light blend mode",
+    l.funcs.register("blend-soft-light", "Blends the two images using the soft light blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -340,7 +343,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-hard-light", "Blends the two images using the hard light blend mode",
+    l.funcs.register("blend-hard-light", "Blends the two images using the hard light blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -369,7 +372,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-difference", "Blends the two images using the difference blend mode",
+    l.funcs.register("blend-difference", "Blends the two images using the difference blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -398,7 +401,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-subtract", "Blends the two images using the subtract blend mode",
+    l.funcs.register("blend-subtract", "Blends the two images using the subtract blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -427,7 +430,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-divide", "Blends the two images using the divide blend mode",
+    l.funcs.register("blend-divide", "Blends the two images using the divide blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -456,7 +459,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-hue", "Blends the two images using the hue blend mode",
+    l.funcs.register("blend-hue", "Blends the two images using the hue blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -485,7 +488,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-saturation", "Blends the two images using the saturation blend mode",
+    l.funcs.register("blend-saturation", "Blends the two images using the saturation blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -514,7 +517,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-color", "Blends the two images using the color blend mode",
+    l.funcs.register("blend-color", "Blends the two images using the color blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -543,7 +546,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-luminosity", "Blends the two images using the luminosity blend mode",
+    l.funcs.register("blend-luminosity", "Blends the two images using the luminosity blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -572,7 +575,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-average", "Blends the two images using the average blend mode",
+    l.funcs.register("blend-average", "Blends the two images using the average blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -601,7 +604,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-negation", "Blends the two images using the negation blend mode",
+    l.funcs.register("blend-negation", "Blends the two images using the negation blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -630,7 +633,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-reflect", "Blends the two images using the reflect blend mode",
+    l.funcs.register("blend-reflect", "Blends the two images using the reflect blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -659,7 +662,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-glow", "Blends the two images using the glow blend mode",
+    l.funcs.register("blend-glow", "Blends the two images using the glow blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -688,7 +691,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-contrast-negate", "Blends the two images using the contrast negate blend mode",
+    l.funcs.register("blend-contrast-negate", "Blends the two images using the contrast negate blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -717,7 +720,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-vivid-light", "Blends the two images using the vivid light blend mode",
+    l.funcs.register("blend-vivid-light", "Blends the two images using the vivid light blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -746,7 +749,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-linear-light", "Blends the two images using the linear light blend mode",
+    l.funcs.register("blend-linear-light", "Blends the two images using the linear light blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -775,7 +778,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-pin-light", "Blends the two images using the pin light blend mode",
+    l.funcs.register("blend-pin-light", "Blends the two images using the pin light blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -804,7 +807,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-darken", "Blends the two images using the darken blend mode",
+    l.funcs.register("blend-darken", "Blends the two images using the darken blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -833,7 +836,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-darker-color", "Blends the two images using the darker color blend mode",
+    l.funcs.register("blend-darker-color", "Blends the two images using the darker color blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -862,7 +865,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-lighten", "Blends the two images using the lighten blend mode",
+    l.funcs.register("blend-lighten", "Blends the two images using the lighten blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -891,7 +894,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-lighter-color", "Blends the two images using the lighter color blend mode",
+    l.funcs.register("blend-lighter-color", "Blends the two images using the lighter color blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -920,7 +923,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blend-hard-mix", "Blends the two images using the hard mix blend mode",
+    l.funcs.register("blend-hard-mix", "Blends the two images using the hard mix blend mode",
         []dslParamMeta{ 
             { 
                 name: "imgA",
@@ -949,7 +952,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("hsla", "Creates a color from HSLA values",
+    l.funcs.register("hsla", "Creates a color from HSLA values",
         []dslParamMeta{ 
             { 
                 name: "h",
@@ -1004,7 +1007,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("rgba", "Creates a color from RGBA values (8-bit per channel)",
+    l.funcs.register("rgba", "Creates a color from RGBA values (8-bit per channel)",
         []dslParamMeta{ 
             { 
                 name: "r",
@@ -1059,7 +1062,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("rgba64", "Creates a color from RGBA values (16-bit per channel)",
+    l.funcs.register("rgba64", "Creates a color from RGBA values (16-bit per channel)",
         []dslParamMeta{ 
             { 
                 name: "r",
@@ -1114,7 +1117,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("cmyk", "Creates a color from CMYK values",
+    l.funcs.register("cmyk", "Creates a color from CMYK values",
         []dslParamMeta{ 
             { 
                 name: "c",
@@ -1179,7 +1182,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("hsv", "Creates a color from HSV values",
+    l.funcs.register("hsv", "Creates a color from HSV values",
         []dslParamMeta{ 
             { 
                 name: "h",
@@ -1234,7 +1237,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("lab", "Creates a color from CIELAB values",
+    l.funcs.register("lab", "Creates a color from CIELAB values",
         []dslParamMeta{ 
             { 
                 name: "l",
@@ -1289,7 +1292,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("hwb", "Creates a color from HWB (Hue, Whiteness, Blackness) values",
+    l.funcs.register("hwb", "Creates a color from HWB (Hue, Whiteness, Blackness) values",
         []dslParamMeta{ 
             { 
                 name: "h",
@@ -1344,7 +1347,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("xyz", "Creates a color from CIE XYZ values",
+    l.funcs.register("xyz", "Creates a color from CIE XYZ values",
         []dslParamMeta{ 
             { 
                 name: "x",
@@ -1399,7 +1402,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("lch", "Creates a color from LCH (Lightness, Chroma, Hue) values",
+    l.funcs.register("lch", "Creates a color from LCH (Lightness, Chroma, Hue) values",
         []dslParamMeta{ 
             { 
                 name: "l",
@@ -1454,7 +1457,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("yuv", "Creates a color from YUV values",
+    l.funcs.register("yuv", "Creates a color from YUV values",
         []dslParamMeta{ 
             { 
                 name: "y",
@@ -1509,7 +1512,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("ycbcr", "Creates a color from YCbCr values (digital video)",
+    l.funcs.register("ycbcr", "Creates a color from YCbCr values (digital video)",
         []dslParamMeta{ 
             { 
                 name: "y",
@@ -1564,7 +1567,54 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("load-csv", "Loads a CSV file",
+    l.funcs.register("map-color", "Maps a value to a color using color stops with HSLA interpolation",
+        []dslParamMeta{ 
+            { 
+                name: "value",
+                typ:  "float64", 
+                def:  0, 
+                unit: "\"\"", 
+                desc: "The value to map to a color",
+            },
+            { 
+                name: "min",
+                typ:  "float64", 
+                def:  0, 
+                unit: "\"\"", 
+                desc: "Minimum value of the range",
+            },
+            { 
+                name: "max",
+                typ:  "float64", 
+                def:  1, 
+                unit: "\"\"", 
+                desc: "Maximum value of the range",
+            },
+            { 
+                name: "stops",
+                typ:  "[][]float64", 
+                def:  "-", 
+                unit: "\"\"", 
+                desc: "Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The interpolated color as color.RGBA64",
+            },
+        },
+        func(a ...any) (any, error) {
+            return mapColor(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].([][]float64), 
+            )
+        },
+    )
+    l.funcs.register("load-csv", "Loads a CSV file",
         []dslParamMeta{ 
             { 
                 name: "path",
@@ -1600,7 +1650,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("load-csv-column", "Loads a column from a CSV file",
+    l.funcs.register("load-csv-column", "Loads a column from a CSV file",
         []dslParamMeta{ 
             { 
                 name: "path",
@@ -1643,7 +1693,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("load-csv-row", "Loads a row from a CSV file",
+    l.funcs.register("load-csv-row", "Loads a row from a CSV file",
         []dslParamMeta{ 
             { 
                 name: "path",
@@ -1686,7 +1736,111 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("fill", "Fills the given image.",
+    l.funcs.register("first-csv-row", "Returns the first row of CSV data",
+        []dslParamMeta{ 
+            { 
+                name: "data",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "Data to return first row of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return firstCSVRow(
+                a[0].([][]float64), 
+            )
+        },
+    )
+    l.funcs.register("first-csv-rows", "Returns the first `n` rows of CSV data",
+        []dslParamMeta{ 
+            { 
+                name: "data",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "Data to return first `n` rows of",
+            },
+            { 
+                name: "n",
+                typ:  "int", 
+                def:  1, 
+                unit: "1", 
+                desc: "Number rows to return",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return firstCSVRows(
+                a[0].([][]float64),
+                a[1].(int), 
+            )
+        },
+    )
+    l.funcs.register("last-csv-row", "Returns the last row of CSV data",
+        []dslParamMeta{ 
+            { 
+                name: "data",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "Data to return last row of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return lastCSVRow(
+                a[0].([][]float64), 
+            )
+        },
+    )
+    l.funcs.register("last-csv-rows", "Returns the last `n` rows of CSV data",
+        []dslParamMeta{ 
+            { 
+                name: "data",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "Data to return last `n` rows of",
+            },
+            { 
+                name: "n",
+                typ:  "int", 
+                def:  1, 
+                unit: "1", 
+                desc: "Number rows to return",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A slice with the data",
+            },
+        },
+        func(a ...any) (any, error) {
+            return lastCSVRows(
+                a[0].([][]float64),
+                a[1].(int), 
+            )
+        },
+    )
+    l.funcs.register("fill", "Fills the given image.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -1715,7 +1869,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("border", "Draws a border around the image.",
+    l.funcs.register("border", "Draws a border around the image.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -1744,7 +1898,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("box", "Fills the image with the given background color and then draws a border around it.",
+    l.funcs.register("box", "Fills the image with the given background color and then draws a border around it.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -1780,7 +1934,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("grid", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("grid", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -1823,7 +1977,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("grid-v", "Draws vertical grid lines on the image with the given thickness and color.",
+    l.funcs.register("grid-v", "Draws vertical grid lines on the image with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -1859,7 +2013,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("grid-h", "Draws horizontal grid lines on the image with the given thickness and color.",
+    l.funcs.register("grid-h", "Draws horizontal grid lines on the image with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -1895,7 +2049,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("text", "Generates the given text with the given styles.",
+    l.funcs.register("text", "Generates the given text with the given styles.",
         []dslParamMeta{ 
             { 
                 name: "t",
@@ -1931,7 +2085,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("group", "Generates the given group with the given styles.",
+    l.funcs.register("group", "Generates the given group with the given styles.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2029,7 +2183,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-circle", "Draws a circle.",
+    l.funcs.register("draw-circle", "Draws a circle.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2065,7 +2219,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-circle-px", "Draws a circle.",
+    l.funcs.register("draw-circle-px", "Draws a circle.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2101,7 +2255,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-ellipse", "Draws an ellipse.",
+    l.funcs.register("draw-ellipse", "Draws an ellipse.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2137,7 +2291,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-ellipse-px", "Draws an ellipse.",
+    l.funcs.register("draw-ellipse-px", "Draws an ellipse.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2173,7 +2327,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-grid", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-grid", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2223,7 +2377,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-grid-h", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-grid-h", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2266,7 +2420,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-grid-v", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-grid-v", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2309,7 +2463,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-grid-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-grid-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2359,7 +2513,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-grid-h-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-grid-h-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2402,7 +2556,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-grid-v-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-grid-v-px", "Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2445,7 +2599,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-line", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-line", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2488,7 +2642,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-line-v", "Draws a line from P(x|y1) to P(x|y2) with the given thickness and color.",
+    l.funcs.register("draw-line-v", "Draws a line from P(x|y1) to P(x|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2538,7 +2692,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-line-h", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
+    l.funcs.register("draw-line-h", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2588,7 +2742,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-line-px", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
+    l.funcs.register("draw-line-px", "Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2631,7 +2785,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-line-v-px", "Draws a line from P(x|y1) to P(x|y2) with the given thickness and color.",
+    l.funcs.register("draw-line-v-px", "Draws a line from P(x|y1) to P(x|y2) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2681,7 +2835,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-line-h-px", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
+    l.funcs.register("draw-line-h-px", "Draws a line from P(x1|y) to P(x2|y) with the given thickness and color.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2731,7 +2885,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-rect", "Draws a rectangle at position (x,y) with the given width and height.",
+    l.funcs.register("draw-rect", "Draws a rectangle at position (x,y) with the given width and height.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2767,7 +2921,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-square", "Draws a square at position (x,y) with the given size.",
+    l.funcs.register("draw-square", "Draws a square at position (x,y) with the given size.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2803,7 +2957,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-rect-px", "Draws a rectangle at position (x,y) with the given width and height.",
+    l.funcs.register("draw-rect-px", "Draws a rectangle at position (x,y) with the given width and height.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2839,7 +2993,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-square-px", "Draws a square at position (x,y) with the given size.",
+    l.funcs.register("draw-square-px", "Draws a square at position (x,y) with the given size.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2875,7 +3029,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-text", "Draws a text at position (x,y).",
+    l.funcs.register("draw-text", "Draws a text at position (x,y).",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2911,7 +3065,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-text-px", "Draws text at position (x,y) with the given style using TrueType fonts.",
+    l.funcs.register("draw-text-px", "Draws text at position (x,y) with the given style using TrueType fonts.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2947,7 +3101,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-text-outline", "Draws only the outline of text at position (x,y).",
+    l.funcs.register("draw-text-outline", "Draws only the outline of text at position (x,y).",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -2990,7 +3144,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("draw-text-outline-px", "Draws only the outline of text at position (x,y).",
+    l.funcs.register("draw-text-outline-px", "Draws only the outline of text at position (x,y).",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3033,7 +3187,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blur-gaussian", "Applies a Gaussian blur to the image",
+    l.funcs.register("blur-gaussian", "Applies a Gaussian blur to the image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3064,7 +3218,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blur-box", "Applies a box blur to an image",
+    l.funcs.register("blur-box", "Applies a box blur to an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3095,7 +3249,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blur-motion", "Applies a motion blur to an image along a specified angle.",
+    l.funcs.register("blur-motion", "Applies a motion blur to an image along a specified angle.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3135,7 +3289,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("blur-zoom", "Applies a zoom blur effect to an image.",
+    l.funcs.register("blur-zoom", "Applies a zoom blur effect to an image.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3184,7 +3338,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("invert", "Inverts an image",
+    l.funcs.register("invert", "Inverts an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3206,7 +3360,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("grayscale", "Grayscales an image",
+    l.funcs.register("grayscale", "Grayscales an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3228,7 +3382,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("sepia", "Changes the tone of an image to sepia",
+    l.funcs.register("sepia", "Changes the tone of an image to sepia",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3250,7 +3404,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("brightness", "Changes the brightness of an image",
+    l.funcs.register("brightness", "Changes the brightness of an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3281,7 +3435,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("colorize", "Colorizes the image",
+    l.funcs.register("colorize", "Colorizes the image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3310,7 +3464,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("contrast", "Adjusts the contrast of an image",
+    l.funcs.register("contrast", "Adjusts the contrast of an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3341,7 +3495,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("saturation", "Adjusts the color saturation of an image",
+    l.funcs.register("saturation", "Adjusts the color saturation of an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3372,7 +3526,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("opacity", "Adjusts the overall opacity/transparency of an image",
+    l.funcs.register("opacity", "Adjusts the overall opacity/transparency of an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3403,7 +3557,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("chromatic-aberration", "Creates a chromatic aberration effect by offsetting color channels",
+    l.funcs.register("chromatic-aberration", "Creates a chromatic aberration effect by offsetting color channels",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3434,7 +3588,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("hue-rotate", "Rotates the hue of image colors",
+    l.funcs.register("hue-rotate", "Rotates the hue of image colors",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3466,7 +3620,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("color-balance", "Adjusts the balance of Red, Green, and Blue channels",
+    l.funcs.register("color-balance", "Adjusts the balance of Red, Green, and Blue channels",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3515,7 +3669,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("posterize", "Reduces the number of color levels in the image",
+    l.funcs.register("posterize", "Reduces the number of color levels in the image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3546,7 +3700,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("threshold", "Converts image to black and white based on a brightness threshold",
+    l.funcs.register("threshold", "Converts image to black and white based on a brightness threshold",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3577,7 +3731,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("edge-detect", "Detects edges in the image using the Sobel operator",
+    l.funcs.register("edge-detect", "Detects edges in the image using the Sobel operator",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3599,7 +3753,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("vignette", "Adds a vignette effect (darkens/lightens edges)",
+    l.funcs.register("vignette", "Adds a vignette effect (darkens/lightens edges)",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3639,7 +3793,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("vibrance", "Adjusts the saturation of an image, protecting already saturated colors and skin tones.",
+    l.funcs.register("vibrance", "Adjusts the saturation of an image, protecting already saturated colors and skin tones.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3670,7 +3824,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("exposure", "Adjusts the overall lightness or darkness of the image, simulating photographic exposure.",
+    l.funcs.register("exposure", "Adjusts the overall lightness or darkness of the image, simulating photographic exposure.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3701,7 +3855,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("select-hue", "Selects a specific hue from the image and makes everything else transparent",
+    l.funcs.register("select-hue", "Selects a specific hue from the image and makes everything else transparent",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3771,7 +3925,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("select-hsl", "Selects pixels based on their hue, saturation, and luminance, making pixels outside the specified ranges transparent",
+    l.funcs.register("select-hsl", "Selects pixels based on their hue, saturation, and luminance, making pixels outside the specified ranges transparent",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3905,7 +4059,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("remove-hsl", "Removes pixels based on their hue, saturation, and luminance, making pixels inside the specified ranges transparent",
+    l.funcs.register("remove-hsl", "Removes pixels based on their hue, saturation, and luminance, making pixels inside the specified ranges transparent",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4039,7 +4193,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("invert-hsl", "Inverts pixels based on their hue, saturation, and luminance, inverting pixels inside the specified ranges",
+    l.funcs.register("invert-hsl", "Inverts pixels based on their hue, saturation, and luminance, inverting pixels inside the specified ranges",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4173,7 +4327,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("rotate-hsl", "Rotates the hue of pixels based on their hue, saturation, and luminance",
+    l.funcs.register("rotate-hsl", "Rotates the hue of pixels based on their hue, saturation, and luminance",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4317,7 +4471,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("auto-levels", "Automatically adjusts the contrast and brightness of an image by stretching the histogram to use the full range of values, ignoring outliers using percentiles",
+    l.funcs.register("auto-levels", "Automatically adjusts the contrast and brightness of an image by stretching the histogram to use the full range of values, ignoring outliers using percentiles",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4362,7 +4516,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("auto-white-balance", "Automatically adjusts the white balance of an image by finding bright areas and making them neutral",
+    l.funcs.register("auto-white-balance", "Automatically adjusts the white balance of an image by finding bright areas and making them neutral",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4401,7 +4555,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("auto-contrast", "Automatically adjusts the contrast of an image by stretching the histogram to use the full range of values",
+    l.funcs.register("auto-contrast", "Automatically adjusts the contrast of an image by stretching the histogram to use the full range of values",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4440,7 +4594,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("auto-tone", "Automatically enhances the image by applying auto-levels, auto-white-balance, and auto-contrast in sequence",
+    l.funcs.register("auto-tone", "Automatically enhances the image by applying auto-levels, auto-white-balance, and auto-contrast in sequence",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4512,7 +4666,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("select-brightness", "Selects pixels based on their brightness, making pixels outside the specified range transparent",
+    l.funcs.register("select-brightness", "Selects pixels based on their brightness, making pixels outside the specified range transparent",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4570,7 +4724,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("remove-brightness", "Removes pixels based on their brightness, making pixels inside the specified range transparent",
+    l.funcs.register("remove-brightness", "Removes pixels based on their brightness, making pixels inside the specified range transparent",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4628,7 +4782,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("rectangular-to-polar", "Converts a rectangular coordinate image to polar coordinates",
+    l.funcs.register("rectangular-to-polar", "Converts a rectangular coordinate image to polar coordinates",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4650,7 +4804,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("polar-to-rectangular", "Converts a polar coordinate image to rectangular coordinates",
+    l.funcs.register("polar-to-rectangular", "Converts a polar coordinate image to rectangular coordinates",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4672,7 +4826,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("pixelate", "Creates a pixelation effect by averaging colors in blocks",
+    l.funcs.register("pixelate", "Creates a pixelation effect by averaging colors in blocks",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4703,7 +4857,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("displace", "Displaces pixels based on the brightness of a displacement map",
+    l.funcs.register("displace", "Displaces pixels based on the brightness of a displacement map",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4741,7 +4895,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("defisheye", "Corrects fisheye lens distortion in an image",
+    l.funcs.register("defisheye", "Corrects fisheye lens distortion in an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4772,7 +4926,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("fisheye", "Applies a fisheye lens distortion effect to the image",
+    l.funcs.register("fisheye", "Applies a fisheye lens distortion effect to the image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4803,7 +4957,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("enhance", "Enhances colors and sharpness of an image",
+    l.funcs.register("enhance", "Enhances colors and sharpness of an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -4933,7 +5087,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("sharpen", "Sharpens an image using a highpass combined with vivid light blending",
+    l.funcs.register("sharpen", "Sharpens an image using a highpass combined with vivid light blending",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5000,7 +5154,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("highpass", "Creates a high pass filter effect, resulting in a gray image with embossed edges",
+    l.funcs.register("highpass", "Creates a high pass filter effect, resulting in a gray image with embossed edges",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5058,7 +5212,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("clarity", "Enhances local contrast while preserving overall image structure",
+    l.funcs.register("clarity", "Enhances local contrast while preserving overall image structure",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5125,7 +5279,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("translate", "Translates (moves) an image by a specified amount",
+    l.funcs.register("translate", "Translates (moves) an image by a specified amount",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5161,7 +5315,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("rotate", "Rotates an image around its center by a specified angle",
+    l.funcs.register("rotate", "Rotates an image around its center by a specified angle",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5192,7 +5346,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("scale", "Scales an image by specified factors",
+    l.funcs.register("scale", "Scales an image by specified factors",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5228,7 +5382,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("transform", "Applies translation, rotation, and scaling to an image in one operation",
+    l.funcs.register("transform", "Applies translation, rotation, and scaling to an image in one operation",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5285,7 +5439,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("flip-v", "Flips an image vertically (top to bottom)",
+    l.funcs.register("flip-v", "Flips an image vertically (top to bottom)",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5307,7 +5461,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("flip-h", "Flips an image horizontally (left to right)",
+    l.funcs.register("flip-h", "Flips an image horizontally (left to right)",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5329,7 +5483,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("crop", "Crops an image by specified percentages from each side",
+    l.funcs.register("crop", "Crops an image by specified percentages from each side",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5379,7 +5533,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("crop-px", "Crops an image by specified amounts of pixels from each side",
+    l.funcs.register("crop-px", "Crops an image by specified amounts of pixels from each side",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5429,7 +5583,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("crop-circle", "Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.",
+    l.funcs.register("crop-circle", "Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5478,7 +5632,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("crop-circle-px", "Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.",
+    l.funcs.register("crop-circle-px", "Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5523,7 +5677,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("crop-square", "Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.",
+    l.funcs.register("crop-square", "Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5572,7 +5726,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("crop-square-px", "Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.",
+    l.funcs.register("crop-square-px", "Crops an image using a square mask. The square is centered at (centerX+offsetX, centerY+offsetY) and the size is a percentage (0-1) of the minimum image dimension.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5617,7 +5771,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("expand", "Expands an image by adding transparent borders with specified percentage widths",
+    l.funcs.register("expand", "Expands an image by adding transparent borders with specified percentage widths",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5667,7 +5821,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("expand-px", "Expands an image by adding transparent borders with specified pixel widths",
+    l.funcs.register("expand-px", "Expands an image by adding transparent borders with specified pixel widths",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5717,7 +5871,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("resize-max-mp", "Resize an image to stay within a maximum amount of megapixels",
+    l.funcs.register("resize-max-mp", "Resize an image to stay within a maximum amount of megapixels",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5746,7 +5900,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("resize-fit", "Resize an image to fit within a bounding box while preserving aspect ratio",
+    l.funcs.register("resize-fit", "Resize an image to fit within a bounding box while preserving aspect ratio",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5782,7 +5936,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("It", "Translates the given image by expanding/cropping the left + top borders.",
+    l.funcs.register("It", "Translates the given image by expanding/cropping the left + top borders.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5811,7 +5965,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("load", "Loads an image",
+    l.funcs.register("load", "Loads an image",
         []dslParamMeta{ 
             { 
                 name: "path",
@@ -5833,7 +5987,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("save", "Saves an image",
+    l.funcs.register("save", "Saves an image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -5857,7 +6011,2156 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("plot-data", "Renders a chart from CSV data by plotting selected columns with specified colors",
+    l.funcs.register("add", "Adds the two numbers",
+        []dslParamMeta{ 
+            { 
+                name: "a",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first number",
+            },
+            { 
+                name: "b",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second number",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - a+b",
+            },
+        },
+        func(a ...any) (any, error) {
+            return add(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("add-n", "Multiplies b by n and adds the result to a",
+        []dslParamMeta{ 
+            { 
+                name: "a",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first number",
+            },
+            { 
+                name: "b",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second number",
+            },
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The multiplier for the second number",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - a + (n * b)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return addN(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sub", "Subtracts the two numbers",
+        []dslParamMeta{ 
+            { 
+                name: "a",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first number",
+            },
+            { 
+                name: "b",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second number",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - a-b",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sub(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sub-n", "Multiplies b by n and subtracts the result from a",
+        []dslParamMeta{ 
+            { 
+                name: "a",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first number",
+            },
+            { 
+                name: "b",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second number",
+            },
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The multiplier for the second number",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - a - (n * b)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return subN(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("mul", "Multiplies the two numbers",
+        []dslParamMeta{ 
+            { 
+                name: "a",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first number",
+            },
+            { 
+                name: "b",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second number",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - a*b",
+            },
+        },
+        func(a ...any) (any, error) {
+            return mul(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("div", "Divides the two numbers",
+        []dslParamMeta{ 
+            { 
+                name: "a",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first number",
+            },
+            { 
+                name: "b",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second number",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - a/b",
+            },
+        },
+        func(a ...any) (any, error) {
+            return div(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("fibonacci", "Calculates the nth fibonacci number using 1-based indexing with memoization",
+        []dslParamMeta{ 
+            { 
+                name: "nth",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The nth fibonacci number to calculate",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The nth fibonacci number",
+            },
+        },
+        func(a ...any) (any, error) {
+            return fibonacci(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("floor", "Returns the largest integer less than or equal to x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The largest integer less than or equal to x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return floor(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("ceil", "Returns the smallest integer greater than or equal to x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The smallest integer greater than or equal to x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return ceil(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("round", "Returns the nearest integer to x, rounding to even on ties",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The nearest integer to x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return round(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("min", "Returns the minimum value of x and y",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x value",
+            },
+            { 
+                name: "y",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The minimum value of x and y",
+            },
+        },
+        func(a ...any) (any, error) {
+            return min(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("max", "Returns the maximum value of x and y",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x value",
+            },
+            { 
+                name: "y",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The maximum value of x and y",
+            },
+        },
+        func(a ...any) (any, error) {
+            return max(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("delta", "Returns the delta between x and y",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x value",
+            },
+            { 
+                name: "y",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The delta between x and y",
+            },
+        },
+        func(a ...any) (any, error) {
+            return delta(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("abs", "Returns the absolute value of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The absolute value of x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return abs(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("slope", "Calculates the slope between two points",
+        []dslParamMeta{ 
+            { 
+                name: "x1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x coordinate of the first point",
+            },
+            { 
+                name: "y1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y coordinate of the first point",
+            },
+            { 
+                name: "x2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x coordinate of the second point",
+            },
+            { 
+                name: "y2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y coordinate of the second point",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The slope value",
+            },
+        },
+        func(a ...any) (any, error) {
+            return slope(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64), 
+            )
+        },
+    )
+    l.funcs.register("tan-of-slope", "Calculates the angle from a slope value",
+        []dslParamMeta{ 
+            { 
+                name: "m",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The slope value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The angle in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return tanOfSlope(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("hypotenuse-of-triangle", "Calculates hypotenuse from adjacent, opposite and gamma angle",
+        []dslParamMeta{ 
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+            { 
+                name: "gamma",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The gamma angle",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The hypotenuse length",
+            },
+        },
+        func(a ...any) (any, error) {
+            return hypotenuseOfTriangle(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("adjacent-of-triangle", "Calculates adjacent side from hypotenuse, opposite and alpha angle",
+        []dslParamMeta{ 
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+            { 
+                name: "alpha",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The alpha angle",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The adjacent side length",
+            },
+        },
+        func(a ...any) (any, error) {
+            return adjacentOfTriangle(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("opposite-of-triangle", "Calculates opposite side from hypotenuse, adjacent and beta angle",
+        []dslParamMeta{ 
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+            { 
+                name: "beta",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The beta angle",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The opposite side length",
+            },
+        },
+        func(a ...any) (any, error) {
+            return oppositeOfTriangle(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("circumference-of-a_circle", "Calculates circumference from radius",
+        []dslParamMeta{ 
+            { 
+                name: "radius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The radius of the circle",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The circumference length",
+            },
+        },
+        func(a ...any) (any, error) {
+            return circumferenceOfACircle(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("distance-between", "Calculates distance between two points",
+        []dslParamMeta{ 
+            { 
+                name: "x1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x coordinate of the first point",
+            },
+            { 
+                name: "y1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y coordinate of the first point",
+            },
+            { 
+                name: "x2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x coordinate of the second point",
+            },
+            { 
+                name: "y2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y coordinate of the second point",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The distance between the points",
+            },
+        },
+        func(a ...any) (any, error) {
+            return distanceBetween(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64), 
+            )
+        },
+    )
+    l.funcs.register("angle-between", "Calculates angle between two points",
+        []dslParamMeta{ 
+            { 
+                name: "x1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x coordinate of the first point",
+            },
+            { 
+                name: "y1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y coordinate of the first point",
+            },
+            { 
+                name: "x2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The x coordinate of the second point",
+            },
+            { 
+                name: "y2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The y coordinate of the second point",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The angle in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return angleBetween(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64), 
+            )
+        },
+    )
+    l.funcs.register("square", "Calculates the square of a number",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The square of x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return square(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow", "Calculates base raised to the power of n, using lookup tables for integer bases when possible",
+        []dslParamMeta{ 
+            { 
+                name: "base",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The base value",
+            },
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - Base^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow2", "Calculates 2 raised to the power of n",
+        []dslParamMeta{ 
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - 2^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow2(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow4", "Calculates 4 raised to the power of n",
+        []dslParamMeta{ 
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - 4^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow4(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow8", "Calculates 8 raised to the power of n",
+        []dslParamMeta{ 
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - 8^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow8(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow10", "Calculates 10 raised to the power of n",
+        []dslParamMeta{ 
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - 10^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow10(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow12", "Calculates 12 raised to the power of n",
+        []dslParamMeta{ 
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - 12^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow12(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("pow16", "Calculates 16 raised to the power of n",
+        []dslParamMeta{ 
+            { 
+                name: "n",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The exponent",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - 16^n",
+            },
+        },
+        func(a ...any) (any, error) {
+            return pow16(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sqrt", "Returns the square root of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The square root of x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sqrt(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("log", "Returns the natural logarithm of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The natural logarithm of x",
+            },
+        },
+        func(a ...any) (any, error) {
+            return log(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("random-range", "Returns a random number between min and max",
+        []dslParamMeta{ 
+            { 
+                name: "min",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The minimum value",
+            },
+            { 
+                name: "max",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - A random float64 value between min and max, with NaN handling",
+            },
+        },
+        func(a ...any) (any, error) {
+            return randomRange(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("or", "Returns either value1 or value2 randomly",
+        []dslParamMeta{ 
+            { 
+                name: "value1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first value",
+            },
+            { 
+                name: "value2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - One of the two input values randomly",
+            },
+        },
+        func(a ...any) (any, error) {
+            return randomOr(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("degrees2radians", "converts degrees to radians",
+        []dslParamMeta{ 
+            { 
+                name: "degrees",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in degrees",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return degrees2Radians(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("grads2radians", "converts grads to radians",
+        []dslParamMeta{ 
+            { 
+                name: "grads",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in grads",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return grads2Radians(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("radians2degrees", "converts radians to degrees",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in degrees",
+            },
+        },
+        func(a ...any) (any, error) {
+            return radians2Degrees(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("radians2grads", "converts radians to grads",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in grads",
+            },
+        },
+        func(a ...any) (any, error) {
+            return radians2Grads(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("normalize-angle", "normalizes an angle to [0, 2π)",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - normalized angle in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return normalizeAngle(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("normalize-angle-degrees", "normalizes an angle to [0, 360)",
+        []dslParamMeta{ 
+            { 
+                name: "degrees",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in degrees",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - normalized angle in degrees",
+            },
+        },
+        func(a ...any) (any, error) {
+            return normalizeAngleDegrees(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("angle-difference", "calculates the smallest difference between two angles",
+        []dslParamMeta{ 
+            { 
+                name: "angle1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first angle in radians",
+            },
+            { 
+                name: "angle2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - smallest angle difference in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return angleDifference(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("angle-difference-degrees", "calculates the smallest difference between two angles in degrees",
+        []dslParamMeta{ 
+            { 
+                name: "angle1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first angle in degrees",
+            },
+            { 
+                name: "angle2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second angle in degrees",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - smallest angle difference in degrees",
+            },
+        },
+        func(a ...any) (any, error) {
+            return angleDifferenceDegrees(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sin", "calculates the sine of an angle",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - sine value between -1 and 1",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sin(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("asin", "calculates the arcsine (inverse sine) of x",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in radians between -PI/2 and PI/2",
+            },
+        },
+        func(a ...any) (any, error) {
+            return asin(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cos", "calculates the cosine of an angle in radians",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - cosine value between -1 and 1",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cos(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("acos", "calculates the arccosine (inverse cosine) of x",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in radians between 0 and PI",
+            },
+        },
+        func(a ...any) (any, error) {
+            return acos(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("tan", "calculates the tangent of an angle in radians",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - tangent value (unbounded)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return tan(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("atan", "calculates the arctangent (inverse tangent) of x",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in radians between -PI/2 and PI/2",
+            },
+        },
+        func(a ...any) (any, error) {
+            return atan(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sec", "calculates the secant of an angle in radians",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - secant value (1/cos)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sec(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cosec", "calculates the cosecant of an angle in radians",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - cosecant value (1/sin)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cosec(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cot", "calculates the cotangent of an angle in radians",
+        []dslParamMeta{ 
+            { 
+                name: "radians",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - cotangent value (1/tan)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cot(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sinh", "calculates the hyperbolic sine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - hyperbolic sine value",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sinh(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cosh", "calculates the hyperbolic cosine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - hyperbolic cosine value (always positive)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cosh(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("tanh", "calculates the hyperbolic tangent of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - hyperbolic tangent value between -1 and 1",
+            },
+        },
+        func(a ...any) (any, error) {
+            return tanh(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sech", "calculates the hyperbolic secant of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - hyperbolic secant value (1/cosh)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sech(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("csch", "calculates the hyperbolic cosecant of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - hyperbolic cosecant value (1/sinh)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return csch(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("coth", "calculates the hyperbolic cotangent of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - hyperbolic cotangent value (1/tanh)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return coth(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("asinh", "calculates the inverse hyperbolic sine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic sine value",
+            },
+        },
+        func(a ...any) (any, error) {
+            return asinh(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("acosh", "calculates the inverse hyperbolic cosine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic cosine value (x >= 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return acosh(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("atanh", "calculates the inverse hyperbolic tangent of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic tangent value (|x| < 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return atanh(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("asech", "calculates the inverse hyperbolic secant of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic secant value (0 < x <= 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return asech(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("acsch", "calculates the inverse hyperbolic cosecant of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic cosecant value (x != 0)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return acsch(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("acoth", "calculates the inverse hyperbolic cotangent of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - inverse hyperbolic cotangent value (|x| > 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return acoth(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("versin", "calculates the versed sine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - versed sine value (1 - cos(x))",
+            },
+        },
+        func(a ...any) (any, error) {
+            return versin(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("vercos", "calculates the versed cosine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - versed cosine value (1 + cos(x))",
+            },
+        },
+        func(a ...any) (any, error) {
+            return vercos(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("coversin", "calculates the coversed sine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - coversed sine value (1 - sin(x))",
+            },
+        },
+        func(a ...any) (any, error) {
+            return coversin(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("covercos", "calculates the coversed cosine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - coversed cosine value (1 + sin(x))",
+            },
+        },
+        func(a ...any) (any, error) {
+            return covercos(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("haversin", "calculates the haversine of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - haversine value (0.5 * (1 - cos(x)))",
+            },
+        },
+        func(a ...any) (any, error) {
+            return haversin(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("exsec", "calculates the exsecant of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - exsecant value (sec(x) - 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return exsec(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("excsc", "calculates the excosecant of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - excosecant value (cosec(x) - 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return excsc(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("chord", "calculates the chord of x",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - chord value (2 * sin(x/2))",
+            },
+        },
+        func(a ...any) (any, error) {
+            return chord(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sin-of-triangle", "calculates sine using opposite and hypotenuse sides",
+        []dslParamMeta{ 
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - sine value (opposite/hypotenuse)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sinOfTriangle(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cos-of-triangle", "calculates cosine using adjacent and hypotenuse sides",
+        []dslParamMeta{ 
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - cosine value (adjacent/hypotenuse)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cosOfTriangle(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("tan-of-triangle", "calculates tangent using opposite and adjacent sides",
+        []dslParamMeta{ 
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - tangent value (opposite/adjacent)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return tanOfTriangle(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sec-of-triangle", "calculates secant using hypotenuse and adjacent sides",
+        []dslParamMeta{ 
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - secant value (hypotenuse/adjacent)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return secOfTriangle(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cosec-of-triangle", "calculates cosecant using hypotenuse and opposite sides",
+        []dslParamMeta{ 
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - cosecant value (hypotenuse/opposite)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cosecOfTriangle(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cot-of-triangle", "calculates cotangent using adjacent and opposite sides",
+        []dslParamMeta{ 
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - cotangent value (adjacent/opposite)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cotOfTriangle(
+                a[0].(float64),
+                a[1].(float64), 
+            )
+        },
+    )
+    l.funcs.register("radians-of-triangle", "calculates angle in radians using all three sides of a triangle",
+        []dslParamMeta{ 
+            { 
+                name: "adjacent",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The adjacent side length",
+            },
+            { 
+                name: "opposite",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The opposite side length",
+            },
+            { 
+                name: "hypotenuse",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The hypotenuse length",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - angle in radians between adjacent and opposite sides",
+            },
+        },
+        func(a ...any) (any, error) {
+            return radiansOfTriangle(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sin2", "calculates the square of sine (sin²(x))",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - squared sine value (sin(x)²)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sin2(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("cos2", "calculates the square of cosine (cos²(x))",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - squared cosine value (cos(x)²)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cos2(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("tan2", "calculates the square of tangent (tan²(x))",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - squared tangent value (tan(x)²)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return tan2(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("sinc", "calculates the sinc function (sin(x)/x)",
+        []dslParamMeta{ 
+            { 
+                name: "x",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The input value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - sinc value (sin(x)/x, with sinc(0) = 1)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return sinc(
+                a[0].(float64), 
+            )
+        },
+    )
+    l.funcs.register("lerp-angle", "linearly interpolates between two angles in radians",
+        []dslParamMeta{ 
+            { 
+                name: "angle1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first angle in radians",
+            },
+            { 
+                name: "angle2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second angle in radians",
+            },
+            { 
+                name: "t",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The interpolation factor (0-1)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - interpolated angle in radians",
+            },
+        },
+        func(a ...any) (any, error) {
+            return lerpAngle(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("lerp-angle-degrees", "linearly interpolates between two angles in degrees",
+        []dslParamMeta{ 
+            { 
+                name: "angle1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The first angle in degrees",
+            },
+            { 
+                name: "angle2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The second angle in degrees",
+            },
+            { 
+                name: "t",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The interpolation factor (0-1)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - interpolated angle in degrees",
+            },
+        },
+        func(a ...any) (any, error) {
+            return lerpAngleDegrees(
+                a[0].(float64),
+                a[1].(float64),
+                a[2].(float64), 
+            )
+        },
+    )
+    l.funcs.register("plot-data", "Renders a chart from CSV data by plotting selected columns with specified colors",
         []dslParamMeta{ 
             { 
                 name: "width",
@@ -5907,2156 +8210,128 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("add", "Adds the two numbers",
+    l.funcs.register("plot-data-compact", "Renders a chart from CSV data by plotting selected columns with specified colors. The series will be normalized to 0..1 based on their minium and maximimum value.",
         []dslParamMeta{ 
             { 
-                name: "a",
-                typ:  "float64", 
+                name: "width",
+                typ:  "int", 
                 def:  "-", 
-                desc: "The first number",
+                desc: "Chart width in pixels",
             },
             { 
-                name: "b",
-                typ:  "float64", 
+                name: "height",
+                typ:  "int", 
                 def:  "-", 
-                desc: "The second number",
+                desc: "Chart height in pixels",
+            },
+            { 
+                name: "data",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "2D array of data from CSV",
+            },
+            { 
+                name: "columns",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "Array of column indices to plot",
+            },
+            { 
+                name: "colors",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "Array of colors for each column",
             },
         },
         []dslParamMeta{     
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - a+b",
+                desc: "- - - The chart image",
             },
         },
         func(a ...any) (any, error) {
-            return add(
-                a[0].(float64),
-                a[1].(float64), 
+            return plotDataCompact(
+                a[0].(int),
+                a[1].(int),
+                a[2].([][]float64),
+                a[3].([]any),
+                a[4].([]any), 
             )
         },
     )
-    dsl.funcs.register("add-n", "Multiplies b by n and adds the result to a",
+    l.funcs.register("plot-series", "Renders a series from CSV data by plotting a single column with colors determined by value using color stops",
         []dslParamMeta{ 
             { 
-                name: "a",
-                typ:  "float64", 
+                name: "width",
+                typ:  "int", 
                 def:  "-", 
-                desc: "The first number",
+                desc: "Chart width in pixels",
             },
             { 
-                name: "b",
-                typ:  "float64", 
+                name: "height",
+                typ:  "int", 
                 def:  "-", 
-                desc: "The second number",
+                desc: "Chart height in pixels",
             },
             { 
-                name: "n",
-                typ:  "float64", 
+                name: "data",
+                typ:  "[][]float64", 
                 def:  "-", 
-                desc: "The multiplier for the second number",
+                desc: "2D array of data from CSV",
             },
-        },
-        []dslParamMeta{     
             { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - a + (n * b)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return addN(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sub", "Subtracts the two numbers",
-        []dslParamMeta{ 
-            { 
-                name: "a",
-                typ:  "float64", 
+                name: "column",
+                typ:  "int", 
                 def:  "-", 
-                desc: "The first number",
+                desc: "Column index to plot",
             },
-            { 
-                name: "b",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second number",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - a-b",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sub(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sub-n", "Multiplies b by n and subtracts the result from a",
-        []dslParamMeta{ 
-            { 
-                name: "a",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first number",
-            },
-            { 
-                name: "b",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second number",
-            },
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The multiplier for the second number",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - a - (n * b)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return subN(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("mul", "Multiplies the two numbers",
-        []dslParamMeta{ 
-            { 
-                name: "a",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first number",
-            },
-            { 
-                name: "b",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second number",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - a*b",
-            },
-        },
-        func(a ...any) (any, error) {
-            return mul(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("div", "Divides the two numbers",
-        []dslParamMeta{ 
-            { 
-                name: "a",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first number",
-            },
-            { 
-                name: "b",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second number",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - a/b",
-            },
-        },
-        func(a ...any) (any, error) {
-            return div(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("fibonacci", "Calculates the nth fibonacci number using 1-based indexing with memoization",
-        []dslParamMeta{ 
-            { 
-                name: "nth",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The nth fibonacci number to calculate",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The nth fibonacci number",
-            },
-        },
-        func(a ...any) (any, error) {
-            return fibonacci(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("floor", "Returns the largest integer less than or equal to x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The largest integer less than or equal to x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return floor(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("ceil", "Returns the smallest integer greater than or equal to x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The smallest integer greater than or equal to x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return ceil(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("round", "Returns the nearest integer to x, rounding to even on ties",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The nearest integer to x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return round(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("min", "Returns the minimum value of x and y",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x value",
-            },
-            { 
-                name: "y",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The minimum value of x and y",
-            },
-        },
-        func(a ...any) (any, error) {
-            return min(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("max", "Returns the maximum value of x and y",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x value",
-            },
-            { 
-                name: "y",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The maximum value of x and y",
-            },
-        },
-        func(a ...any) (any, error) {
-            return max(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("delta", "Returns the delta between x and y",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x value",
-            },
-            { 
-                name: "y",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The delta between x and y",
-            },
-        },
-        func(a ...any) (any, error) {
-            return delta(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("abs", "Returns the absolute value of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The absolute value of x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return abs(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("slope", "Calculates the slope between two points",
-        []dslParamMeta{ 
-            { 
-                name: "x1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x coordinate of the first point",
-            },
-            { 
-                name: "y1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y coordinate of the first point",
-            },
-            { 
-                name: "x2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x coordinate of the second point",
-            },
-            { 
-                name: "y2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y coordinate of the second point",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The slope value",
-            },
-        },
-        func(a ...any) (any, error) {
-            return slope(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("tan-of-slope", "Calculates the angle from a slope value",
-        []dslParamMeta{ 
-            { 
-                name: "m",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The slope value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The angle in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return tanOfSlope(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("hypotenuse-of-triangle", "Calculates hypotenuse from adjacent, opposite and gamma angle",
-        []dslParamMeta{ 
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-            { 
-                name: "gamma",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The gamma angle",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The hypotenuse length",
-            },
-        },
-        func(a ...any) (any, error) {
-            return hypotenuseOfTriangle(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("adjacent-of-triangle", "Calculates adjacent side from hypotenuse, opposite and alpha angle",
-        []dslParamMeta{ 
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-            { 
-                name: "alpha",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The alpha angle",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The adjacent side length",
-            },
-        },
-        func(a ...any) (any, error) {
-            return adjacentOfTriangle(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("opposite-of-triangle", "Calculates opposite side from hypotenuse, adjacent and beta angle",
-        []dslParamMeta{ 
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-            { 
-                name: "beta",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The beta angle",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The opposite side length",
-            },
-        },
-        func(a ...any) (any, error) {
-            return oppositeOfTriangle(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("circumference-of-a_circle", "Calculates circumference from radius",
-        []dslParamMeta{ 
-            { 
-                name: "radius",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The radius of the circle",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The circumference length",
-            },
-        },
-        func(a ...any) (any, error) {
-            return circumferenceOfACircle(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("distance-between", "Calculates distance between two points",
-        []dslParamMeta{ 
-            { 
-                name: "x1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x coordinate of the first point",
-            },
-            { 
-                name: "y1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y coordinate of the first point",
-            },
-            { 
-                name: "x2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x coordinate of the second point",
-            },
-            { 
-                name: "y2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y coordinate of the second point",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The distance between the points",
-            },
-        },
-        func(a ...any) (any, error) {
-            return distanceBetween(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("angle-between", "Calculates angle between two points",
-        []dslParamMeta{ 
-            { 
-                name: "x1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x coordinate of the first point",
-            },
-            { 
-                name: "y1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y coordinate of the first point",
-            },
-            { 
-                name: "x2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The x coordinate of the second point",
-            },
-            { 
-                name: "y2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The y coordinate of the second point",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The angle in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return angleBetween(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64),
-                a[3].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("square", "Calculates the square of a number",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The square of x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return square(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow", "Calculates base raised to the power of n, using lookup tables for integer bases when possible",
-        []dslParamMeta{ 
-            { 
-                name: "base",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The base value",
-            },
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - Base^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow2", "Calculates 2 raised to the power of n",
-        []dslParamMeta{ 
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - 2^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow2(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow4", "Calculates 4 raised to the power of n",
-        []dslParamMeta{ 
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - 4^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow4(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow8", "Calculates 8 raised to the power of n",
-        []dslParamMeta{ 
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - 8^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow8(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow10", "Calculates 10 raised to the power of n",
-        []dslParamMeta{ 
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - 10^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow10(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow12", "Calculates 12 raised to the power of n",
-        []dslParamMeta{ 
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - 12^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow12(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("pow16", "Calculates 16 raised to the power of n",
-        []dslParamMeta{ 
-            { 
-                name: "n",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The exponent",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - 16^n",
-            },
-        },
-        func(a ...any) (any, error) {
-            return pow16(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sqrt", "Returns the square root of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The square root of x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sqrt(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("log", "Returns the natural logarithm of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The natural logarithm of x",
-            },
-        },
-        func(a ...any) (any, error) {
-            return log(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("random-range", "Returns a random number between min and max",
-        []dslParamMeta{ 
             { 
                 name: "min",
                 typ:  "float64", 
                 def:  "-", 
-                desc: "The minimum value",
+                desc: "Minimum value for color mapping",
             },
             { 
                 name: "max",
                 typ:  "float64", 
                 def:  "-", 
-                desc: "The maximum value",
+                desc: "Maximum value for color mapping",
+            },
+            { 
+                name: "stops",
+                typ:  "[][]float64", 
+                def:  "-", 
+                desc: "Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]",
+            },
+            { 
+                name: "invertY",
+                typ:  "bool", 
+                def:  false, 
+                desc: "Whether flip the y-axis when plotting",
             },
         },
         []dslParamMeta{     
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - A random float64 value between min and max, with NaN handling",
+                desc: "- - - The chart image",
             },
         },
         func(a ...any) (any, error) {
-            return randomRange(
-                a[0].(float64),
-                a[1].(float64), 
+            return plotSeries(
+                a[0].(int),
+                a[1].(int),
+                a[2].([][]float64),
+                a[3].(int),
+                a[4].(float64),
+                a[5].(float64),
+                a[6].([][]float64),
+                a[7].(bool), 
             )
         },
     )
-    dsl.funcs.register("or", "Returns either value1 or value2 randomly",
-        []dslParamMeta{ 
-            { 
-                name: "value1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first value",
-            },
-            { 
-                name: "value2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - One of the two input values randomly",
-            },
-        },
-        func(a ...any) (any, error) {
-            return randomOr(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("degrees2radians", "converts degrees to radians",
-        []dslParamMeta{ 
-            { 
-                name: "degrees",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in degrees",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return degrees2Radians(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("grads2radians", "converts grads to radians",
-        []dslParamMeta{ 
-            { 
-                name: "grads",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in grads",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return grads2Radians(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("radians2degrees", "converts radians to degrees",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in degrees",
-            },
-        },
-        func(a ...any) (any, error) {
-            return radians2Degrees(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("radians2grads", "converts radians to grads",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in grads",
-            },
-        },
-        func(a ...any) (any, error) {
-            return radians2Grads(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("normalize-angle", "normalizes an angle to [0, 2π)",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - normalized angle in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return normalizeAngle(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("normalize-angle-degrees", "normalizes an angle to [0, 360)",
-        []dslParamMeta{ 
-            { 
-                name: "degrees",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in degrees",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - normalized angle in degrees",
-            },
-        },
-        func(a ...any) (any, error) {
-            return normalizeAngleDegrees(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("angle-difference", "calculates the smallest difference between two angles",
-        []dslParamMeta{ 
-            { 
-                name: "angle1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first angle in radians",
-            },
-            { 
-                name: "angle2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - smallest angle difference in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return angleDifference(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("angle-difference-degrees", "calculates the smallest difference between two angles in degrees",
-        []dslParamMeta{ 
-            { 
-                name: "angle1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first angle in degrees",
-            },
-            { 
-                name: "angle2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second angle in degrees",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - smallest angle difference in degrees",
-            },
-        },
-        func(a ...any) (any, error) {
-            return angleDifferenceDegrees(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sin", "calculates the sine of an angle",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - sine value between -1 and 1",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sin(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("asin", "calculates the arcsine (inverse sine) of x",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in radians between -PI/2 and PI/2",
-            },
-        },
-        func(a ...any) (any, error) {
-            return asin(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cos", "calculates the cosine of an angle in radians",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - cosine value between -1 and 1",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cos(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("acos", "calculates the arccosine (inverse cosine) of x",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in radians between 0 and PI",
-            },
-        },
-        func(a ...any) (any, error) {
-            return acos(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("tan", "calculates the tangent of an angle in radians",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - tangent value (unbounded)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return tan(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("atan", "calculates the arctangent (inverse tangent) of x",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in radians between -PI/2 and PI/2",
-            },
-        },
-        func(a ...any) (any, error) {
-            return atan(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sec", "calculates the secant of an angle in radians",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - secant value (1/cos)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sec(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cosec", "calculates the cosecant of an angle in radians",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - cosecant value (1/sin)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cosec(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cot", "calculates the cotangent of an angle in radians",
-        []dslParamMeta{ 
-            { 
-                name: "radians",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The angle in radians",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - cotangent value (1/tan)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cot(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sinh", "calculates the hyperbolic sine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - hyperbolic sine value",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sinh(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cosh", "calculates the hyperbolic cosine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - hyperbolic cosine value (always positive)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cosh(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("tanh", "calculates the hyperbolic tangent of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - hyperbolic tangent value between -1 and 1",
-            },
-        },
-        func(a ...any) (any, error) {
-            return tanh(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sech", "calculates the hyperbolic secant of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - hyperbolic secant value (1/cosh)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sech(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("csch", "calculates the hyperbolic cosecant of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - hyperbolic cosecant value (1/sinh)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return csch(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("coth", "calculates the hyperbolic cotangent of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - hyperbolic cotangent value (1/tanh)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return coth(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("asinh", "calculates the inverse hyperbolic sine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - inverse hyperbolic sine value",
-            },
-        },
-        func(a ...any) (any, error) {
-            return asinh(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("acosh", "calculates the inverse hyperbolic cosine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - inverse hyperbolic cosine value (x >= 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return acosh(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("atanh", "calculates the inverse hyperbolic tangent of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - inverse hyperbolic tangent value (|x| < 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return atanh(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("asech", "calculates the inverse hyperbolic secant of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - inverse hyperbolic secant value (0 < x <= 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return asech(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("acsch", "calculates the inverse hyperbolic cosecant of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - inverse hyperbolic cosecant value (x != 0)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return acsch(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("acoth", "calculates the inverse hyperbolic cotangent of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - inverse hyperbolic cotangent value (|x| > 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return acoth(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("versin", "calculates the versed sine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - versed sine value (1 - cos(x))",
-            },
-        },
-        func(a ...any) (any, error) {
-            return versin(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("vercos", "calculates the versed cosine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - versed cosine value (1 + cos(x))",
-            },
-        },
-        func(a ...any) (any, error) {
-            return vercos(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("coversin", "calculates the coversed sine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - coversed sine value (1 - sin(x))",
-            },
-        },
-        func(a ...any) (any, error) {
-            return coversin(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("covercos", "calculates the coversed cosine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - coversed cosine value (1 + sin(x))",
-            },
-        },
-        func(a ...any) (any, error) {
-            return covercos(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("haversin", "calculates the haversine of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - haversine value (0.5 * (1 - cos(x)))",
-            },
-        },
-        func(a ...any) (any, error) {
-            return haversin(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("exsec", "calculates the exsecant of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - exsecant value (sec(x) - 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return exsec(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("excsc", "calculates the excosecant of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - excosecant value (cosec(x) - 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return excsc(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("chord", "calculates the chord of x",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - chord value (2 * sin(x/2))",
-            },
-        },
-        func(a ...any) (any, error) {
-            return chord(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sin-of-triangle", "calculates sine using opposite and hypotenuse sides",
-        []dslParamMeta{ 
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - sine value (opposite/hypotenuse)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sinOfTriangle(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cos-of-triangle", "calculates cosine using adjacent and hypotenuse sides",
-        []dslParamMeta{ 
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - cosine value (adjacent/hypotenuse)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cosOfTriangle(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("tan-of-triangle", "calculates tangent using opposite and adjacent sides",
-        []dslParamMeta{ 
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - tangent value (opposite/adjacent)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return tanOfTriangle(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sec-of-triangle", "calculates secant using hypotenuse and adjacent sides",
-        []dslParamMeta{ 
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - secant value (hypotenuse/adjacent)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return secOfTriangle(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cosec-of-triangle", "calculates cosecant using hypotenuse and opposite sides",
-        []dslParamMeta{ 
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - cosecant value (hypotenuse/opposite)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cosecOfTriangle(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cot-of-triangle", "calculates cotangent using adjacent and opposite sides",
-        []dslParamMeta{ 
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - cotangent value (adjacent/opposite)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cotOfTriangle(
-                a[0].(float64),
-                a[1].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("radians-of-triangle", "calculates angle in radians using all three sides of a triangle",
-        []dslParamMeta{ 
-            { 
-                name: "adjacent",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The adjacent side length",
-            },
-            { 
-                name: "opposite",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The opposite side length",
-            },
-            { 
-                name: "hypotenuse",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The hypotenuse length",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - angle in radians between adjacent and opposite sides",
-            },
-        },
-        func(a ...any) (any, error) {
-            return radiansOfTriangle(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sin2", "calculates the square of sine (sin²(x))",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - squared sine value (sin(x)²)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sin2(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("cos2", "calculates the square of cosine (cos²(x))",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - squared cosine value (cos(x)²)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return cos2(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("tan2", "calculates the square of tangent (tan²(x))",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - squared tangent value (tan(x)²)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return tan2(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sinc", "calculates the sinc function (sin(x)/x)",
-        []dslParamMeta{ 
-            { 
-                name: "x",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The input value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - sinc value (sin(x)/x, with sinc(0) = 1)",
-            },
-        },
-        func(a ...any) (any, error) {
-            return sinc(
-                a[0].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("lerp-angle", "linearly interpolates between two angles in radians",
-        []dslParamMeta{ 
-            { 
-                name: "angle1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first angle in radians",
-            },
-            { 
-                name: "angle2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second angle in radians",
-            },
-            { 
-                name: "t",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The interpolation factor (0-1)",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - interpolated angle in radians",
-            },
-        },
-        func(a ...any) (any, error) {
-            return lerpAngle(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("lerp-angle-degrees", "linearly interpolates between two angles in degrees",
-        []dslParamMeta{ 
-            { 
-                name: "angle1",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The first angle in degrees",
-            },
-            { 
-                name: "angle2",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The second angle in degrees",
-            },
-            { 
-                name: "t",
-                typ:  "float64", 
-                def:  "-", 
-                desc: "The interpolation factor (0-1)",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - interpolated angle in degrees",
-            },
-        },
-        func(a ...any) (any, error) {
-            return lerpAngleDegrees(
-                a[0].(float64),
-                a[1].(float64),
-                a[2].(float64), 
-            )
-        },
-    )
-    dsl.funcs.register("sprintf", "Creates formatted strings",
+    l.funcs.register("sprintf", "Creates formatted strings",
         []dslParamMeta{ 
             { 
                 name: "str",
@@ -8085,7 +8360,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("uppercase", "Uppercases a string",
+    l.funcs.register("uppercase", "Uppercases a string",
         []dslParamMeta{ 
             { 
                 name: "str",
@@ -8107,7 +8382,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("lowercase", "Lowercases a string",
+    l.funcs.register("lowercase", "Lowercases a string",
         []dslParamMeta{ 
             { 
                 name: "str",
@@ -8129,7 +8404,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("time", "Returns the current time according to the given layout",
+    l.funcs.register("time", "Returns the current time according to the given layout",
         []dslParamMeta{ 
             { 
                 name: "layout",
@@ -8151,7 +8426,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("T", "Creates a new text.",
+    l.funcs.register("T", "Creates a new text.",
         []dslParamMeta{ 
             { 
                 name: "style",
@@ -8180,7 +8455,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("P", "Creates a new point at P(x|y).",
+    l.funcs.register("P", "Creates a new point at P(x|y).",
         []dslParamMeta{ 
             { 
                 name: "x",
@@ -8209,7 +8484,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Px", "Returns the x-coordinate of a point.",
+    l.funcs.register("Px", "Returns the x-coordinate of a point.",
         []dslParamMeta{ 
             { 
                 name: "p",
@@ -8231,7 +8506,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Py", "Returns the y-coordinate of a point.",
+    l.funcs.register("Py", "Returns the y-coordinate of a point.",
         []dslParamMeta{ 
             { 
                 name: "p",
@@ -8253,7 +8528,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("V", "Creates a new Vector from x, y and z.",
+    l.funcs.register("V", "Creates a new Vector from x, y and z.",
         []dslParamMeta{ 
             { 
                 name: "x",
@@ -8289,7 +8564,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Vx", "Returns the x-component of a vector.",
+    l.funcs.register("Vx", "Returns the x-component of a vector.",
         []dslParamMeta{ 
             { 
                 name: "v",
@@ -8311,7 +8586,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Vy", "Returns the y-component of a vector.",
+    l.funcs.register("Vy", "Returns the y-component of a vector.",
         []dslParamMeta{ 
             { 
                 name: "v",
@@ -8333,7 +8608,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Vz", "Returns the z-component of a vector.",
+    l.funcs.register("Vz", "Returns the z-component of a vector.",
         []dslParamMeta{ 
             { 
                 name: "v",
@@ -8355,7 +8630,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("R", "Creates a new rectangle with the given dimensions at P(x|y).",
+    l.funcs.register("R", "Creates a new rectangle with the given dimensions at P(x|y).",
         []dslParamMeta{ 
             { 
                 name: "x",
@@ -8398,7 +8673,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Rx", "Returns the x-coordinate of a rect.",
+    l.funcs.register("Rx", "Returns the x-coordinate of a rect.",
         []dslParamMeta{ 
             { 
                 name: "r",
@@ -8420,7 +8695,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Ry", "Returns the y-coordinate of a rect.",
+    l.funcs.register("Ry", "Returns the y-coordinate of a rect.",
         []dslParamMeta{ 
             { 
                 name: "r",
@@ -8442,7 +8717,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Rw", "Returns the width of a rect.",
+    l.funcs.register("Rw", "Returns the width of a rect.",
         []dslParamMeta{ 
             { 
                 name: "r",
@@ -8464,7 +8739,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Rh", "Returns the height of a rect.",
+    l.funcs.register("Rh", "Returns the height of a rect.",
         []dslParamMeta{ 
             { 
                 name: "r",
@@ -8486,7 +8761,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("E", "Creates a new ellipse with the given radius at P(x|y).",
+    l.funcs.register("E", "Creates a new ellipse with the given radius at P(x|y).",
         []dslParamMeta{ 
             { 
                 name: "centerX",
@@ -8529,7 +8804,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Ex", "Returns the center x-coordinate of an ellipse.",
+    l.funcs.register("Ex", "Returns the center x-coordinate of an ellipse.",
         []dslParamMeta{ 
             { 
                 name: "e",
@@ -8551,7 +8826,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Ey", "Returns the center y-coordinate of an ellipse.",
+    l.funcs.register("Ey", "Returns the center y-coordinate of an ellipse.",
         []dslParamMeta{ 
             { 
                 name: "e",
@@ -8573,7 +8848,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Erx", "Returns the x-component of the radius of an ellipse.",
+    l.funcs.register("Erx", "Returns the x-component of the radius of an ellipse.",
         []dslParamMeta{ 
             { 
                 name: "e",
@@ -8595,7 +8870,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Ery", "Returns the y-component of the radius of an ellipse.",
+    l.funcs.register("Ery", "Returns the y-component of the radius of an ellipse.",
         []dslParamMeta{ 
             { 
                 name: "e",
@@ -8617,7 +8892,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("C", "Creates a new circle with the given radius at P(x|y).",
+    l.funcs.register("C", "Creates a new circle with the given radius at P(x|y).",
         []dslParamMeta{ 
             { 
                 name: "centerX",
@@ -8653,7 +8928,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Iw", "Returns the width of an image.",
+    l.funcs.register("Iw", "Returns the width of an image.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -8675,7 +8950,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Ih", "Returns the height of an image.",
+    l.funcs.register("Ih", "Returns the height of an image.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -8697,7 +8972,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("Ir", "Returns the aspect ratio of the given image",
+    l.funcs.register("Ir", "Returns the aspect ratio of the given image",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -8719,7 +8994,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("IC", "Creates a new image with the given color.",
+    l.funcs.register("IC", "Creates a new image with the given color.",
         []dslParamMeta{ 
             { 
                 name: "w",
@@ -8755,7 +9030,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("I", "Creates a new transparent image.",
+    l.funcs.register("I", "Creates a new transparent image.",
         []dslParamMeta{ 
             { 
                 name: "w",
@@ -8784,7 +9059,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("SI", "Copies an area from a source image and returns it as a new image.",
+    l.funcs.register("SI", "Copies an area from a source image and returns it as a new image.",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -8813,7 +9088,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("LS", "Creates a new line style.",
+    l.funcs.register("LS", "Creates a new line style.",
         []dslParamMeta{ 
             { 
                 name: "color",
@@ -8843,7 +9118,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("FS", "Creates a new fill style.",
+    l.funcs.register("FS", "Creates a new fill style.",
         []dslParamMeta{ 
             { 
                 name: "color",
@@ -8865,7 +9140,7 @@ func init() {
             )
         },
     )
-    dsl.funcs.register("TS", "Creates a new font style.",
+    l.funcs.register("TS", "Creates a new font style.",
         []dslParamMeta{ 
             { 
                 name: "color",
@@ -8902,5 +9177,11 @@ func init() {
             )
         },
     )
-    dsl.funcs.storeState() // Store the state of functions, so we can reset the language without losing them
+    l.funcs.storeState() // Store the state of functions, so we can reset the language without losing them
+
+    return l
+}
+
+func init() {
+    dsl = *NewLanguage()
 } 

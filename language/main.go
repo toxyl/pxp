@@ -1,26 +1,36 @@
 package language
 
-import "image"
+import (
+	"image"
+)
 
 // Language represents the PixelPipeline Studio language functionality
-type Language struct{}
+type Language struct {
+	dsl *dslCollection
+}
 
 func Shell() {
 	dsl.shell()
 }
 
-func Run(script string, args ...any) (*dslResult, error) {
-	dsl.storeState()
-	defer dsl.restoreState()
-	res, err := dsl.run(script, false, args...)
+func New() *Language {
+	return &Language{
+		dsl: NewLanguage(), // Use the generated constructor
+	}
+}
+
+func (l *Language) Run(script string, args ...any) (*dslResult, error) {
+	l.dsl.storeState()
+	res, err := l.dsl.run(script, false, args...)
+	l.dsl.restoreState()
 	if err != nil {
 		return nil, err
 	}
 	switch t := res.value.(type) {
 	case *image.RGBA64:
-		res.value = dsl.convertRGBA64ToNRGBA(t)
+		res.value = l.dsl.convertRGBA64ToNRGBA(t)
 	case *image.NRGBA64:
-		res.value = dsl.convertNRGBA64ToNRGBA(t)
+		res.value = l.dsl.convertNRGBA64ToNRGBA(t)
 	}
 	return res, err
 }

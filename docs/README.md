@@ -1658,6 +1658,25 @@ _Fills the given image._
 | `⮕ result` | `error` |   |   |   |   | - - - The filled image |
 ---
 
+### `first-csv-row(data=-) ⮕ (result=)`  
+_Returns the first row of CSV data_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `data` | `[][]float64` | `-` |   |   |   | Data to return first row of |
+| `⮕ result` | `error` |   |   |   |   | - - - A slice with the data |
+---
+
+### `first-csv-rows(data=- n=1) ⮕ (result=)`  
+_Returns the first `n` rows of CSV data_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `data` | `[][]float64` | `-` |   |   |   | Data to return first `n` rows of |
+| `n` | `int` | `1` |   |   | `1` | Number rows to return |
+| `⮕ result` | `error` |   |   |   |   | - - - A slice with the data |
+---
+
 ### `fisheye(img=- strength=1) ⮕ (result=)`  
 _Applies a fisheye lens distortion effect to the image_
 
@@ -1887,6 +1906,25 @@ _Creates a color from CIELAB values_
 | `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
 ---
 
+### `last-csv-row(data=-) ⮕ (result=)`  
+_Returns the last row of CSV data_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `data` | `[][]float64` | `-` |   |   |   | Data to return last row of |
+| `⮕ result` | `error` |   |   |   |   | - - - A slice with the data |
+---
+
+### `last-csv-rows(data=- n=1) ⮕ (result=)`  
+_Returns the last `n` rows of CSV data_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `data` | `[][]float64` | `-` |   |   |   | Data to return last `n` rows of |
+| `n` | `int` | `1` |   |   | `1` | Number rows to return |
+| `⮕ result` | `error` |   |   |   |   | - - - A slice with the data |
+---
+
 ### `lch(l=50 c=0 h=0 alpha=1) ⮕ (result=)`  
 _Creates a color from LCH (Lightness, Chroma, Hue) values_
 
@@ -1981,6 +2019,18 @@ _Lowercases a string_
 |------|------|---------|-----|-----|------|-------------|
 | `str` | `string` | `"-"` |   |   |   | - - The string to lowercase |
 | `⮕ result` | `error` |   |   |   |   | - - - The lowercased string |
+---
+
+### `map-color(value=0 min=0 max=1 stops=-) ⮕ (result=)`  
+_Maps a value to a color using color stops with HSLA interpolation_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `value` | `float64` | `0` |   |   | `&#34;&#34;` | The value to map to a color |
+| `min` | `float64` | `0` |   |   | `&#34;&#34;` | Minimum value of the range |
+| `max` | `float64` | `1` |   |   | `&#34;&#34;` | Maximum value of the range |
+| `stops` | `[][]float64` | `-` |   |   | `&#34;&#34;` | Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha] |
+| `⮕ result` | `error` |   |   |   |   | - - - The interpolated color as color.RGBA64 |
 ---
 
 ### `max(x=- y=-) ⮕ (result=)`  
@@ -2082,6 +2132,35 @@ _Renders a chart from CSV data by plotting selected columns with specified color
 | `data` | `[][]float64` | `-` |   |   |   | 2D array of data from CSV |
 | `columns` | `[]any` | `-` |   |   |   | Array of column indices to plot |
 | `colors` | `[]any` | `-` |   |   |   | Array of colors for each column |
+| `⮕ result` | `error` |   |   |   |   | - - - The chart image |
+---
+
+### `plot-data-compact(width=- height=- data=- columns=- colors=-) ⮕ (result=)`  
+_Renders a chart from CSV data by plotting selected columns with specified colors. The series will be normalized to 0..1 based on their minium and maximimum value._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `width` | `int` | `-` |   |   |   | Chart width in pixels |
+| `height` | `int` | `-` |   |   |   | Chart height in pixels |
+| `data` | `[][]float64` | `-` |   |   |   | 2D array of data from CSV |
+| `columns` | `[]any` | `-` |   |   |   | Array of column indices to plot |
+| `colors` | `[]any` | `-` |   |   |   | Array of colors for each column |
+| `⮕ result` | `error` |   |   |   |   | - - - The chart image |
+---
+
+### `plot-series(width=- height=- data=- column=- min=- max=- stops=- invertY=false) ⮕ (result=)`  
+_Renders a series from CSV data by plotting a single column with colors determined by value using color stops_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `width` | `int` | `-` |   |   |   | Chart width in pixels |
+| `height` | `int` | `-` |   |   |   | Chart height in pixels |
+| `data` | `[][]float64` | `-` |   |   |   | 2D array of data from CSV |
+| `column` | `int` | `-` |   |   |   | Column index to plot |
+| `min` | `float64` | `-` |   |   |   | Minimum value for color mapping |
+| `max` | `float64` | `-` |   |   |   | Maximum value for color mapping |
+| `stops` | `[][]float64` | `-` |   |   |   | Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha] |
+| `invertY` | `bool` | `false` |   |   |   | Whether flip the y-axis when plotting |
 | `⮕ result` | `error` |   |   |   |   | - - - The chart image |
 ---
 

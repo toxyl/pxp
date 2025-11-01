@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/toxyl/flo"
 	"github.com/toxyl/pxp/pxp"
+	"github.com/toxyl/scheduler"
 )
 
 func ensureImgPrefix(script string) string {
@@ -30,13 +30,9 @@ func ensureImgPrefix(script string) string {
 // Stream repeatedly renders scripts produced by ScriptFn to a single file in
 // the OS temp directory and invokes a hook after each successful render.
 type Stream struct {
-	mu      sync.RWMutex
-	cfg     Config
-	dir     *flo.DirObj
-	latest  *flo.FileObj
-	stopCh  chan struct{}
-	running bool
-	busy    bool
+	cfg    Config
+	dir    *flo.DirObj
+	latest *flo.FileObj
 }
 
 // New creates a new Stream instance. The stream writes into
@@ -45,6 +41,7 @@ type Stream struct {
 func New(cfg Config) *Stream {
 	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(cfg.Name)))
 	base := flo.File(os.TempDir()).Dir("pxp").Dir(hash)
+	_ = base.Mkdir(0755)
 	return &Stream{cfg: cfg, dir: base}
 }
 
@@ -52,13 +49,6 @@ func New(cfg Config) *Stream {
 // continues at the configured interval. Calling Start when already running is a
 // no-op and returns nil.
 func (s *Stream) Start() error {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	if s.running {
-		return nil
-	}
-
 	if s.cfg.ScriptFn == nil {
 		return fmt.Errorf("scriptFn must be provided")
 	}
@@ -71,80 +61,29 @@ func (s *Stream) Start() error {
 	}
 
 	s.latest = s.dir.File("latest.png")
-	s.stopCh = make(chan struct{})
-	s.running = true
 
-	go s.loop()
-	return nil
-}
-
-// Stop signals the rendering loop to stop. It is safe to call Stop when the
-// stream is not running.
-func (s *Stream) Stop() error {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	if !s.running {
-		return nil
-	}
-
-	close(s.stopCh)
-	s.running = false
-	return nil
-}
-
-func (s *Stream) loop() {
-	// Immediate first run
-	s.render()
-
-	ticker := time.NewTicker(s.cfg.Interval)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-s.stopCh:
-			return
-		case <-ticker.C:
-			s.render()
+	scheduler.Run(s.cfg.Interval, 0, func() (stop bool) {
+		script := ensureImgPrefix(strings.TrimSpace(s.cfg.ScriptFn(time.Now())))
+		if script == "" {
+			// skip empty scripts
+			return false
 		}
-	}
-}
 
-func (s *Stream) render() {
-	// Prevent overlapping renders
-	s.mu.Lock()
-	if s.busy {
-		s.mu.Unlock()
-		return
-	}
-	s.busy = true
-	s.mu.Unlock()
-	defer func() {
-		s.mu.Lock()
-		s.busy = false
-		s.mu.Unlock()
-	}()
+		// Render to latest.png
+		if err := pxp.RenderToFile(script, s.latest.Path(), 0, 0); err != nil {
+			// rendering failed, skip
+			return false
+		}
 
-	now := time.Now()
-	script := s.cfg.ScriptFn(now)
-	if script = strings.TrimSpace(script); script == "" {
-		// skip empty scripts
-		return
-	}
-	script = ensureImgPrefix(script)
-
-	// Render to latest.png
-	if err := pxp.RenderToFile(script, s.latest.Path(), 0, 0); err != nil {
-		// rendering failed, skip
-		return
-	}
-
-	// Invoke hook if present
-	if s.cfg.OnImage != nil {
-		// Guard against panics in user hook to keep the loop alive
-		func() {
-			defer func() { _ = recover() }()
-			s.cfg.OnImage(s.latest)
-		}()
-	}
+		// Invoke hook if present
+		if s.cfg.OnImage != nil {
+			// Guard against panics in user hook to keep the loop alive
+			func() {
+				defer func() { _ = recover() }()
+				s.cfg.OnImage(s.latest)
+			}()
+		}
+		return false
+	}, nil)
+	return nil
 }

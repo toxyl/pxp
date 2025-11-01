@@ -49,14 +49,8 @@ func newServer(addr string, routeToStream map[string]*Stream) (*http.Server, err
 			r = "/"
 		}
 
-		// auto-start stream if not running
-		st.mu.RLock()
-		running := st.running
-		st.mu.RUnlock()
-		if !running {
-			if err := st.Start(); err != nil {
-				return nil, err
-			}
+		if err := st.Start(); err != nil {
+			return nil, err
 		}
 
 		mux.HandleFunc(r, func(w http.ResponseWriter, r *http.Request) {

@@ -63,6 +63,8 @@ require (
 	github.com/tkrajina/go-reflector v0.5.8 // indirect
 	github.com/toxyl/errors v0.0.0-20240410073853-96b96b437ed5 // indirect
 	github.com/toxyl/glog v1.0.0-alpha.18 // indirect
+	github.com/toxyl/safe v0.0.1-alpha.1
+	github.com/toxyl/scheduler v0.0.0-20240318173328-a53f3ca9ef6c
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/wailsapp/go-webview2 v1.0.19 // indirect

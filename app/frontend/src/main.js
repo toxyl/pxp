@@ -1177,11 +1177,7 @@ function updateOutputPreview(result, error = null) {
     }
 
     if (result.error) {
-        outputPreview.innerHTML = `
-            <div class="error-message">
-                <div class="error-title">Render Error</div>
-                ${result.error}
-            </div>`;
+        outputPreview.innerHTML = `<div class="error-message"><div class="error-title">Render Error</div>${result.error}</div>`;
         return;
     }
     

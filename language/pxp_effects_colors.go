@@ -18,7 +18,7 @@ func colorInvert(img *image.NRGBA64) (*image.NRGBA64, error) {
 		b = 0xFFFF - b1
 		a = a1 // Keep original alpha
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: grayscale
@@ -34,7 +34,7 @@ func colorGrayscale(img *image.NRGBA64) (*image.NRGBA64, error) {
 		b = gray
 		a = a1 // Keep original alpha
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: sepia
@@ -51,7 +51,7 @@ func colorSepia(img *image.NRGBA64) (*image.NRGBA64, error) {
 		b = uint32(math.Min((rf*0.272)+(gf*0.534)+(bf*0.131), 65535))
 		a = a1 // Keep original alpha
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: brightness
@@ -66,7 +66,7 @@ func colorBrightness(img *image.NRGBA64, factor float64) (*image.NRGBA64, error)
 		b = uint32(math.Min(float64(b1)*factor, 0xFFFF))
 		a = a1 // Keep original alpha
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: colorize
@@ -111,7 +111,7 @@ func colorColorize(img *image.NRGBA64, col color.RGBA64) (*image.NRGBA64, error)
 		b = uint32(math.Clamp(bf*(1-alpha)+newB*alpha, 0, 1) * 65535.0)
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: contrast
@@ -128,7 +128,7 @@ func colorContrast(img *image.NRGBA64, factor float64) (*image.NRGBA64, error) {
 		b = uint32(math.Clamp(((float64(b1)-mid)*factor)+mid, 0, 0xFFFF))
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: saturation
@@ -152,7 +152,7 @@ func colorSaturation(img *image.NRGBA64, factor float64) (*image.NRGBA64, error)
 		b = uint32(bf * 65535.0)
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: opacity
@@ -165,7 +165,7 @@ func colorOpacity(img *image.NRGBA64, amount float64) (*image.NRGBA64, error) {
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
 		// Multiply existing alpha by the opacity amount while preserving color
 		return r1, g1, b1, uint32((a1 * alphaMultiplier) / 65535)
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: chromatic-aberration
@@ -232,7 +232,7 @@ func colorHueRotate(img *image.NRGBA64, angle float64) (*image.NRGBA64, error) {
 		b = uint32(bf * 65535.0)
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: color-balance
@@ -249,7 +249,7 @@ func colorBalance(img *image.NRGBA64, rFactor, gFactor, bFactor float64) (*image
 		b = uint32(math.Clamp(float64(b1)*bFactor, 0, 0xFFFF))
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: posterize
@@ -267,7 +267,7 @@ func colorPosterize(img *image.NRGBA64, levels int) (*image.NRGBA64, error) {
 		b = uint32(math.Round(float64(b1)/levelStep) * levelStep)
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: threshold
@@ -285,7 +285,7 @@ func colorThreshold(img *image.NRGBA64, level float64) (*image.NRGBA64, error) {
 			r, g, b, a = 0, 0, 0, a1
 		}
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: edge-detect
@@ -428,7 +428,7 @@ func colorVibrance(img *image.NRGBA64, factor float64) (*image.NRGBA64, error) {
 		b = uint32(bf * 65535.0)
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: exposure
@@ -444,7 +444,7 @@ func colorExposure(img *image.NRGBA64, level float64) (*image.NRGBA64, error) {
 		b = uint32(math.Clamp(float64(b1)*factor, 0, 0xFFFF))
 		a = a1
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: select-hue
@@ -849,7 +849,7 @@ func colorAutoLevels(img *image.NRGBA64, lowPercentile, highPercentile float64, 
 			a = a1 // Keep original alpha
 		}
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: auto-white-balance
@@ -922,7 +922,7 @@ func colorAutoWhiteBalance(img *image.NRGBA64, threshold, strength float64) (*im
 		b = uint32(math.Clamp(float64(b1)*((scaleB-1.0)*strength+1.0), 0, 0xFFFF))
 		a = a1 // Keep original alpha
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: auto-contrast
@@ -1000,7 +1000,7 @@ func colorAutoContrast(img *image.NRGBA64, threshold, strength float64) (*image.
 		b = uint32(math.Clamp(float64(b1)*(contrastFactor*strength+1.0), 0, 0xFFFF))
 		a = a1 // Keep original alpha
 		return
-	}, numWorkers), nil
+	}, NumColorConversionWorkers), nil
 }
 
 // @Name: auto-tone

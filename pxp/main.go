@@ -7,51 +7,23 @@ import (
 	"image/png"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/toxyl/pxp/language"
+	"github.com/toxyl/safe"
 )
-
-type renderLock struct {
-	mu     *sync.Mutex
-	locked bool
-}
-
-func (l *renderLock) lock() {
-	l.mu.Lock()
-	defer l.mu.Unlock()
-	l.locked = true
-}
-
-func (l *renderLock) unlock() {
-	l.mu.Lock()
-	defer l.mu.Unlock()
-	l.locked = false
-}
-
-func (l *renderLock) isLocked() bool {
-	l.mu.Lock()
-	defer l.mu.Unlock()
-	return l.locked
-}
-
-func (l *renderLock) exec(fn func()) {
-	for l.isLocked() {
-		time.Sleep(1 * time.Second)
-	}
-	l.lock()
-	defer l.unlock()
-	fn()
-}
 
 var (
-	rlock = &renderLock{
-		mu:     &sync.Mutex{},
-		locked: false,
-	}
+	MAX_CONCURRENCY = 16
+	activeRenders   = safe.NewSafeInt(0)
 )
+
+func init() {
+	MAX_CONCURRENCY = max(1, runtime.NumCPU()>>1)
+	language.NumColorConversionWorkers = 2
+}
 
 // RenderToFile processes the given `script` and stores the result in `path`.
 //
@@ -68,7 +40,7 @@ func RenderToFile(script, path string, maxW, maxH int) (err error) {
 		sb.WriteString(`img`)
 	}
 	sb.WriteString(` "` + path + `")`)
-	_, err = New().Script(sb.String()).render(nil)
+	_, err = New().Script(sb.String()).Render(nil)
 	return
 }
 
@@ -90,7 +62,7 @@ func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (img *image.NRGB
 		sb.WriteString(`img`)
 	}
 	sb.WriteString(` "` + pathOut + `")`)
-	return New().Script(sb.String()).render(nil)
+	return New().Script(sb.String()).Render(nil)
 }
 
 func RenderWithPXPFile(script string, args []any, files []string) (images []*image.NRGBA, err error) {
@@ -107,6 +79,7 @@ func DocText() string                    { return language.DocText() }
 func ExportToVSIX(vsixFile string) error { return language.ExportToVSIX(vsixFile) }
 
 type PXP struct {
+	lang   *language.Language
 	err    error
 	script string
 	args   []any
@@ -115,6 +88,7 @@ type PXP struct {
 
 func New() *PXP {
 	return &PXP{
+		lang:   language.New(),
 		script: "",
 		args:   nil,
 		files:  []string{},
@@ -169,7 +143,7 @@ func (p *PXP) RenderImages() ([]*image.NRGBA, error) {
 		if file == "" {
 			continue
 		}
-		img, err := p.render(&file)
+		img, err := p.Render(&file)
 		if err != nil {
 			p.err = fmt.Errorf("render error: %s", err.Error())
 			continue
@@ -200,7 +174,7 @@ func (p *PXP) RenderFiles(outputDir string) ([]string, error) {
 		if file == "" {
 			continue
 		}
-		img, err := p.render(&file)
+		img, err := p.Render(&file)
 		if err != nil {
 			p.err = fmt.Errorf("render error: %s", err.Error())
 			continue
@@ -230,60 +204,56 @@ func (p *PXP) RenderFiles(outputDir string) ([]string, error) {
 	return files, p.err
 }
 
-func (p *PXP) render(file *string) (*image.NRGBA, error) {
+func (p *PXP) Render(file *string) (*image.NRGBA, error) {
 	if p.err != nil {
 		return nil, p.err
 	}
-	var nrgba *image.NRGBA
-	var err error
-	rlock.exec(func() {
-		f := "dummy"
-		if file != nil {
-			f = *file
-		}
-		res, err2 := language.Run(p.script, append([]any{f}, p.args...)...)
-		if err2 != nil {
-			err = fmt.Errorf("script execution error: %w", err2)
-			return
-		}
-		if res == nil {
-			err = fmt.Errorf("no result returned from script")
-			return
-		}
+	f := "dummy"
+	if file != nil {
+		f = *file
+	}
+	for activeRenders.Get() >= MAX_CONCURRENCY {
+		time.Sleep(10 * time.Second)
+	}
+	activeRenders.Inc()
+	res, err := p.lang.Run(p.script, append([]any{f}, p.args...)...)
+	activeRenders.Dec()
+	if err != nil {
+		return nil, fmt.Errorf("script execution error: %w", err)
+	}
+	if res == nil {
+		return nil, fmt.Errorf("no result returned from script")
+	}
 
-		var img image.Image
-		switch val := res.Value().(type) {
-		case *image.RGBA:
-			img = val
-		case *image.NRGBA:
-			img = val
-		case *image.RGBA64:
-			img = val
-		case *image.NRGBA64:
-			img = val
-		default:
-			err = fmt.Errorf("unexpected result type: %T", res.Value())
-			return
-		}
+	var img image.Image
+	switch val := res.Value().(type) {
+	case *image.RGBA:
+		img = val
+	case *image.NRGBA:
+		img = val
+	case *image.RGBA64:
+		img = val
+	case *image.NRGBA64:
+		img = val
+	default:
+		return nil, fmt.Errorf("unexpected result type: %T", res.Value())
+	}
 
-		if img == nil {
-			err = fmt.Errorf("no image data returned")
-			return
-		}
+	if img == nil {
+		return nil, fmt.Errorf("no image data returned")
+	}
 
-		if res, ok := img.(*image.NRGBA); ok {
-			nrgba = res
-			return
-		}
+	if res, ok := img.(*image.NRGBA); ok {
+		return res, nil
+	}
 
-		bounds := img.Bounds()
-		nrgba := image.NewNRGBA(bounds)
-		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-			for x := bounds.Min.X; x < bounds.Max.X; x++ {
-				nrgba.Set(x, y, img.At(x, y))
-			}
+	bounds := img.Bounds()
+	nrgba := image.NewNRGBA(bounds)
+	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+		for x := bounds.Min.X; x < bounds.Max.X; x++ {
+			nrgba.Set(x, y, img.At(x, y))
 		}
-	})
+	}
 
-	return nrgba, err
+	return nrgba, nil
 }
