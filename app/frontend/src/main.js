@@ -1,7 +1,7 @@
 import './style.css';
 import './app.css';
 import * as monaco from 'monaco-editor';
-import {Run, OpenFile, SaveFile, SaveOutput, RunBatch, SelectDirectory, LoadMultipleInputImages, LoadMultipleImages, CancelRendering, BatchProgress, NextReviewQueueItem, ApproveReviewQueueItem, RejectReviewQueueItem, FileToBase64} from '../wailsjs/go/main/App';
+import {Run, OpenFile, SaveFile, SaveOutput, RunBatch, SelectDirectory, LoadMultipleInputImages, LoadMultipleImages, CancelRendering, BatchProgress, NextReviewQueueItem, ApproveReviewQueueItem, RejectReviewQueueItem, FileToBase64, ChangeDirectory } from '../wailsjs/go/main/App';
 import {GetLanguageDefinition} from '../wailsjs/go/language/Language';
 import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
@@ -16,19 +16,16 @@ const state = {
     editor: null,
 };
 
-// Helper function to create a new tab ID
 function createTabId() {
     return `script_${state.tabCounter++}`;
 }
 
-// Helper function to create a new tab
-function createTab(name = null, content = '') {
+function createTab(name = null, content = '', filePath = null) {
     const id = createTabId();
     const tabName = name || `Script${state.tabCounter}.pxp`;
-    return { id, name: tabName, content, savedContent: content };
+    return { id, name: tabName, content, savedContent: content, filePath };
 }
 
-// Helper function to check if tab has unsaved changes
 function hasUnsavedChanges(tab) {
     return tab.content !== tab.savedContent;
 }
@@ -73,6 +70,8 @@ async function initializeMonaco() {
                     // Keywords
                     [/\bfor\b/, 'keyword.control'],
                     [/\bdone\b/, 'keyword.control'],
+                    [/\binclude\b/, 'keyword.control'],
+                    [/\bmacro\b/, 'keyword.control'],
                     
                     // Argument references ($1, $2, etc)
                     [/\$\d+/, 'variable.parameter'],
@@ -276,9 +275,8 @@ async function initializeMonaco() {
     }
 }
 
-// Helper function to switch active tab
 function switchTab(tabId) {
-    // Save current content
+    // Save current tab content
     const currentTab = state.tabs.find(tab => tab.id === state.activeTab);
     if (currentTab && state.editor) {
         currentTab.content = state.editor.getValue();
@@ -290,17 +288,22 @@ function switchTab(tabId) {
     if (newTab && state.editor) {
         state.editor.setValue(newTab.content);
         
-        // Update UI
-        document.querySelectorAll('.script-tabs .tab').forEach(tab => {
-            tab.classList.remove('active');
-            if (tab.dataset.tabId === tabId) {
-                tab.classList.add('active');
-            }
-        });
+        // Change working directory if file path is available
+        if (newTab.filePath) {
+            const dir = newTab.filePath.substring(0, newTab.filePath.lastIndexOf('/') || newTab.filePath.lastIndexOf('\\'));
+            ChangeDirectory(dir);
+        }
     }
+
+    // Update tab UI
+    document.querySelectorAll('.script-tabs .tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.tabId === tabId) {
+            tab.classList.add('active');
+        }
+    });
 }
 
-// Helper function to render tabs
 function renderTabs() {
     const tabsContainer = document.querySelector('.script-tabs');
     tabsContainer.innerHTML = state.tabs.map(tab => {
@@ -331,7 +334,6 @@ function renderTabs() {
     tabsContainer.querySelector('.new-tab-btn').addEventListener('click', addNewTab);
 }
 
-// Function to close a tab
 function closeTab(tabId) {
     const index = state.tabs.findIndex(tab => tab.id === tabId);
     if (index === -1) return;
@@ -367,16 +369,21 @@ function closeTab(tabId) {
     }
 }
 
-// Function to add a new tab
-function addNewTab(name = null, content = '') {
+function addNewTab(name = null, content = '', filePath = null) {
     // If name is an object (from click event) or not provided, create a new file
     const isNewFile = typeof name !== 'string' || !name;
     const tabName = isNewFile ? `Script${state.tabCounter}.pxp` : name;
     const tabContent = isNewFile ? '' : content;
     
-    const newTab = createTab(tabName, tabContent);
+    const newTab = createTab(tabName, tabContent, filePath);
     state.tabs.push(newTab);
     state.activeTab = newTab.id;  // Set as active tab immediately
+    
+    // Change working directory if file path is provided
+    if (filePath) {
+        const dir = filePath.substring(0, filePath.lastIndexOf('/') || filePath.lastIndexOf('\\'));
+        ChangeDirectory(dir);
+    }
     
     // Update the editor with the new content
     if (state.editor) {
@@ -386,6 +393,7 @@ function addNewTab(name = null, content = '') {
     renderTabs();
     return newTab;
 }
+
 
 // Update the HTML template
 document.querySelector('#app').innerHTML = `
@@ -561,10 +569,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (res.error) {
             console.error('Error opening file:', res.error);
         } else if (res.data && res.data.content) {
-            // Create new tab with the file name and content
-            addNewTab(res.data.name, res.data.content);
+            // Create new tab with the file name, content, and full path
+            addNewTab(res.data.name, res.data.content, res.data.path);
         }
     });
+
+    function getDirectory(path) {
+        const lastSlash = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
+        return lastSlash > 0 ? path.substring(0, lastSlash) : path;
+    }
 
     saveBtn.addEventListener('click', async () => {
         const activeTab = state.tabs.find(tab => tab.id === state.activeTab);
@@ -574,9 +587,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         const res = await SaveFile(activeTab.name, content);
         if (res.error) {
             console.error('Error saving file:', res.error);
-        } else if (res.data) {
-            activeTab.name = res.data;
+        } else if (res.data) { 
+            const pathParts = res.data.split(/[/\\]/);
+            activeTab.name = pathParts[pathParts.length - 1];
+            activeTab.filePath = res.data;
+            activeTab.content = content;
             activeTab.savedContent = content;
+            // Change working directory to the saved file's directory
+            const dir = getDirectory(res.data);
+            ChangeDirectory(dir);
             renderTabs(); // Update unsaved indicator
         }
     });

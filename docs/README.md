@@ -989,7 +989,7 @@ _Creates a color from CMYK values_
 | `y` | `float64` | `0` | `0` | `1` | `&#34;%&#34;` | The yellow component |
 | `k` | `float64` | `0` | `0` | `1` | `&#34;%&#34;` | The key (black) component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The alpha component |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `color-balance(img=- rFactor=1 gFactor=1 bFactor=1) ⮕ (result=)`  
@@ -1816,7 +1816,7 @@ _Creates a color from HSLA values_
 | `s` | `float64` | `0.5` | `0` | `1` | `&#34;%&#34;` | The color&#39;s saturation |
 | `l` | `float64` | `0.5` | `0` | `1` | `&#34;%&#34;` | The color&#39;s luminosity |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `hsv(h=0 s=0.5 v=0.5 alpha=1) ⮕ (result=)`  
@@ -1828,7 +1828,7 @@ _Creates a color from HSV values_
 | `s` | `float64` | `0.5` | `0` | `1` | `&#34;%&#34;` | The color&#39;s saturation |
 | `v` | `float64` | `0.5` | `0` | `1` | `&#34;%&#34;` | The color&#39;s value (brightness) |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `hue-rotate(img=- angle=0) ⮕ (result=)`  
@@ -1850,7 +1850,7 @@ _Creates a color from HWB (Hue, Whiteness, Blackness) values_
 | `w` | `float64` | `0` | `0` | `1` | `&#34;%&#34;` | The whiteness component |
 | `b` | `float64` | `0` | `0` | `1` | `&#34;%&#34;` | The blackness component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `hypotenuse-of-triangle(adjacent=- opposite=- gamma=-) ⮕ (result=)`  
@@ -1903,7 +1903,7 @@ _Creates a color from CIELAB values_
 | `a` | `float64` | `0` | `-128` | `127` | `&#34;&#34;` | The green-red component |
 | `b` | `float64` | `0` | `-128` | `127` | `&#34;&#34;` | The blue-yellow component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `last-csv-row(data=-) ⮕ (result=)`  
@@ -1934,7 +1934,16 @@ _Creates a color from LCH (Lightness, Chroma, Hue) values_
 | `c` | `float64` | `0` | `0` | `128` | `&#34;&#34;` | The chroma component |
 | `h` | `float64` | `0` | `0` | `360` | `&#34;°&#34;` | The hue component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
+---
+
+### `len(v=-) ⮕ (result=)`  
+_Returns the length of the given value._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `v` | `any` | `-` |   |   |   | The value to get the length of |
+| `⮕ result` | `error` |   |   |   |   | - - - The length of v |
 ---
 
 ### `lerp-angle(angle1=- angle2=- t=-) ⮕ (result=)`  
@@ -2029,8 +2038,8 @@ _Maps a value to a color using color stops with HSLA interpolation_
 | `value` | `float64` | `0` |   |   | `&#34;&#34;` | The value to map to a color |
 | `min` | `float64` | `0` |   |   | `&#34;&#34;` | Minimum value of the range |
 | `max` | `float64` | `1` |   |   | `&#34;&#34;` | Maximum value of the range |
-| `stops` | `[][]float64` | `-` |   |   | `&#34;&#34;` | Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha] |
-| `⮕ result` | `error` |   |   |   |   | - - - The interpolated color as color.RGBA64 |
+| `stops` | `[][]any` | `-` |   |   | `&#34;&#34;` | Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; threshold is a raw value between min and max |
+| `⮕ result` | `error` |   |   |   |   | - - - The interpolated color |
 ---
 
 ### `max(x=- y=-) ⮕ (result=)`  
@@ -2159,7 +2168,7 @@ _Renders a series from CSV data by plotting a single column with colors determin
 | `column` | `int` | `-` |   |   |   | Column index to plot |
 | `min` | `float64` | `-` |   |   |   | Minimum value for color mapping |
 | `max` | `float64` | `-` |   |   |   | Maximum value for color mapping |
-| `stops` | `[][]float64` | `-` |   |   |   | Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha] |
+| `stops` | `[][]any` | `-` |   |   |   | Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; additional fields are ignored |
 | `invertY` | `bool` | `false` |   |   |   | Whether flip the y-axis when plotting |
 | `⮕ result` | `error` |   |   |   |   | - - - The chart image |
 ---
@@ -2245,6 +2254,26 @@ _Calculates 8 raised to the power of n_
 |------|------|---------|-----|-----|------|-------------|
 | `n` | `float64` | `-` |   |   |   | The exponent |
 | `⮕ result` | `error` |   |   |   |   | - - - 8^n |
+---
+
+### `printf(str="-" a=-) ⮕ (result=)`  
+_Prints formatted strings to the console_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `str` | `string` | `"-"` |   |   |   | - - The format string |
+| `a` | `[]any` | `-` |   |   |   | A slice with the arguments |
+| `⮕ result` | `error` |   |   |   |   | - - - Number of bytes written |
+---
+
+### `printfln(str="-" a=-) ⮕ (result=)`  
+_Prints formatted strings to the console_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `str` | `string` | `"-"` |   |   |   | - - The format string |
+| `a` | `[]any` | `-` |   |   |   | A slice with the arguments |
+| `⮕ result` | `error` |   |   |   |   | - - - Number of bytes written |
 ---
 
 ### `radians-of-triangle(adjacent=- opposite=- hypotenuse=-) ⮕ (result=)`  
@@ -2359,7 +2388,7 @@ _Creates a color from RGBA values (8-bit per channel)_
 | `g` | `float64` | `0` | `0` | `255` | `&#34;&#34;` | The green component |
 | `b` | `float64` | `0` | `0` | `255` | `&#34;&#34;` | The blue component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The alpha component |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `rgba64(r=0 g=0 b=0 alpha=1) ⮕ (result=)`  
@@ -2371,7 +2400,7 @@ _Creates a color from RGBA values (16-bit per channel)_
 | `g` | `float64` | `0` | `0` | `65535` | `&#34;&#34;` | The green component |
 | `b` | `float64` | `0` | `0` | `65535` | `&#34;&#34;` | The blue component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The alpha component |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `rotate(img=- angle=0) ⮕ (result=)`  
@@ -2528,6 +2557,16 @@ _Changes the tone of an image to sepia_
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to change to sepia tone |
 | `⮕ result` | `error` |   |   |   |   | - - - The sepia-toned image |
+---
+
+### `set-alpha(c=- alpha=1) ⮕ (result=)`  
+_Sets the alpha channel of a color_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `c` | `color.RGBA64` | `-` |   |   | `&#34;&#34;` | The color to modify |
+| `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The new alpha value |
+| `⮕ result` | `error` |   |   |   |   | - - - The color with new alpha |
 ---
 
 ### `sharpen(img=- intensity=1 radius=1 rWeight=0.299 gWeight=0.587 bWeight=0.114) ⮕ (result=)`  
@@ -2809,7 +2848,7 @@ _Creates a color from CIE XYZ values_
 | `y` | `float64` | `0` | `0` | `1` | `&#34;&#34;` | The Y component (green) |
 | `z` | `float64` | `0` | `0` | `1.08883` | `&#34;&#34;` | The Z component (blue) |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `ycbcr(y=0 cb=128 cr=128 alpha=1) ⮕ (result=)`  
@@ -2821,7 +2860,7 @@ _Creates a color from YCbCr values (digital video)_
 | `cb` | `float64` | `128` | `0` | `255` | `&#34;&#34;` | The blue-difference chroma component |
 | `cr` | `float64` | `128` | `0` | `255` | `&#34;&#34;` | The red-difference chroma component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
 ### `yuv(y=0 u=0 v=0 alpha=1) ⮕ (result=)`  
@@ -2833,7 +2872,7 @@ _Creates a color from YUV values_
 | `u` | `float64` | `0` | `-0.436` | `0.436` | `&#34;&#34;` | The U chrominance component |
 | `v` | `float64` | `0` | `-0.615` | `0.615` | `&#34;&#34;` | The V chrominance component |
 | `alpha` | `float64` | `1` | `0` | `1` | `&#34;%&#34;` | The color&#39;s alpha |
-| `⮕ result` | `error` |   |   |   |   | - - - The color as color.RGBA64 |
+| `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
  

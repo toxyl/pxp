@@ -232,10 +232,10 @@ func plotDataCompact(width, height int, data [][]float64, columns []any, colors 
 // @Param:      column  - - -   Column index to plot
 // @Param:      min     - - -   Minimum value for color mapping
 // @Param:      max     - - -   Maximum value for color mapping
-// @Param:      stops   - - -   Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]
+// @Param:      stops   - - -   Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; additional fields are ignored
 // @Param:      invertY false   Whether flip the y-axis when plotting
 // @Returns:    result  - - -   The chart image
-func plotSeries(width, height int, data [][]float64, column int, min, max float64, stops [][]float64, invertY bool) (*image.NRGBA64, error) {
+func plotSeries(width, height int, data [][]float64, column int, min, max float64, stops [][]any, invertY bool) (*image.NRGBA64, error) {
 	if width <= 0 || height <= 0 {
 		return nil, fmt.Errorf("width and height must be greater than 0")
 	}

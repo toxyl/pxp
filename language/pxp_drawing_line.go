@@ -230,6 +230,16 @@ func drawLinePx(img *image.NRGBA64, p1, p2 Point, style LineStyle) (*image.NRGBA
 				c := float64(p2.X*p1.Y - p1.X*p2.Y)
 				dist := math.Abs(a*float64(px)+b*float64(py)+c) / length
 
+				// Project pixel onto line segment to check if within bounds
+				pxVec := float64(px) - float64(p1.X)
+				pyVec := float64(py) - float64(p1.Y)
+				projection := pxVec*dx + pyVec*dy
+
+				// Check if projection is within line segment bounds
+				if projection < -halfThickness || projection > length+halfThickness {
+					continue
+				}
+
 				// Get pixel coverage for anti-aliasing
 				coverage := getRectPixelCoverage(dist, halfThickness)
 

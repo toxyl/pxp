@@ -14,7 +14,7 @@ import (
 // @Param:      s     	"%" 0.0..1.0   	0.5   	The color's saturation
 // @Param:      l     	"%" 0.0..1.0   	0.5   	The color's luminosity
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func hsla(h float64, s float64, l float64, alpha float64) (color.RGBA64, error) {
 	// Convert HSLA to RGB
 	var r, g, b float64
@@ -54,7 +54,7 @@ func hsla(h float64, s float64, l float64, alpha float64) (color.RGBA64, error) 
 // @Param:      g     	"" 0..255   	0   	The green component
 // @Param:      b     	"" 0..255   	0   	The blue component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The alpha component
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func rgba(r float64, g float64, b float64, alpha float64) (color.RGBA64, error) {
 	// Convert 8-bit values to 16-bit color channels
 	R := uint16((r / 255.0) * 65535)
@@ -76,7 +76,7 @@ func rgba(r float64, g float64, b float64, alpha float64) (color.RGBA64, error) 
 // @Param:      g     	"" 0..65535   	0   	The green component
 // @Param:      b     	"" 0..65535   	0   	The blue component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The alpha component
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func rgba64(r float64, g float64, b float64, alpha float64) (color.RGBA64, error) {
 	return color.RGBA64{
 		R: uint16(r),
@@ -93,7 +93,7 @@ func rgba64(r float64, g float64, b float64, alpha float64) (color.RGBA64, error
 // @Param:      y     	"%" 0.0..1.0   	0.0   	The yellow component
 // @Param:      k     	"%" 0.0..1.0   	0.0   	The key (black) component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The alpha component
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func cmyk(c float64, m float64, y float64, k float64, alpha float64) (color.RGBA64, error) {
 	// Convert CMYK to RGB
 	r := (1 - c) * (1 - k)
@@ -120,7 +120,7 @@ func cmyk(c float64, m float64, y float64, k float64, alpha float64) (color.RGBA
 // @Param:      s     	"%" 0.0..1.0   	0.5   	The color's saturation
 // @Param:      v     	"%" 0.0..1.0   	0.5   	The color's value (brightness)
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func hsv(h float64, s float64, v float64, alpha float64) (color.RGBA64, error) {
 	// Convert HSV to RGB
 	var r, g, b float64
@@ -171,7 +171,7 @@ func hsv(h float64, s float64, v float64, alpha float64) (color.RGBA64, error) {
 // @Param:      a     	"" -128..127   	0.0   	The green-red component
 // @Param:      b     	"" -128..127   	0.0   	The blue-yellow component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func lab(l float64, a float64, b float64, alpha float64) (color.RGBA64, error) {
 	// Convert LAB to XYZ first
 	// Using D65 illuminant
@@ -234,7 +234,7 @@ func lab(l float64, a float64, b float64, alpha float64) (color.RGBA64, error) {
 // @Param:      w     	"%" 0.0..1.0   	0.0   	The whiteness component
 // @Param:      b     	"%" 0.0..1.0   	0.0   	The blackness component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func hwb(h float64, w float64, b float64, alpha float64) (color.RGBA64, error) {
 	// First convert HWB to HSV
 	// Value is 1 - blackness
@@ -295,7 +295,7 @@ func hwb(h float64, w float64, b float64, alpha float64) (color.RGBA64, error) {
 // @Param:      y     	"" 0.0..1.0   	0.0   	The Y component (green)
 // @Param:      z     	"" 0.0..1.08883   0.0   	The Z component (blue)
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func xyz(x float64, y float64, z float64, alpha float64) (color.RGBA64, error) {
 	// Convert XYZ to RGB using D65 matrix
 	var r, g, b float64
@@ -328,7 +328,7 @@ func xyz(x float64, y float64, z float64, alpha float64) (color.RGBA64, error) {
 // @Param:      c     	"" 0..128   	0.0   	The chroma component
 // @Param:      h     	"°" 0..360   	0.0   	The hue component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func lch(l float64, c float64, h float64, alpha float64) (color.RGBA64, error) {
 	// Convert LCH to LAB
 	// a = C * cos(h)
@@ -347,7 +347,7 @@ func lch(l float64, c float64, h float64, alpha float64) (color.RGBA64, error) {
 // @Param:      u     	"" -0.436..0.436   0.0   	The U chrominance component
 // @Param:      v     	"" -0.615..0.615   0.0   	The V chrominance component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func yuv(y float64, u float64, v float64, alpha float64) (color.RGBA64, error) {
 	// Convert YUV to RGB
 	var r, g, b float64
@@ -380,7 +380,7 @@ func yuv(y float64, u float64, v float64, alpha float64) (color.RGBA64, error) {
 // @Param:      cb     	"" 0..255   	128   	The blue-difference chroma component
 // @Param:      cr     	"" 0..255   	128   	The red-difference chroma component
 // @Param:      alpha  	"%" 0.0..1.0   	1.0   	The color's alpha
-// @Returns:    result  - 	-   		-   	The color as color.RGBA64
+// @Returns:    result  - 	-   		-   	The color
 func ycbcr(y float64, cb float64, cr float64, alpha float64) (color.RGBA64, error) {
 	// Normalize YCbCr values
 	yn := y / 255.0
@@ -417,69 +417,74 @@ func ycbcr(y float64, cb float64, cr float64, alpha float64) (color.RGBA64, erro
 // @Param:      value      	"" -   	0.0   	The value to map to a color
 // @Param:      min        	"" -   	0.0   	Minimum value of the range
 // @Param:      max        	"" -   	1.0   	Maximum value of the range
-// @Param:      stops      	"" -   	-   	Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]
-// @Returns:    result      - -		-   	The interpolated color as color.RGBA64
-func mapColor(value float64, min float64, max float64, stops [][]float64) (color.RGBA64, error) {
-	// Normalize value to 0-1 range
-	if max == min {
-		value = 0.0
-	} else {
-		value = (value - min) / (max - min)
-	}
-	value = math.Max(0.0, math.Min(1.0, value))
-
-	// Find the two stops to interpolate between
+// @Param:      stops      	"" -   	-   	Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; threshold is a raw value between min and max
+// @Returns:    result      - -		-   	The interpolated color
+func mapColor(value float64, min float64, max float64, stops [][]any) (color.RGBA64, error) {
 	if len(stops) == 0 {
 		return color.RGBA64{}, fmt.Errorf("no color stops provided")
 	}
 
-	// Sort stops ascending by the first field of each row (threshold)
-	sort.Slice(stops, func(i, j int) bool {
-		if len(stops[i]) == 0 {
-			return false
+	type colorstop struct {
+		threshold, thresholdNorm, hue, saturation, lightness, alpha float64
+	}
+	colorstops := []colorstop{}
+	for _, s := range stops {
+		t, h, sa, l, a := s[0].(float64), s[1].(float64), s[2].(float64), s[3].(float64), s[4].(float64)
+		tn := 0.0
+		if max != min {
+			tn = (t - min) / (max - min)
 		}
-		if len(stops[j]) == 0 {
-			return true
-		}
-		return stops[i][0] < stops[j][0]
+		tn = math.Max(0.0, math.Min(1.0, tn))
+		colorstops = append(colorstops, colorstop{
+			threshold:     t,
+			thresholdNorm: tn,
+			hue:           h,
+			saturation:    sa,
+			lightness:     l,
+			alpha:         a,
+		})
+	}
+	sort.Slice(colorstops, func(i, j int) bool {
+		return colorstops[i].threshold < colorstops[j].threshold
 	})
 
-	// Find the stop range
-	var startStop, endStop []float64
+	var startStop, endStop *colorstop
 
-	for i := 0; i < len(stops)-1; i++ {
-		if len(stops[i]) < 5 || len(stops[i+1]) < 5 {
-			return color.RGBA64{}, fmt.Errorf("invalid color stop format: each stop must have [threshold, hue, saturation, lightness, alpha]")
-		}
-		if value >= stops[i][0] && value <= stops[i+1][0] {
-			startStop = stops[i]
-			endStop = stops[i+1]
+	for i := 0; i < len(colorstops)-1; i++ {
+		if value >= colorstops[i].threshold && value < colorstops[i+1].threshold {
+			startStop = &colorstops[i]
+			endStop = &colorstops[i+1]
 			break
 		}
 	}
 
 	// If value is before first stop or after last stop, use the nearest stop
 	if startStop == nil {
-		if value <= stops[0][0] {
-			startStop = stops[0]
-			endStop = stops[0]
+		if value < colorstops[0].threshold {
+			startStop = &colorstops[0]
+			endStop = &colorstops[0]
+		} else if value >= colorstops[len(colorstops)-1].threshold {
+			startStop = &colorstops[len(colorstops)-1]
+			endStop = &colorstops[len(colorstops)-1]
 		} else {
-			startStop = stops[len(stops)-1]
-			endStop = stops[len(stops)-1]
+			// This shouldn't happen if the loop above worked correctly, but handle edge case
+			// where value equals the last threshold exactly
+			startStop = &colorstops[len(colorstops)-1]
+			endStop = &colorstops[len(colorstops)-1]
 		}
 	}
 
 	// If start and end are the same, return that color directly
-	if startStop[0] == endStop[0] {
-		return hsla(startStop[1], startStop[2], startStop[3], startStop[4])
+	if startStop.threshold == endStop.threshold {
+		return hsla(startStop.hue, startStop.saturation, startStop.lightness, startStop.alpha)
 	}
 
 	// Calculate interpolation factor
-	factor := (value - startStop[0]) / (endStop[0] - startStop[0])
+	factor := (value - startStop.threshold) / (endStop.threshold - startStop.threshold)
 
 	// Interpolate HSLA values
 	// Handle hue wrapping (hue is circular 0-360)
-	dh := endStop[1] - startStop[1]
+	dh := endStop.hue - startStop.hue
 	if math.Abs(dh) > 180 {
 		if dh > 0 {
 			dh -= 360
@@ -487,16 +492,31 @@ func mapColor(value float64, min float64, max float64, stops [][]float64) (color
 			dh += 360
 		}
 	}
-	h := startStop[1] + factor*dh
+	h := startStop.hue + factor*dh
 	if h < 0 {
 		h += 360
 	} else if h >= 360 {
 		h -= 360
 	}
 
-	s := startStop[2] + factor*(endStop[2]-startStop[2])
-	l := startStop[3] + factor*(endStop[3]-startStop[3])
-	a := startStop[4] + factor*(endStop[4]-startStop[4])
+	s := startStop.saturation + factor*(endStop.saturation-startStop.saturation)
+	l := startStop.lightness + factor*(endStop.lightness-startStop.lightness)
+	a := startStop.alpha + factor*(endStop.alpha-startStop.alpha)
 
 	return hsla(h, s, l, a)
+}
+
+// @Name: set-alpha
+// @Desc: Sets the alpha channel of a color
+// @Param:      c      	"" -   	-   	The color to modify
+// @Param:      alpha  	"%" 0.0..1.0   	1.0   	The new alpha value
+// @Returns:    result  - 	-   		-   	The color with new alpha
+func setAlpha(c color.RGBA64, alpha float64) (color.RGBA64, error) {
+	A := uint16(alpha * 65535)
+	return color.RGBA64{
+		R: c.R,
+		G: c.G,
+		B: c.B,
+		A: A,
+	}, nil
 }

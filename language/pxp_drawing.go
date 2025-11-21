@@ -138,14 +138,14 @@ func group(img *image.NRGBA64, title string, colText, colFill, colBorder color.R
 	// Add padding to all sides
 	paddingPx := int(padding)
 	totalWidth := imgWidth + 2*paddingPx
-	totalHeight := int(float64(imgHeight+2*paddingPx) - borderThickness)
+	totalHeight := int(float64(imgHeight + 2*paddingPx))
 
 	// Estimate header height based on title text size (fallback to 20px)
 	headerHeight := 20
 	if title != "" {
 		// Estimate based on text length and typical font size
-		estimatedTextHeight := int(math.Max(12, math.Min(24, float64(len(title))/3)))
-		headerHeight = estimatedTextHeight + 8 // Add padding
+		estimatedTextHeight := int(math.Max(14, math.Min(24, float64(len(title))/3)))
+		headerHeight = estimatedTextHeight + 6 // Add padding
 	}
 
 	// Calculate final dimensions
@@ -173,7 +173,7 @@ func group(img *image.NRGBA64, title string, colText, colFill, colBorder color.R
 	var headerText *image.NRGBA64
 	if title != "" {
 		textColorVal := colText
-		textStyle := TS(textColorVal, 12, "mono")
+		textStyle := TS(textColorVal, 10, "mono")
 		outlineStyle := LS(headerBorderColor, 1)
 
 		var err error

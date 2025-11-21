@@ -158,8 +158,8 @@ func E(centerX, centerY, radiusX, radiusY float64) Ellipse {
 			Y: centerY,
 		},
 		Radius: &Point{
-			X: centerX,
-			Y: centerY,
+			X: radiusX,
+			Y: radiusY,
 		},
 	}
 }

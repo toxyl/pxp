@@ -1,7 +1,9 @@
 package language
 
 import (
+	"fmt"
 	"math/rand/v2"
+	"reflect"
 	"sync"
 
 	"github.com/toxyl/math"
@@ -344,7 +346,7 @@ func sqrt(x float64) (float64, error) {
 // @Desc: Returns the natural logarithm of x
 // @Param:      x       - -   -   The input value
 // @Returns:    result  - -   -   The natural logarithm of x
-func log(x float64) (float64, error) {
+func logX(x float64) (float64, error) {
 	if x <= 0 {
 		return math.NaN[float64](), nil
 	}
@@ -766,4 +768,23 @@ func lerpAngleDegrees(angle1, angle2, t float64) (float64, error) {
 
 	result := angle1 + diff*t
 	return normalizeAngleDegrees(result)
+}
+
+// @Name: len
+// @Desc: Returns the length of the given value.
+// @Param:      v       - -   -   The value to get the length of
+// @Returns:    result  - -   -   The length of v
+func len2(v any) (int, error) {
+	switch val := v.(type) {
+	case string:
+		return len(val), nil
+	default:
+		rv := reflect.ValueOf(v)
+		switch rv.Kind() {
+		case reflect.Slice, reflect.Array, reflect.Map, reflect.Chan, reflect.String:
+			return rv.Len(), nil
+		default:
+			return 0, fmt.Errorf("len() not supported for type %T", v)
+		}
+	}
 }

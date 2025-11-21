@@ -19,9 +19,9 @@ func New() *Language {
 	}
 }
 
-func (l *Language) Run(script string, args ...any) (*dslResult, error) {
+func (l *Language) Run(script, baseDir string, replacements map[string]string, args ...any) (*dslResult, error) {
 	l.dsl.storeState()
-	res, err := l.dsl.run(script, false, args...)
+	res, err := l.dsl.run(script, baseDir, replacements, false, args...)
 	l.dsl.restoreState()
 	if err != nil {
 		return nil, err

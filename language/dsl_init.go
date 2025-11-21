@@ -995,7 +995,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1050,7 +1050,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1105,7 +1105,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1169,7 +1169,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1225,7 +1225,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1280,7 +1280,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1335,7 +1335,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1390,7 +1390,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1445,7 +1445,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1500,7 +1500,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1555,7 +1555,7 @@ func NewLanguage() *dslCollection {
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The color as color.RGBA64",
+                desc: "- - - The color",
             },
         },
         func(a ...any) (any, error) {
@@ -1592,17 +1592,17 @@ func NewLanguage() *dslCollection {
             },
             { 
                 name: "stops",
-                typ:  "[][]float64", 
+                typ:  "[][]any", 
                 def:  "-", 
                 unit: "\"\"", 
-                desc: "Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]",
+                desc: "Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; threshold is a raw value between min and max",
             },
         },
         []dslParamMeta{     
             { 
                 name: "result",
                 typ:  "error", 
-                desc: "- - - The interpolated color as color.RGBA64",
+                desc: "- - - The interpolated color",
             },
         },
         func(a ...any) (any, error) {
@@ -1610,7 +1610,40 @@ func NewLanguage() *dslCollection {
                 a[0].(float64),
                 a[1].(float64),
                 a[2].(float64),
-                a[3].([][]float64), 
+                a[3].([][]any), 
+            )
+        },
+    )
+    l.funcs.register("set-alpha", "Sets the alpha channel of a color",
+        []dslParamMeta{ 
+            { 
+                name: "c",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                unit: "\"\"", 
+                desc: "The color to modify",
+            },
+            { 
+                name: "alpha",
+                typ:  "float64", 
+                min:  0, 
+                max:  1, 
+                def:  1, 
+                unit: "\"%\"", 
+                desc: "The new alpha value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The color with new alpha",
+            },
+        },
+        func(a ...any) (any, error) {
+            return setAlpha(
+                a[0].(color.RGBA64),
+                a[1].(float64), 
             )
         },
     )
@@ -6899,7 +6932,7 @@ func NewLanguage() *dslCollection {
             },
         },
         func(a ...any) (any, error) {
-            return log(
+            return logX(
                 a[0].(float64), 
             )
         },
@@ -8160,6 +8193,28 @@ func NewLanguage() *dslCollection {
             )
         },
     )
+    l.funcs.register("len", "Returns the length of the given value.",
+        []dslParamMeta{ 
+            { 
+                name: "v",
+                typ:  "any", 
+                def:  "-", 
+                desc: "The value to get the length of",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The length of v",
+            },
+        },
+        func(a ...any) (any, error) {
+            return len2(
+                a[0].(any), 
+            )
+        },
+    )
     l.funcs.register("plot-data", "Renders a chart from CSV data by plotting selected columns with specified colors",
         []dslParamMeta{ 
             { 
@@ -8300,9 +8355,9 @@ func NewLanguage() *dslCollection {
             },
             { 
                 name: "stops",
-                typ:  "[][]float64", 
+                typ:  "[][]any", 
                 def:  "-", 
-                desc: "Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]",
+                desc: "Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; additional fields are ignored",
             },
             { 
                 name: "invertY",
@@ -8326,8 +8381,66 @@ func NewLanguage() *dslCollection {
                 a[3].(int),
                 a[4].(float64),
                 a[5].(float64),
-                a[6].([][]float64),
+                a[6].([][]any),
                 a[7].(bool), 
+            )
+        },
+    )
+    l.funcs.register("printf", "Prints formatted strings to the console",
+        []dslParamMeta{ 
+            { 
+                name: "str",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - The format string",
+            },
+            { 
+                name: "a",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "A slice with the arguments",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - Number of bytes written",
+            },
+        },
+        func(a ...any) (any, error) {
+            return printf(
+                a[0].(string),
+                a[1].([]any), 
+            )
+        },
+    )
+    l.funcs.register("printfln", "Prints formatted strings to the console",
+        []dslParamMeta{ 
+            { 
+                name: "str",
+                typ:  "string", 
+                def:  "-", 
+                desc: "- - The format string",
+            },
+            { 
+                name: "a",
+                typ:  "[]any", 
+                def:  "-", 
+                desc: "A slice with the arguments",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - Number of bytes written",
+            },
+        },
+        func(a ...any) (any, error) {
+            return printfln(
+                a[0].(string),
+                a[1].([]any), 
             )
         },
     )

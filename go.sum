@@ -128,8 +128,6 @@ github.com/toxyl/math v0.0.1-alpha.4 h1:uOf7fwvUKYu7C5Hc5JDEgGFRbGyvj2ENTHzd9Gsu
 github.com/toxyl/math v0.0.1-alpha.4/go.mod h1:vapRKwqknwc4Fnu3/kX0Qp7VfgOfTRyaqgEZCn5gf5c=
 github.com/toxyl/safe v0.0.1-alpha.1 h1:d/RqEm/i6MN7Dqiby2OHudkGWrtKEYcThM8zz0yB/2Q=
 github.com/toxyl/safe v0.0.1-alpha.1/go.mod h1:MBHkh33Sw/JxHdIniPb4lQOCs00u2UE8KAqS/rJAslQ=
-github.com/toxyl/scheduler v0.0.0-20240318173328-a53f3ca9ef6c h1:Cexemg7+TvR7EF7Z6J+94WqS3DsTYI9EAbzL0JRT0SQ=
-github.com/toxyl/scheduler v0.0.0-20240318173328-a53f3ca9ef6c/go.mod h1:HT154OSh/z989zBMOs9q5IoBVt5zbybaYK8OxVomzZo=
 github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasttemplate v1.2.2 h1:lxLXG0uE3Qnshl9QyaK6XJxMXlQZELvChBOCmQD0Loo=

@@ -6,6 +6,24 @@ import (
 	"time"
 )
 
+// @Name: printf
+// @Desc: Prints formatted strings to the console
+// @Param:      str        - - -   The format string
+// @Param:      a          - - -   A slice with the arguments
+// @Returns:    result     - - -   Number of bytes written
+func printf(str string, a []any) (int, error) {
+	return fmt.Printf(str, a...)
+}
+
+// @Name: printfln
+// @Desc: Prints formatted strings to the console
+// @Param:      str        - - -   The format string
+// @Param:      a          - - -   A slice with the arguments
+// @Returns:    result     - - -   Number of bytes written
+func printfln(str string, a []any) (int, error) {
+	return fmt.Printf(str+"\n", a...)
+}
+
 // @Name: sprintf
 // @Desc: Creates formatted strings
 // @Param:      str        - - -   The format string

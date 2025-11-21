@@ -1,12 +1,8 @@
 package pxp
 
 import (
-	"bytes"
 	"fmt"
 	"image"
-	"image/png"
-	"os"
-	"path/filepath"
 	"runtime"
 	"strings"
 	"time"
@@ -30,7 +26,7 @@ func init() {
 // The script must use the variable `img` to store the final result.
 //
 // When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given dimensions.
-func RenderToFile(script, path string, maxW, maxH int) (err error) {
+func RenderToFile(script, baseDir, path string, maxW, maxH int, replacements map[string]string) (err error) {
 	sb := strings.Builder{}
 	sb.WriteString(script + "\n")
 	sb.WriteString(`save(`)
@@ -40,37 +36,8 @@ func RenderToFile(script, path string, maxW, maxH int) (err error) {
 		sb.WriteString(`img`)
 	}
 	sb.WriteString(` "` + path + `")`)
-	_, err = New().Script(sb.String()).Render(nil)
+	_, err = New().Script(sb.String()).Render(baseDir, replacements)
 	return
-}
-
-// RenderFile loads `pathIn` into the variable `in`, processes it with the given `script` and stores the result in `pathOut`.
-//
-// The script must use the variable `in` as input image and store the final result in the `img` variable.
-//
-// The `pathIn` variable can be a URL or a local file path.
-//
-// When `maxW` and `maxH` are greater than zero, the output image will be resized to fit within the given dimensions.
-func RenderFile(script, pathIn, pathOut string, maxW, maxH int) (img *image.NRGBA, err error) {
-	sb := strings.Builder{}
-	sb.WriteString(`in: load("` + pathIn + `")` + "\n")
-	sb.WriteString(script + "\n")
-	sb.WriteString(`save(`)
-	if maxW > 0 && maxH > 0 {
-		sb.WriteString(fmt.Sprintf("resize-fit(img %d %d)", maxW, maxH))
-	} else {
-		sb.WriteString(`img`)
-	}
-	sb.WriteString(` "` + pathOut + `")`)
-	return New().Script(sb.String()).Render(nil)
-}
-
-func RenderWithPXPFile(script string, args []any, files []string) (images []*image.NRGBA, err error) {
-	return New().ScriptFromFile(script).Args(args...).Files(files...).RenderImages()
-}
-
-func RenderWithPXPScript(script string, args []any, files []string) (images []*image.NRGBA, err error) {
-	return New().Script(script).Args(args...).Files(files...).RenderImages()
 }
 
 func DocMarkdown() string                { return language.DocMarkdown() }
@@ -82,30 +49,13 @@ type PXP struct {
 	lang   *language.Language
 	err    error
 	script string
-	args   []any
-	files  []string
 }
 
 func New() *PXP {
 	return &PXP{
 		lang:   language.New(),
 		script: "",
-		args:   nil,
-		files:  []string{},
 	}
-}
-
-func (p *PXP) ScriptFromFile(file string) *PXP {
-	if p.err != nil {
-		return p
-	}
-	data, err := os.ReadFile(file)
-	if err != nil {
-		p.err = err
-		return p
-	}
-	p.script = string(data)
-	return p
 }
 
 func (p *PXP) Script(script string) *PXP {
@@ -116,107 +66,15 @@ func (p *PXP) Script(script string) *PXP {
 	return p
 }
 
-func (p *PXP) Args(args ...any) *PXP {
-	if p.err != nil {
-		return p
-	}
-	p.args = args
-	return p
-}
-
-func (p *PXP) Files(files ...string) *PXP {
-	if p.err != nil {
-		return p
-	}
-	p.files = files
-	return p
-}
-
-func (p *PXP) RenderImages() ([]*image.NRGBA, error) {
-	images := []*image.NRGBA{}
-	if p.err != nil {
-		return images, p.err
-	}
-
-	for _, file := range p.files {
-		file = strings.TrimSpace(file)
-		if file == "" {
-			continue
-		}
-		img, err := p.Render(&file)
-		if err != nil {
-			p.err = fmt.Errorf("render error: %s", err.Error())
-			continue
-		}
-		if img == nil {
-			p.err = fmt.Errorf("render error: %s", "no image data returned")
-			continue
-		}
-		images = append(images, img)
-	}
-
-	return images, p.err
-}
-
-func (p *PXP) RenderFiles(outputDir string) ([]string, error) {
-	files := []string{}
-	if p.err != nil {
-		return files, p.err
-	}
-
-	if err := os.MkdirAll(outputDir, 0755); err != nil {
-		p.err = fmt.Errorf("error creating output directory: %s", err.Error())
-		return files, p.err
-	}
-
-	for _, file := range p.files {
-		file = strings.TrimSpace(file)
-		if file == "" {
-			continue
-		}
-		img, err := p.Render(&file)
-		if err != nil {
-			p.err = fmt.Errorf("render error: %s", err.Error())
-			continue
-		}
-		if img == nil {
-			p.err = fmt.Errorf("render error: %s", "no image data returned")
-			continue
-		}
-
-		var buf bytes.Buffer
-		if err := png.Encode(&buf, img); err != nil {
-			p.err = fmt.Errorf("encoding error: %s", err.Error())
-			continue
-		}
-
-		baseName := filepath.Base(file)
-		nameWithoutExt := strings.TrimSuffix(baseName, filepath.Ext(baseName))
-		outputFile := filepath.Join(outputDir, nameWithoutExt+".png")
-
-		if err := os.WriteFile(outputFile, buf.Bytes(), 0644); err != nil {
-			p.err = fmt.Errorf("write error: %s", err.Error())
-			continue
-		}
-		files = append(files, outputFile)
-	}
-
-	return files, p.err
-}
-
-func (p *PXP) Render(file *string) (*image.NRGBA, error) {
+func (p *PXP) Render(baseDir string, replacements map[string]string) (*image.NRGBA, error) {
 	if p.err != nil {
 		return nil, p.err
-	}
-	f := "dummy"
-	if file != nil {
-		f = *file
 	}
 	for activeRenders.Get() >= MAX_CONCURRENCY {
 		time.Sleep(10 * time.Second)
 	}
 	activeRenders.Inc()
-	res, err := p.lang.Run(p.script, append([]any{f}, p.args...)...)
+	res, err := p.lang.Run(p.script, baseDir, replacements, []any{"dummy"}...)
 	activeRenders.Dec()
 	if err != nil {
 		return nil, fmt.Errorf("script execution error: %w", err)

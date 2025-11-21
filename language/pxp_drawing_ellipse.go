@@ -56,9 +56,8 @@ func drawEllipsePx(img *image.NRGBA64, e Ellipse, style LineStyle) (*image.NRGBA
 	bounds := img.Bounds()
 	result := IClone(img)
 
-	// Convert upper-left corner to center for calculations
-	centerX := e.Center.X + e.Radius.X
-	centerY := e.Center.Y + e.Radius.Y
+	centerX := e.Center.X
+	centerY := e.Center.Y
 
 	// Calculate bounding box for efficiency
 	minX := int(centerX - e.Radius.X - style.Thickness - 1)

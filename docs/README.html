@@ -4346,7 +4346,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -8414,7 +8414,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -8477,7 +8477,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -8585,7 +8585,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -8882,7 +8882,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -9026,7 +9026,43 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">len(v=-) ⮕ (result=)</code></h3>
+<p><em>Returns the length of the given value.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">v</code></td>
+<td><code class="language-pxp">any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The value to get the length of</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The length of v</td>
 </tr>
 </tbody>
 </table>
@@ -9471,12 +9507,12 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">stops</code></td>
-<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">[][]any</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
-<td>Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+<td>Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; threshold is a raw value between min and max</td>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
@@ -9485,7 +9521,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The interpolated color as color.RGBA64</td>
+<td>- - - The interpolated color</td>
 </tr>
 </tbody>
 </table>
@@ -10101,12 +10137,12 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">stops</code></td>
-<td><code class="language-pxp">[][]float64</code></td>
+<td><code class="language-pxp">[][]any</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>Color stops as [][]float64 where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+<td>Color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]; additional fields are ignored</td>
 </tr>
 <tr>
 <td><code class="language-pxp">invertY</code></td>
@@ -10467,6 +10503,96 @@ done
 <td></td>
 <td></td>
 <td>- - - 8^n</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">printf(str=&quot;-&quot; a=-) ⮕ (result=)</code></h3>
+<p><em>Prints formatted strings to the console</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">str</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The format string</td>
+</tr>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>A slice with the arguments</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - Number of bytes written</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">printfln(str=&quot;-&quot; a=-) ⮕ (result=)</code></h3>
+<p><em>Prints formatted strings to the console</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">str</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The format string</td>
+</tr>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">[]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>A slice with the arguments</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - Number of bytes written</td>
 </tr>
 </tbody>
 </table>
@@ -11051,7 +11177,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -11114,7 +11240,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -11934,6 +12060,51 @@ done
 <td></td>
 <td></td>
 <td>- - - The sepia-toned image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">set-alpha(c=- alpha=1) ⮕ (result=)</code></h3>
+<p><em>Sets the alpha channel of a color</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">c</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>The color to modify</td>
+</tr>
+<tr>
+<td><code class="language-pxp">alpha</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">&amp;#34;%&amp;#34;</code></td>
+<td>The new alpha value</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The color with new alpha</td>
 </tr>
 </tbody>
 </table>
@@ -13211,7 +13382,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -13274,7 +13445,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -13337,7 +13508,7 @@ done
 <td></td>
 <td></td>
 <td></td>
-<td>- - - The color as color.RGBA64</td>
+<td>- - - The color</td>
 </tr>
 </tbody>
 </table>
@@ -13370,7 +13541,7 @@ done
                 alias: 'constant.language.null'
             },
             'keyword': {
-                pattern: /\bfor\b/,
+                pattern: /\b(?:for|include|macro)\b/,
                 alias: 'keyword.control'
             },
             'argument-reference': {

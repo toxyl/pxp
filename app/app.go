@@ -27,6 +27,7 @@ import (
 type FileResult struct {
 	Name    string `json:"name"`
 	Content string `json:"content"`
+	Path    string `json:"path"`
 }
 
 // OpResult represents the result of a  operation
@@ -87,6 +88,7 @@ func (a *App) OpenFile(filter string) OpResult {
 	return OpResult{&FileResult{
 		Name:    filepath.Base(file),
 		Content: string(content),
+		Path:    file,
 	}, nil}
 }
 
@@ -119,7 +121,7 @@ func (a *App) SaveFile(filename string, content string) OpResult {
 	}
 
 	return OpResult{
-		Data:  filepath.Base(file),
+		Data:  file,
 		Error: nil,
 	}
 }
@@ -273,12 +275,11 @@ func (a *App) LoadMultipleInputImages() OpResult {
 
 // Run runs the script and returns the result image as base64 data
 func (a *App) Run(script string, filePaths []string) OpResult {
-	// Convert []string to []any
 	args := make([]any, len(filePaths))
 	for i, v := range filePaths {
 		args[i] = v
 	}
-	res, err := language.New().Run(string(script), args...)
+	res, err := language.New().Run(string(script), "", nil, args...)
 	if err != nil {
 		return OpResult{map[string]string{
 			"error": err.Error(),
@@ -445,7 +446,7 @@ func (a *App) RunBatch(script, outputDir string, filePaths [][]string, reviewEna
 		}
 		fname := fmt.Sprintf("%s.png", strings.Join(suffix, "_-_"))
 
-		res, err := lang.Run(script, args...)
+		res, err := lang.Run(script, "", nil, args...)
 		if err != nil {
 			errors[fname] = err.Error()
 			continue
@@ -562,4 +563,12 @@ func (a *App) SelectDirectory() OpResult {
 		return OpResult{"", fmt.Errorf("failed to open directory dialog: %v", err)}
 	}
 	return OpResult{dir, nil}
+}
+
+// ChangeDirectory changes the current working directory
+func (a *App) ChangeDirectory(path string) OpResult {
+	if err := os.Chdir(path); err != nil {
+		return OpResult{false, fmt.Errorf("failed to change directory: %v", err)}
+	}
+	return OpResult{true, nil}
 }

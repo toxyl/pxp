@@ -49,6 +49,18 @@ func buildGoDSL(src *flo.DirObj, bin *flo.FileObj) error {
 	return nil
 }
 
+func buildPXPCLI(src *flo.DirObj, bin *flo.FileObj, goos, goarch string) error {
+	cmd := exec.Command("go", "build", "-o", bin.Path(), "-trimpath", "-buildvcs=false", ".")
+	cmd.Dir = src.Path()
+	cmd.Env = append(os.Environ(), "GOOS="+goos, "GOARCH="+goarch)
+
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to build PXP CLI: %w", err)
+	}
+
+	return nil
+}
+
 func generateDSL(src *flo.DirObj, bin *flo.FileObj) error {
 	printBlue("Generating DSL...")
 
@@ -171,6 +183,21 @@ func main() {
 			dieOnError(err, "Coud not make relative path")
 			dieOnError(f.Copy(dBuild.File(prel).Path()), "Failed to copy sources")
 		}, nil)
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		printBlue(fmt.Sprintf("%s: %s", osName, "Building CLI app..."))
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		time.Sleep(5 * time.Second)
+		dAppCLI := dBuild.Dir("app-cli")
+		var cliBinName string
+		if osName == "windows" {
+			cliBinName = fmt.Sprintf("%s-cli-%s-%s.exe", *appSlug, osName, *arch)
+		} else {
+			cliBinName = fmt.Sprintf("%s-cli-%s-%s", *appSlug, osName, *arch)
+		}
+		fCLIBinDst := dSrcBin.File(cliBinName)
+		dieOnError(buildPXPCLI(dAppCLI, fCLIBinDst, osName, *arch), "Failed to build PXP CLI")
 
 		/////////////////////////////////////////////////////////////////////////////////////////
 		printBlue(fmt.Sprintf("%s: %s", osName, "Building desktop app..."))
