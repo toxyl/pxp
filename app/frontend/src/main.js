@@ -72,6 +72,9 @@ async function initializeMonaco() {
                     [/\bdone\b/, 'keyword.control'],
                     [/\binclude\b/, 'keyword.control'],
                     [/\bmacro\b/, 'keyword.control'],
+                    [/\bif\b/, 'keyword.control'],
+                    [/\belse\b/, 'keyword.control'],
+                    [/\bend\b/, 'keyword.control'],
                     
                     // Argument references ($1, $2, etc)
                     [/\$\d+/, 'variable.parameter'],

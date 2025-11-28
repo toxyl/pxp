@@ -51,6 +51,8 @@ func (n *dslNode) String() string {
 		typ = "slice"
 	case nodes.forRange:
 		typ = "for"
+	case nodes.ifElse:
+		typ = "if"
 	}
 	return fmt.Sprintf("Node{Type: %s, Value: %s, Children: %v, Named: %t, ArgName: %s}", typ, n.data, n.children, n.named, n.argName)
 }

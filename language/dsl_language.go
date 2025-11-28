@@ -68,6 +68,95 @@ func (dsl *dslCollection) initDSL(id, name, description, version, extension stri
 		pos:       -1,
 		args:      []any{},
 	}
+	dsl.funcs.register(
+		"eq",
+		"Returns true if two values are equal",
+		[]dslParamMeta{
+			{name: "a", typ: "any", def: nil, desc: "First value to compare"},
+			{name: "b", typ: "any", def: nil, desc: "Second value to compare"},
+		},
+		[]dslParamMeta{
+			{name: "result", typ: "bool", def: false, desc: "True if values are equal"},
+		},
+		func(args ...any) (any, error) {
+			return dsl.compareEqual(args[0], args[1]), nil
+		},
+	)
+
+	dsl.funcs.register(
+		"ne",
+		"Returns true if two values are not equal",
+		[]dslParamMeta{
+			{name: "a", typ: "any", def: nil, desc: "First value to compare"},
+			{name: "b", typ: "any", def: nil, desc: "Second value to compare"},
+		},
+		[]dslParamMeta{
+			{name: "result", typ: "bool", def: false, desc: "True if values are not equal"},
+		},
+		func(args ...any) (any, error) {
+			return dsl.compareNotEqual(args[0], args[1]), nil
+		},
+	)
+
+	dsl.funcs.register(
+		"lt",
+		"Returns true if the first value is less than the second value",
+		[]dslParamMeta{
+			{name: "a", typ: "any", def: nil, desc: "First value to compare"},
+			{name: "b", typ: "any", def: nil, desc: "Second value to compare"},
+		},
+		[]dslParamMeta{
+			{name: "result", typ: "bool", def: false, desc: "True if a < b"},
+		},
+		func(args ...any) (any, error) {
+			return dsl.compareLessThan(args[0], args[1]), nil
+		},
+	)
+
+	dsl.funcs.register(
+		"le",
+		"Returns true if the first value is less than or equal to the second value",
+		[]dslParamMeta{
+			{name: "a", typ: "any", def: nil, desc: "First value to compare"},
+			{name: "b", typ: "any", def: nil, desc: "Second value to compare"},
+		},
+		[]dslParamMeta{
+			{name: "result", typ: "bool", def: false, desc: "True if a <= b"},
+		},
+		func(args ...any) (any, error) {
+			return dsl.compareLessThanOrEqual(args[0], args[1]), nil
+		},
+	)
+
+	dsl.funcs.register(
+		"gt",
+		"Returns true if the first value is greater than the second value",
+		[]dslParamMeta{
+			{name: "a", typ: "any", def: nil, desc: "First value to compare"},
+			{name: "b", typ: "any", def: nil, desc: "Second value to compare"},
+		},
+		[]dslParamMeta{
+			{name: "result", typ: "bool", def: false, desc: "True if a > b"},
+		},
+		func(args ...any) (any, error) {
+			return dsl.compareGreaterThan(args[0], args[1]), nil
+		},
+	)
+
+	dsl.funcs.register(
+		"ge",
+		"Returns true if the first value is greater than or equal to the second value",
+		[]dslParamMeta{
+			{name: "a", typ: "any", def: nil, desc: "First value to compare"},
+			{name: "b", typ: "any", def: nil, desc: "Second value to compare"},
+		},
+		[]dslParamMeta{
+			{name: "result", typ: "bool", def: false, desc: "True if a >= b"},
+		},
+		func(args ...any) (any, error) {
+			return dsl.compareGreaterThanOrEqual(args[0], args[1]), nil
+		},
+	)
 }
 
 // load initializes the language with a new script and arguments.

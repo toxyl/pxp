@@ -49,10 +49,11 @@ func lowercase(str string) (string, error) {
 	return strings.ToUpper(str), nil
 }
 
-// @Name: time
+// @Name: now
 // @Desc: Returns the current time according to the given layout
+// @Param:      offset     - - 0    					The amount of seconds to offset the current time by
 // @Param:      layout     - - "2006-01-02 15:04:05"    The layout
 // @Returns:    result     - - -   						The current time as string
-func timeStr(layout string) (string, error) {
-	return time.Now().Format(layout), nil
+func nowStr(offset int, layout string) (string, error) {
+	return time.Now().Add(time.Duration(offset) * time.Second).Format(layout), nil
 }

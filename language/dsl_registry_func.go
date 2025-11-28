@@ -94,8 +94,9 @@ func (f *dslFnType) call(vars *dslVarRegistry, args ...any) (any, error) {
 	// Handle variable references and type conversions
 	for i, arg := range callArgs {
 		if str, ok := arg.(string); ok {
+			paramType := f.meta.params[i].typ
 			// Check if it's a variable reference
-			if vars.has(str) {
+			if paramType != "string" && vars.has(str) {
 				// Get the variable value in a thread-safe way
 				varVal := vars.get(str)
 				if varVal != nil {

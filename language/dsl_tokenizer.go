@@ -8,6 +8,7 @@ package language
 
 import (
 	"fmt"
+	"unicode/utf8"
 )
 
 // dslTokenizer converts source code into tokens.
@@ -52,6 +53,12 @@ func (t *dslTokenizer) lex() error {
 		case tokens.forLoop:
 			continue
 		case tokens.done:
+			continue
+		case tokens.ifToken:
+			continue
+		case tokens.elseToken:
+			continue
+		case tokens.endToken:
 			continue
 		case tokens.sliceEnd:
 			slices--
@@ -228,6 +235,10 @@ func (t *dslTokenizer) addTokenAndSetNext(token *dslToken, typ dslTokenType) {
 	if t.hasTokens() && token.Value == "for" && dsl.isNotTerminatorToken(dsl.getLastToken(t.tokens)) && dsl.isNotAssignToken(dsl.getLastToken(t.tokens)) {
 		t.addToken(*dsl.newTerminatorToken())
 	}
+	// Add terminator before if statements if needed
+	if t.hasTokens() && token.Value == "if" && dsl.isNotTerminatorToken(dsl.getLastToken(t.tokens)) && dsl.isNotAssignToken(dsl.getLastToken(t.tokens)) {
+		t.addToken(*dsl.newTerminatorToken())
+	}
 	t.determineTokenType(token)
 	if dsl.isNotStringToken(token) && dsl.isNotCommentToken(token) {
 		dsl.trimTokenRight(token, " ")
@@ -277,6 +288,18 @@ func (t *dslTokenizer) determineTokenType(token *dslToken) {
 	}
 	if dsl.equals(v, "done") {
 		token.Type = tokens.done
+		return
+	}
+	if dsl.equals(v, "if") {
+		token.Type = tokens.ifToken
+		return
+	}
+	if dsl.equals(v, "else") {
+		token.Type = tokens.elseToken
+		return
+	}
+	if dsl.equals(v, "end") {
+		token.Type = tokens.endToken
 		return
 	}
 
@@ -354,9 +377,19 @@ func (t *dslTokenizer) handleString() error {
 			return nil
 		}
 
-		// Add character to token value
-		t.token.append(c)
-		t.advancePos(c)
+		// Decode UTF-8 rune and add to token value
+		r, size := utf8.DecodeRuneInString(t.source[t.pos:])
+		if size == 0 {
+			break
+		}
+		t.token.Value += string(r)
+		// Update position tracking for each byte of the rune
+		for i := 0; i < size; i++ {
+			if t.pos < len(t.source) {
+				t.updatePosition(t.source[t.pos])
+				t.pos++
+			}
+		}
 	}
 
 	// If we reach here, we hit EOF before finding the closing quote
@@ -848,6 +881,10 @@ func (t *dslTokenizer) tokenize() error {
 			// Handle done keyword
 			if token.Value == "done" {
 				token.Type = tokens.done
+			}
+			// Handle end keyword
+			if token.Value == "end" {
+				token.Type = tokens.endToken
 			}
 			t.addTokenAndSetNext(token, tokens.invalid)
 			t.pos++

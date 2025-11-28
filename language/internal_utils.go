@@ -8,7 +8,7 @@ import (
 )
 
 // blendWithAlpha applies the blend mode only where the top alpha is not zero,
-// and interpolates for partial alpha, matching professional software behavior.
+// and interpolates for partial alpha.
 func blendWithAlpha(
 	r1, g1, b1, a1, r2, g2, b2, a2 uint32,
 	blendFunc func(uint32, uint32, uint32, uint32, uint32, uint32) (uint32, uint32, uint32),
@@ -39,26 +39,6 @@ func porterDuffAlpha(a1, a2 uint32) uint32 {
 	return a1 + a2 - (a1 * a2 / 0xffff)
 }
 
-// hueToRGB helper function for HSL to RGB conversion
-func hueToRGB(p, q, t float64) float64 {
-	if t < 0 {
-		t += 1
-	}
-	if t > 1 {
-		t -= 1
-	}
-	if t < 1.0/6.0 {
-		return p + (q-p)*6*t
-	}
-	if t < 1.0/2.0 {
-		return q
-	}
-	if t < 2.0/3.0 {
-		return p + (q-p)*(2.0/3.0-t)*6
-	}
-	return p
-}
-
 // Helper function to calculate saturation from RGB
 func calculateSaturation(r, g, b float64) float64 {
 	max := math.Max(math.Max(r, g), b)
@@ -76,7 +56,7 @@ func calculateSaturation(r, g, b float64) float64 {
 }
 
 // Helper function to convert RGB to HSL
-func rgbToHsl(r, g, b float64) (h, s, l float64) {
+func convertRGBToHSLFloat(r, g, b float64) (h, s, l float64) {
 	max := math.Max(math.Max(r, g), b)
 	min := math.Min(math.Min(r, g), b)
 
@@ -111,7 +91,7 @@ func rgbToHsl(r, g, b float64) (h, s, l float64) {
 }
 
 // Helper function to convert HSL to RGB
-func hslToRgb(h, s, l float64) (r, g, b float64) {
+func convertHSLToRGBFloat(h, s, l float64) (r, g, b float64) {
 	if s == 0 {
 		r, g, b = l, l, l
 	} else {
@@ -123,15 +103,15 @@ func hslToRgb(h, s, l float64) (r, g, b float64) {
 		}
 		p := 2*l - q
 
-		r = hueToRgb(p, q, h+1.0/3.0)
-		g = hueToRgb(p, q, h)
-		b = hueToRgb(p, q, h-1.0/3.0)
+		r = convertHueToRGBFloat(p, q, h+1.0/3.0)
+		g = convertHueToRGBFloat(p, q, h)
+		b = convertHueToRGBFloat(p, q, h-1.0/3.0)
 	}
 	return r, g, b
 }
 
 // Helper function for HSL to RGB conversion
-func hueToRgb(p, q, t float64) float64 {
+func convertHueToRGBFloat(p, q, t float64) float64 {
 	if t < 0 {
 		t += 1
 	}
@@ -245,6 +225,72 @@ func convertHueToRGB(p, q, t float64) float64 {
 		return p + (q-p)*(2.0/3.0-t)*6
 	}
 	return p
+}
+
+// Helper function to convert RGB to LAB (for perceptual color matching)
+func convertRGBToLAB(r, g, b float64) (l, a, b2 float64) {
+	// First convert RGB to XYZ using D65 matrix
+	x := 0.4124564*r + 0.3575761*g + 0.1804375*b
+	y := 0.2126729*r + 0.7151522*g + 0.0721750*b
+	z := 0.0193339*r + 0.1191920*g + 0.9503041*b
+
+	// D65 white point
+	xn, yn, zn := 0.95047, 1.0, 1.08883
+
+	// Normalize by white point
+	x /= xn
+	y /= yn
+	z /= zn
+
+	// Convert XYZ to LAB
+	fx := fxyz(x)
+	fy := fxyz(y)
+	fz := fxyz(z)
+
+	l = 116.0*fy - 16.0
+	a = 500.0 * (fx - fy)
+	b2 = 200.0 * (fy - fz)
+	return
+}
+
+func fxyz(t float64) float64 {
+	if t > 0.008856 {
+		return math.Pow(t, 1.0/3.0)
+	}
+	return (7.787*t + 16.0/116.0)
+}
+
+// Helper function to convert LAB to RGB
+func convertLABToRGB(l, a, b2 float64) (r, g, b float64) {
+	// Convert LAB to XYZ
+	fy := (l + 16.0) / 116.0
+	fx := fy + (a / 500.0)
+	fz := fy - (b2 / 200.0)
+
+	// D65 white point
+	xn, yn, zn := 0.95047, 1.0, 1.08883
+
+	x := fxyzInv(fx) * xn
+	y := fxyzInv(fy) * yn
+	z := fxyzInv(fz) * zn
+
+	// Convert XYZ to RGB using D65 matrix
+	r = 3.2404542*x - 1.5371385*y - 0.4985314*z
+	g = -0.9692660*x + 1.8760108*y + 0.0415560*z
+	b = 0.0556434*x - 0.2040259*y + 1.0572252*z
+
+	// Clip to valid range
+	r = math.Max(0.0, math.Min(1.0, r))
+	g = math.Max(0.0, math.Min(1.0, g))
+	b = math.Max(0.0, math.Min(1.0, b))
+	return
+}
+
+func fxyzInv(t float64) float64 {
+	if t > 0.206897 {
+		return t * t * t
+	}
+	return (t - 16.0/116.0) / 7.787
 }
 
 // Helper function for bilinear interpolation of NRGBA64 images

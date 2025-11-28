@@ -281,27 +281,6 @@ _Copies an area from a source image and returns it as a new image._
 | `⮕ result` | `error` |   |   |   |   | - - - The new image |
 ---
 
-### `T(style=- text="-") ⮕ (result=)`  
-_Creates a new text._
-
-| Name | Type | Default | Min | Max | Unit | Description |
-|------|------|---------|-----|-----|------|-------------|
-| `style` | `TextStyle` | `-` |   |   |   | The text style to use |
-| `text` | `string` | `"-"` |   |   |   | - - The text to print |
-| `⮕ result` | `error` |   |   |   |   | - - - A new text |
----
-
-### `TS(color=- size=10 family="mono") ⮕ (result=)`  
-_Creates a new font style._
-
-| Name | Type | Default | Min | Max | Unit | Description |
-|------|------|---------|-----|-----|------|-------------|
-| `color` | `color.RGBA64` | `-` |   |   |   | The font color |
-| `size` | `float64` | `10` |   |   | `1` | The font size |
-| `family` | `string` | `"mono"` |   |   |   | The font family |
-| `⮕ result` | `error` |   |   |   |   | - - - A new font style |
----
-
 ### `V(x=0 y=0 z=0) ⮕ (result=)`  
 _Creates a new Vector from x, y and z._
 
@@ -552,6 +531,18 @@ _Blends the two images using the given blendmode (defaults to normal)_
 | `imgB` | `*image.NRGBA64` | `-` |   |   |   | The top image |
 | `mode` | `string` | `"normal"` |   |   |   | The blendmode name |
 | `⮕ result` | `error` |   |   |   |   | - - - The blended image |
+---
+
+### `blend-aligned(imgA=- imgB=- anchor="C" mode="normal") ⮕ (result=)`  
+_Aligns two images using the given anchor (left-top, top, top-right, left, center, right, bottom-left, bottom, bottom-right) and blends them using the given blendmode (defaults to normal)._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `imgA` | `*image.NRGBA64` | `-` |   |   |   | The bottom image |
+| `imgB` | `*image.NRGBA64` | `-` |   |   |   | The top image |
+| `anchor` | `string` | `"C"` |   |   |   | The anchor to align to (TL, T, TR, L, C, R, BL, B, BR) |
+| `mode` | `string` | `"normal"` |   |   |   | The blendmode name |
+| `⮕ result` | `error` |   |   |   |   | - - - The aligned and blended image |
 ---
 
 ### `blend-average(imgA=- imgB=-) ⮕ (result=)`  
@@ -1139,6 +1130,34 @@ _Crops an image by specified percentages from each side_
 | `⮕ result` | `error` |   |   |   |   | - - - The cropped image |
 ---
 
+### `crop-arc(img=- radius=1 startAngle=0 endAngle=360 offsetX=0 offsetY=0) ⮕ (result=)`  
+_Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX&#43;offsetX, centerY&#43;offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to crop |
+| `radius` | `float64` | `1` | `0` | `1` |   | Radius as a percentage of half the min(width, height) |
+| `startAngle` | `float64` | `0` | `-360` | `360` |   | Starting angle of the arc in degrees (-360 to 360, clockwise from right) |
+| `endAngle` | `float64` | `360` | `-360` | `360` |   | Ending angle of the arc in degrees (-360 to 360, clockwise from right) |
+| `offsetX` | `float64` | `0` | `-1` | `1` |   | Horizontal offset from image center (percentage of width, -1..1) |
+| `offsetY` | `float64` | `0` | `-1` | `1` |   | Vertical offset from image center (percentage of height, -1..1) |
+| `⮕ result` | `error` |   |   |   |   | - - - The arc-cropped image (pixels outside the arc are transparent) |
+---
+
+### `crop-arc-px(img=- radius=1 startAngle=0 endAngle=360 offsetX=0 offsetY=0) ⮕ (result=)`  
+_Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX&#43;offsetX, centerY&#43;offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to crop |
+| `radius` | `float64` | `1` | `0` | `1` |   | Radius as a percentage of half the min(width, height) |
+| `startAngle` | `float64` | `0` | `-360` | `360` |   | Starting angle of the arc in degrees (-360 to 360, clockwise from right) |
+| `endAngle` | `float64` | `360` | `-360` | `360` |   | Ending angle of the arc in degrees (-360 to 360, clockwise from right) |
+| `offsetX` | `float64` | `0` |   |   |   | Horizontal offset from image center (pixels) |
+| `offsetY` | `float64` | `0` |   |   |   | Vertical offset from image center (pixels) |
+| `⮕ result` | `error` |   |   |   |   | - - - The arc-cropped image (pixels outside the arc are transparent) |
+---
+
 ### `crop-circle(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=)`  
 _Crops an image using a circular mask. The circle is centered at (centerX&#43;offsetX, centerY&#43;offsetY) and the radius is a percentage (0-1) of half the minimum image dimension._
 
@@ -1158,8 +1177,8 @@ _Crops an image using a circular mask. The circle is centered at (centerX&#43;of
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to crop |
 | `radius` | `float64` | `1` | `0` | `1` |   | Radius as a percentage of half the min(width, height) |
-| `offsetX` | `int` | `0` |   |   |   | Horizontal offset from image center (pixels) |
-| `offsetY` | `int` | `0` |   |   |   | Vertical offset from image center (pixels) |
+| `offsetX` | `float64` | `0` |   |   |   | Horizontal offset from image center (pixels) |
+| `offsetY` | `float64` | `0` |   |   |   | Vertical offset from image center (pixels) |
 | `⮕ result` | `error` |   |   |   |   | - - - The circularly cropped image (pixels outside the circle are transparent) |
 ---
 
@@ -1271,6 +1290,34 @@ _Divides the two numbers_
 | `⮕ result` | `error` |   |   |   |   | - - - a/b |
 ---
 
+### `draw-arc(img=- origin=- r=- theta1=- theta2=- style=-) ⮕ (result=)`  
+_Draws an arc at radius r from angle θ1 to θ2 with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system (relative) |
+| `r` | `float64` | `-` |   |   |   | The radius |
+| `theta1` | `float64` | `-` |   |   |   | The start angle in radians |
+| `theta2` | `float64` | `-` |   |   |   | The end angle in radians |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-arc-px(img=- origin=- r=- theta1=- theta2=- style=-) ⮕ (result=)`  
+_Draws an arc at radius r from angle θ1 to θ2 with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system |
+| `r` | `float64` | `-` |   |   |   | The radius |
+| `theta1` | `float64` | `-` |   |   |   | The start angle in radians |
+| `theta2` | `float64` | `-` |   |   |   | The end angle in radians |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
 ### `draw-circle(img=- c=- style=-) ⮕ (result=)`  
 _Draws a circle._
 
@@ -1328,6 +1375,32 @@ _Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
+### `draw-grid-concentric(img=- origin=- maxRadius=- circles=- style=-) ⮕ (result=)`  
+_Draws concentric circles centered at the origin._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system (relative) |
+| `maxRadius` | `float64` | `-` |   |   |   | The maximum radius (relative) |
+| `circles` | `int` | `-` |   |   |   | The number of concentric circles |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-grid-concentric-px(img=- origin=- maxRadius=- circles=- style=-) ⮕ (result=)`  
+_Draws concentric circles centered at the origin._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system |
+| `maxRadius` | `float64` | `-` |   |   |   | The maximum radius |
+| `circles` | `int` | `-` |   |   |   | The number of concentric circles |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
 ### `draw-grid-h(img=- r=- rows=- style=-) ⮕ (result=)`  
 _Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
 
@@ -1352,6 +1425,34 @@ _Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
+### `draw-grid-polar(img=- origin=- maxRadius=- circles=- radials=- style=-) ⮕ (result=)`  
+_Draws a polar grid with concentric circles and radial lines._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system (relative) |
+| `maxRadius` | `float64` | `-` |   |   |   | The maximum radius (relative) |
+| `circles` | `int` | `-` |   |   |   | The number of concentric circles |
+| `radials` | `int` | `-` |   |   |   | The number of radial lines |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-grid-polar-px(img=- origin=- maxRadius=- circles=- radials=- style=-) ⮕ (result=)`  
+_Draws a polar grid with concentric circles and radial lines._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system |
+| `maxRadius` | `float64` | `-` |   |   |   | The maximum radius |
+| `circles` | `int` | `-` |   |   |   | The number of concentric circles |
+| `radials` | `int` | `-` |   |   |   | The number of radial lines |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
 ### `draw-grid-px(img=- r=- rows=- cols=- style=-) ⮕ (result=)`  
 _Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
 
@@ -1361,6 +1462,32 @@ _Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color._
 | `r` | `Rect` | `-` |   |   |   | The area to draw the grid on |
 | `rows` | `int` | `-` |   |   |   | The number of rows |
 | `cols` | `int` | `-` |   |   |   | The number of cols |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-grid-radial(img=- origin=- maxRadius=- radials=- style=-) ⮕ (result=)`  
+_Draws radial lines from the origin at evenly spaced angles._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system (relative) |
+| `maxRadius` | `float64` | `-` |   |   |   | The maximum radius (relative) |
+| `radials` | `int` | `-` |   |   |   | The number of radial lines |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-grid-radial-px(img=- origin=- maxRadius=- radials=- style=-) ⮕ (result=)`  
+_Draws radial lines from the origin at evenly spaced angles._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system |
+| `maxRadius` | `float64` | `-` |   |   |   | The maximum radius |
+| `radials` | `int` | `-` |   |   |   | The number of radial lines |
 | `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
@@ -1427,6 +1554,36 @@ _Draws a line from P(x1|y) to P(x2|y) with the given thickness and color._
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
+### `draw-line-polar(img=- origin=- r1=- theta1=- r2=- theta2=- style=-) ⮕ (result=)`  
+_Draws a line from polar point P(r1|θ1) to P(r2|θ2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system (relative) |
+| `r1` | `float64` | `-` |   |   |   | The start radius |
+| `theta1` | `float64` | `-` |   |   |   | The start angle in radians |
+| `r2` | `float64` | `-` |   |   |   | The end radius |
+| `theta2` | `float64` | `-` |   |   |   | The end angle in radians |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-line-polar-px(img=- origin=- r1=- theta1=- r2=- theta2=- style=-) ⮕ (result=)`  
+_Draws a line from polar point P(r1|θ1) to P(r2|θ2) with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system |
+| `r1` | `float64` | `-` |   |   |   | The start radius |
+| `theta1` | `float64` | `-` |   |   |   | The start angle in radians |
+| `r2` | `float64` | `-` |   |   |   | The end radius |
+| `theta2` | `float64` | `-` |   |   |   | The end angle in radians |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
 ### `draw-line-px(img=- p1=- p2=- style=-) ⮕ (result=)`  
 _Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color._
 
@@ -1435,6 +1592,34 @@ _Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color._
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `p1` | `Point` | `-` |   |   |   | The start position |
 | `p2` | `Point` | `-` |   |   |   | The end position |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-line-radial(img=- origin=- theta=- r1=- r2=- style=-) ⮕ (result=)`  
+_Draws a radial line from radius r1 to r2 at angle θ with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system (relative) |
+| `theta` | `float64` | `-` |   |   |   | The angle in radians |
+| `r1` | `float64` | `-` |   |   |   | The start radius |
+| `r2` | `float64` | `-` |   |   |   | The end radius |
+| `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
+| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
+---
+
+### `draw-line-radial-px(img=- origin=- theta=- r1=- r2=- style=-) ⮕ (result=)`  
+_Draws a radial line from radius r1 to r2 at angle θ with the given thickness and color._
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
+| `origin` | `Point` | `-` |   |   |   | The origin point for the polar coordinate system |
+| `theta` | `float64` | `-` |   |   |   | The angle in radians |
+| `r1` | `float64` | `-` |   |   |   | The start radius |
+| `r2` | `float64` | `-` |   |   |   | The end radius |
 | `style` | `LineStyle` | `-` |   |   |   | The thickness and color of the line |
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
@@ -1509,49 +1694,31 @@ _Draws a square at position (x,y) with the given size._
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
-### `draw-text(img=- p=- t=-) ⮕ (result=)`  
+### `draw-text(img=- p=- t="-" colText=- colOutline=- blendMode="normal") ⮕ (result=)`  
 _Draws a text at position (x,y)._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
-| `t` | `Text` | `-` |   |   |   | The text to draw |
+| `t` | `string` | `"-"` |   |   |   | - - The text to draw |
+| `colText` | `color.RGBA64` | `-` |   |   |   | The text color |
+| `colOutline` | `color.RGBA64` | `-` |   |   |   | The outline color |
+| `blendMode` | `string` | `"normal"` |   |   |   | The blend mode to use |
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
-### `draw-text-outline(img=- p=- t=- outline=-) ⮕ (result=)`  
-_Draws only the outline of text at position (x,y)._
+### `draw-text-px(img=- p=- t="-" colText=- colOutline=- blendMode="normal") ⮕ (result=)`  
+_Draws text at position (x,y)._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
 | `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
-| `t` | `Text` | `-` |   |   |   | The text to outline |
-| `outline` | `LineStyle` | `-` |   |   |   | The outline style (thickness and color) |
-| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
----
-
-### `draw-text-outline-px(img=- p=- t=- outline=-) ⮕ (result=)`  
-_Draws only the outline of text at position (x,y)._
-
-| Name | Type | Default | Min | Max | Unit | Description |
-|------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
-| `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
-| `t` | `Text` | `-` |   |   |   | The text to outline |
-| `outline` | `LineStyle` | `-` |   |   |   | The outline style (thickness and color) |
-| `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
----
-
-### `draw-text-px(img=- p=- t=-) ⮕ (result=)`  
-_Draws text at position (x,y) with the given style using TrueType fonts._
-
-| Name | Type | Default | Min | Max | Unit | Description |
-|------|------|---------|-----|-----|------|-------------|
-| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to draw to |
-| `p` | `Point` | `-` |   |   |   | The upper-left coordinate of the text |
-| `t` | `Text` | `-` |   |   |   | The text to draw |
+| `t` | `string` | `"-"` |   |   |   | - - The text to draw |
+| `colText` | `color.RGBA64` | `-` |   |   |   | The text color |
+| `colOutline` | `color.RGBA64` | `-` |   |   |   | The outline color |
+| `blendMode` | `string` | `"normal"` |   |   |   | The blend mode to use |
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
@@ -1583,6 +1750,16 @@ _Enhances colors and sharpness of an image_
 | `gWeight` | `float64` | `0.587` | `0` | `1` |   | The weight of the green channel (used for sharpening) |
 | `bWeight` | `float64` | `0.114` | `0` | `1` |   | The weight of the blue channel (used for sharpening) |
 | `⮕ result` | `error` |   |   |   |   | - - - The enhanceed image |
+---
+
+### `eq(a= b=) ⮕ (result=false)`  
+_Returns true if two values are equal_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `any` |   |   |   |   | First value to compare |
+| `b` | `any` |   |   |   |   | Second value to compare |
+| `⮕ result` | `bool` | `false` |   |   |   | True if values are equal |
 ---
 
 ### `excsc(x=-) ⮕ (result=)`  
@@ -1714,6 +1891,16 @@ _Returns the largest integer less than or equal to x_
 | `⮕ result` | `error` |   |   |   |   | - - - The largest integer less than or equal to x |
 ---
 
+### `ge(a= b=) ⮕ (result=false)`  
+_Returns true if the first value is greater than or equal to the second value_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `any` |   |   |   |   | First value to compare |
+| `b` | `any` |   |   |   |   | Second value to compare |
+| `⮕ result` | `bool` | `false` |   |   |   | True if a &gt;= b |
+---
+
 ### `grads2radians(grads=-) ⮕ (result=)`  
 _converts grads to radians_
 
@@ -1766,23 +1953,29 @@ _Draws vertical grid lines on the image with the given thickness and color._
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
-### `group(img=- title="-" colText=- colFill=- colBorder=- padding=3 fillAlphaHeader=0.9 fillAlphaBody=0.8 borderThickness=1 borderAlphaHeader=0.95 borderAlphaBody=0.95) ⮕ (result=)`  
+### `group(img=- title="-" colTitle=- colHeader=- colBody=- colBorder=- padding=3) ⮕ (result=)`  
 _Generates the given group with the given styles._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to wrap in a group |
 | `title` | `string` | `"-"` |   |   |   | - - The title of the group |
-| `colText` | `color.RGBA64` | `-` |   |   |   | The color of the title |
-| `colFill` | `color.RGBA64` | `-` |   |   |   | The color of the group |
+| `colTitle` | `color.RGBA64` | `-` |   |   |   | The color of the title |
+| `colHeader` | `color.RGBA64` | `-` |   |   |   | The color of the header |
+| `colBody` | `color.RGBA64` | `-` |   |   |   | The color of the body |
 | `colBorder` | `color.RGBA64` | `-` |   |   |   | The color of the border |
-| `padding` | `float64` | `3` |   |   | `0` | The padding for the image to wrap |
-| `fillAlphaHeader` | `float64` | `0.9` |   |   | `0` | The alpha of header fill |
-| `fillAlphaBody` | `float64` | `0.8` |   |   | `0` | The alpha of body fill |
-| `borderThickness` | `float64` | `1` |   |   | `0` | The thickness of the border |
-| `borderAlphaHeader` | `float64` | `0.95` |   |   | `0` | The alpha of header border |
-| `borderAlphaBody` | `float64` | `0.95` |   |   | `0` | The alpha of body border |
+| `padding` | `int` | `3` |   |   | `0` | The padding for the image to wrap |
 | `⮕ result` | `error` |   |   |   |   | - - - The group wrapping the input image |
+---
+
+### `gt(a= b=) ⮕ (result=false)`  
+_Returns true if the first value is greater than the second value_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `any` |   |   |   |   | First value to compare |
+| `b` | `any` |   |   |   |   | Second value to compare |
+| `⮕ result` | `bool` | `false` |   |   |   | True if a &gt; b |
 ---
 
 ### `haversin(x=-) ⮕ (result=)`  
@@ -1937,6 +2130,16 @@ _Creates a color from LCH (Lightness, Chroma, Hue) values_
 | `⮕ result` | `error` |   |   |   |   | - - - The color |
 ---
 
+### `le(a= b=) ⮕ (result=false)`  
+_Returns true if the first value is less than or equal to the second value_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `any` |   |   |   |   | First value to compare |
+| `b` | `any` |   |   |   |   | Second value to compare |
+| `⮕ result` | `bool` | `false` |   |   |   | True if a &lt;= b |
+---
+
 ### `len(v=-) ⮕ (result=)`  
 _Returns the length of the given value._
 
@@ -2030,6 +2233,16 @@ _Lowercases a string_
 | `⮕ result` | `error` |   |   |   |   | - - - The lowercased string |
 ---
 
+### `lt(a= b=) ⮕ (result=false)`  
+_Returns true if the first value is less than the second value_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `any` |   |   |   |   | First value to compare |
+| `b` | `any` |   |   |   |   | Second value to compare |
+| `⮕ result` | `bool` | `false` |   |   |   | True if a &lt; b |
+---
+
 ### `map-color(value=0 min=0 max=1 stops=-) ⮕ (result=)`  
 _Maps a value to a color using color stops with HSLA interpolation_
 
@@ -2072,6 +2285,16 @@ _Multiplies the two numbers_
 | `⮕ result` | `error` |   |   |   |   | - - - a*b |
 ---
 
+### `ne(a= b=) ⮕ (result=false)`  
+_Returns true if two values are not equal_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `a` | `any` |   |   |   |   | First value to compare |
+| `b` | `any` |   |   |   |   | Second value to compare |
+| `⮕ result` | `bool` | `false` |   |   |   | True if values are not equal |
+---
+
 ### `normalize-angle(radians=-) ⮕ (result=)`  
 _normalizes an angle to [0, 2π)_
 
@@ -2088,6 +2311,16 @@ _normalizes an angle to [0, 360)_
 |------|------|---------|-----|-----|------|-------------|
 | `degrees` | `float64` | `-` |   |   |   | The angle in degrees |
 | `⮕ result` | `error` |   |   |   |   | - - - normalized angle in degrees |
+---
+
+### `now(offset=0 layout="2006-01-02 15:04:05") ⮕ (result=)`  
+_Returns the current time according to the given layout_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `offset` | `int` | `0` |   |   |   | The amount of seconds to offset the current time by |
+| `layout` | `string` | `"2006-01-02 15:04:05"` |   |   |   | The layout |
+| `⮕ result` | `error` |   |   |   |   | - - - The current time as string |
 ---
 
 ### `opacity(img=- amount=1) ⮕ (result=)`  
@@ -2322,6 +2555,31 @@ _Converts a rectangular coordinate image to polar coordinates_
 |------|------|---------|-----|-----|------|-------------|
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to transform |
 | `⮕ result` | `error` |   |   |   |   | - - - The transformed image |
+---
+
+### `remap-bw(img=- sourceStops=- tolerance=2.5 precision=1) ⮕ (result=)`  
+_Remaps image colors from source color stops to grayscale_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to remap |
+| `sourceStops` | `[][]any` | `-` |   |   | `&#34;&#34;` | Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha] |
+| `tolerance` | `float64` | `2.5` |   |   | `&#34;&#34;` | Tolerance for color matching (higher = more forgiving, reduces artifacts from compression) |
+| `precision` | `float64` | `1` |   |   | `&#34;&#34;` | Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.) |
+| `⮕ result` | `error` |   |   |   |   | - - - The remapped image |
+---
+
+### `remap-color(img=- sourceStops=- targetStops=- tolerance=2.5 precision=1) ⮕ (result=)`  
+_Remaps image colors from source color stops to target color stops_
+
+| Name | Type | Default | Min | Max | Unit | Description |
+|------|------|---------|-----|-----|------|-------------|
+| `img` | `*image.NRGBA64` | `-` |   |   |   | The image to remap |
+| `sourceStops` | `[][]any` | `-` |   |   | `&#34;&#34;` | Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha] |
+| `targetStops` | `[][]any` | `-` |   |   | `&#34;&#34;` | Target color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha] |
+| `tolerance` | `float64` | `2.5` |   |   | `&#34;&#34;` | Tolerance for color matching (higher = more forgiving, reduces artifacts from compression) |
+| `precision` | `float64` | `1` |   |   | `&#34;&#34;` | Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.) |
+| `⮕ result` | `error` |   |   |   |   | - - - The remapped image |
 ---
 
 ### `remove-brightness(img=- lowerBright=0.1 minBright=0.2 maxBright=0.8 upperBright=0.9) ⮕ (result=)`  
@@ -2736,14 +2994,14 @@ _calculates the hyperbolic tangent of x_
 | `⮕ result` | `error` |   |   |   |   | - - - hyperbolic tangent value between -1 and 1 |
 ---
 
-### `text(t="-" style=- outline=-) ⮕ (result=)`  
-_Generates the given text with the given styles._
+### `text(t="-" colText=- colOutline=-) ⮕ (result=)`  
+_Generates the given text._
 
 | Name | Type | Default | Min | Max | Unit | Description |
 |------|------|---------|-----|-----|------|-------------|
 | `t` | `string` | `"-"` |   |   |   | - - The text to generate |
-| `style` | `TextStyle` | `-` |   |   |   | The text style (font, size, color) |
-| `outline` | `LineStyle` | `-` |   |   |   | The thickness and color of the outline |
+| `colText` | `color.RGBA64` | `-` |   |   |   | The text color |
+| `colOutline` | `color.RGBA64` | `-` |   |   |   | The outline color |
 | `⮕ result` | `error` |   |   |   |   | - - - The resulting image |
 ---
 
@@ -2755,15 +3013,6 @@ _Converts image to black and white based on a brightness threshold_
 | `img` | `*image.NRGBA64` | `-` |   |   |   | The image to apply thresholding to |
 | `level` | `float64` | `0.5` | `0` | `1` |   | The brightness threshold |
 | `⮕ result` | `error` |   |   |   |   | - - - The thresholded (black and white) image |
----
-
-### `time(layout="2006-01-02 15:04:05") ⮕ (result=)`  
-_Returns the current time according to the given layout_
-
-| Name | Type | Default | Min | Max | Unit | Description |
-|------|------|---------|-----|-----|------|-------------|
-| `layout` | `string` | `"2006-01-02 15:04:05"` |   |   |   | The layout |
-| `⮕ result` | `error` |   |   |   |   | - - - The current time as string |
 ---
 
 ### `transform(img=- dx=0 dy=0 angle=0 sx=0 sy=0) ⮕ (result=)`  

@@ -41,6 +41,9 @@ var (
 		rowEnd     dslTokenType
 		forLoop    dslTokenType
 		done       dslTokenType
+		ifToken    dslTokenType
+		elseToken  dslTokenType
+		endToken   dslTokenType
 	}{
 		invalid:    "INVALID",
 		argRef:     "ARG_REF",
@@ -70,6 +73,9 @@ var (
 		rowEnd:     "ROW_END",
 		forLoop:    "FOR_LOOP",
 		done:       "DONE",
+		ifToken:    "IF",
+		elseToken:  "ELSE",
+		endToken:   "END",
 	}
 	nodes = struct {
 		call       dslNodeKind
@@ -87,6 +93,7 @@ var (
 		matrix     dslNodeKind
 		row        dslNodeKind
 		forRange   dslNodeKind
+		ifElse     dslNodeKind
 	}{
 		call:       0,
 		arg:        1,
@@ -103,6 +110,7 @@ var (
 		matrix:     12,
 		row:        13,
 		forRange:   14,
+		ifElse:     15,
 	}
 	errors = struct {
 		UNSUPPORTED_TARGET_TYPE             func(typ string) error
@@ -144,6 +152,9 @@ var (
 		PSR_FOR_NOT_TOP_LEVEL               func() error
 		PSR_FOR_INVALID_VARS                func() error
 		PSR_FOR_TARGET_NOT_ITERABLE         func() error
+		PSR_IF_MISSING_CONDITION            func() error
+		PSR_IF_INVALID                      func() error
+		PSR_IF_UNTERMINATED                 func() error
 	}{
 		UNSUPPORTED_TARGET_TYPE:  func(typ string) error { return dslError("unsupported target type: %s", typ) },
 		STRING_CAST:              func(str, typ string) error { return dslError("cannot cast string %q to %s", str, typ) },
@@ -192,6 +203,9 @@ var (
 		PSR_FOR_NOT_TOP_LEVEL:        func() error { return dslError("for loops are only allowed at top level") },
 		PSR_FOR_INVALID_VARS:         func() error { return dslError("invalid for loop variable declaration") },
 		PSR_FOR_TARGET_NOT_ITERABLE:  func() error { return dslError("for loop target must be a slice or matrix") },
+		PSR_IF_MISSING_CONDITION:     func() error { return dslError("if statement missing condition") },
+		PSR_IF_INVALID:               func() error { return dslError("invalid if statement") },
+		PSR_IF_UNTERMINATED:          func() error { return dslError("if statement not terminated with end") },
 	}
 )
 

@@ -7,23 +7,6 @@ import (
 	"github.com/toxyl/math"
 )
 
-// //////// TEXT ///////////////////////////////////////////////////
-func T(style TextStyle, text string) *Text {
-	return &Text{
-		Text:  text,
-		Style: &style,
-	}
-}
-
-// @Name: T
-// @Desc: Creates a new text.
-// @Param:      style    - - -   The text style to use
-// @Param:      text     - - -   The text to print
-// @Returns:    result   - - -	 A new text
-func makeText(style TextStyle, text string) (Text, error) {
-	return *T(style, text), nil
-}
-
 // //////// POINT ///////////////////////////////////////////////////
 func P(x, y float64) *Point {
 	return &Point{
@@ -322,25 +305,6 @@ func FS(color color.RGBA64) FillStyle {
 // @Returns:    result    - - -	 A new fill style
 func makeFillStyle(color color.RGBA64) (FillStyle, error) {
 	return FS(color), nil
-}
-
-// //////// TEXT STYLE ///////////////////////////////////////////////////
-func TS(color color.RGBA64, size float64, family string) TextStyle {
-	return TextStyle{
-		Family: family,
-		Size:   size,
-		Color:  &color,
-	}
-}
-
-// @Name: TS
-// @Desc: Creates a new font style.
-// @Param:      color     - - -  		The font color
-// @Param:      size      1 - 10  		The font size
-// @Param:      family    - - "mono"  	The font family
-// @Returns:    result    - - -	 		A new font style
-func makeTextStyle(color color.RGBA64, size float64, family string) (TextStyle, error) {
-	return TS(color, size, family), nil
 }
 
 // //////// MISC (not exposed) ///////////////////////////////////////////////////

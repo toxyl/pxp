@@ -11,6 +11,8 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/toxyl/math"
 )
 
 type dslResult struct {
@@ -322,6 +324,176 @@ func (p *dslParser) parseForRange() (*dslNode, error) {
 	return node, nil
 }
 
+// parseIfElse parses an if-else construct: if [condition] { body } else { body } end
+func (p *dslParser) parseIfElse() (*dslNode, error) {
+	node := &dslNode{
+		kind: nodes.ifElse,
+	}
+
+	// Parse condition - must be wrapped in brackets
+	if !p.advance() {
+		return nil, errors.PSR_IF_MISSING_CONDITION()
+	}
+
+	// Expect indexStart '[' for condition
+	if p.curr.Type != tokens.indexStart {
+		return nil, errors.PSR_IF_MISSING_CONDITION()
+	}
+
+	// Collect tokens until matching indexEnd, handling nested brackets
+	depth := 1
+	conditionTokens := make([]*dslToken, 0)
+	for p.advance() {
+		if p.curr.Type == tokens.indexStart {
+			depth++
+		} else if p.curr.Type == tokens.indexEnd {
+			depth--
+			if depth == 0 {
+				break
+			}
+		}
+		conditionTokens = append(conditionTokens, p.curr)
+	}
+	if depth != 0 {
+		return nil, errors.PSR_IF_MISSING_CONDITION()
+	}
+	if len(conditionTokens) == 0 {
+		return nil, errors.PSR_IF_MISSING_CONDITION()
+	}
+
+	// Parse condition from collected tokens - skip terminators and spaces like parseIndex does
+	sub := &dslParser{dsl: p.dsl, curr: nil, next: nil, prev: nil, tokens: conditionTokens, formatted: "", types: "", pos: -1, args: p.args}
+	var condition *dslNode
+	var err error
+	for sub.advance() {
+		if sub.curr.Type == tokens.terminator || sub.curr.Value == "" || sub.curr.Type == tokens.space {
+			continue
+		}
+		if sub.curr.Type == tokens.comment {
+			continue
+		}
+		condition, err = sub.parseArgument()
+		if err != nil {
+			return nil, err
+		}
+		if condition != nil {
+			break
+		}
+	}
+	if condition == nil {
+		return nil, errors.PSR_IF_MISSING_CONDITION()
+	}
+	node.children = append(node.children, condition)
+
+	// Advance past the indexEnd token
+	if !p.advance() {
+		return nil, errors.PSR_IF_UNTERMINATED()
+	}
+
+	// Parse true branch statements
+	trueBranch := []*dslNode{}
+	for {
+		if p.curr == nil {
+			return nil, errors.PSR_IF_UNTERMINATED()
+		}
+
+		if p.curr.Type == tokens.elseToken || p.curr.Type == tokens.endToken {
+			break
+		}
+
+		if p.curr.Type == tokens.space || p.curr.Value == "" {
+			if !p.advance() {
+				break
+			}
+			continue
+		}
+		if p.curr.Type == tokens.comment {
+			if !p.advance() {
+				break
+			}
+			continue
+		}
+
+		stmt, err := p.parseNode()
+		if err != nil {
+			return nil, err
+		}
+		if stmt != nil {
+			trueBranch = append(trueBranch, stmt)
+		}
+
+		if !p.advance() {
+			break
+		}
+	}
+
+	// Parse else branch if present
+	falseBranch := []*dslNode{}
+	hasElse := false
+	if p.curr != nil && p.curr.Type == tokens.elseToken {
+		hasElse = true
+		if !p.advance() {
+			return nil, errors.PSR_IF_UNTERMINATED()
+		}
+
+		for {
+			if p.curr == nil {
+				return nil, errors.PSR_IF_UNTERMINATED()
+			}
+
+			if p.curr.Type == tokens.endToken {
+				break
+			}
+
+			if p.curr.Type == tokens.space || p.curr.Value == "" {
+				if !p.advance() {
+					break
+				}
+				continue
+			}
+			if p.curr.Type == tokens.comment {
+				if !p.advance() {
+					break
+				}
+				continue
+			}
+
+			stmt, err := p.parseNode()
+			if err != nil {
+				return nil, err
+			}
+			if stmt != nil {
+				falseBranch = append(falseBranch, stmt)
+			}
+
+			if !p.advance() {
+				break
+			}
+		}
+	}
+
+	// Verify we have end token
+	if p.curr == nil || p.curr.Type != tokens.endToken {
+		return nil, errors.PSR_IF_UNTERMINATED()
+	}
+
+	// Store branch information: first child is condition, then true branch nodes, then false branch nodes
+	// We'll use a marker node to separate branches, or store count in node.data
+	// For simplicity, we'll store: [condition, trueBranch..., falseBranch...]
+	// and track the split point using a special marker or by storing count
+	node.children = append(node.children, trueBranch...)
+
+	// Store false branch count in node.data to know where false branch starts
+	if hasElse {
+		node.data = strconv.Itoa(len(trueBranch))
+		node.children = append(node.children, falseBranch...)
+	} else {
+		node.data = strconv.Itoa(len(trueBranch))
+	}
+
+	return node, nil
+}
+
 // parseIndex parses one or more chained index operations on a base node.
 // It expects the current token to be indexStart when called.
 func (p *dslParser) parseIndex(base *dslNode) (*dslNode, error) {
@@ -394,6 +566,8 @@ func (p *dslParser) parseNode() (*dslNode, error) {
 		}, nil
 	case tokens.forLoop:
 		return p.parseForRange()
+	case tokens.ifToken:
+		return p.parseIfElse()
 	case tokens.callStart:
 		return p.parseCall()
 	case tokens.sliceStart:
@@ -1274,6 +1448,60 @@ func (p *dslParser) evaluateNode(node *dslNode) (any, error) {
 					if err != nil {
 						return nil, err
 					}
+				}
+			}
+		}
+
+		return nil, nil
+	case nodes.ifElse:
+		if len(node.children) < 2 {
+			return nil, errors.PSR_IF_INVALID()
+		}
+
+		// First child is the condition
+		condition, err := p.evaluateNode(node.children[0])
+		if err != nil {
+			return nil, err
+		}
+
+		// Convert condition to boolean
+		condBool := false
+		if b, ok := condition.(bool); ok {
+			condBool = b
+		} else if f, err := dsl.toFloat64(condition); err == nil {
+			condBool = f != 0
+		} else if s, ok := condition.(string); ok {
+			condBool = s != ""
+		} else if condition != nil {
+			condBool = true
+		}
+
+		// Parse branch split point from node.data
+		trueBranchCount := 0
+		if node.data != "" {
+			if count, err := strconv.Atoi(node.data); err == nil {
+				trueBranchCount = count
+			}
+		}
+
+		// Execute appropriate branch
+		if condBool {
+			// Execute true branch (children 1 to 1+trueBranchCount)
+			startIdx := 1
+			endIdx := math.Min(startIdx+trueBranchCount, len(node.children))
+			for i := startIdx; i < endIdx; i++ {
+				_, err := p.evaluateNode(node.children[i])
+				if err != nil {
+					return nil, err
+				}
+			}
+		} else {
+			// Execute false branch (children after true branch)
+			startIdx := 1 + trueBranchCount
+			for i := startIdx; i < len(node.children); i++ {
+				_, err := p.evaluateNode(node.children[i])
+				if err != nil {
+					return nil, err
 				}
 			}
 		}

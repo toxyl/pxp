@@ -324,7 +324,7 @@ func cropPx(img *image.NRGBA64, left int, right int, top int, bottom int) (*imag
 // @Returns:    result   - -   	-   The circularly cropped image (pixels outside the circle are transparent)
 func cropCircle(img *image.NRGBA64, radius float64, offsetX float64, offsetY float64) (*image.NRGBA64, error) {
 	bounds := img.Bounds()
-	return cropCirclePx(img, radius, int(offsetX*(float64(bounds.Dx())/2.0)), int(offsetY*(float64(bounds.Dy())/2.0)))
+	return cropCirclePx(img, radius*math.Min(float64(bounds.Dx()), float64(bounds.Dy())), offsetX*float64(bounds.Dx()), offsetY*float64(bounds.Dy()))
 }
 
 // @Name: crop-circle-px
@@ -334,17 +334,17 @@ func cropCircle(img *image.NRGBA64, radius float64, offsetX float64, offsetY flo
 // @Param:      offsetX  - -   	0   Horizontal offset from image center (pixels)
 // @Param:      offsetY  - -   	0   Vertical offset from image center (pixels)
 // @Returns:    result   - -   	-   The circularly cropped image (pixels outside the circle are transparent)
-func cropCirclePx(img *image.NRGBA64, radius float64, offsetX int, offsetY int) (*image.NRGBA64, error) {
+func cropCirclePx(img *image.NRGBA64, radius float64, offsetX float64, offsetY float64) (*image.NRGBA64, error) {
 	bounds := img.Bounds()
-	width := bounds.Dx()
-	height := bounds.Dy()
+	width := float64(bounds.Dx())
+	height := float64(bounds.Dy())
 	centerX := width/2 + offsetX
 	centerY := height/2 + offsetY
 
 	// Use the smaller of width or height for radius calculation
 	minHalf := math.Min(height, width)
 	minHalf = minHalf / 2
-	r := int(math.Round(float64(minHalf) * radius))
+	r := radius
 	r2 := r * r // squared radius for distance check
 
 	// Calculate bounding box of the circle, clamp to image bounds
@@ -353,35 +353,31 @@ func cropCirclePx(img *image.NRGBA64, radius float64, offsetX int, offsetY int) 
 	cropMinY := centerY - r
 	cropMaxY := centerY + r
 
-	if cropMinX < bounds.Min.X {
-		cropMinX = bounds.Min.X
+	if cropMinX < 0 {
+		cropMinX = 0
 	}
-	if cropMaxX > bounds.Max.X {
-		cropMaxX = bounds.Max.X
+	if cropMaxX > width {
+		cropMaxX = width
 	}
-	if cropMinY < bounds.Min.Y {
-		cropMinY = bounds.Min.Y
+	if cropMinY < 0 {
+		cropMinY = 0
 	}
-	if cropMaxY > bounds.Max.Y {
-		cropMaxY = bounds.Max.Y
+	if cropMaxY > height {
+		cropMaxY = height
 	}
 
 	newWidth := cropMaxX - cropMinX
 	newHeight := cropMaxY - cropMinY
-	newBounds := image.Rect(0, 0, newWidth, newHeight)
-	result := IFromBounds(newBounds)
-	transparent := color.NRGBA64{0, 0, 0, 0}
+	result := I(int(newWidth), int(newHeight))
 
-	for y := range newHeight {
-		for x := range newWidth {
-			srcX := cropMinX + x
-			srcY := cropMinY + y
+	for y := range int(newHeight) {
+		for x := range int(newWidth) {
+			srcX := cropMinX + float64(x)
+			srcY := cropMinY + float64(y)
 			dx := srcX - centerX
 			dy := srcY - centerY
 			if dx*dx+dy*dy <= r2 {
-				result.Set(x, y, img.NRGBA64At(srcX, srcY))
-			} else {
-				result.Set(x, y, transparent)
+				result.Set(x, y, img.NRGBA64At(int(srcX), int(srcY)))
 			}
 		}
 	}
@@ -458,6 +454,107 @@ func cropSquarePx(img *image.NRGBA64, size float64, offsetX int, offsetY int) (*
 				result.Set(x, y, img.NRGBA64At(srcX, srcY))
 			} else {
 				result.Set(x, y, color.NRGBA64{0, 0, 0, 0})
+			}
+		}
+	}
+
+	return result, nil
+}
+
+// @Name: crop-arc
+// @Desc: Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX+offsetX, centerY+offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept.
+// @Param:      img       - -   	-   The image to crop
+// @Param:      radius    - 0..1	1   Radius as a percentage of half the min(width, height)
+// @Param:      startAngle - -360..360	0   Starting angle of the arc in degrees (-360 to 360, clockwise from right)
+// @Param:      endAngle   - -360..360	360 Ending angle of the arc in degrees (-360 to 360, clockwise from right)
+// @Param:      offsetX   - -1..1	0   Horizontal offset from image center (percentage of width, -1..1)
+// @Param:      offsetY   - -1..1	0   Vertical offset from image center (percentage of height, -1..1)
+// @Returns:    result    - -   	-   The arc-cropped image (pixels outside the arc are transparent)
+func cropArc(img *image.NRGBA64, radius float64, startAngle float64, endAngle float64, offsetX float64, offsetY float64) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	return cropArcPx(img, radius*math.Min(float64(bounds.Dx()), float64(bounds.Dy())), startAngle, endAngle, offsetX*float64(bounds.Dx()), offsetY*float64(bounds.Dy()))
+}
+
+// @Name: crop-arc-px
+// @Desc: Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX+offsetX, centerY+offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept.
+// @Param:      img       - -   	-   The image to crop
+// @Param:      radius    - 0..1	1   Radius as a percentage of half the min(width, height)
+// @Param:      startAngle - -360..360	0   Starting angle of the arc in degrees (-360 to 360, clockwise from right)
+// @Param:      endAngle   - -360..360	360 Ending angle of the arc in degrees (-360 to 360, clockwise from right)
+// @Param:      offsetX   - -   	0   Horizontal offset from image center (pixels)
+// @Param:      offsetY   - -   	0   Vertical offset from image center (pixels)
+// @Returns:    result    - -   	-   The arc-cropped image (pixels outside the arc are transparent)
+func cropArcPx(img *image.NRGBA64, radius float64, startAngle float64, endAngle float64, offsetX float64, offsetY float64) (*image.NRGBA64, error) {
+	bounds := img.Bounds()
+	width := float64(bounds.Dx())
+	height := float64(bounds.Dy())
+	centerX := width/2 + (offsetX / 2)
+	centerY := height/2 + (offsetY / 2)
+
+	r := radius
+	r2 := r * r
+
+	cropMinX := centerX - r
+	cropMaxX := centerX + r
+	cropMinY := centerY - r
+	cropMaxY := centerY + r
+
+	if cropMinX < 0 {
+		cropMinX = 0
+	}
+	if cropMaxX > width {
+		cropMaxX = width
+	}
+	if cropMinY < 0 {
+		cropMinY = 0
+	}
+	if cropMaxY > height {
+		cropMaxY = height
+	}
+
+	newWidth := cropMaxX - cropMinX
+	newHeight := cropMaxY - cropMinY
+	result := I(int(newWidth), int(newHeight))
+
+	// Normalize angles to 0-360 range
+	for startAngle < 0 {
+		startAngle += 360
+	}
+	for startAngle >= 360 {
+		startAngle -= 360
+	}
+	for endAngle < 0 {
+		endAngle += 360
+	}
+	for endAngle >= 360 {
+		endAngle -= 360
+	}
+
+	for y := range int(newHeight) {
+		for x := range int(newWidth) {
+			srcX := cropMinX + float64(x)
+			srcY := cropMinY + float64(y)
+			dx := float64(srcX - centerX)
+			dy := float64(srcY - centerY)
+			dist2 := dx*dx + dy*dy
+
+			if dist2 <= float64(r2) {
+				angle := math.Atan2(dy, dx)
+				angleDeg := angle * 180.0 / math.Pi
+				if angleDeg < 0 {
+					angleDeg += 360
+				}
+
+				inArc := false
+				if startAngle <= endAngle {
+					inArc = angleDeg >= startAngle && angleDeg <= endAngle
+				} else {
+					inArc = angleDeg >= startAngle || angleDeg <= endAngle
+				}
+
+				if inArc {
+					result.Set(x, y, img.NRGBA64At(int(srcX), int(srcY)))
+				}
 			}
 		}
 	}

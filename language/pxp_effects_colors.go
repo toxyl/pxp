@@ -82,7 +82,7 @@ func colorColorize(img *image.NRGBA64, col color.RGBA64) (*image.NRGBA64, error)
 	alpha := float64(col.A) / 65535.0
 
 	// Convert target color to HSL to get hue and saturation
-	targetH, targetS, targetL := rgbToHsl(targetR, targetG, targetB)
+	targetH, targetS, targetL := convertRGBToHSLFloat(targetR, targetG, targetB)
 
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
 		// Convert pixel to normalized RGB
@@ -91,7 +91,7 @@ func colorColorize(img *image.NRGBA64, col color.RGBA64) (*image.NRGBA64, error)
 		bf := float64(b1) / 65535.0
 
 		// Convert original pixel to HSL
-		_, _, originalL := rgbToHsl(rf, gf, bf)
+		_, _, originalL := convertRGBToHSLFloat(rf, gf, bf)
 
 		// Calculate new luminance by blending original and target luminance
 		// This preserves the image's contrast while allowing some influence from target luminance
@@ -103,7 +103,7 @@ func colorColorize(img *image.NRGBA64, col color.RGBA64) (*image.NRGBA64, error)
 		newS := originalS*(1-alpha) + targetS*alpha
 
 		// Convert back to RGB using the new HSL values
-		newR, newG, newB := hslToRgb(targetH, newS, newL)
+		newR, newG, newB := convertHSLToRGBFloat(targetH, newS, newL)
 
 		// Blend with original color based on alpha
 		r = uint32(math.Clamp(rf*(1-alpha)+newR*alpha, 0, 1) * 65535.0)
@@ -139,13 +139,13 @@ func colorContrast(img *image.NRGBA64, factor float64) (*image.NRGBA64, error) {
 func colorSaturation(img *image.NRGBA64, factor float64) (*image.NRGBA64, error) {
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
 		// Convert to HSL
-		h, s, l := rgbToHsl(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
+		h, s, l := convertRGBToHSLFloat(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
 
 		// Adjust saturation
 		s = math.Min(s*factor, 1.0)
 
 		// Convert back to RGB
-		rf, gf, bf := hslToRgb(h, s, l)
+		rf, gf, bf := convertHSLToRGBFloat(h, s, l)
 
 		r = uint32(rf * 65535.0)
 		g = uint32(gf * 65535.0)
@@ -215,7 +215,7 @@ func colorChromaticAberration(img *image.NRGBA64, amount float64) (*image.NRGBA6
 func colorHueRotate(img *image.NRGBA64, angle float64) (*image.NRGBA64, error) {
 	hueShift := angle / 360.0 // Normalize angle to 0.0-1.0 range for HSL calculation
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
-		h, s, l := rgbToHsl(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
+		h, s, l := convertRGBToHSLFloat(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
 
 		// Rotate hue
 		h += hueShift
@@ -225,7 +225,7 @@ func colorHueRotate(img *image.NRGBA64, angle float64) (*image.NRGBA64, error) {
 			h += 1.0
 		}
 
-		rf, gf, bf := hslToRgb(h, s, l)
+		rf, gf, bf := convertHSLToRGBFloat(h, s, l)
 
 		r = uint32(rf * 65535.0)
 		g = uint32(gf * 65535.0)
@@ -403,7 +403,7 @@ func colorVignette(img *image.NRGBA64, strength float64, falloff float64) (*imag
 // @Returns:    result  - -   	-   The vibrance-adjusted image
 func colorVibrance(img *image.NRGBA64, factor float64) (*image.NRGBA64, error) {
 	return dsl.parallelProcessNRGBA64(img, func(r1, g1, b1, a1 uint32) (r, g, b, a uint32) {
-		h, s, l := rgbToHsl(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
+		h, s, l := convertRGBToHSLFloat(float64(r1)/65535.0, float64(g1)/65535.0, float64(b1)/65535.0)
 
 		// Calculate saturation adjustment - more effect on less saturated colors
 		// Max increase/decrease is scaled by how far current saturation is from max (1.0)
@@ -421,7 +421,7 @@ func colorVibrance(img *image.NRGBA64, factor float64) (*image.NRGBA64, error) {
 		newS = math.Clamp(newS, 0.0, 1.0) // Clamp saturation [0, 1]
 
 		// Convert back to RGB
-		rf, gf, bf := hslToRgb(h, newS, l)
+		rf, gf, bf := convertHSLToRGBFloat(h, newS, l)
 
 		r = uint32(rf * 65535.0)
 		g = uint32(gf * 65535.0)
@@ -442,7 +442,7 @@ func colorExposure(img *image.NRGBA64, level float64) (*image.NRGBA64, error) {
 		r = uint32(math.Clamp(float64(r1)*factor, 0, 0xFFFF))
 		g = uint32(math.Clamp(float64(g1)*factor, 0, 0xFFFF))
 		b = uint32(math.Clamp(float64(b1)*factor, 0, 0xFFFF))
-		a = a1
+		a = a1 // Keep original alpha
 		return
 	}, NumColorConversionWorkers), nil
 }
@@ -478,7 +478,7 @@ func colorSelectHue(img *image.NRGBA64, hue, toleranceLeft, toleranceRight, soft
 			af := float64(c.A) / 65535.0
 
 			// Convert to HSL
-			h, s, _ := rgbToHsl(rf, gf, bf)
+			h, s, _ := convertRGBToHSLFloat(rf, gf, bf)
 
 			// Calculate hue difference, handling circular hue space
 			diff := h - targetHue
@@ -577,7 +577,7 @@ func colorSelectHSL(img *image.NRGBA64,
 			af := float64(c.A) / 65535.0
 
 			// Convert to HSL
-			h, s, l := rgbToHsl(rf, gf, bf)
+			h, s, l := convertRGBToHSLFloat(rf, gf, bf)
 
 			// Calculate alpha for each component
 			var alphaH, alphaS, alphaL float64
@@ -1106,4 +1106,27 @@ func colorRemoveBrightness(img *image.NRGBA64,
 		return nil, err
 	}
 	return blendErase(img, bright)
+}
+
+// @Name: remap-color
+// @Desc: Remaps image colors from source color stops to target color stops
+// @Param:      img          -  -   -   The image to remap
+// @Param:      sourceStops  "" -   -   Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]
+// @Param:      targetStops  "" -   -   Target color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]
+// @Param:      tolerance    "" -   2.5 Tolerance for color matching (higher = more forgiving, reduces artifacts from compression)
+// @Param:      precision    "" -   1.0 Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.)
+// @Returns:    result       -  -	-   The remapped image
+func colorRemap(img *image.NRGBA64, sourceStops [][]any, targetStops [][]any, tolerance float64, precision float64) (*image.NRGBA64, error) {
+	return colorMapper(img, sourceStops, targetStops, tolerance, precision)
+}
+
+// @Name: remap-bw
+// @Desc: Remaps image colors from source color stops to grayscale
+// @Param:      img          -  -   -   The image to remap
+// @Param:      sourceStops  "" -   -   Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]
+// @Param:      tolerance    "" -   2.5 Tolerance for color matching (higher = more forgiving, reduces artifacts from compression)
+// @Param:      precision    "" -   1.0 Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.)
+// @Returns:    result       -  -	-   The remapped image
+func bwRemap(img *image.NRGBA64, sourceStops [][]any, tolerance float64, precision float64) (*image.NRGBA64, error) {
+	return colorMapper(img, sourceStops, [][]any{}, tolerance, precision)
 }

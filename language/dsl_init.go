@@ -1567,6 +1567,39 @@ func NewLanguage() *dslCollection {
             )
         },
     )
+    l.funcs.register("set-alpha", "Sets the alpha channel of a color",
+        []dslParamMeta{ 
+            { 
+                name: "c",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                unit: "\"\"", 
+                desc: "The color to modify",
+            },
+            { 
+                name: "alpha",
+                typ:  "float64", 
+                min:  0, 
+                max:  1, 
+                def:  1, 
+                unit: "\"%\"", 
+                desc: "The new alpha value",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The color with new alpha",
+            },
+        },
+        func(a ...any) (any, error) {
+            return setAlpha(
+                a[0].(color.RGBA64),
+                a[1].(float64), 
+            )
+        },
+    )
     l.funcs.register("map-color", "Maps a value to a color using color stops with HSLA interpolation",
         []dslParamMeta{ 
             { 
@@ -1611,39 +1644,6 @@ func NewLanguage() *dslCollection {
                 a[1].(float64),
                 a[2].(float64),
                 a[3].([][]any), 
-            )
-        },
-    )
-    l.funcs.register("set-alpha", "Sets the alpha channel of a color",
-        []dslParamMeta{ 
-            { 
-                name: "c",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                unit: "\"\"", 
-                desc: "The color to modify",
-            },
-            { 
-                name: "alpha",
-                typ:  "float64", 
-                min:  0, 
-                max:  1, 
-                def:  1, 
-                unit: "\"%\"", 
-                desc: "The new alpha value",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The color with new alpha",
-            },
-        },
-        func(a ...any) (any, error) {
-            return setAlpha(
-                a[0].(color.RGBA64),
-                a[1].(float64), 
             )
         },
     )
@@ -2082,42 +2082,6 @@ func NewLanguage() *dslCollection {
             )
         },
     )
-    l.funcs.register("text", "Generates the given text with the given styles.",
-        []dslParamMeta{ 
-            { 
-                name: "t",
-                typ:  "string", 
-                def:  "-", 
-                desc: "- - The text to generate",
-            },
-            { 
-                name: "style",
-                typ:  "TextStyle", 
-                def:  "-", 
-                desc: "The text style (font, size, color)",
-            },
-            { 
-                name: "outline",
-                typ:  "LineStyle", 
-                def:  "-", 
-                desc: "The thickness and color of the outline",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return text(
-                a[0].(string),
-                a[1].(TextStyle),
-                a[2].(LineStyle), 
-            )
-        },
-    )
     l.funcs.register("group", "Generates the given group with the given styles.",
         []dslParamMeta{ 
             { 
@@ -2133,16 +2097,22 @@ func NewLanguage() *dslCollection {
                 desc: "- - The title of the group",
             },
             { 
-                name: "colText",
+                name: "colTitle",
                 typ:  "color.RGBA64", 
                 def:  "-", 
                 desc: "The color of the title",
             },
             { 
-                name: "colFill",
+                name: "colHeader",
                 typ:  "color.RGBA64", 
                 def:  "-", 
-                desc: "The color of the group",
+                desc: "The color of the header",
+            },
+            { 
+                name: "colBody",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The color of the body",
             },
             { 
                 name: "colBorder",
@@ -2152,45 +2122,10 @@ func NewLanguage() *dslCollection {
             },
             { 
                 name: "padding",
-                typ:  "float64", 
+                typ:  "int", 
                 def:  3, 
                 unit: "0", 
                 desc: "The padding for the image to wrap",
-            },
-            { 
-                name: "fillAlphaHeader",
-                typ:  "float64", 
-                def:  0.9, 
-                unit: "0", 
-                desc: "The alpha of header fill",
-            },
-            { 
-                name: "fillAlphaBody",
-                typ:  "float64", 
-                def:  0.8, 
-                unit: "0", 
-                desc: "The alpha of body fill",
-            },
-            { 
-                name: "borderThickness",
-                typ:  "float64", 
-                def:  1, 
-                unit: "0", 
-                desc: "The thickness of the border",
-            },
-            { 
-                name: "borderAlphaHeader",
-                typ:  "float64", 
-                def:  0.95, 
-                unit: "0", 
-                desc: "The alpha of header border",
-            },
-            { 
-                name: "borderAlphaBody",
-                typ:  "float64", 
-                def:  0.95, 
-                unit: "0", 
-                desc: "The alpha of body border",
             },
         },
         []dslParamMeta{     
@@ -2207,12 +2142,8 @@ func NewLanguage() *dslCollection {
                 a[2].(color.RGBA64),
                 a[3].(color.RGBA64),
                 a[4].(color.RGBA64),
-                a[5].(float64),
-                a[6].(float64),
-                a[7].(float64),
-                a[8].(float64),
-                a[9].(float64),
-                a[10].(float64), 
+                a[5].(color.RGBA64),
+                a[6].(int), 
             )
         },
     )
@@ -2918,6 +2849,676 @@ func NewLanguage() *dslCollection {
             )
         },
     )
+    l.funcs.register("draw-line-polar", "Draws a line from polar point P(r1|θ1) to P(r2|θ2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system (relative)",
+            },
+            { 
+                name: "r1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start radius",
+            },
+            { 
+                name: "theta1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start angle in radians",
+            },
+            { 
+                name: "r2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end radius",
+            },
+            { 
+                name: "theta2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end angle in radians",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLinePolar(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(float64),
+                a[6].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-line-polar-px", "Draws a line from polar point P(r1|θ1) to P(r2|θ2) with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system",
+            },
+            { 
+                name: "r1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start radius",
+            },
+            { 
+                name: "theta1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start angle in radians",
+            },
+            { 
+                name: "r2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end radius",
+            },
+            { 
+                name: "theta2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end angle in radians",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLinePolarPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(float64),
+                a[6].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-line-radial", "Draws a radial line from radius r1 to r2 at angle θ with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system (relative)",
+            },
+            { 
+                name: "theta",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+            { 
+                name: "r1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start radius",
+            },
+            { 
+                name: "r2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end radius",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLineRadial(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-line-radial-px", "Draws a radial line from radius r1 to r2 at angle θ with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system",
+            },
+            { 
+                name: "theta",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The angle in radians",
+            },
+            { 
+                name: "r1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start radius",
+            },
+            { 
+                name: "r2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end radius",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawLineRadialPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-arc", "Draws an arc at radius r from angle θ1 to θ2 with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system (relative)",
+            },
+            { 
+                name: "r",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The radius",
+            },
+            { 
+                name: "theta1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start angle in radians",
+            },
+            { 
+                name: "theta2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end angle in radians",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawArc(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-arc-px", "Draws an arc at radius r from angle θ1 to θ2 with the given thickness and color.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system",
+            },
+            { 
+                name: "r",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The radius",
+            },
+            { 
+                name: "theta1",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The start angle in radians",
+            },
+            { 
+                name: "theta2",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The end angle in radians",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawArcPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-grid-polar", "Draws a polar grid with concentric circles and radial lines.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system (relative)",
+            },
+            { 
+                name: "maxRadius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum radius (relative)",
+            },
+            { 
+                name: "circles",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of concentric circles",
+            },
+            { 
+                name: "radials",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of radial lines",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridPolar(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(int),
+                a[4].(int),
+                a[5].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-grid-polar-px", "Draws a polar grid with concentric circles and radial lines.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system",
+            },
+            { 
+                name: "maxRadius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum radius",
+            },
+            { 
+                name: "circles",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of concentric circles",
+            },
+            { 
+                name: "radials",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of radial lines",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridPolarPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(int),
+                a[4].(int),
+                a[5].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-grid-radial", "Draws radial lines from the origin at evenly spaced angles.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system (relative)",
+            },
+            { 
+                name: "maxRadius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum radius (relative)",
+            },
+            { 
+                name: "radials",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of radial lines",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridRadial(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(int),
+                a[4].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-grid-radial-px", "Draws radial lines from the origin at evenly spaced angles.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system",
+            },
+            { 
+                name: "maxRadius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum radius",
+            },
+            { 
+                name: "radials",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of radial lines",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridRadialPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(int),
+                a[4].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-grid-concentric", "Draws concentric circles centered at the origin.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system (relative)",
+            },
+            { 
+                name: "maxRadius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum radius (relative)",
+            },
+            { 
+                name: "circles",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of concentric circles",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridConcentric(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(int),
+                a[4].(LineStyle), 
+            )
+        },
+    )
+    l.funcs.register("draw-grid-concentric-px", "Draws concentric circles centered at the origin.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to draw to",
+            },
+            { 
+                name: "origin",
+                typ:  "Point", 
+                def:  "-", 
+                desc: "The origin point for the polar coordinate system",
+            },
+            { 
+                name: "maxRadius",
+                typ:  "float64", 
+                def:  "-", 
+                desc: "The maximum radius",
+            },
+            { 
+                name: "circles",
+                typ:  "int", 
+                def:  "-", 
+                desc: "The number of concentric circles",
+            },
+            { 
+                name: "style",
+                typ:  "LineStyle", 
+                def:  "-", 
+                desc: "The thickness and color of the line",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The resulting image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return drawGridConcentricPx(
+                a[0].(*image.NRGBA64),
+                a[1].(Point),
+                a[2].(float64),
+                a[3].(int),
+                a[4].(LineStyle), 
+            )
+        },
+    )
     l.funcs.register("draw-rect", "Draws a rectangle at position (x,y) with the given width and height.",
         []dslParamMeta{ 
             { 
@@ -3078,9 +3679,27 @@ func NewLanguage() *dslCollection {
             },
             { 
                 name: "t",
-                typ:  "Text", 
+                typ:  "string", 
                 def:  "-", 
-                desc: "The text to draw",
+                desc: "- - The text to draw",
+            },
+            { 
+                name: "colText",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The text color",
+            },
+            { 
+                name: "colOutline",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The outline color",
+            },
+            { 
+                name: "blendMode",
+                typ:  "string", 
+                def:  "normal", 
+                desc: "The blend mode to use",
             },
         },
         []dslParamMeta{     
@@ -3094,11 +3713,14 @@ func NewLanguage() *dslCollection {
             return drawText(
                 a[0].(*image.NRGBA64),
                 a[1].(Point),
-                a[2].(Text), 
+                a[2].(string),
+                a[3].(color.RGBA64),
+                a[4].(color.RGBA64),
+                a[5].(string), 
             )
         },
     )
-    l.funcs.register("draw-text-px", "Draws text at position (x,y) with the given style using TrueType fonts.",
+    l.funcs.register("draw-text-px", "Draws text at position (x,y).",
         []dslParamMeta{ 
             { 
                 name: "img",
@@ -3114,9 +3736,27 @@ func NewLanguage() *dslCollection {
             },
             { 
                 name: "t",
-                typ:  "Text", 
+                typ:  "string", 
                 def:  "-", 
-                desc: "The text to draw",
+                desc: "- - The text to draw",
+            },
+            { 
+                name: "colText",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The text color",
+            },
+            { 
+                name: "colOutline",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The outline color",
+            },
+            { 
+                name: "blendMode",
+                typ:  "string", 
+                def:  "normal", 
+                desc: "The blend mode to use",
             },
         },
         []dslParamMeta{     
@@ -3130,35 +3770,32 @@ func NewLanguage() *dslCollection {
             return drawTextPx(
                 a[0].(*image.NRGBA64),
                 a[1].(Point),
-                a[2].(Text), 
+                a[2].(string),
+                a[3].(color.RGBA64),
+                a[4].(color.RGBA64),
+                a[5].(string), 
             )
         },
     )
-    l.funcs.register("draw-text-outline", "Draws only the outline of text at position (x,y).",
+    l.funcs.register("text", "Generates the given text.",
         []dslParamMeta{ 
             { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to draw to",
-            },
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The upper-left coordinate of the text",
-            },
-            { 
                 name: "t",
-                typ:  "Text", 
+                typ:  "string", 
                 def:  "-", 
-                desc: "The text to outline",
+                desc: "- - The text to generate",
             },
             { 
-                name: "outline",
-                typ:  "LineStyle", 
+                name: "colText",
+                typ:  "color.RGBA64", 
                 def:  "-", 
-                desc: "The outline style (thickness and color)",
+                desc: "The text color",
+            },
+            { 
+                name: "colOutline",
+                typ:  "color.RGBA64", 
+                def:  "-", 
+                desc: "The outline color",
             },
         },
         []dslParamMeta{     
@@ -3169,54 +3806,10 @@ func NewLanguage() *dslCollection {
             },
         },
         func(a ...any) (any, error) {
-            return drawTextOutline(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(Text),
-                a[3].(LineStyle), 
-            )
-        },
-    )
-    l.funcs.register("draw-text-outline-px", "Draws only the outline of text at position (x,y).",
-        []dslParamMeta{ 
-            { 
-                name: "img",
-                typ:  "*image.NRGBA64", 
-                def:  "-", 
-                desc: "The image to draw to",
-            },
-            { 
-                name: "p",
-                typ:  "Point", 
-                def:  "-", 
-                desc: "The upper-left coordinate of the text",
-            },
-            { 
-                name: "t",
-                typ:  "Text", 
-                def:  "-", 
-                desc: "The text to outline",
-            },
-            { 
-                name: "outline",
-                typ:  "LineStyle", 
-                def:  "-", 
-                desc: "The outline style (thickness and color)",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - The resulting image",
-            },
-        },
-        func(a ...any) (any, error) {
-            return drawTextOutlinePx(
-                a[0].(*image.NRGBA64),
-                a[1].(Point),
-                a[2].(Text),
-                a[3].(LineStyle), 
+            return text(
+                a[0].(string),
+                a[1].(color.RGBA64),
+                a[2].(color.RGBA64), 
             )
         },
     )
@@ -4815,6 +5408,106 @@ func NewLanguage() *dslCollection {
             )
         },
     )
+    l.funcs.register("remap-color", "Remaps image colors from source color stops to target color stops",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to remap",
+            },
+            { 
+                name: "sourceStops",
+                typ:  "[][]any", 
+                def:  "-", 
+                unit: "\"\"", 
+                desc: "Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]",
+            },
+            { 
+                name: "targetStops",
+                typ:  "[][]any", 
+                def:  "-", 
+                unit: "\"\"", 
+                desc: "Target color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]",
+            },
+            { 
+                name: "tolerance",
+                typ:  "float64", 
+                def:  2.5, 
+                unit: "\"\"", 
+                desc: "Tolerance for color matching (higher = more forgiving, reduces artifacts from compression)",
+            },
+            { 
+                name: "precision",
+                typ:  "float64", 
+                def:  1, 
+                unit: "\"\"", 
+                desc: "Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The remapped image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return colorRemap(
+                a[0].(*image.NRGBA64),
+                a[1].([][]any),
+                a[2].([][]any),
+                a[3].(float64),
+                a[4].(float64), 
+            )
+        },
+    )
+    l.funcs.register("remap-bw", "Remaps image colors from source color stops to grayscale",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to remap",
+            },
+            { 
+                name: "sourceStops",
+                typ:  "[][]any", 
+                def:  "-", 
+                unit: "\"\"", 
+                desc: "Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]",
+            },
+            { 
+                name: "tolerance",
+                typ:  "float64", 
+                def:  2.5, 
+                unit: "\"\"", 
+                desc: "Tolerance for color matching (higher = more forgiving, reduces artifacts from compression)",
+            },
+            { 
+                name: "precision",
+                typ:  "float64", 
+                def:  1, 
+                unit: "\"\"", 
+                desc: "Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The remapped image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return bwRemap(
+                a[0].(*image.NRGBA64),
+                a[1].([][]any),
+                a[2].(float64),
+                a[3].(float64), 
+            )
+        },
+    )
     l.funcs.register("rectangular-to-polar", "Converts a rectangular coordinate image to polar coordinates",
         []dslParamMeta{ 
             { 
@@ -5683,13 +6376,13 @@ func NewLanguage() *dslCollection {
             },
             { 
                 name: "offsetX",
-                typ:  "int", 
+                typ:  "float64", 
                 def:  0, 
                 desc: "Horizontal offset from image center (pixels)",
             },
             { 
                 name: "offsetY",
-                typ:  "int", 
+                typ:  "float64", 
                 def:  0, 
                 desc: "Vertical offset from image center (pixels)",
             },
@@ -5705,8 +6398,8 @@ func NewLanguage() *dslCollection {
             return cropCirclePx(
                 a[0].(*image.NRGBA64),
                 a[1].(float64),
-                a[2].(int),
-                a[3].(int), 
+                a[2].(float64),
+                a[3].(float64), 
             )
         },
     )
@@ -5801,6 +6494,136 @@ func NewLanguage() *dslCollection {
                 a[1].(float64),
                 a[2].(int),
                 a[3].(int), 
+            )
+        },
+    )
+    l.funcs.register("crop-arc", "Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX+offsetX, centerY+offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to crop",
+            },
+            { 
+                name: "radius",
+                typ:  "float64", 
+                min:  0, 
+                max:  1, 
+                def:  1, 
+                desc: "Radius as a percentage of half the min(width, height)",
+            },
+            { 
+                name: "startAngle",
+                typ:  "float64", 
+                min:  -360, 
+                max:  360, 
+                def:  0, 
+                desc: "Starting angle of the arc in degrees (-360 to 360, clockwise from right)",
+            },
+            { 
+                name: "endAngle",
+                typ:  "float64", 
+                min:  -360, 
+                max:  360, 
+                def:  360, 
+                desc: "Ending angle of the arc in degrees (-360 to 360, clockwise from right)",
+            },
+            { 
+                name: "offsetX",
+                typ:  "float64", 
+                min:  -1, 
+                max:  1, 
+                def:  0, 
+                desc: "Horizontal offset from image center (percentage of width, -1..1)",
+            },
+            { 
+                name: "offsetY",
+                typ:  "float64", 
+                min:  -1, 
+                max:  1, 
+                def:  0, 
+                desc: "Vertical offset from image center (percentage of height, -1..1)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The arc-cropped image (pixels outside the arc are transparent)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cropArc(
+                a[0].(*image.NRGBA64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(float64), 
+            )
+        },
+    )
+    l.funcs.register("crop-arc-px", "Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX+offsetX, centerY+offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept.",
+        []dslParamMeta{ 
+            { 
+                name: "img",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The image to crop",
+            },
+            { 
+                name: "radius",
+                typ:  "float64", 
+                min:  0, 
+                max:  1, 
+                def:  1, 
+                desc: "Radius as a percentage of half the min(width, height)",
+            },
+            { 
+                name: "startAngle",
+                typ:  "float64", 
+                min:  -360, 
+                max:  360, 
+                def:  0, 
+                desc: "Starting angle of the arc in degrees (-360 to 360, clockwise from right)",
+            },
+            { 
+                name: "endAngle",
+                typ:  "float64", 
+                min:  -360, 
+                max:  360, 
+                def:  360, 
+                desc: "Ending angle of the arc in degrees (-360 to 360, clockwise from right)",
+            },
+            { 
+                name: "offsetX",
+                typ:  "float64", 
+                def:  0, 
+                desc: "Horizontal offset from image center (pixels)",
+            },
+            { 
+                name: "offsetY",
+                typ:  "float64", 
+                def:  0, 
+                desc: "Vertical offset from image center (pixels)",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The arc-cropped image (pixels outside the arc are transparent)",
+            },
+        },
+        func(a ...any) (any, error) {
+            return cropArcPx(
+                a[0].(*image.NRGBA64),
+                a[1].(float64),
+                a[2].(float64),
+                a[3].(float64),
+                a[4].(float64),
+                a[5].(float64), 
             )
         },
     )
@@ -5995,6 +6818,49 @@ func NewLanguage() *dslCollection {
             return translateImage(
                 a[0].(*image.NRGBA64),
                 a[1].(Point), 
+            )
+        },
+    )
+    l.funcs.register("blend-aligned", "Aligns two images using the given anchor (left-top, top, top-right, left, center, right, bottom-left, bottom, bottom-right) and blends them using the given blendmode (defaults to normal).",
+        []dslParamMeta{ 
+            { 
+                name: "imgA",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The bottom image",
+            },
+            { 
+                name: "imgB",
+                typ:  "*image.NRGBA64", 
+                def:  "-", 
+                desc: "The top image",
+            },
+            { 
+                name: "anchor",
+                typ:  "string", 
+                def:  "C", 
+                desc: "The anchor to align to (TL, T, TR, L, C, R, BL, B, BR)",
+            },
+            { 
+                name: "mode",
+                typ:  "string", 
+                def:  "normal", 
+                desc: "The blendmode name",
+            },
+        },
+        []dslParamMeta{     
+            { 
+                name: "result",
+                typ:  "error", 
+                desc: "- - - The aligned and blended image",
+            },
+        },
+        func(a ...any) (any, error) {
+            return blendAligned(
+                a[0].(*image.NRGBA64),
+                a[1].(*image.NRGBA64),
+                a[2].(string),
+                a[3].(string), 
             )
         },
     )
@@ -8517,8 +9383,14 @@ func NewLanguage() *dslCollection {
             )
         },
     )
-    l.funcs.register("time", "Returns the current time according to the given layout",
+    l.funcs.register("now", "Returns the current time according to the given layout",
         []dslParamMeta{ 
+            { 
+                name: "offset",
+                typ:  "int", 
+                def:  0, 
+                desc: "The amount of seconds to offset the current time by",
+            },
             { 
                 name: "layout",
                 typ:  "string", 
@@ -8534,36 +9406,8 @@ func NewLanguage() *dslCollection {
             },
         },
         func(a ...any) (any, error) {
-            return timeStr(
-                a[0].(string), 
-            )
-        },
-    )
-    l.funcs.register("T", "Creates a new text.",
-        []dslParamMeta{ 
-            { 
-                name: "style",
-                typ:  "TextStyle", 
-                def:  "-", 
-                desc: "The text style to use",
-            },
-            { 
-                name: "text",
-                typ:  "string", 
-                def:  "-", 
-                desc: "- - The text to print",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - A new text",
-            },
-        },
-        func(a ...any) (any, error) {
-            return makeText(
-                a[0].(TextStyle),
+            return nowStr(
+                a[0].(int),
                 a[1].(string), 
             )
         },
@@ -9250,43 +10094,6 @@ func NewLanguage() *dslCollection {
         func(a ...any) (any, error) {
             return makeFillStyle(
                 a[0].(color.RGBA64), 
-            )
-        },
-    )
-    l.funcs.register("TS", "Creates a new font style.",
-        []dslParamMeta{ 
-            { 
-                name: "color",
-                typ:  "color.RGBA64", 
-                def:  "-", 
-                desc: "The font color",
-            },
-            { 
-                name: "size",
-                typ:  "float64", 
-                def:  10, 
-                unit: "1", 
-                desc: "The font size",
-            },
-            { 
-                name: "family",
-                typ:  "string", 
-                def:  "mono", 
-                desc: "The font family",
-            },
-        },
-        []dslParamMeta{     
-            { 
-                name: "result",
-                typ:  "error", 
-                desc: "- - - A new font style",
-            },
-        },
-        func(a ...any) (any, error) {
-            return makeTextStyle(
-                a[0].(color.RGBA64),
-                a[1].(float64),
-                a[2].(string), 
             )
         },
     )

@@ -846,4 +846,91 @@ func (dsl *dslCollection) toFloat64(value any) (float64, error) {
 	}
 }
 
+// compareEqual compares two values for equality.
+// Handles numeric types, strings, booleans, and nil values.
+func (dsl *dslCollection) compareEqual(a, b any) bool {
+	if a == nil && b == nil {
+		return true
+	}
+	if a == nil || b == nil {
+		return false
+	}
+
+	// Try numeric comparison first
+	aFloat, aErr := dsl.toFloat64(a)
+	bFloat, bErr := dsl.toFloat64(b)
+	if aErr == nil && bErr == nil {
+		return aFloat == bFloat
+	}
+
+	// String comparison
+	if aStr, ok := a.(string); ok {
+		if bStr, ok := b.(string); ok {
+			return aStr == bStr
+		}
+	}
+
+	// Boolean comparison
+	if aBool, ok := a.(bool); ok {
+		if bBool, ok := b.(bool); ok {
+			return aBool == bBool
+		}
+	}
+
+	// Fallback to direct comparison
+	return a == b
+}
+
+// compareNotEqual returns true if two values are not equal.
+func (dsl *dslCollection) compareNotEqual(a, b any) bool {
+	return !dsl.compareEqual(a, b)
+}
+
+// compareLessThan compares two values using less-than operation.
+// Works with numeric types and strings.
+func (dsl *dslCollection) compareLessThan(a, b any) bool {
+	aFloat, aErr := dsl.toFloat64(a)
+	bFloat, bErr := dsl.toFloat64(b)
+	if aErr == nil && bErr == nil {
+		return aFloat < bFloat
+	}
+
+	// String comparison
+	if aStr, ok := a.(string); ok {
+		if bStr, ok := b.(string); ok {
+			return aStr < bStr
+		}
+	}
+
+	return false
+}
+
+// compareLessThanOrEqual compares two values using less-than-or-equal operation.
+func (dsl *dslCollection) compareLessThanOrEqual(a, b any) bool {
+	return dsl.compareEqual(a, b) || dsl.compareLessThan(a, b)
+}
+
+// compareGreaterThan compares two values using greater-than operation.
+func (dsl *dslCollection) compareGreaterThan(a, b any) bool {
+	aFloat, aErr := dsl.toFloat64(a)
+	bFloat, bErr := dsl.toFloat64(b)
+	if aErr == nil && bErr == nil {
+		return aFloat > bFloat
+	}
+
+	// String comparison
+	if aStr, ok := a.(string); ok {
+		if bStr, ok := b.(string); ok {
+			return aStr > bStr
+		}
+	}
+
+	return false
+}
+
+// compareGreaterThanOrEqual compares two values using greater-than-or-equal operation.
+func (dsl *dslCollection) compareGreaterThanOrEqual(a, b any) bool {
+	return dsl.compareEqual(a, b) || dsl.compareGreaterThan(a, b)
+}
+
 // TODO: NEW TYPES: add additional cast* functions if needed

@@ -321,6 +321,18 @@ func (dsl *dslCollection) GetLanguageDefinition() (map[string]any, error) {
 					"name":  "keyword.control.macro",
 				},
 				{
+					"match": "\\bif\\b",
+					"name":  "keyword.control.if",
+				},
+				{
+					"match": "\\belse\\b",
+					"name":  "keyword.control.else",
+				},
+				{
+					"match": "\\bend\\b",
+					"name":  "keyword.control.end",
+				},
+				{
 					"name":  "constant.numeric",
 					"match": "[-+]?\\d+(?:\\.\\d+)?",
 				},

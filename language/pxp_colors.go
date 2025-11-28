@@ -29,9 +29,9 @@ func hsla(h float64, s float64, l float64, alpha float64) (color.RGBA64, error) 
 		}
 		p := 2*l - q
 
-		r = hueToRGB(p, q, h/360+1.0/3.0)
-		g = hueToRGB(p, q, h/360)
-		b = hueToRGB(p, q, h/360-1.0/3.0)
+		r = convertHueToRGBFloat(p, q, h/360+1.0/3.0)
+		g = convertHueToRGBFloat(p, q, h/360)
+		b = convertHueToRGBFloat(p, q, h/360-1.0/3.0)
 	}
 
 	// Convert to 16-bit color channels
@@ -412,6 +412,21 @@ func ycbcr(y float64, cb float64, cr float64, alpha float64) (color.RGBA64, erro
 	}, nil
 }
 
+// @Name: set-alpha
+// @Desc: Sets the alpha channel of a color
+// @Param:      c      	"" -   	-   	The color to modify
+// @Param:      alpha  	"%" 0.0..1.0   	1.0   	The new alpha value
+// @Returns:    result  - 	-   		-   	The color with new alpha
+func setAlpha(c color.RGBA64, alpha float64) (color.RGBA64, error) {
+	A := uint16(alpha * 65535)
+	return color.RGBA64{
+		R: c.R,
+		G: c.G,
+		B: c.B,
+		A: A,
+	}, nil
+}
+
 // @Name: map-color
 // @Desc: Maps a value to a color using color stops with HSLA interpolation
 // @Param:      value      	"" -   	0.0   	The value to map to a color
@@ -504,19 +519,4 @@ func mapColor(value float64, min float64, max float64, stops [][]any) (color.RGB
 	a := startStop.alpha + factor*(endStop.alpha-startStop.alpha)
 
 	return hsla(h, s, l, a)
-}
-
-// @Name: set-alpha
-// @Desc: Sets the alpha channel of a color
-// @Param:      c      	"" -   	-   	The color to modify
-// @Param:      alpha  	"%" 0.0..1.0   	1.0   	The new alpha value
-// @Returns:    result  - 	-   		-   	The color with new alpha
-func setAlpha(c color.RGBA64, alpha float64) (color.RGBA64, error) {
-	A := uint16(alpha * 65535)
-	return color.RGBA64{
-		R: c.R,
-		G: c.G,
-		B: c.B,
-		A: A,
-	}, nil
 }

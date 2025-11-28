@@ -1102,105 +1102,6 @@ done
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">T(style=- text=&quot;-&quot;) ⮕ (result=)</code></h3>
-<p><em>Creates a new text.</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Min</th>
-<th>Max</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-pxp">style</code></td>
-<td><code class="language-pxp">TextStyle</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The text style to use</td>
-</tr>
-<tr>
-<td><code class="language-pxp">text</code></td>
-<td><code class="language-pxp">string</code></td>
-<td><code class="language-pxp">&quot;-&quot;</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>- - The text to print</td>
-</tr>
-<tr>
-<td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">error</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>- - - A new text</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3><code class="language-pxp">TS(color=- size=10 family=&quot;mono&quot;) ⮕ (result=)</code></h3>
-<p><em>Creates a new font style.</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Min</th>
-<th>Max</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-pxp">color</code></td>
-<td><code class="language-pxp">color.RGBA64</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The font color</td>
-</tr>
-<tr>
-<td><code class="language-pxp">size</code></td>
-<td><code class="language-pxp">float64</code></td>
-<td><code class="language-pxp">10</code></td>
-<td></td>
-<td></td>
-<td><code class="language-pxp">1</code></td>
-<td>The font size</td>
-</tr>
-<tr>
-<td><code class="language-pxp">family</code></td>
-<td><code class="language-pxp">string</code></td>
-<td><code class="language-pxp">&quot;mono&quot;</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The font family</td>
-</tr>
-<tr>
-<td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">error</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>- - - A new font style</td>
-</tr>
-</tbody>
-</table>
-<hr>
 <h3><code class="language-pxp">V(x=0 y=0 z=0) ⮕ (result=)</code></h3>
 <p><em>Creates a new Vector from x, y and z.</em></p>
 <table>
@@ -2340,6 +2241,69 @@ done
 <td></td>
 <td></td>
 <td>- - - The blended image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">blend-aligned(imgA=- imgB=- anchor=&quot;C&quot; mode=&quot;normal&quot;) ⮕ (result=)</code></h3>
+<p><em>Aligns two images using the given anchor (left-top, top, top-right, left, center, right, bottom-left, bottom, bottom-right) and blends them using the given blendmode (defaults to normal).</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">imgA</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The bottom image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">imgB</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The top image</td>
+</tr>
+<tr>
+<td><code class="language-pxp">anchor</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;C&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The anchor to align to (TL, T, TR, L, C, R, BL, B, BR)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">mode</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;normal&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blendmode name</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The aligned and blended image</td>
 </tr>
 </tbody>
 </table>
@@ -4999,6 +4963,168 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">crop-arc(img=- radius=1 startAngle=0 endAngle=360 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
+<p><em>Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX+offsetX, centerY+offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Radius as a percentage of half the min(width, height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">startAngle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-360</code></td>
+<td><code class="language-pxp">360</code></td>
+<td></td>
+<td>Starting angle of the arc in degrees (-360 to 360, clockwise from right)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">endAngle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">-360</code></td>
+<td><code class="language-pxp">360</code></td>
+<td></td>
+<td>Ending angle of the arc in degrees (-360 to 360, clockwise from right)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetX</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Horizontal offset from image center (percentage of width, -1..1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetY</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-1</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Vertical offset from image center (percentage of height, -1..1)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The arc-cropped image (pixels outside the arc are transparent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">crop-arc-px(img=- radius=1 startAngle=0 endAngle=360 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
+<p><em>Crops an image using an arc mask. The arc is a portion of a circle centered at (centerX+offsetX, centerY+offsetY) with the radius as a percentage (0-1) of half the minimum image dimension. Only pixels within the arc angle range are kept.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to crop</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td>Radius as a percentage of half the min(width, height)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">startAngle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td><code class="language-pxp">-360</code></td>
+<td><code class="language-pxp">360</code></td>
+<td></td>
+<td>Starting angle of the arc in degrees (-360 to 360, clockwise from right)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">endAngle</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">360</code></td>
+<td><code class="language-pxp">-360</code></td>
+<td><code class="language-pxp">360</code></td>
+<td></td>
+<td>Ending angle of the arc in degrees (-360 to 360, clockwise from right)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetX</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Horizontal offset from image center (pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">offsetY</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Vertical offset from image center (pixels)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The arc-cropped image (pixels outside the arc are transparent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">crop-circle(img=- radius=1 offsetX=0 offsetY=0) ⮕ (result=)</code></h3>
 <p><em>Crops an image using a circular mask. The circle is centered at (centerX+offsetX, centerY+offsetY) and the radius is a percentage (0-1) of half the minimum image dimension.</em></p>
 <table>
@@ -5097,7 +5223,7 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">offsetX</code></td>
-<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">float64</code></td>
 <td><code class="language-pxp">0</code></td>
 <td></td>
 <td></td>
@@ -5106,7 +5232,7 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">offsetY</code></td>
-<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">float64</code></td>
 <td><code class="language-pxp">0</code></td>
 <td></td>
 <td></td>
@@ -5647,6 +5773,168 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">draw-arc(img=- origin=- r=- theta1=- theta2=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws an arc at radius r from angle θ1 to θ2 with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-arc-px(img=- origin=- r=- theta1=- theta2=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws an arc at radius r from angle θ1 to θ2 with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">draw-circle(img=- c=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a circle.</em></p>
 <table>
@@ -5935,6 +6223,150 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">draw-grid-concentric(img=- origin=- maxRadius=- circles=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws concentric circles centered at the origin.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxRadius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum radius (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">circles</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of concentric circles</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-concentric-px(img=- origin=- maxRadius=- circles=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws concentric circles centered at the origin.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxRadius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">circles</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of concentric circles</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">draw-grid-h(img=- r=- rows=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
@@ -6061,6 +6493,168 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">draw-grid-polar(img=- origin=- maxRadius=- circles=- radials=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a polar grid with concentric circles and radial lines.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxRadius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum radius (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">circles</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of concentric circles</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radials</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of radial lines</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-polar-px(img=- origin=- maxRadius=- circles=- radials=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a polar grid with concentric circles and radial lines.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxRadius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">circles</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of concentric circles</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radials</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of radial lines</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">draw-grid-px(img=- r=- rows=- cols=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a grid from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
@@ -6111,6 +6705,150 @@ done
 <td></td>
 <td></td>
 <td>The number of cols</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-radial(img=- origin=- maxRadius=- radials=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws radial lines from the origin at evenly spaced angles.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxRadius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum radius (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radials</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of radial lines</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-grid-radial-px(img=- origin=- maxRadius=- radials=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws radial lines from the origin at evenly spaced angles.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system</td>
+</tr>
+<tr>
+<td><code class="language-pxp">maxRadius</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The maximum radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">radials</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The number of radial lines</td>
 </tr>
 <tr>
 <td><code class="language-pxp">style</code></td>
@@ -6466,6 +7204,186 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">draw-line-polar(img=- origin=- r1=- theta1=- r2=- theta2=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a line from polar point P(r1|θ1) to P(r2|θ2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-polar-px(img=- origin=- r1=- theta1=- r2=- theta2=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a line from polar point P(r1|θ1) to P(r2|θ2) with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">draw-line-px(img=- p1=- p2=- style=-) ⮕ (result=)</code></h3>
 <p><em>Draws a line from P(x1|y1) to P(x2|y2) with the given thickness and color.</em></p>
 <table>
@@ -6507,6 +7425,168 @@ done
 <td></td>
 <td></td>
 <td>The end position</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-radial(img=- origin=- theta=- r1=- r2=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a radial line from radius r1 to r2 at angle θ with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system (relative)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">style</code></td>
+<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The thickness and color of the line</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The resulting image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">draw-line-radial-px(img=- origin=- theta=- r1=- r2=- style=-) ⮕ (result=)</code></h3>
+<p><em>Draws a radial line from radius r1 to r2 at angle θ with the given thickness and color.</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to draw to</td>
+</tr>
+<tr>
+<td><code class="language-pxp">origin</code></td>
+<td><code class="language-pxp">Point</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The origin point for the polar coordinate system</td>
+</tr>
+<tr>
+<td><code class="language-pxp">theta</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The angle in radians</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r1</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The start radius</td>
+</tr>
+<tr>
+<td><code class="language-pxp">r2</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The end radius</td>
 </tr>
 <tr>
 <td><code class="language-pxp">style</code></td>
@@ -6889,7 +7969,7 @@ done
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-text(img=- p=- t=-) ⮕ (result=)</code></h3>
+<h3><code class="language-pxp">draw-text(img=- p=- t=&quot;-&quot; colText=- colOutline=- blendMode=&quot;normal&quot;) ⮕ (result=)</code></h3>
 <p><em>Draws a text at position (x,y).</em></p>
 <table>
 <thead>
@@ -6924,12 +8004,39 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">t</code></td>
-<td><code class="language-pxp">Text</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The text to draw</td>
+</tr>
+<tr>
+<td><code class="language-pxp">colText</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The text to draw</td>
+<td>The text color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">colOutline</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The outline color</td>
+</tr>
+<tr>
+<td><code class="language-pxp">blendMode</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;normal&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The blend mode to use</td>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
@@ -6943,8 +8050,8 @@ done
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">draw-text-outline(img=- p=- t=- outline=-) ⮕ (result=)</code></h3>
-<p><em>Draws only the outline of text at position (x,y).</em></p>
+<h3><code class="language-pxp">draw-text-px(img=- p=- t=&quot;-&quot; colText=- colOutline=- blendMode=&quot;normal&quot;) ⮕ (result=)</code></h3>
+<p><em>Draws text at position (x,y).</em></p>
 <table>
 <thead>
 <tr>
@@ -6978,138 +8085,39 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">t</code></td>
-<td><code class="language-pxp">Text</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - The text to draw</td>
+</tr>
+<tr>
+<td><code class="language-pxp">colText</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The text to outline</td>
+<td>The text color</td>
 </tr>
 <tr>
-<td><code class="language-pxp">outline</code></td>
-<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">colOutline</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The outline style (thickness and color)</td>
+<td>The outline color</td>
 </tr>
 <tr>
-<td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">error</code></td>
+<td><code class="language-pxp">blendMode</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;normal&quot;</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td>- - - The resulting image</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3><code class="language-pxp">draw-text-outline-px(img=- p=- t=- outline=-) ⮕ (result=)</code></h3>
-<p><em>Draws only the outline of text at position (x,y).</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Min</th>
-<th>Max</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-pxp">img</code></td>
-<td><code class="language-pxp">*image.NRGBA64</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The image to draw to</td>
-</tr>
-<tr>
-<td><code class="language-pxp">p</code></td>
-<td><code class="language-pxp">Point</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The upper-left coordinate of the text</td>
-</tr>
-<tr>
-<td><code class="language-pxp">t</code></td>
-<td><code class="language-pxp">Text</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The text to outline</td>
-</tr>
-<tr>
-<td><code class="language-pxp">outline</code></td>
-<td><code class="language-pxp">LineStyle</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The outline style (thickness and color)</td>
-</tr>
-<tr>
-<td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">error</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>- - - The resulting image</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3><code class="language-pxp">draw-text-px(img=- p=- t=-) ⮕ (result=)</code></h3>
-<p><em>Draws text at position (x,y) with the given style using TrueType fonts.</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Min</th>
-<th>Max</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-pxp">img</code></td>
-<td><code class="language-pxp">*image.NRGBA64</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The image to draw to</td>
-</tr>
-<tr>
-<td><code class="language-pxp">p</code></td>
-<td><code class="language-pxp">Point</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The upper-left coordinate of the text</td>
-</tr>
-<tr>
-<td><code class="language-pxp">t</code></td>
-<td><code class="language-pxp">Text</code></td>
-<td><code class="language-pxp">-</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The text to draw</td>
+<td>The blend mode to use</td>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
@@ -7299,6 +8307,51 @@ done
 <td></td>
 <td></td>
 <td>- - - The enhanceed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">eq(a= b=) ⮕ (result=false)</code></h3>
+<p><em>Returns true if two values are equal</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>First value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Second value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>True if values are equal</td>
 </tr>
 </tbody>
 </table>
@@ -7879,6 +8932,51 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">ge(a= b=) ⮕ (result=false)</code></h3>
+<p><em>Returns true if the first value is greater than or equal to the second value</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>First value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Second value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>True if a &gt;= b</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">grads2radians(grads=-) ⮕ (result=)</code></h3>
 <p><em>converts grads to radians</em></p>
 <table>
@@ -8122,7 +9220,7 @@ done
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">group(img=- title=&quot;-&quot; colText=- colFill=- colBorder=- padding=3 fillAlphaHeader=0.9 fillAlphaBody=0.8 borderThickness=1 borderAlphaHeader=0.95 borderAlphaBody=0.95) ⮕ (result=)</code></h3>
+<h3><code class="language-pxp">group(img=- title=&quot;-&quot; colTitle=- colHeader=- colBody=- colBorder=- padding=3) ⮕ (result=)</code></h3>
 <p><em>Generates the given group with the given styles.</em></p>
 <table>
 <thead>
@@ -8156,7 +9254,7 @@ done
 <td>- - The title of the group</td>
 </tr>
 <tr>
-<td><code class="language-pxp">colText</code></td>
+<td><code class="language-pxp">colTitle</code></td>
 <td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
@@ -8165,13 +9263,22 @@ done
 <td>The color of the title</td>
 </tr>
 <tr>
-<td><code class="language-pxp">colFill</code></td>
+<td><code class="language-pxp">colHeader</code></td>
 <td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The color of the group</td>
+<td>The color of the header</td>
+</tr>
+<tr>
+<td><code class="language-pxp">colBody</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The color of the body</td>
 </tr>
 <tr>
 <td><code class="language-pxp">colBorder</code></td>
@@ -8184,57 +9291,12 @@ done
 </tr>
 <tr>
 <td><code class="language-pxp">padding</code></td>
-<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">int</code></td>
 <td><code class="language-pxp">3</code></td>
 <td></td>
 <td></td>
 <td><code class="language-pxp">0</code></td>
 <td>The padding for the image to wrap</td>
-</tr>
-<tr>
-<td><code class="language-pxp">fillAlphaHeader</code></td>
-<td><code class="language-pxp">float64</code></td>
-<td><code class="language-pxp">0.9</code></td>
-<td></td>
-<td></td>
-<td><code class="language-pxp">0</code></td>
-<td>The alpha of header fill</td>
-</tr>
-<tr>
-<td><code class="language-pxp">fillAlphaBody</code></td>
-<td><code class="language-pxp">float64</code></td>
-<td><code class="language-pxp">0.8</code></td>
-<td></td>
-<td></td>
-<td><code class="language-pxp">0</code></td>
-<td>The alpha of body fill</td>
-</tr>
-<tr>
-<td><code class="language-pxp">borderThickness</code></td>
-<td><code class="language-pxp">float64</code></td>
-<td><code class="language-pxp">1</code></td>
-<td></td>
-<td></td>
-<td><code class="language-pxp">0</code></td>
-<td>The thickness of the border</td>
-</tr>
-<tr>
-<td><code class="language-pxp">borderAlphaHeader</code></td>
-<td><code class="language-pxp">float64</code></td>
-<td><code class="language-pxp">0.95</code></td>
-<td></td>
-<td></td>
-<td><code class="language-pxp">0</code></td>
-<td>The alpha of header border</td>
-</tr>
-<tr>
-<td><code class="language-pxp">borderAlphaBody</code></td>
-<td><code class="language-pxp">float64</code></td>
-<td><code class="language-pxp">0.95</code></td>
-<td></td>
-<td></td>
-<td><code class="language-pxp">0</code></td>
-<td>The alpha of body border</td>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
@@ -8244,6 +9306,51 @@ done
 <td></td>
 <td></td>
 <td>- - - The group wrapping the input image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">gt(a= b=) ⮕ (result=false)</code></h3>
+<p><em>Returns true if the first value is greater than the second value</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>First value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Second value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>True if a &gt; b</td>
 </tr>
 </tbody>
 </table>
@@ -9031,6 +10138,51 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">le(a= b=) ⮕ (result=false)</code></h3>
+<p><em>Returns true if the first value is less than or equal to the second value</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>First value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Second value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>True if a &lt;= b</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">len(v=-) ⮕ (result=)</code></h3>
 <p><em>Returns the length of the given value.</em></p>
 <table>
@@ -9463,6 +10615,51 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">lt(a= b=) ⮕ (result=false)</code></h3>
+<p><em>Returns true if the first value is less than the second value</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>First value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Second value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>True if a &lt; b</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">map-color(value=0 min=0 max=1 stops=-) ⮕ (result=)</code></h3>
 <p><em>Maps a value to a color using color stops with HSLA interpolation</em></p>
 <table>
@@ -9661,6 +10858,51 @@ done
 </tbody>
 </table>
 <hr>
+<h3><code class="language-pxp">ne(a= b=) ⮕ (result=false)</code></h3>
+<p><em>Returns true if two values are not equal</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">a</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>First value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">b</code></td>
+<td><code class="language-pxp">any</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Second value to compare</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">bool</code></td>
+<td><code class="language-pxp">false</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>True if values are not equal</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><code class="language-pxp">normalize-angle(radians=-) ⮕ (result=)</code></h3>
 <p><em>normalizes an angle to [0, 2π)</em></p>
 <table>
@@ -9729,6 +10971,51 @@ done
 <td></td>
 <td></td>
 <td>- - - normalized angle in degrees</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">now(offset=0 layout=&quot;2006-01-02 15:04:05&quot;) ⮕ (result=)</code></h3>
+<p><em>Returns the current time according to the given layout</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">offset</code></td>
+<td><code class="language-pxp">int</code></td>
+<td><code class="language-pxp">0</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The amount of seconds to offset the current time by</td>
+</tr>
+<tr>
+<td><code class="language-pxp">layout</code></td>
+<td><code class="language-pxp">string</code></td>
+<td><code class="language-pxp">&quot;2006-01-02 15:04:05&quot;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The layout</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The current time as string</td>
 </tr>
 </tbody>
 </table>
@@ -10800,6 +12087,141 @@ done
 <td></td>
 <td></td>
 <td>- - - The transformed image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">remap-bw(img=- sourceStops=- tolerance=2.5 precision=1) ⮕ (result=)</code></h3>
+<p><em>Remaps image colors from source color stops to grayscale</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to remap</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sourceStops</code></td>
+<td><code class="language-pxp">[][]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+</tr>
+<tr>
+<td><code class="language-pxp">tolerance</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">2.5</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Tolerance for color matching (higher = more forgiving, reduces artifacts from compression)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">precision</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The remapped image</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code class="language-pxp">remap-color(img=- sourceStops=- targetStops=- tolerance=2.5 precision=1) ⮕ (result=)</code></h3>
+<p><em>Remaps image colors from source color stops to target color stops</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Min</th>
+<th>Max</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-pxp">img</code></td>
+<td><code class="language-pxp">*image.NRGBA64</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>The image to remap</td>
+</tr>
+<tr>
+<td><code class="language-pxp">sourceStops</code></td>
+<td><code class="language-pxp">[][]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Source color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+</tr>
+<tr>
+<td><code class="language-pxp">targetStops</code></td>
+<td><code class="language-pxp">[][]any</code></td>
+<td><code class="language-pxp">-</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Target color stops as [][]any where each stop is [threshold, hue, saturation, lightness, alpha]</td>
+</tr>
+<tr>
+<td><code class="language-pxp">tolerance</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">2.5</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Tolerance for color matching (higher = more forgiving, reduces artifacts from compression)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">precision</code></td>
+<td><code class="language-pxp">float64</code></td>
+<td><code class="language-pxp">1</code></td>
+<td></td>
+<td></td>
+<td><code class="language-pxp">&amp;#34;&amp;#34;</code></td>
+<td>Precision multiplier for color bar size (1 = max(width,height), 2 = 2x, 3 = 3x, etc.)</td>
+</tr>
+<tr>
+<td><code class="language-pxp">⮕ result</code></td>
+<td><code class="language-pxp">error</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>- - - The remapped image</td>
 </tr>
 </tbody>
 </table>
@@ -12847,8 +14269,8 @@ done
 </tbody>
 </table>
 <hr>
-<h3><code class="language-pxp">text(t=&quot;-&quot; style=- outline=-) ⮕ (result=)</code></h3>
-<p><em>Generates the given text with the given styles.</em></p>
+<h3><code class="language-pxp">text(t=&quot;-&quot; colText=- colOutline=-) ⮕ (result=)</code></h3>
+<p><em>Generates the given text.</em></p>
 <table>
 <thead>
 <tr>
@@ -12872,22 +14294,22 @@ done
 <td>- - The text to generate</td>
 </tr>
 <tr>
-<td><code class="language-pxp">style</code></td>
-<td><code class="language-pxp">TextStyle</code></td>
+<td><code class="language-pxp">colText</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The text style (font, size, color)</td>
+<td>The text color</td>
 </tr>
 <tr>
-<td><code class="language-pxp">outline</code></td>
-<td><code class="language-pxp">LineStyle</code></td>
+<td><code class="language-pxp">colOutline</code></td>
+<td><code class="language-pxp">color.RGBA64</code></td>
 <td><code class="language-pxp">-</code></td>
 <td></td>
 <td></td>
 <td></td>
-<td>The thickness and color of the outline</td>
+<td>The outline color</td>
 </tr>
 <tr>
 <td><code class="language-pxp">⮕ result</code></td>
@@ -12942,42 +14364,6 @@ done
 <td></td>
 <td></td>
 <td>- - - The thresholded (black and white) image</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3><code class="language-pxp">time(layout=&quot;2006-01-02 15:04:05&quot;) ⮕ (result=)</code></h3>
-<p><em>Returns the current time according to the given layout</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Min</th>
-<th>Max</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-pxp">layout</code></td>
-<td><code class="language-pxp">string</code></td>
-<td><code class="language-pxp">&quot;2006-01-02 15:04:05&quot;</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td>The layout</td>
-</tr>
-<tr>
-<td><code class="language-pxp">⮕ result</code></td>
-<td><code class="language-pxp">error</code></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>- - - The current time as string</td>
 </tr>
 </tbody>
 </table>
@@ -13541,7 +14927,7 @@ done
                 alias: 'constant.language.null'
             },
             'keyword': {
-                pattern: /\b(?:for|include|macro)\b/,
+                pattern: /\b(?:for|include|macro|if|else|end|done)\b/,
                 alias: 'keyword.control'
             },
             'argument-reference': {
